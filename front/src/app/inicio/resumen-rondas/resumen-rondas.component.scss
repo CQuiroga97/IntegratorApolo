@@ -1,0 +1,60 @@
+
+.flechas{
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #b4c122;
+    display: flex;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.flechas nb-icon{
+    margin: auto;
+
+}
+.divEncuentrosCompletos{
+    width: 1000px;
+    height: 150px;
+    display: flex;
+    margin: auto 0px auto 0px;
+    overflow: hidden;
+}
+button{
+    height: 30px;
+    margin: auto auto auto 2px;
+}
+.divEncuentrosCompletos .divEncuentrosInterno{
+
+    width: auto;
+    height: 100%;
+    display: flex;
+    
+}
+.divEncuentrosCompletos .divEncuentrosInterno .encuentro{
+    height: 120px;
+    width: 200px;
+    margin: 15px 8px 15px 8px;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    padding: 0px 4px 0px 4px;
+    transform: scale(.8);
+    opacity: .6;
+}
+.divEncuentrosCompletos .divEncuentrosInterno .encuentro.activo{
+    transform: scale(1);
+    opacity: 1;
+}
+.divEncuentrosCompletos .divEncuentrosInterno .encuentro .participante{
+    width: 100%;
+    height: 40px;
+    display: flex;
+}
+.divEncuentrosCompletos .divEncuentrosInterno .encuentro .participante span{
+    margin: auto;
+    color: white;
+    width: 100px;
+}
+.divEncuentrosCompletos .divEncuentrosInterno .encuentro .participante nb-icon{
+    margin: auto 2px auto 2px;
+    width: 20px;
+}
