@@ -1,0 +1,46 @@
+span.titulo{
+    font-size: 25px;
+    margin: 0px 50px;
+    font-weight: bold;
+    color: #2f6b14;
+}
+.divExtraResults{
+    display: flex;
+    flex-wrap: wrap;
+    width: 1500px;
+    margin: 10px auto auto auto;
+    height: auto;
+}
+.cuadroDivResults{
+    width: 710px;
+    height: 110px;
+    background-color: #2f6b14;
+    margin: 10px auto 10px auto;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.cuadroDivResults span.tituloRonda{
+    color: #94cd76;
+    margin: 10px auto 0px auto;
+    font-size: 17px;
+}
+.infoEncuentro{
+    width: 100%;
+    height: auto;
+    display: flex;
+    margin: 20px auto auto auto;
+}
+.infoEncuentro{
+    color: white;
+    font-size: 24px;
+}
+.infoEncuentro .participante{
+    width: 300px;
+    display: flex;
+}
+.participante img{
+    width: 40px;
+    height: 40px;
+    background-color: #b4c122;
+}

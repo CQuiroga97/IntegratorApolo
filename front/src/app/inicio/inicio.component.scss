@@ -1,73 +1,34 @@
 .divFechas{
     width: 100%;
-    height: 180px;
+    height: 140px;
     background-color: #2f6b14;
     display: flex;
 }
-.divCuadrosBlancos{
+app-transmision{
     width: 100%;
     height: 700px;
     display: flex;
 }
-.divCuadrosBlancos .cuadroIzq{
-    width: 700px;
-    height: 335px;
-    background-color: #edf0dd;
-    margin: auto 20px auto auto;
-}
-.divCuadrosBlancos .columnaDer{
-    width: 400px;
-    height: 350px;
-    display: flex;
-    margin: auto auto auto 20px;
-    flex-direction: column;
-}
-.divCuadrosBlancos .columnaDer .cuadroColDer{
-    width: 400px;
-    height: 100px;
-    background-color: #edf0dd;
-    margin: auto;
-}
-.divResults{
+
+app-resultados{
     width: 100%;
-    height: 600px;
+    height: auto;
     display: flex;
     background-color: #bde899;
     flex-wrap: wrap;
+    flex-direction: column;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
-.divExtraResults{
-    display: flex;
-    flex-wrap: wrap;
-    width: 1300px;
-    margin: auto;
-    height: 520px;
-}
-.divResults .cuadroDivResults{
-    width: 310px;
-    height: 110px;
-    background-color: #2f6b14;
-    margin: auto;
-}
-.divStands{
-    width: 100%;
-    height: 400px;
-    display: flex;
-}
-.divStands .divCuadrosStands{
-    width: 1300px;
-    height: 300px;
-    margin: auto;
-    display: flex;
-}
-.divStands .divCuadrosStands .cuadrosStands{
-    width: 380px;
-    height: 200px;
-    margin: auto;
-    background-color: #edf0dd;
-}
+
 app-resumen-rondas{
     width: 80%;
-    height: 180px;
+    height: 100px;
     margin: auto;
+    display: flex;
+}
+app-datos{
+    width: 100%;
+    height: 400px;
     display: flex;
 }
