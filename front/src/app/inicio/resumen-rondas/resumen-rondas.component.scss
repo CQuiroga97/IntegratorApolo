@@ -14,7 +14,7 @@
 }
 .divEncuentrosCompletos{
     width: 1000px;
-    height: 150px;
+    height: 100px;
     display: flex;
     margin: auto 0px auto 0px;
     overflow: hidden;
@@ -31,8 +31,8 @@ button{
     
 }
 .divEncuentrosCompletos .divEncuentrosInterno .encuentro{
-    height: 120px;
-    width: 200px;
+    height: 90px;
+    width: 300px;
     margin: 15px 8px 15px 8px;
     border-left: 2px solid white;
     border-right: 2px solid white;
@@ -46,13 +46,22 @@ button{
 }
 .divEncuentrosCompletos .divEncuentrosInterno .encuentro .participante{
     width: 100%;
-    height: 40px;
+    height: 30px;
     display: flex;
 }
 .divEncuentrosCompletos .divEncuentrosInterno .encuentro .participante span{
     margin: auto;
     color: white;
-    width: 100px;
+    width: 170px;
+}
+.divEncuentrosCompletos .divEncuentrosInterno .encuentro .participante span b{
+    color: #93cc75;
+}
+.divEncuentrosCompletos .divEncuentrosInterno .encuentro .participante img{
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    background-color: #b4c122;
 }
 .divEncuentrosCompletos .divEncuentrosInterno .encuentro .participante nb-icon{
     margin: auto 2px auto 2px;

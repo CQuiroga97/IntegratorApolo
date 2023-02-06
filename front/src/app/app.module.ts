@@ -12,12 +12,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbButtonModule } from '@nebular/theme';
 import { CabezeraComponent } from './cabezera/cabezera.component';
 import { ResumenRondasComponent } from './inicio/resumen-rondas/resumen-rondas.component';
+import { TransmisionComponent } from './inicio/transmision/transmision.component';
+import { ResultadosComponent } from './inicio/resultados/resultados.component';
+import { DatosComponent } from './inicio/datos/datos.component';
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     CabezeraComponent,
-    ResumenRondasComponent
+    ResumenRondasComponent,
+    TransmisionComponent,
+    ResultadosComponent,
+    DatosComponent
   ],
   imports: [
     BrowserModule,

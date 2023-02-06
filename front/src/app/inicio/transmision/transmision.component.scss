@@ -1,0 +1,16 @@
+.cuadroIzq{
+    width: 900px;
+    height: 435px;
+    background-color: #edf0dd;
+    margin: auto 20px auto auto;
+    border-radius: 20px;
+}
+.columnaDer{
+    width: 400px;
+    height: 435px;
+    display: flex;
+    margin: auto auto auto 20px;
+    flex-direction: column;
+    background-color: #2f6b14;
+    border-radius: 20px;
+}

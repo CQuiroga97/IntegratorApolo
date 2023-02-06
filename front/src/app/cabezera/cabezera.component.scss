@@ -2,7 +2,23 @@
     width: 1000px;
     height: 70px;
     margin: auto;
-    background-color: aqua;
+    display: flex;
+}
+.divBtnMenu{
+    width: 200px;
+    height: auto;
+    padding: 5px;
+    display: flex;
+}
+.divBtnMenu span{
+    margin: auto;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all .5s;
+    font-weight: bold;
+}
+.divBtnMenu span:hover{
+    font-size: 25px;
 }
 button{
     margin: auto 0px auto auto;
