@@ -13,7 +13,15 @@ $nb-themes: nb-register-theme((
   button-outline-basic-border-color: #b4c122,
   button-outline-basic-background-color: transparent,
   button-outline-basic-text-color: #b4c122,
-  icon-primary-color: rgb(201, 201, 201)
+  icon-primary-color: rgb(201, 201, 201),
+  input-medium-max-width: 400px,
+  input-basic-background-color: transparent,
+  input-basic-border-color: transparent,
+  input-basic-focus-background-color: transparent,
+  input-basic-hover-background-color: transparent,
+  input-basic-focus-border-color: transparent,
+  input-basic-hover-border-color: transparent,
+  input-basic-text-color: #b4c122
   // add your variables here like:
 
   // color-primary-100: #f2f6ff,

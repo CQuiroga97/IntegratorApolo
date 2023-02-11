@@ -1,28 +1,16 @@
 const express = require('express');
 const app = express();
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const port = 3000;
-var sql = require('mssql');
+const indexRouter = require("./routes/router.js")
 
-var config = {
-  user: 'sa',
-  password: 'Cristian2396980',
-  server: 'localhost',
-  database: 'integrator',
-  options: {
-      trustedConnection: true,
-      encrypt: true,
-      enableArithAbort: true,
-      trustServerCertificate: true,
-      }
-};
-var con;
-app.get('/', (req, res) => {
-  res.send('asd');
-});
-sql.connect(config, function(err){
-  if (err) console.log(err)
-  con = new sql.Request();
-})
+app.use(cors());
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json());
+app.use("/api", indexRouter);
+
+
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
 });

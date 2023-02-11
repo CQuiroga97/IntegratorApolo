@@ -1,0 +1,40 @@
+.divLogin{
+    width: 100%;
+    height: 100%;
+    background-color: #2f5917;
+    display: flex;
+}
+.divLogin .columna{
+    width: 50%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.divLogin .columna span.titulo{
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    margin: auto auto 20px auto;
+}
+nb-card{
+    margin: 0px auto auto auto;
+    height: auto;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    width: 450px;
+}
+nb-card nb-card-body nb-form-field{
+    border-bottom: 2px solid #e0dc53;
+}
+a{
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+}
+img{
+    margin: auto;
+    width: 500px;
+}

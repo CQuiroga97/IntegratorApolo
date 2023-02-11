@@ -1,0 +1,26 @@
+<div class="divLogin">
+    <div class="columna">
+        <img src="../../assets/img/logos/logoEvento.png" alt="">
+    </div>
+    <div class="columna">
+        <span class="titulo">Inicie sesión en su cuenta</span>
+        <nb-card size="small">
+            <nb-card-body>
+      
+              <nb-form-field>
+                <nb-icon nbPrefix icon="at-outline" pack="eva" status="basic"></nb-icon>
+                <input type="mail" [(ngModel)]="name"  nbInput fullWidth fieldSize="giant">
+              </nb-form-field>
+      
+              <nb-form-field>
+                <nb-icon nbPrefix icon="lock-outline" pack="eva" status="basic"></nb-icon>
+                <input type="password" [(ngModel)]="pass" nbInput fullWidth fieldSize="giant">
+              </nb-form-field>
+            </nb-card-body>
+            <button nbButton outline status="basic" (click)="login()">Iniciar Sesión</button>
+            <a href="">Crear una cuenta</a>
+            <a href="">¿Olvidó su contraseña?</a>
+        </nb-card>
+        
+    </div>
+</div>
