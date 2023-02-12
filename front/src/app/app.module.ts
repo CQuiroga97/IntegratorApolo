@@ -15,6 +15,8 @@ import { ResumenRondasComponent } from './inicio/resumen-rondas/resumen-rondas.c
 import { TransmisionComponent } from './inicio/transmision/transmision.component';
 import { ResultadosComponent } from './inicio/resultados/resultados.component';
 import { DatosComponent } from './inicio/datos/datos.component';
+import { RegistroUniComponent } from './registro-uni/registro-uni.component';
+import { FormularioUniComponent } from './registro-uni/formulario-uni/formulario-uni.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +25,9 @@ import { DatosComponent } from './inicio/datos/datos.component';
     ResumenRondasComponent,
     TransmisionComponent,
     ResultadosComponent,
-    DatosComponent
+    DatosComponent,
+    RegistroUniComponent,
+    FormularioUniComponent
   ],
   imports: [
     BrowserModule,
