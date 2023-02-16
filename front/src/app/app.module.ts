@@ -21,6 +21,13 @@ import { DatosComponent } from './inicio/datos/datos.component';
 import { RegistroUniComponent } from './registro-uni/registro-uni.component';
 import { FormularioUniComponent } from './registro-uni/formulario-uni/formulario-uni.component';
 import { ListasUniversidadesComponent } from './registro-uni/listas-universidades/listas-universidades.component';
+import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { NbCardModule } from '@nebular/theme';
+import { NbFormFieldModule } from '@nebular/theme';
+import { NbInputModule } from '@nebular/theme';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,10 +37,10 @@ import { ListasUniversidadesComponent } from './registro-uni/listas-universidade
     TransmisionComponent,
     ResultadosComponent,
     DatosComponent,
-    
     RegistroUniComponent,
     FormularioUniComponent,
-    ListasUniversidadesComponent
+    ListasUniversidadesComponent,
+    LoginAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -43,12 +50,19 @@ import { ListasUniversidadesComponent } from './registro-uni/listas-universidade
     NbLayoutModule,
     NbIconModule,
     NbButtonModule,
-    NbCardModule,
     NbSelectModule,
     NbEvaIconsModule,
     NbAccordionModule,
+    NbEvaIconsModule,
+    NbCardModule,
+    NbFormFieldModule,
+    NbInputModule,
+    HttpClientModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
