@@ -18,8 +18,8 @@ sql.connect(config, function(err){
 var con = new sql.Request();
 
 exports.registrarUniversidad = (req, res)=>{
-    console.log(`exec registrarUniversidad "${req.body.nombre}", "${req.body.sede}", "${req.body.pais}", ${req.body.cant}`);
-    con.query(`exec registrarUniversidad "${req.body.nombre}", "${req.body.sede}", "${req.body.pais}", ${req.body.cant}`, (err, res2)=>{
+    console.log(`exec registrarUniversidad "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.cantEstudiantes}`);
+    con.query(`exec registrarUniversidad "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.cantEstudiantes}`, (err, res2)=>{
         if(err)
             return res.status(401).send({msg:"Error en la base de datos"})
         return res.status(200).send({msg:"Dato almacenado con exito"})

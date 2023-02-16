@@ -4,9 +4,11 @@ import { RegistroUniversidadesComponent } from './admin/registro-universidades/r
 import { LoginGuard } from './guards/login.guard';
 import { InicioComponent } from './inicio/inicio.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { RegistroUniComponent } from './registro-uni/registro-uni.component';
 const routes: Routes = [
+  {path:"registroUni", component:RegistroUniComponent},  
   {path:"", component:InicioComponent, canActivate:[LoginGuard]},
-  {path:"admin/registroUniversidad", component:RegistroUniversidadesComponent, canActivate:[LoginGuard]},
+  {path:"admin/registroUniversidad", component:RegistroUniComponent},
   {path:"loginAdmin", component:LoginAdminComponent, title:"Login Administración"}
 ];
 

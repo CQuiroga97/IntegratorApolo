@@ -11,6 +11,7 @@ router.post("/login", (req, res, next) =>{
     loginAdmin.login(req, res)
 })
 router.post("/registrarUniversidad", (req, res, next) =>{
+    console.log(req.body)
     regUni.registrarUniversidad(req, res);
 })
 

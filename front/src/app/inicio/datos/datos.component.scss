@@ -7,8 +7,50 @@
 }
 .divCuadrosStands .cuadrosStands{
     width: 380px;
-    height: 200px;
+    height: 250px;
     margin: auto;
     background-color: #edf0dd;
-    border-radius: 10px;
+    border-radius: 1vw;
 }
+
+.divCuadrosStands .cuadrosStands .tittle {
+    position: relative;
+    left: 30px;
+}
+
+.divCuadrosStands .cuadrosStands .subtittle {
+    position: relative;
+    left: 30px;
+    top: 25px;
+}
+
+
+.divCuadrosStands .cuadrosStands .subtittle p{
+    font-size: 20px;
+    color: #6ba33c;
+}
+
+.divCuadrosStands .cuadrosStands .tittle p{
+    color: #6ba33c;
+    font-size: 25px;
+
+
+}
+.divCuadrosStands .cuadrosStands .numberoEncuentros {
+    position: relative;
+    left: 30px;
+    color: #86b164;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.divCuadrosStands .cuadrosStands .numberoEncuentros .numero1{
+    font-size: 45px;
+}
+
+.divCuadrosStands .cuadrosStands .numberoEncuentros .numero2{
+    font-size: 35px;
+    position: relative;
+    left: -10px;
+}
+

@@ -1,0 +1,35 @@
+<section class="contFormulario">
+
+  <nb-card>    
+    <nb-card-body>
+        <div class="form-group">
+          <!-- <label for="nombre">Nombre:</label> -->
+          <input type="text" id="nombre" class="form-control" placeholder="nombre" [(ngModel)]="nombre">
+        </div>
+        <div class="form-group">
+          <!-- <label for="pais">País:</label> -->
+          <input type="text" id="pais" class="form-control"  placeholder="Pais" [(ngModel)]="pais">
+        </div>
+        <div class="form-group">
+          <!-- <label for="ciudad">Ciudad:</label> -->
+          <input type="text" id="ciudad" class="form-control"  placeholder="Ciudad" [(ngModel)] = "ciudad">
+        </div>
+        <div class="form-group">
+          <!-- <label for="ciudad">Ciudad:</label> -->
+          <!-- <input type="text" id="ciudad" class="form-control" formControlName="ciudad" placeholder="ciudad"> -->
+        </div>
+        <div class="form-group">
+          <label for="estudiantes">Cantidad de estudiantes:</label>
+          <input type="number" id="estudiantes" class="form-control"  [(ngModel)] = "cantEstudiantes">
+        </div>
+        <div class="form-group">
+          <label for="logo">Seleccionar logo:</label>
+          <input type="file" id="logo" class="form-control" formControlName="logo">
+        </div>
+        <button nbButton status="primary" (click)="submit()">Ingresar</button>
+    </nb-card-body>
+  </nb-card>
+
+
+</section>
+
