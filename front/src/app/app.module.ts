@@ -22,6 +22,7 @@ import { NbInputModule } from '@nebular/theme';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { RegistroUniversidadesComponent } from './admin/registro-universidades/registro-universidades.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { CookieService } from 'ngx-cookie-service';
     TransmisionComponent,
     ResultadosComponent,
     DatosComponent,
-    LoginAdminComponent
+    LoginAdminComponent,
+    RegistroUniversidadesComponent
   ],
   imports: [
     BrowserModule,
