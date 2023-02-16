@@ -4,12 +4,15 @@ import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSidebarModule } from '@nebular/theme';
 import { NbActionsModule } from '@nebular/theme';
+import { NbAccordionModule } from '@nebular/theme';
 import { AppRoutingModule } from './app-routing.module';
 import { NbIconModule } from '@nebular/theme';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbButtonModule } from '@nebular/theme';
+import {NbCardModule} from '@nebular/theme';
+import {NbSelectModule} from '@nebular/theme';
 import { CabezeraComponent } from './cabezera/cabezera.component';
 import { ResumenRondasComponent } from './inicio/resumen-rondas/resumen-rondas.component';
 import { TransmisionComponent } from './inicio/transmision/transmision.component';
@@ -17,6 +20,7 @@ import { ResultadosComponent } from './inicio/resultados/resultados.component';
 import { DatosComponent } from './inicio/datos/datos.component';
 import { RegistroUniComponent } from './registro-uni/registro-uni.component';
 import { FormularioUniComponent } from './registro-uni/formulario-uni/formulario-uni.component';
+import { ListasUniversidadesComponent } from './registro-uni/listas-universidades/listas-universidades.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,8 +30,10 @@ import { FormularioUniComponent } from './registro-uni/formulario-uni/formulario
     TransmisionComponent,
     ResultadosComponent,
     DatosComponent,
+    
     RegistroUniComponent,
-    FormularioUniComponent
+    FormularioUniComponent,
+    ListasUniversidadesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +43,10 @@ import { FormularioUniComponent } from './registro-uni/formulario-uni/formulario
     NbLayoutModule,
     NbIconModule,
     NbButtonModule,
-    NbEvaIconsModule
+    NbCardModule,
+    NbSelectModule,
+    NbEvaIconsModule,
+    NbAccordionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

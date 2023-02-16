@@ -1,0 +1,37 @@
+.form-group {
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input.form-control {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  button[nbButton] {
+    margin-top: 1rem;
+  }
+
+  .contFormulario{
+    position: relative;
+    margin: auto;
+    width: 100%;
+    
+  }
+
+  nb-card-body.example-items-col {
+    align-items: stretch;
+  }
+
+  form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;    
+    position: relative;
+    margin: auto;
+  }
