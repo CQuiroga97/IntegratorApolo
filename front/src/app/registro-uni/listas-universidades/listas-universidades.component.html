@@ -1,0 +1,30 @@
+<nb-accordion *ngFor="let item of dataArray">
+  <nb-accordion-item>
+    <nb-accordion-item-header>
+      <div class="accordion-header">
+        <img src="{{item.imageUrl}}" class="accordion-header-image">
+        {{item.header}}
+      </div>
+    </nb-accordion-item-header>
+    <nb-accordion-item-body>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Puesto General</th>
+            <th>Carrera</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let person of item.persons">
+            <td>{{ person.name }}</td>
+            <td>{{ person.surname }}</td>
+            <td class="postiion">{{ person.position }}</td>
+            <td>{{ person.career }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </nb-accordion-item-body>
+  </nb-accordion-item>
+</nb-accordion>
