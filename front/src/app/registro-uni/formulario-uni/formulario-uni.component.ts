@@ -43,7 +43,9 @@ export class FormularioUniComponent {
 
     })
   }
-
+  fileUpload(archivo:any){
+    console.log(archivo)
+  }
 
 }
 

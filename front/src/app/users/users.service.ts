@@ -16,6 +16,9 @@ export class UsersService{
     registrUniversidad(universidad:any):Observable<any>{
         return this.http.post("http://localhost:3000/api/registrarUniversidad", universidad)
     }
+    getUniversidades():Observable<any>{
+        return this.http.post("http://localhost:3000/api/sp_getUniversidades", {});
+    }
     setToken(token:string){
         this.cookies.set("token", token);
     }

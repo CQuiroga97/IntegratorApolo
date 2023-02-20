@@ -8,7 +8,7 @@ import { RegistroUniComponent } from './registro-uni/registro-uni.component';
 const routes: Routes = [
   {path:"registroUni", component:RegistroUniComponent},  
   {path:"", component:InicioComponent, canActivate:[LoginGuard]},
-  {path:"admin/registroUniversidad", component:RegistroUniComponent},
+  {path:"admin/registroUniversidad", component:RegistroUniComponent, canActivate:[LoginGuard]},
   {path:"loginAdmin", component:LoginAdminComponent, title:"Login Administración"}
 ];
 

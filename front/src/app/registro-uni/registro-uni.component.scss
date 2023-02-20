@@ -18,7 +18,12 @@
 } */
 
 .listas{
-    width: 560px;
+    width: 860px;
     display: flex;
     align-items: center;
+	margin: auto;
+}
+app-listas-universidades{
+	width: 100%;
+	background-color: #edf0dd;
 }

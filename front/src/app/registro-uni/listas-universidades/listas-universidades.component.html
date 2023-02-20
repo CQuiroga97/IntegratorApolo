@@ -1,12 +1,19 @@
-<nb-accordion *ngFor="let item of dataArray">
+<nb-accordion *ngFor="let item of universidades">
   <nb-accordion-item>
     <nb-accordion-item-header>
       <div class="accordion-header">
-        <img src="{{item.imageUrl}}" class="accordion-header-image">
-        {{item.header}}
+        <!-- <img src="{{item.imageUrl}}" class="accordion-header-image"> -->
+        <span>
+          {{item["nombre"]}}
+        </span>
+        <div class="divCantEstudiantes">
+          <span>{{item["cantParticipantes"]}}</span>
+          <nb-icon icon="person-outline" status="basic"></nb-icon>
+        </div>
+
       </div>
     </nb-accordion-item-header>
-    <nb-accordion-item-body>
+    <!-- <nb-accordion-item-body>
       <table>
         <thead>
           <tr>
@@ -25,6 +32,6 @@
           </tr>
         </tbody>
       </table>
-    </nb-accordion-item-body>
+    </nb-accordion-item-body> -->
   </nb-accordion-item>
 </nb-accordion>

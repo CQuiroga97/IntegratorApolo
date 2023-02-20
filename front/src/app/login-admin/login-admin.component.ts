@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsersService } from '../users/users.service';
 @Component({
   selector: 'app-login-admin',
@@ -8,7 +9,10 @@ import { UsersService } from '../users/users.service';
 export class LoginAdminComponent {
   name: string;
   pass: string;
-  constructor(public userService:UsersService){
+  constructor(
+    public userService:UsersService,
+    private router:Router
+    ){
     const barra = document.getElementsByTagName("nb-layout-header");
     barra[0].remove();
   }
@@ -17,6 +21,7 @@ export class LoginAdminComponent {
     console.log(user)
     this.userService.login(user).subscribe(data => {
       this.userService.setToken(data.token);
+      this.router.navigate(["admin/registroUniversidad"])
     }, error =>{
       console.log("error")
     })
