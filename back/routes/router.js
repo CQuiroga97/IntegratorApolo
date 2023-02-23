@@ -27,5 +27,4 @@ router.post("/sp_getUniversidades", (req, res, next) =>{
 router.post("/getExcelUniversidades", (req, res) =>{
     universidad.createExcel(req, res);
 })
-
 module.exports = router;
