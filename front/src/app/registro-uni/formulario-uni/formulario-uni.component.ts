@@ -19,6 +19,7 @@ export class FormularioUniComponent {
   pais:string;
   ciudad:string;
   cantEstudiantes:string;
+  file:any;
   constructor(
     private formBuilder: FormBuilder, 
     private userService: UsersService) { }
@@ -43,8 +44,17 @@ export class FormularioUniComponent {
 
     })
   }
+  registrarUniversidadExcel(){
+    this.userService.registrarUniversidadExcel(this.file).subscribe(()=>{
+      console.log("Enviado!")
+    });
+  }
   fileUpload(archivo:any){
-    console.log(archivo)
+    document.querySelector(".uploadedFileDiv")?.classList.add("active");
+    const span = document.getElementById("spanFile");
+    this.file = archivo.files[0];
+    if (span != undefined)
+      span.textContent = archivo.value.split("\\", 3 )[2];
   }
 
 }

@@ -2,6 +2,8 @@
 
   <nb-card>    
     <nb-card-body>
+      <span class="titulo">Puedes registrar una universidad de manera manual.</span>
+      <div class="divFormManual">
         <div class="form-group">
           <!-- <label for="nombre">Nombre:</label> -->
           <input type="text" id="nombre" class="form-control" placeholder="Nombre" [(ngModel)]="nombre">
@@ -22,16 +24,26 @@
           <!-- <label for="estudiantes">Cantidad de estudiantes:</label> -->
           <input type="number" id="estudiantes" class="form-control" placeholder="Cantidad de estudiantes"  [(ngModel)] = "cantEstudiantes">
         </div>
+        <button nbButton status="primary" (click)="submit()">Ingresar</button>
+      </div>
+      <span class="titulo">O puedes exportar el archivo excel para guardar multiples universidades</span>
+      <div class="divDropFile">
         <div class="dropFile">
-          <input type="file" #fileDropRef id="fileDropRef" multiple (change) = "fileUpload($event.target)">
+          <input type="file" #fileDropRef id="fileDropRef" multiple (change) = "fileUpload($event.target)" name="archivo">
           <nb-icon icon="upload-outline"></nb-icon>
           <span>
-            <b>Selecciona un archivo CSV para importar</b><br>
+            <b>Selecciona un archivo CSV/XLSX para importar</b><br>
             o arrástralo y suéltalo aquí
           </span>
         </div>
         <br>
-        <button nbButton status="primary" (click)="submit()">Ingresar</button>
+        <div class="uploadedFileDiv">
+          <nb-icon icon="file-outline" class="fileIcon"></nb-icon>
+          <span id="spanFile"></span>
+          <nb-icon icon="paper-plane-outline" class="sendIcon" (click) = "registrarUniversidadExcel()"></nb-icon>
+        </div>
+      </div>
+        
     </nb-card-body>
   </nb-card>
 

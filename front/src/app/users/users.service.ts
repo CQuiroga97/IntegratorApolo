@@ -16,6 +16,10 @@ export class UsersService{
     registrUniversidad(universidad:any):Observable<any>{
         return this.http.post("http://localhost:3000/api/registrarUniversidad", universidad)
     }
+    registrarUniversidadExcel(excel:any):Observable<any>{
+        console.log(excel)
+        return this.http.post("http://localhost:3000/api/registrarUniversidadExcel", {"excel":excel})
+    }
     getUniversidades():Observable<any>{
         return this.http.post("http://localhost:3000/api/sp_getUniversidades", {});
     }

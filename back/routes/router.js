@@ -15,6 +15,11 @@ router.post("/login", (req, res, next) =>{
 router.post("/registrarUniversidad", (req, res, next) =>{
     regUni.registrarUniversidad(req, res);
 })
+router.post("/registrarUniversidadExcel", (req, res, next) =>{
+    console.log(req.body.content.replace(/^data:.*,/, ''));
+    res.end();
+    /* regUni.registrarUniversidad(req, res); */
+})
 router.post("/sp_getUniversidades", (req, res, next) =>{
     console.log("asdasd")
     mostrarUniversidades.mostrarUniversidades(req, res);

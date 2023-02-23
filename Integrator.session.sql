@@ -36,4 +36,11 @@ create procedure sp_getUniversidades
         from
             universidad;
         
-exec sp_getUniversidades
+go
+create procedure sp_setParticipantes @nombre varchar(200), @email varchar(200), @pass varchar(60), @universidad int
+    as
+        insert into participante values (@nombre, @email, @pass, @universidad)
+go
+
+exec sp_setParticipantes "Prueba", "Prueba", "Prueba", 1
+select * from participante;
