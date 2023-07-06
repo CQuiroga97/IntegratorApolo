@@ -19,12 +19,14 @@ sql.connect(config, function(err){
 })
 var con = new sql.Request();
 exports.login = (req, res)=>{
-    console.log(req.body);
+    console.log(`exec loginAdmin "${req.body.name}", "${md5(req.body.pass)}"`);
+    
     con.query(`exec loginAdmin "${req.body.name}", "${md5(req.body.pass)}"`, (err, result)=>{
         if(err){
             return res.status(401).send({msg:err})
         }
         const id = result.recordset[0]["resultado"];
+        console.log(result.recordset)
         if(id){
             const token = jwt.sign({id:id}, "the-super-strong-secret", {expiresIn:"1h"});
             return res.status(200).send({msg:"Logueado", token})

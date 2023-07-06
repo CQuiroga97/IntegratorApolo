@@ -20,6 +20,7 @@
   .contFormulario{
     position: relative;
     margin: auto;
+    margin-top: 20px;
     width: 100%;
   }
 
@@ -38,16 +39,11 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    width: 80%;
+    width: 100%;
     height: auto;
   }
-nb-card-body .form-group{
-  margin: 20px;
-}
 .dropFile{
-  width: 450px;
   height: 200px;
-  padding: 2rem;
   text-align: center;
   border: dashed 1px gray;
   margin: auto;
@@ -108,7 +104,6 @@ span.titulo{
 }
 .divDropFile{
   margin: auto;
-  width: auto;
   position: relative;
 }
 .divDropFile .uploadedFileDiv{

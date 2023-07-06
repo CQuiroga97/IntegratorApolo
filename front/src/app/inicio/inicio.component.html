@@ -1,6 +1,6 @@
-<div class="divFechas">
+<div class="divFechas" *ngIf="onAnimation">
     <app-resumen-rondas></app-resumen-rondas>
 </div>
-<app-transmision></app-transmision>
-<app-resultados></app-resultados>
-<app-datos></app-datos>
+<app-transmision *ngIf="onAnimation"></app-transmision>
+<app-resultados *ngIf="onAnimation"></app-resultados>
+<app-datos *ngIf="onAnimation"></app-datos>

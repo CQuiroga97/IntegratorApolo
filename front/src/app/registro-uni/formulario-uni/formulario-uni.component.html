@@ -1,52 +1,74 @@
 <section class="contFormulario">
+  <h2>Puedes registrar una universidad de manera manúal.</h2>
 
-  <nb-card>    
+  <nb-card class="transparent">    
     <nb-card-body>
-      <span class="titulo">Puedes registrar una universidad de manera manual.</span>
-      <div class="divFormManual">
-        <div class="form-group">
-          <!-- <label for="nombre">Nombre:</label> -->
-          <input type="text" id="nombre" class="form-control" placeholder="Nombre" [(ngModel)]="nombre">
-        </div>
-        <div class="form-group">
-          <!-- <label for="pais">País:</label> -->
-          <input type="text" id="pais" class="form-control"  placeholder="Pais" [(ngModel)]="pais">
-        </div>
-        <div class="form-group">
-          <!-- <label for="ciudad">Ciudad:</label> -->
-          <input type="text" id="ciudad" class="form-control"  placeholder="Ciudad" [(ngModel)] = "ciudad">
-        </div>
-        <div class="form-group">
-          <!-- <label for="ciudad">Ciudad:</label> -->
-          <!-- <input type="text" id="ciudad" class="form-control" formControlName="ciudad" placeholder="ciudad"> -->
-        </div>
-        <div class="form-group">
-          <!-- <label for="estudiantes">Cantidad de estudiantes:</label> -->
-          <input type="number" id="estudiantes" class="form-control" placeholder="Cantidad de estudiantes"  [(ngModel)] = "cantEstudiantes">
-        </div>
-        <button nbButton status="primary" (click)="submit()">Ingresar</button>
-      </div>
-      <span class="titulo">O puedes exportar el archivo excel para guardar multiples universidades</span>
-      <div class="divDropFile">
-        <div class="dropFile">
-          <input type="file" #fileDropRef id="fileDropRef" multiple (change) = "fileUpload($event.target)" name="archivo">
-          <nb-icon icon="upload-outline"></nb-icon>
-          <span>
-            <b>Selecciona un archivo CSV/XLSX para importar</b><br>
-            o arrástralo y suéltalo aquí
-          </span>
-        </div>
-        <br>
-        <div class="uploadedFileDiv">
-          <nb-icon icon="file-outline" class="fileIcon"></nb-icon>
-          <span id="spanFile"></span>
-          <nb-icon icon="paper-plane-outline" class="sendIcon" (click) = "registrarUniversidadExcel()"></nb-icon>
-        </div>
-      </div>
-        
+      <form [formGroup]="dataUniversidad" (ngSubmit)="submit()" id="ngForm" #documentEditForm="ngForm" class="container" style="width: 100%;">
+          <div class="row">
+            <div class="form-group col-md-3">
+              <!-- <label for="nombre">Nombre:</label> -->
+              <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre">
+            </div>
+            <div class="form-group col-md-3">
+              <!-- <label for="pais">País:</label> -->
+              <input type="text" formControlName="pais" class="form-control"  placeholder="Pais">
+            </div>
+            <div class="form-group col-md-3">
+              <!-- <label for="ciudad">Ciudad:</label> -->
+              <input type="text" formControlName="ciudad" class="form-control"  placeholder="Ciudad">
+            </div>
+            <!-- <div class="form-group">
+              <label for="ciudad">Ciudad:</label>
+              <input type="text" id="ciudad" class="form-control" formControlName="ciudad" placeholder="ciudad">
+            </div> -->
+            <div class="form-group col-md-3">
+              <!-- <label for="estudiantes">Cantidad de estudiantes:</label> -->
+              <input type="number" formControlName="estudiantes" class="form-control" placeholder="Cantidad de estudiantes" >
+            </div>
+          </div>
+          <div class="row">
+            <span class="col-md-8" *ngIf="dataUniversidad.get('nombre')!.hasError('required')">Se debe escribir un nombre de universidad</span>
+            <span class="col-md-8" *ngIf="dataUniversidad.get('pais')!.hasError('required')">Se debe escribir un país</span>
+            <span class="col-md-8" *ngIf="dataUniversidad.get('ciudad')!.hasError('required')">Se debe escribir una ciudad</span>
+            <span class="col-md-8" *ngIf="dataUniversidad.get('estudiantes')!.hasError('required')">Se debe ingresar el numero de estudiantes</span>
+            <span class="col-md-8" *ngIf="dataUniversidad.get('estudiantes')!.hasError('min')">Debe haber más de 5 estudiantes</span>
+            <button nbButton outline status="basic" form="ngForm" class="col-md-3 ms-auto">Ingresar</button>
+          </div>
+      </form>
+      
     </nb-card-body>
   </nb-card>
-
+  <h2>O puedes exportar el archivo excel para guardar multiples universidades</h2>
+  <nb-card class="transparent">
+    <nb-card-body>
+      <div class="container">
+        <div class="row">
+          <div class="divDropFile col-md-8">
+            <div class="dropFile">
+              <input type="file" #fileDropRef id="fileDropRef" multiple (change) = "fileUpload($event.target)" name="archivo">
+              <nb-icon icon="upload-outline"></nb-icon>
+              <span>
+                <b>Selecciona un archivo CSV/XLSX para importar</b><br>
+                o arrástralo y suéltalo aquí
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="container">
+              <div class="row">
+                <span class="col-md-15"><b>Nombre:  </b>{{fileName}}</span>
+                <span class="col-md-15"> <b>Tamaño:  </b>{{fileSize}}</span>
+                <span class="col-md-15"><b>Numero de universidades: </b>{{cantUni}}</span>
+                <button nbButton outline status="basic" (click)="submit()" class="col-md-15 ms-auto" [disabled]="file==null">Guardar excel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </nb-card-body>
+  </nb-card>
+  
 
 </section>
 

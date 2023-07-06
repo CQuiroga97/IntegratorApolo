@@ -18,12 +18,29 @@
 } */
 
 .listas{
-    width: 860px;
+    width: 100%;
     display: flex;
     align-items: center;
 	margin: auto;
+	padding-top: 10px;
+	padding-bottom: 30px;
 }
 app-listas-universidades{
 	width: 100%;
-	background-color: #edf0dd;
+	background-color: transparent;
+}
+.registroUniversidades{
+    position: relative;
+	margin: auto;
+	margin-top: 100px;
+	width: 1400px;
+
+}
+.divMenu{
+    width: 100%;
+    height: 100%;
+    background:linear-gradient(90.15deg, rgba(13, 47, 28, 0.9) 0.14%, rgba(13, 47, 28, 0.62) 99.88%), url(../../assets/img/admin/registroUniversidades/background2.png);
+    background-repeat: no-repeat;
+    background-size:100%  auto ;
+    display: flex;
 }

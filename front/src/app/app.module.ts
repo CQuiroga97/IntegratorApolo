@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbTabsetModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSidebarModule } from '@nebular/theme';
 import { NbActionsModule } from '@nebular/theme';
@@ -28,6 +28,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { RegistroUniversidadesComponent } from './admin/registro-universidades/registro-universidades.component';
+import { MenuAdminComponent } from './admin/menu-admin/menu-admin.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DialogBorrarUniversidadComponent } from './dialogs/dialog-borrar-universidad/dialog-borrar-universidad.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,10 +42,12 @@ import { RegistroUniversidadesComponent } from './admin/registro-universidades/r
     TransmisionComponent,
     ResultadosComponent,
     DatosComponent,
-    RegistroUniComponent,
     FormularioUniComponent,
     ListasUniversidadesComponent,
-    LoginAdminComponent
+    LoginAdminComponent,
+    RegistroUniComponent,
+    MenuAdminComponent,
+    DialogBorrarUniversidadComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +66,11 @@ import { RegistroUniversidadesComponent } from './admin/registro-universidades/r
     NbInputModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NbTabsetModule,
+    MatTabsModule,
+    NgbModule,
+    MatDialogModule,
   ],
   providers: [
     CookieService

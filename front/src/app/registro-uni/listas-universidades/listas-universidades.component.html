@@ -1,37 +1,109 @@
-<nb-accordion *ngFor="let item of universidades">
-  <nb-accordion-item>
-    <nb-accordion-item-header>
-      <div class="accordion-header">
-        <!-- <img src="{{item.imageUrl}}" class="accordion-header-image"> -->
-        <span>
-          {{item["nombre"]}}
-        </span>
-        <div class="divCantEstudiantes">
-          <span>{{item["cantParticipantes"]}}</span>
-          <nb-icon icon="person-outline" status="basic"></nb-icon>
-        </div>
+<nb-card class="transparent">  
+  <nb-card-header>
 
+    <span>Puedes registrar a los estudiantes de cada universidad en este módulo.</span>
+  </nb-card-header>  
+  <nb-card-body>
+    <div class="container">
+      <div class="row">
+
+        <div class="divDropFile col-md-8">
+          <div class="dropFile">
+            <input type="file" #fileDropRef id="fileDropRef" multiple (change) = "fileUpload($event.target)" name="archivo">
+            <nb-icon icon="upload-outline"></nb-icon>
+            <span>
+              <b>Selecciona un archivo CSV/XLSX para importar</b><br>
+              o arrástralo y suéltalo aquí
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="container">
+            <div class="row">
+              <span class="col-md-15"><b>Nombre:  </b>{{fileName}}</span>
+              <span class="col-md-15"> <b>Tamaño:  </b>{{fileSize}}</span>
+              <span class="col-md-15"><b>Numero de universidades: </b>{{cantUni}}</span>
+              <button nbButton outline status="basic" class="col-md-15 ms-auto" [disabled]="file==null" (click)="registrarParticipantesExcel()">Guardar excel</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </nb-accordion-item-header>
-    <!-- <nb-accordion-item-body>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Puesto General</th>
-            <th>Carrera</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let person of item.persons">
-            <td>{{ person.name }}</td>
-            <td>{{ person.surname }}</td>
-            <td class="postiion">{{ person.position }}</td>
-            <td>{{ person.career }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </nb-accordion-item-body> -->
-  </nb-accordion-item>
-</nb-accordion>
+      <div class="row">
+        <div class="col-md-8">
+
+          <button nbButton outline status="basic" (click)="generateExcelParticipante()" style="width: 100%;">Descargar Excel</button>
+        </div>
+      </div>
+    </div>
+
+</nb-card-body>
+</nb-card>
+<div class="divUniversidades" style="height: 400px; overflow: auto;">
+  
+  <div class="container">
+    <div class="row" *ngFor="let item of universidades">
+      <nb-card class="transparent col-md-11" style="margin-bottom: 15px;">
+        <nb-card-body>
+
+          <nb-accordion>
+            <nb-accordion-item>
+              <nb-accordion-item-header>
+                <div class="accordion-header">
+                  <!-- <img src="{{item.imageUrl}}" class="accordion-header-image"> -->
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-1">
+                        <span>
+                          <nb-icon icon="edit-outline" style="color: white;" class="d-flex justify-content-center text-center"></nb-icon>
+                        </span>
+                      </div>
+                      <div class="col-md-10">
+                        <span>
+
+                          {{item.universidad["nombre"]}}
+                        </span>
+                      </div>
+                      
+                      <div class="divCantEstudiantes col-md-1">
+                        <span>{{item.participante.length}}/{{item.universidad["cantParticipantes"]}}</span>
+                        <nb-icon icon="person-outline" status="basic"></nb-icon>
+                      </div>
+                    </div>
+                  </div>
+                 
+          
+                </div>
+              </nb-accordion-item-header>
+              <nb-accordion-item-body  *ngIf="item.participante.length > 0">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Nombre</th>
+                      <th>correo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  *ngFor="let participantes of item.participante" >
+                      <td>{{ participantes.idParticipante }}</td>
+                      <td>{{ participantes.nombre }}</td>
+                      <td>{{ participantes.email }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </nb-accordion-item-body>
+              <nb-accordion-item-body  *ngIf="item.participante.length == 0">
+                <span>No hay participantes registrados para esta universidad</span>
+              </nb-accordion-item-body>
+            </nb-accordion-item>
+          </nb-accordion>
+          
+        </nb-card-body>
+      </nb-card>
+
+      <div class="col-md-1 d-flex justify-content-center text-center">
+        <nb-icon icon="trash-2-outline" style="color: white; margin-top: 27px; cursor: pointer;" class="d-flex justify-content-center text-center" (click)="deleteU(item.universidad.nombre, item.universidad.idUniversidad)"></nb-icon>
+      </div>
+    </div>
+  </div>
+</div>

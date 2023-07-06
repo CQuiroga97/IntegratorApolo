@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./inicio.component.scss']
 })
 export class InicioComponent {
-
+  public onAnimation:boolean = false;
 }

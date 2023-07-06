@@ -1,10 +1,23 @@
-<section class="registroUniversidades">
-  <app-formulario-uni></app-formulario-uni>
+<div class="divMenu">
 
-  <section class="listas">
-
-
-    <app-listas-universidades></app-listas-universidades>
+  <section class="registroUniversidades">
+    <mat-tab-group>
+      <mat-tab label="Registro de universidades"> 
+        <app-formulario-uni></app-formulario-uni>
+      </mat-tab>
+      <mat-tab label="Universidades"> 
+        <section class="listas">
+          <app-listas-universidades></app-listas-universidades>
+        </section>  
+      </mat-tab>
+    </mat-tab-group>
+   <!--  <nb-tabset  (changeTab)="restoreActive($event)">
+      <nb-tab tabTitle="Registro de universidades" active="{{setActiveUni2}}">
+        
+      </nb-tab>
+      <nb-tab tabTitle="Universidades" active="{{setActiveUni}}">
+        
+      </nb-tab>
+     </nb-tabset> -->
   </section>
-
-</section>
+</div>

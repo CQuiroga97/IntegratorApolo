@@ -1,4 +1,6 @@
 <div class="divMenu">
+    <img src="../../assets/img/logos/america.png" alt="">
+
     <div class="divBtnMenu">
         <span>Inicio</span>
     </div>
@@ -9,4 +11,6 @@
         <span>Datos</span>
     </div>
 </div>
-<button nbButton outline status="basic">Iniciar Sesión</button>
+
+<button nbButton outline status="basic" *ngIf="!isLoggedIn">Iniciar Sesión</button>
+<button nbButton outline status="basic" (click) = "logOut()" *ngIf="isLoggedIn">Cerrar Sesión</button>

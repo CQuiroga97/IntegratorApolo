@@ -1,5 +1,5 @@
 .divMenu{
-    width: 1000px;
+    width: 100%;
     height: 70px;
     margin: auto;
     display: flex;
@@ -22,4 +22,8 @@
 }
 button{
     margin: auto 0px auto auto;
+}
+img{
+    margin: auto 0px auto 50px;
+    height: 43px;
 }

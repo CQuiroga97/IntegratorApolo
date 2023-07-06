@@ -1,10 +1,4 @@
-import { Component } from '@angular/core';
-
-
-
-
-export class CardColorsComponent {
-}
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -14,14 +8,28 @@ export class CardColorsComponent {
   
 })
 export class RegistroUniComponent {
-
+  setActiveReg:boolean = false;
   
+  public setActiveUni:boolean
+  public setActiveUni2:boolean
+  constructor(
+  ){
 
+  }
+
+  setActiveUniFunc(){
+    this.setActiveUni = true;
+    this.setActiveUni2 = false;
+  }
+  restoreActive(e:any){
+    if(e.tabTitle == "Registro de universidades"){
+      this.setActiveUni2 = true;
+      this.setActiveUni = false;
+    }
+  }
 }
 
 
-
-export class PageModule { }
 
 /* import { Component, OnInit } from '@angular/core'; */
 

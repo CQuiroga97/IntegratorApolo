@@ -18,10 +18,19 @@ sql.connect(config, function(err){
 var con = new sql.Request();
 
 exports.mostrarUniversidades = (req, res)=>{
-    con.query(`exec sp_getUniversidades`, (err, res2)=>{
+    con.query(`exec sp_getParticipantesByUniversidad`, (err, res2)=>{
         if(err)
             return res.status(401).send({msg:"Error en la base de datos"})
-        return res.status(200).send(res2.recordset)
+        else
+            return res.status(200).send(res2.recordsets)
     })
 
+}
+exports.BorrarUniversidadesEstudiantes = (req, res)=>{
+    con.query(`exec spBorrarUniversidadesEstudiantes ${req.body.idu}`, (err, res2)=>{
+        if(err)
+            return res.status(401).send({msg:"Error en la base de datos"})
+        else
+            return res.status(200).send(res2)
+    })
 }
