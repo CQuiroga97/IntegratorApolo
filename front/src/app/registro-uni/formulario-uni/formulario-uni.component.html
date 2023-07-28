@@ -10,29 +10,25 @@
               <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre">
             </div>
             <div class="form-group col-md-3">
+              <!-- <label for="ciudad">Ciudad:</label> -->
+              <input type="text" formControlName="correo" class="form-control"  placeholder="Correo">
+            </div>
+            <div class="form-group col-md-2">
               <!-- <label for="pais">País:</label> -->
               <input type="text" formControlName="pais" class="form-control"  placeholder="Pais">
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
               <!-- <label for="ciudad">Ciudad:</label> -->
               <input type="text" formControlName="ciudad" class="form-control"  placeholder="Ciudad">
             </div>
-            <!-- <div class="form-group">
-              <label for="ciudad">Ciudad:</label>
-              <input type="text" id="ciudad" class="form-control" formControlName="ciudad" placeholder="ciudad">
-            </div> -->
-            <div class="form-group col-md-3">
+            
+            <div class="form-group col-md-2">
               <!-- <label for="estudiantes">Cantidad de estudiantes:</label> -->
               <input type="number" formControlName="estudiantes" class="form-control" placeholder="Cantidad de estudiantes" >
             </div>
           </div>
           <div class="row">
-            <span class="col-md-8" *ngIf="dataUniversidad.get('nombre')!.hasError('required')">Se debe escribir un nombre de universidad</span>
-            <span class="col-md-8" *ngIf="dataUniversidad.get('pais')!.hasError('required')">Se debe escribir un país</span>
-            <span class="col-md-8" *ngIf="dataUniversidad.get('ciudad')!.hasError('required')">Se debe escribir una ciudad</span>
-            <span class="col-md-8" *ngIf="dataUniversidad.get('estudiantes')!.hasError('required')">Se debe ingresar el numero de estudiantes</span>
-            <span class="col-md-8" *ngIf="dataUniversidad.get('estudiantes')!.hasError('min')">Debe haber más de 5 estudiantes</span>
-            <button nbButton outline status="basic" form="ngForm" class="col-md-3 ms-auto">Ingresar</button>
+            <button nbButton outline status="basic" form="ngForm" class="col-md-4 ms-auto">Guardar</button>
           </div>
       </form>
       
@@ -59,7 +55,7 @@
                 <span class="col-md-15"><b>Nombre:  </b>{{fileName}}</span>
                 <span class="col-md-15"> <b>Tamaño:  </b>{{fileSize}}</span>
                 <span class="col-md-15"><b>Numero de universidades: </b>{{cantUni}}</span>
-                <button nbButton outline status="basic" (click)="submit()" class="col-md-15 ms-auto" [disabled]="file==null">Guardar excel</button>
+                <button nbButton outline status="basic" (click)="registrarUniversidadExcel()" class="col-md-15 ms-auto" [disabled]="file==null">Guardar excel</button>
               </div>
             </div>
           </div>

@@ -1,0 +1,154 @@
+<div class="divLoading" *ngIf="!iniciarPrueba">
+    <span *ngIf="segundos == 4">{{mensajeLoading}}</span>
+    <h1 *ngIf="segundos != 4">
+        {{segundos}}
+    </h1>
+</div>
+<nb-card class="bg-transparent" *ngIf="iniciarPrueba">
+    <nb-card-body>
+        <div class="container timer">
+            <div class="row justify-content-md-center">
+                <div class="col-1">
+                    <img src="../../../assets/img/participante/clasificaciones/lineas.png" alt="" class="der">
+                </div>
+                <div class="col-2">
+                    <nb-card class="transparent">
+                        <nb-card-body>
+                            <span>
+                                {{cronometroFront.minutos<10?'0'+cronometroFront.minutos:cronometroFront.minutos}}
+                            </span>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="col-1">
+                    <h1>:</h1>
+                </div>
+                <div class="col-2">
+                    <nb-card class="transparent">
+                        <nb-card-body>
+                            <span>
+                                {{cronometroFront.segundos<10?'0'+cronometroFront.segundos:cronometroFront.segundos}}
+                            </span>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="col-1">
+                    <h1>:</h1>
+                </div>
+                <div class="col-3">
+                    <nb-card class="transparent">
+                        <nb-card-body>
+                            <span>
+                                {{cronometroFront.mill<10?'0'+cronometroFront.mill:cronometroFront.mill}}
+                            </span>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="col-1">
+                    <img src="../../../assets/img/participante/clasificaciones/lineas.png" alt="" class="der">
+                </div>
+            </div>
+        </div>
+      <nb-stepper orientation="horizontal" disableStepNavigation #stepper>
+        <nb-step  *ngFor="let integral of integrales.integrales; let i = index;">
+          
+            <div class="container containerSuperior">
+                <div class="row justify-content-md-center">
+                    <div class="col-12">
+                        <nb-card class="transparent">
+                            <nb-card-body>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <img [src]='"http://localhost:3000/images/"+integral.Nombre+"/"+integral.Imagenes[0]' alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                </div>
+                <div class="row justify-content-around">
+                    <nb-card class="transparent col-5" (click)="seleccionarRespuesta(1, i)" [class.checked] = "respuestaSeleccionada == 1">
+                        <nb-card-body>
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div class="seleccion-box col-2">
+                                        <h1>
+                                            A
+                                        </h1>
+                                    </div>
+                                    <div class="col-10">
+                                        <img [src]='"http://localhost:3000/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[0]' alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card class="transparent col-5" (click)="seleccionarRespuesta(2, i)" [class.checked] = "respuestaSeleccionada == 2">
+                        <nb-card-body>
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div class="seleccion-box col-2">
+                                        <h1>
+                                            B
+                                        </h1>
+                                    </div>
+                                    <div class="col-10">
+                                        <img [src]='"http://localhost:3000/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[1]' alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                    
+                </div>
+                <div class="row justify-content-around">
+                    <nb-card class="transparent col-5" (click)="seleccionarRespuesta(3, i)" [class.checked] = "respuestaSeleccionada == 3">
+                        <nb-card-body>
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div class="seleccion-box col-2">
+                                        <h1>
+                                            C
+                                        </h1>
+                                    </div>
+                                    <div class="col-10">
+                                        <img [src]='"http://localhost:3000/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[2]' alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card class="transparent col-5" (click)="seleccionarRespuesta(4, i)" [class.checked] = "respuestaSeleccionada == 4">
+                        <nb-card-body>
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div class="seleccion-box col-2">
+                                        <h1>
+                                            D
+                                        </h1>
+                                    </div>
+                                    <div class="col-10">
+                                        <img [src]='"http://localhost:3000/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[3]' alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <button class="next-button" nbButton (click)="guardarSeleccion()" [disabled]="respuestaSeleccionada == 0">Responder</button>
+                    </div>
+                </div>
+            </div>
+
+          
+
+        </nb-step>
+        
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>

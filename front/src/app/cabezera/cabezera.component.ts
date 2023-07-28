@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class CabezeraComponent implements OnInit{
   isLoggedIn: boolean = false;
+  usuario:any = {rol:""};
   constructor(
     public userService:UsersService,
     public router:Router,
@@ -16,10 +17,12 @@ export class CabezeraComponent implements OnInit{
 
   }
   ngOnInit(): void {
-   /*  this.checkLoginStatus(); */
    this.userService.isLoggedIn$.subscribe(isLoggedIn => {
-     console.log("asd")
     this.isLoggedIn = isLoggedIn;
+    if(isLoggedIn){
+      this.usuario = this.userService.getUserInfo().data
+      console.log(this.usuario)
+    }
    })
   }
   checkLoginStatus() {
@@ -28,5 +31,8 @@ export class CabezeraComponent implements OnInit{
   }
   logOut(){
     this.userService.logoutAdmin();
+  }
+  goLogin(){
+    this.router.navigate(["/login"])
   }
 }

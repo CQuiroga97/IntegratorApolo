@@ -19,12 +19,20 @@ sql.connect(config, function(err){
 var con = new sql.Request();
 
 exports.registrarUniversidad = (req, res)=>{
-   con.query(`exec sp_setUniversidad "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.cantEstudiantes}, ${req.body.correo}`, (err, res2)=>{
+    console.log(req.body)
+   con.query(`exec sp_setUniversidad "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.cantEstudiantes}, '${req.body.correo}'`, (err, res2)=>{
         if(err)
             return res.status(401).send({msg:"Error en la base de datos"})
         return res.status(200).send({msg:"Dato almacenado con exito"})
     })
-
+}
+exports.modificarUniversidad = (req, res)=>{
+    console.log(req.body)
+   con.query(`exec spModificarUniversidad ${req.body.idUniversidad}, "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.estudiantes}, '${req.body.correo}'`, (err, res2)=>{
+        if(err)
+            return res.status(401).send({msg:"Error en la base de datos"})
+        return res.status(200).send({msg:"Dato almacenado con exito"})
+    })
 }
 exports.registrarUniversidadMultiples = (excel, res, callback)=>{
    /*  con.query(`exec registrarUniversidad "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.cantEstudiantes}`, (err, res2)=>{

@@ -54,7 +54,7 @@
                     <div class="row">
                       <div class="col-sm-1">
                         <span>
-                          <nb-icon icon="edit-outline" style="color: white;" class="d-flex justify-content-center text-center"></nb-icon>
+                          <nb-icon icon="edit-outline" style="color: white;" class="d-flex justify-content-center text-center" (click)="modificarUniversidad(item)"></nb-icon>
                         </span>
                       </div>
                       <div class="col-md-10">
@@ -66,7 +66,7 @@
                       
                       <div class="divCantEstudiantes col-md-1">
                         <span>{{item.participante.length}}/{{item.universidad["cantParticipantes"]}}</span>
-                        <nb-icon icon="person-outline" status="basic"></nb-icon>
+                        <nb-icon icon="person-outline" ></nb-icon>
                       </div>
                     </div>
                   </div>
@@ -74,10 +74,11 @@
           
                 </div>
               </nb-accordion-item-header>
-              <nb-accordion-item-body  *ngIf="item.participante.length > 0">
-                <table>
+              <nb-accordion-item-body>
+                <table *ngIf="item.participante.length > 0">
                   <thead>
                     <tr>
+                      <th></th>
                       <th>Id</th>
                       <th>Nombre</th>
                       <th>correo</th>
@@ -85,15 +86,26 @@
                   </thead>
                   <tbody>
                     <tr  *ngFor="let participantes of item.participante" >
+                      <td>
+                        <nb-icon icon="edit-outline" style="color: white; margin-top: 27px; cursor: pointer;" (click)="modificarParticipante(participantes, item.universidad)"></nb-icon>
+                      </td>
                       <td>{{ participantes.idParticipante }}</td>
                       <td>{{ participantes.nombre }}</td>
                       <td>{{ participantes.email }}</td>
+                      <td>
+                        <nb-icon icon="trash-2-outline" style="color: white; margin-top: 27px; cursor: pointer;" (click)="borrarParticipante(participantes.idParticipante, participantes.nombre)"></nb-icon>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
-              </nb-accordion-item-body>
-              <nb-accordion-item-body  *ngIf="item.participante.length == 0">
-                <span>No hay participantes registrados para esta universidad</span>
+                <span *ngIf="item.participante.length == 0">No hay participantes registrados para esta universidad</span>
+                <div class="container" *ngIf="item.participante.length<item.universidad['cantParticipantes']">
+                  <div class="row justify-content-md-center">
+                    <div class="col-1">
+                      <nb-icon icon="plus-circle-outline" style="color: white; cursor: pointer;" (click)="crearParticipante(null, item.universidad)"></nb-icon>
+                    </div>
+                  </div>
+                </div>
               </nb-accordion-item-body>
             </nb-accordion-item>
           </nb-accordion>

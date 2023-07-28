@@ -1,13 +1,13 @@
 <div class="divMenu">
 
   <section class="registroUniversidades">
-    <mat-tab-group>
+    <mat-tab-group (selectedTabChange)="onTabChanged($event);" [(selectedIndex)]="selectedTab">
       <mat-tab label="Registro de universidades"> 
         <app-formulario-uni></app-formulario-uni>
       </mat-tab>
       <mat-tab label="Universidades"> 
         <section class="listas">
-          <app-listas-universidades></app-listas-universidades>
+          <app-listas-universidades #listasUniversidades></app-listas-universidades>
         </section>  
       </mat-tab>
     </mat-tab-group>

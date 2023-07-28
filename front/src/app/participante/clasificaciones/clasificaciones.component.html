@@ -1,0 +1,124 @@
+<div class="divMenu2">
+    <nb-card class="transparent outer" *ngIf="bannerLobby && loaded" [@inOutAnimation] #cardInicial id="cardInicial">
+        <nb-card-header>
+            <h1>
+                Inicio de prueba
+            </h1>
+        </nb-card-header>
+        <nb-card-body>
+            <img src="../../../assets/img/participante/clasificaciones/lineas.png" alt="" class="izq">
+            <div class="container timer" *ngIf="dias <= 1" >
+                <div class="row justify-content-md-center">
+                    <div class="col-3">
+                        <nb-card class="transparent">
+                            <nb-card-body>
+
+                                <h1 *ngIf="timerInicio">
+                                    {{timerInicio.hora<10?'0'+timerInicio.hora:timerInicio.hora}}
+                                </h1>
+                                <h1 *ngIf="!timerInicio">
+                                    00
+                                </h1>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                    <div class="col-1">
+                        <h1>:</h1>
+                    </div>
+                    <div class="col-3">
+                        <nb-card class="transparent">
+                            <nb-card-body>
+
+                                <h1 *ngIf="timerInicio">
+                                    {{timerInicio.minutos<10?'0'+timerInicio.minutos:timerInicio.minutos}}
+                                </h1>
+                                <h1 *ngIf="!timerInicio">
+                                    00
+                                </h1>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                    <div class="col-1">
+                        <h1>:</h1>
+                    </div>
+                    <div class="col-3">
+                        <nb-card class="transparent">
+                            <nb-card-body>
+
+                                <h1 *ngIf="timerInicio">
+                                    {{timerInicio.segundos<10?'0'+timerInicio.segundos:timerInicio.segundos}}
+                                </h1>
+                                <h1 *ngIf="!timerInicio">
+                                    00
+                                </h1>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                </div>
+            </div>
+            <div class="column" *ngIf="dias > 1">
+                <div class="row">
+                    <div class="col-4">
+                        <nb-card class="transparent">
+                            <nb-card-body>
+                                <h1>
+                                    {{dias}}
+                                </h1>
+                            </nb-card-body>
+                            <nb-card-footer>
+                                <h1>
+                                    Días
+                                </h1>
+                            </nb-card-footer>
+                        </nb-card>
+                    </div>
+                </div>
+            </div>
+            <img src="../../../assets/img/participante/clasificaciones/lineas.png" alt="" class="der">
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton outline status="basic" (click)="volver()">Volver</button>
+        </nb-card-footer>
+    </nb-card>
+    <nb-card class="transparent outer banner" *ngIf="bannerEspera && loaded" [@inOutAnimation]>
+        <img src="../../../assets/img/participante/clasificaciones/fondoBanner.png" alt="">
+        <div class="container" style="margin: auto;">
+            <div class="row">
+                <div class="col-8">
+                    <h1>Prueba de clasificaciones</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <h2>Integrales</h2>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-8 text-end">
+                    <h1>La ronda iniciará en breve.</h1><br>
+                    <span>No salgas de esta página.</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <img src="../../../assets/img/participante/clasificaciones/reloj.png" alt="" class="reloj">
+                </div>
+                <div class="col-4">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                {{tiempo.minutos}}:{{tiempo.segundos}} Minutos (Por pregunta)
+                            </div>
+                            <div class="col-12">
+                                {{cantIntegrales}} preguntas
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-card>
+    <app-integrales *ngIf="enPrueba" [@inOutAnimationIntegrales]>
+
+    </app-integrales>
+</div>

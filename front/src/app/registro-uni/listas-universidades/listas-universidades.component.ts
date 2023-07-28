@@ -1,15 +1,17 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { NbAccordionModule } from '@nebular/theme';
 import { UsersService } from 'src/app/users/users.service';
 import { CommonService } from 'src/app/users/common.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { saveAs } from 'file-saver';
 import { RegistroUniComponent } from '../registro-uni.component';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogBorrarUniversidadComponent } from 'src/app/dialogs/dialog-borrar-universidad/dialog-borrar-universidad.component';
+import { DialogModificarUniversidadComponent } from 'src/app/dialogs/dialog-modificar-universidad/dialog-modificar-universidad.component';
+import { NbToastrService } from '@nebular/theme';
+import { DialogBorrarParticipanteComponent } from 'src/app/dialogs/dialog-borrar-participante/dialog-borrar-participante.component';
+import { DialogParticipanteComponent } from 'src/app/dialogs/dialog-participante/dialog-participante.component';
 @Component({
   selector: 'app-listas-universidades',
   templateUrl: './listas-universidades.component.html',
@@ -30,6 +32,7 @@ export class ListasUniversidadesComponent implements OnDestroy {
   public fileName:string = ""
   public fileSize:string = ""
   public cantUni = 0;
+  
   constructor(
       private dialog: MatDialog,
       private user:UsersService,
@@ -39,24 +42,10 @@ export class ListasUniversidadesComponent implements OnDestroy {
       private regUni:RegistroUniComponent,
       private appCom: AppComponent,
       private userService: UsersService,
-    ) { 
+      private toastrService: NbToastrService
+      ) { 
 
       this.traerUniversidades();
-      /* this.subscriptionName= this.common.getUpdate().subscribe
-        (message => {
-            this.user.getUniversidades().subscribe((data) =>{
-              
-              appCom.mostrarAlerta(message)
-              this.updateUniversidades(data)
-              let el = document.getElementsByClassName("listas");
-              document.querySelector(".uploadedFileDiv")?.classList.remove("active");
-
-              setTimeout(function(){
-                const y = el[0].getBoundingClientRect().top - 110;
-                window.scrollTo({ behavior: 'smooth', top: y})
-              }, 100)
-            })
-        }); */
         
     }
     traerUniversidades(){
@@ -107,17 +96,98 @@ export class ListasUniversidadesComponent implements OnDestroy {
       });
     }
     deleteU(nombre:string, idu:any){
-      console.log(idu)
       this.dialog.open(DialogBorrarUniversidadComponent, {
         data: {nombre:nombre},
         width: '400px',
       }).afterClosed().subscribe((res)=>{
         if(res)
           this.userService.borrarUniversidadesEstudiantes(idu).subscribe(res=>{
-            console.log(res);
+            if(res){
+              this.toastrService.show(`La universidad ${nombre} ha sido eliminada con éxito`, "Registro eliminado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+            }else{
+              this.toastrService.show(`La universidad no ha sido eliminada`, "Error", { status: "danger", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+            }
             this.traerUniversidades();
           })
       });
+    }
+    modificarUniversidad(universidad:any){
+      this.dialog.open(DialogModificarUniversidadComponent, {
+        data: {universidad: universidad.universidad, participantesTotal: universidad.participante.length},
+        width: '1100px',
+      }).afterClosed().subscribe(res=>{
+        if(res){
+          res["idUniversidad"] = universidad.universidad.idUniversidad;
+          this.userService.modificarUniversidad(res).subscribe(res=>{
+            if(res){
+              this.toastrService.show(`La universidad ha sido modificada con exito`, "Registro modificado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+            }else{
+              this.toastrService.show(`La universidad no ha sido modificada`, "Error", { status: "danger", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+            }
+            this.traerUniversidades();
+          })
+        }
+      })
+    }
+    borrarParticipante(idParticipante:any, nombre:any){
+      this.dialog.open(DialogBorrarParticipanteComponent, {
+        data: {nombreParticipante: nombre, idParticipante: idParticipante},
+        width: '600px',
+      }).afterClosed().subscribe((res)=>{
+        if(res)
+        this.userService.borrarParticipante(idParticipante).subscribe(res=>{
+          console.log(res)
+          if(res){
+            this.toastrService.show(`Participante eliminado con éxito`, "Registro eliminado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+          }else{
+            this.toastrService.show(`La universidad no ha sido modificada`, res["error"]["titulo"], { status: "danger", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+          }
+          this.traerUniversidades();
+        })
+      });
+    }
+    crearParticipante(participante:any, universidad:any){
+      console.log(universidad)
+      this.dialog.open(DialogParticipanteComponent, {
+        data: {participante: participante, universidad: universidad.nombre, opcion:"Crear nuevo "},
+        width: '600px',
+      }).afterClosed().subscribe(res=>{
+        if(res){
+          res["idUniversidad"] = universidad.idUniversidad;
+          this.userService.insertarParticipante(res).subscribe(res2=>{
+            console.log(res2)
+            if(res2){
+              this.toastrService.show(`Participante creado con éxito`, "Registro creado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+            }else{
+              this.toastrService.show(`La universidad no ha sido modificada`, res2["error"]["titulo"], { status: "danger", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+            }
+            this.traerUniversidades();
+          })
+        }
+      })
+    }
+    modificarParticipante(participante:any, universidad:any){
+      console.log(participante)
+      this.dialog.open(DialogParticipanteComponent, {
+        data: {participante: participante, universidad: universidad.nombre, opcion:"Crear nuevo "},
+        width: '600px',
+      }).afterClosed().subscribe(res=>{
+        if(res){
+          res["idUniversidad"] = universidad.idUniversidad;
+          res["id"] = participante.idParticipante;
+          res["pass"] = participante.pass;
+          console.log(res)
+          this.userService.modificarParticipante(res).subscribe(res2=>{
+            console.log(res2)
+            if(res2){
+              this.toastrService.show(`Participante modificado con éxito`, "Registro modificado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+            }else{
+              this.toastrService.show(`La universidad no ha sido modificada`, res2["error"]["titulo"], { status: "danger", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+            }
+            this.traerUniversidades();
+          })
+        }
+      })
     }
    
 }

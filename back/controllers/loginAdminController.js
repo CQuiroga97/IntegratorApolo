@@ -26,9 +26,9 @@ exports.login = (req, res)=>{
             return res.status(401).send({msg:err})
         }
         const id = result.recordset[0]["resultado"];
-        console.log(result.recordset)
+        result.recordset[0]["rol"]="Admin";
         if(id){
-            const token = jwt.sign({id:id}, "the-super-strong-secret", {expiresIn:"1h"});
+            const token = jwt.sign({id:id, data:result.recordset[0]}, "the-super-strong-secret", {expiresIn:"1h"});
             return res.status(200).send({msg:"Logueado", token})
         }else{
             return res.status(401).send({msg:"Usuario no encontrado"})

@@ -1,0 +1,39 @@
+nb-card{
+    margin: auto;
+    margin-top: 20px;
+    width: 100%;
+    height: 600px;
+    max-height: 600px;
+}
+.row2 nb-card.transparent{
+    height: 50px !important;
+    display: flex;
+    text-align: center;
+    margin-top: 0px !important;
+}
+.row2 nb-card.transparent span{
+    margin: auto;
+}
+.col-2{
+    display: flex;
+}
+.col-2 span{
+    margin: auto;
+}
+nb-card-header{
+    display: flex;
+    flex-direction: column;
+}
+nb-card-header img{
+    margin: auto;
+    width: 80px;
+}
+nb-card-header span{
+    margin: auto;
+    margin-top: 10px;
+    font-size: 30px;
+}
+.row{
+    height: auto;
+    margin-top: 10px;
+}

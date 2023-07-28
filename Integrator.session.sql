@@ -2,11 +2,9 @@ create database integrator;
 use integrator;
 create table integral(idIntegral int identity(1,1) PRIMARY KEY, estado int);
 create table pregunta(idPregunta int identity(1,1) PRIMARY KEY, urlImagen varchar(120));
-create table respuestas(idRespuesta int identity(1,1) PRIMARY KEY, urlImagen varchar(120), valor int, pregunta int, FOREIGN KEY (pregunta) REFERENCES pregunta(idPregunta));
 create table universidad(idUniversidad int identity(1,1) PRIMARY KEY, nombre varchar(200), sede varchar(200), pais varchar(200), cantParticipantes int, correo varchar(200));
 create table participante(idParticipante int identity(1,1) PRIMARY KEY, nombre varchar(200), email varchar(200), pass varchar(60), universidad int, FOREIGN KEY (universidad) REFERENCES universidad(idUniversidad));
 create table seriales(serial varchar(25) PRIMARY KEY, estado int,  universidad int, FOREIGN KEY (universidad) REFERENCES universidad(idUniversidad));
-create table puntaje(hora date, tiempo int, totalPuntaje int, respuesta int, participante int, FOREIGN KEY (respuesta) REFERENCES respuestas(idRespuesta), FOREIGN KEY (participante) REFERENCES participante(idParticipante));
 create table encuentro(idEncuentro int identity(1,1) PRIMARY KEY, estado int, ronda int);
 create table encuentroParticipante(participante int, encuentro int, FOREIGN KEY(participante) REFERENCES participante(idParticipante), FOREIGN KEY(encuentro) REFERENCES encuentro(idEncuentro));
 create table puntoRonda(hora date, participante int, encuentro int, integral int, FOREIGN KEY(participante) REFERENCES participante(idParticipante), FOREIGN KEY(encuentro) REFERENCES encuentro(idEncuentro), FOREIGN KEY(integral) REFERENCES integral(idIntegral));
@@ -14,7 +12,20 @@ create table admin(idAdmin int identity(1,1) PRIMARY KEY, nombre varchar(250), c
 create table jurado(idJurado int identity(1,1) PRIMARY KEY, nombre varchar(250), contraseña varchar(200), correo varchar(300));
 create table contacto(nombre varchar(200), descripcion varchar(500), correo varchar(300), hora date);
 
+CREATE TABLE respuestas (
+    idRespuesta INT IDENTITY(1, 1) PRIMARY KEY,
+    numeroIntegral INT,
+    numeroRespuesta INT,
+    tiempoRespuestaSegundos INT,
+    participante INT,
+    FOREIGN KEY (participante) REFERENCES participante(idParticipante)
+);
+ALTER TABLE encuentro ADD minutos int, segundos int;
+
+insert into encuentro values (0, 0, 4, 30);
+select * from encuentro
 go
+
 create procedure crearAdmin @nombre varchar(250), @pass varchar(200)
 as
 	insert into admin values (@nombre, @pass);
@@ -202,4 +213,102 @@ BEGIN
     -- Eliminar la universidad
     DELETE FROM universidad
     WHERE idUniversidad = @idUniversidad;
+END;
+CREATE PROCEDURE spModificarUniversidad
+    @idUniversidad INT,
+    @nombre VARCHAR(200),
+    @sede VARCHAR(200),
+    @pais VARCHAR(200),
+    @cantParticipantes INT,
+    @correo VARCHAR(200)
+AS
+BEGIN
+    UPDATE universidad
+    SET nombre = @nombre,
+        sede = @sede,
+        pais = @pais,
+        cantParticipantes = @cantParticipantes,
+        correo = @correo
+    WHERE idUniversidad = @idUniversidad;
+END;
+CREATE PROCEDURE spBorrarParticipante
+    @idParticipante INT
+AS
+BEGIN
+    DELETE FROM participante
+    WHERE idParticipante = @idParticipante;
+END;
+CREATE PROCEDURE spInsertarParticipante
+    @nombre VARCHAR(200),
+    @email VARCHAR(200),
+    @pass VARCHAR(60),
+    @universidad INT
+AS
+BEGIN
+    INSERT INTO participante (nombre, email, pass, universidad)
+    VALUES (@nombre, @email, @pass, @universidad);
+END;
+CREATE PROCEDURE spModificarParticipante
+    @idParticipante INT,
+    @nombre VARCHAR(200),
+    @email VARCHAR(200),
+    @pass VARCHAR(60),
+    @universidad INT
+AS
+BEGIN
+    UPDATE participante
+    SET nombre = @nombre,
+        email = @email,
+        pass = @pass,
+        universidad = @universidad
+    WHERE idParticipante = @idParticipante;
+END;
+CREATE PROCEDURE spModificarContrasenaParticipante
+    @correo VARCHAR(200),
+    @nuevaContrasena VARCHAR(60)
+AS
+BEGIN
+    UPDATE participante
+    SET pass = @nuevaContrasena
+    WHERE email = @correo;
+END;
+select * from participante;
+
+
+CREATE PROCEDURE loginParticipante
+    @email VARCHAR(200),
+    @pass VARCHAR(200)
+AS
+BEGIN
+    SELECT
+        p.idParticipante AS idParticipante,
+        p.nombre AS nombreParticipante,
+        universidad AS universidadParticipante,
+        p.email AS emailParticipante,
+        u.nombre AS nombreUniversidad
+    FROM
+        participante p
+        INNER JOIN universidad u ON p.universidad = u.idUniversidad
+    WHERE
+        p.email = @email
+        AND p.pass = @pass;
+END;
+
+CREATE PROCEDURE spGuardarRespuestaParticipante
+    @numeroIntegral INT,
+    @numeroRespuesta INT,
+    @tiempoRespuestaSegundos INT,
+    @idParticipante INT
+AS
+BEGIN
+    INSERT INTO respuestas (numeroIntegral, numeroRespuesta, tiempoRespuestaSegundos, participante)
+    VALUES (@numeroIntegral, @numeroRespuesta, @tiempoRespuestaSegundos, @idParticipante);
+END;
+select * from respuestas
+
+CREATE PROCEDURE spGetTimerClasificaciones
+    @id INT
+AS
+BEGIN
+    SELECT minutos as minutos, segundos as segundos from encuentro where encuentro.idEncuentro = @id
 END;

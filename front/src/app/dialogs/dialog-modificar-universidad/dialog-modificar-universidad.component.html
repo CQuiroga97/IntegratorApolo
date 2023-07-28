@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Modificar Universidad</h1>
+<div class="container">
+    <div class="row">
+        <h3 class="col-3">Nombre</h3>
+        <h3 class="col-3">Correo</h3>
+        <h3 class="col-2">País</h3>
+        <h3 class="col-2">Ciudad</h3>
+        <h3 class="col-2">Cantidad de estudiantes</h3>
+    </div>
+    <form>
+    <div class="row" [formGroup]="dataUniversidad">
+
+            <div class="form-group col-md-3">
+                <input type="text" class="form-control" formControlName="nombre">
+            </div>
+            <div class="form-group col-md-3">
+                <input type="text" class="form-control" formControlName="correo">
+            </div>
+            <div class="form-group col-md-2">
+                <input type="text" class="form-control" formControlName="pais">
+            </div>
+            <div class="form-group col-md-2">
+                <input type="text" class="form-control" formControlName="ciudad">
+            </div>
+            <div class="form-group col-md-2">
+                <input type="text" class="form-control" formControlName="estudiantes">
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+
+                <button nbButton outline status="danger" mat-button mat-dialog-close cdkFocusInitial [mat-dialog-close]="false" style="width: 100%;">Cancelar</button>
+            </div>
+            <div class="col-3">
+
+                <button nbButton outline status="basic"  (click)="modificar()" style="width: 100%;">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

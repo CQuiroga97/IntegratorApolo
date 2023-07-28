@@ -2,7 +2,7 @@
     <img src="../../assets/img/logos/america.png" alt="">
 
     <div class="divBtnMenu">
-        <span>Inicio</span>
+        <a href="./">inicio</a>
     </div>
     <div class="divBtnMenu">
         <span>Resultados</span>
@@ -10,7 +10,27 @@
     <div class="divBtnMenu">
         <span>Datos</span>
     </div>
+    <div class="divBtnMenu" *ngIf="usuario.rol == 'Participante' && isLoggedIn">
+        <a href="./participante/clasificatorias">Pruebas clasificatorias</a>
+    </div>
 </div>
 
-<button nbButton outline status="basic" *ngIf="!isLoggedIn">Iniciar Sesión</button>
-<button nbButton outline status="basic" (click) = "logOut()" *ngIf="isLoggedIn">Cerrar Sesión</button>
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-5" *ngIf="usuario.rol == 'Participante' && isLoggedIn">
+            <div class="container">
+                <div class="row justify-content-end">
+                    <b>
+                        {{usuario.nombreParticipante}}
+                    </b>
+                </div>
+                <div class="row justify-content-end">{{usuario.nombreUniversidad}}</div>
+            </div>
+        </div>
+        <div class="col-3">
+
+            <button nbButton outline status="basic" (click) = "goLogin()" *ngIf="!isLoggedIn">Iniciar Sesión</button>
+            <button nbButton outline status="basic" (click) = "logOut()" *ngIf="isLoggedIn">Cerrar Sesión</button>
+        </div>
+    </div>
+</div>

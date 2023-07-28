@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NbThemeModule, NbLayoutModule, NbTabsetModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbTabsetModule, NbToastrModule, NbToastrService, NbGlobalPhysicalPosition, NbStepperModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSidebarModule } from '@nebular/theme';
 import { NbActionsModule } from '@nebular/theme';
@@ -33,6 +33,18 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogBorrarUniversidadComponent } from './dialogs/dialog-borrar-universidad/dialog-borrar-universidad.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
+import { DialogModificarUniversidadComponent } from './dialogs/dialog-modificar-universidad/dialog-modificar-universidad.component';
+import { DialogBorrarParticipanteComponent } from './dialogs/dialog-borrar-participante/dialog-borrar-participante.component';
+import { DialogParticipanteComponent } from './dialogs/dialog-participante/dialog-participante.component';
+import { CambiarPasswordComponent } from './cambiar-password/cambiar-password.component';
+import { LoginParticipanteComponent } from './login-participante/login-participante.component';
+import { ClasificacionesComponent } from './participante/clasificaciones/clasificaciones.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { PanelControlComponent } from './admin/panel-control/panel-control.component';
+import { ClasificatoriasComponent } from './admin/panelControl/clasificatorias/clasificatorias.component';
+import { IntegralesComponent } from './participante/clasificaciones/integrales/integrales.component';
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +59,17 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     LoginAdminComponent,
     RegistroUniComponent,
     MenuAdminComponent,
-    DialogBorrarUniversidadComponent
+    DialogBorrarUniversidadComponent,
+    DialogModificarUniversidadComponent,
+    DialogBorrarParticipanteComponent,
+    DialogParticipanteComponent,
+    CambiarPasswordComponent,
+    LoginParticipanteComponent,
+    ClasificacionesComponent,
+    PanelControlComponent,
+    ClasificatoriasComponent,
+    IntegralesComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -62,6 +84,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     NbAccordionModule,
     NbEvaIconsModule,
     NbCardModule,
+    NbStepperModule,
     NbFormFieldModule,
     NbInputModule,
     HttpClientModule,
@@ -71,6 +94,11 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatTabsModule,
     NgbModule,
     MatDialogModule,
+    SocketIoModule.forRoot(config),
+    NbToastrModule.forRoot({
+      position: NbGlobalPhysicalPosition.BOTTOM_RIGHT
+    }),
+    BrowserAnimationsModule,
   ],
   providers: [
     CookieService

@@ -1,0 +1,24 @@
+<div class="divLogin">
+    <div class="divImg">
+  
+      <img src="../../assets/img/logos/logoEvento.png" alt="">
+    </div>
+    <nb-card size="small">
+      <nb-card-header>
+        <img src="./assets/img/admin/login/imgSesion.png" alt="">
+        <span class="titulo">Iniciar sesión</span>
+      </nb-card-header>
+          <nb-card-body (keyup) = "checkEnter($event)">
+    
+            <nb-form-field>
+              <input type="mail" [(ngModel)]="name"  nbInput fullWidth fieldSize="giant" placeholder="Usuario">
+            </nb-form-field>
+    
+            <nb-form-field>
+              <input type="password" [(ngModel)]="pass" nbInput fullWidth fieldSize="giant" placeholder="Contraseña">
+            </nb-form-field>
+          </nb-card-body>
+          <button nbButton outline status="basic" (click)="login()">Ingresar</button>
+          <a href="">Olvidé mi contraseña</a>
+      </nb-card>
+  </div>
