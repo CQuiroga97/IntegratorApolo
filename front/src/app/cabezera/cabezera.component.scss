@@ -1,5 +1,5 @@
 .divMenu{
-    width: 1000px;
+    width: 100%;
     height: 70px;
     margin: auto;
     display: flex;
@@ -10,16 +10,24 @@
     padding: 5px;
     display: flex;
 }
-.divBtnMenu span{
+.divBtnMenu span, .divBtnMenu a{
     margin: auto;
     cursor: pointer;
     font-size: 20px;
     transition: all .5s;
     font-weight: bold;
+    text-decoration: none;
 }
 .divBtnMenu span:hover{
     font-size: 25px;
 }
 button{
     margin: auto 0px auto auto;
+}
+img{
+    margin: auto 0px auto 50px;
+    height: 43px;
+}
+.justify-content-end b{
+    text-align: right;
 }

@@ -1,32 +1,20 @@
 <nb-layout>
-
   <nb-layout-header fixed>
     <app-cabezera></app-cabezera>
   </nb-layout-header>
-
+  
   <nb-layout-column>
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-    <!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-    <!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-    <!-- * * * * * * * to get started with your project! * * * * * * * * -->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-    
-    
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-    <!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * *  * * * * -->
-    
     <router-outlet></router-outlet>
     
+    <div class="notificacionAbajo">
+      <div class="divClose">
+        <nb-icon icon="close-circle-outline" (click)="cerrarModalNotificacion()"></nb-icon>
+      </div>
+      <span class="titulo">{{tituloN}}</span>
+      <span class="texto">{{textoN}}</span>
+      <nb-icon icon="{{iconoN}}" class="iconoNotificacion"></nb-icon>
+    </div>
   </nb-layout-column>
-
   <nb-layout-footer fixed>
   <!-- Insert footer here -->
   </nb-layout-footer>

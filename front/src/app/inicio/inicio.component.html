@@ -1,6 +1,41 @@
-<div class="divFechas">
-    <app-resumen-rondas></app-resumen-rondas>
+<div class="divMenu2">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <iframe src="https://www.youtube.com/embed/YGmtURwu-O8?controls=0" 
+                title="YouTube video player" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
+            </div>
+            <div class="col-4">
+                <nb-card>
+                    <nb-card-header>
+                        <span>
+                            <h1>
+
+                                Novedades
+                            </h1>
+                        </span>
+                    </nb-card-header>
+                    <nb-card-body>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+                        mollit anim id est laborum.
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+        <div class="row">
+            <app-datos></app-datos>
+        </div>
+    </div>
+    <div class="divFechas" *ngIf="onAnimation">
+        <app-resumen-rondas></app-resumen-rondas>
+    </div>
+    <app-transmision *ngIf="onAnimation"></app-transmision>
+    <app-resultados *ngIf="onAnimation"></app-resultados>
+    
 </div>
-<app-transmision></app-transmision>
-<app-resultados></app-resultados>
-<app-datos></app-datos>

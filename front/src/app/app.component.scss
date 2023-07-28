@@ -6,3 +6,55 @@ app-cabezera{
     width: 100%;
     display: flex;
 }
+.notificacionAbajo{
+    position: fixed;
+    bottom: -220px;
+    right: 50px;
+    width: 300px;
+    height: 180px;
+    background-color: rgba(201, 201, 201, 0.635);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px black;
+    opacity: .7;
+    transition: all .5s;
+}
+.notificacionAbajo:hover{
+    opacity: 1;
+}
+.notificacionAbajo span.titulo{
+    margin: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.notificacionAbajo span.texto{
+    font-size: 15px;
+    margin: 10px;
+}
+.notificacionAbajo.activo{
+    bottom: 50px;
+}
+.notificacionAbajo .divClose{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 10px;
+    display: flex;
+}
+.notificacionAbajo .divClose nb-icon{
+    cursor: pointer;
+    margin: auto;
+    transform: scale(.8);
+    transition: all .4s;
+}
+.notificacionAbajo .divClose nb-icon:hover{
+    transform: scale(1);
+}
+.iconoNotificacion{
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    font-size: 100px;
+    color: rgb(58, 58, 58);
+}

@@ -20,8 +20,8 @@
   .contFormulario{
     position: relative;
     margin: auto;
+    margin-top: 20px;
     width: 100%;
-    
   }
 
   nb-card-body.example-items-col {
@@ -35,3 +35,81 @@
     position: relative;
     margin: auto;
   }
+  nb-card-body{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+    height: auto;
+  }
+.dropFile{
+  height: 200px;
+  text-align: center;
+  border: dashed 1px gray;
+  margin: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.dropFile input{
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+.dropFile nb-icon{
+  margin: auto;
+}
+.dropFile span b{
+  margin: auto;
+  color: #3f3f3f;
+  font-size: 18px;
+}
+.dropFile span{
+  margin: auto;
+  color: #959595;
+  font-size: 14px;
+}
+.divFormManual{
+  display: flex;
+  margin: auto;
+}
+span.titulo{
+  margin: 40px;
+  font-size: 18px;
+}
+.uploadedFileDiv{
+  margin: auto;
+  width: 100%;
+  height: 50px;
+  background-color: #edf0dd;
+  display: flex;
+}
+.uploadedFileDiv span{
+  margin: auto auto auto 10px;
+  font-weight: bold;
+}
+.uploadedFileDiv nb-icon{
+  margin: auto 0px auto 10px;
+}
+.uploadedFileDiv nb-icon.sendIcon{
+  margin: auto 10px auto 10px;
+  cursor: pointer;
+  transform: scale(.6);
+  transition: all .5s;
+}
+.uploadedFileDiv nb-icon.sendIcon:hover{
+  transform: scale(1);
+}
+.divDropFile{
+  margin: auto;
+  position: relative;
+}
+.divDropFile .uploadedFileDiv{
+  transform: scale(0);
+  transition: all .8s;
+}
+.divDropFile .uploadedFileDiv.active{
+  transform: scale(1);
+}

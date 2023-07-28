@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ParticipanteService } from 'src/app/users/participante.services';
+import { SocketService } from 'src/app/users/socket.service';
+
+@Component({
+  selector: 'app-clasificatorias',
+  templateUrl: './clasificatorias.component.html',
+  styleUrls: ['./clasificatorias.component.scss']
+})
+export class ClasificatoriasComponent implements OnInit{
+  public users:any = [];
+  public cantIntegrales:number = 0;
+  constructor(
+    private socket: SocketService,
+    private participanteService:ParticipanteService
+  ) {}
+  ngOnInit(): void {
+    this.socket.getUsersOnline().subscribe(res =>{
+      this.users = []
+      res.forEach((el:any) => {
+        this.users.push(el)
+      });
+      this.participanteService.getIntegralesClasificaciones().subscribe((res:any)=>{
+        this.cantIntegrales = res.integrales.length;
+      })
+    })
+
+  }
+  iniciarClasificatorias(){
+    this.socket.iniciarClasificatorias();
+  }
+}

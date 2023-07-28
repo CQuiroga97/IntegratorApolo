@@ -1,0 +1,111 @@
+.divMenu{
+    width: 100%;
+    height: 100%;
+    background:linear-gradient(90.15deg, rgba(13, 47, 28, 0.9) 0.14%, rgba(13, 47, 28, 0.62) 99.88%), url(../../../assets/img/admin/menu/background.png);
+
+    background-repeat: no-repeat;
+    background-size:100%  auto ;
+    display: flex;
+}
+.divMenu .columna{
+    height: calc(100% - 100px);
+    width: 840px;
+    top: 70px;
+    position: relative;
+    margin: auto 0px auto auto;
+    display: flex;
+}
+.divMenu .columna.der{
+    margin: auto auto auto 0px;
+}
+.divMenu .columna .boton{
+    position: relative;
+    width: 320px;
+    height: 200px;
+    margin: auto;
+    cursor: pointer;
+    transition: all .5s;
+    border-radius: 25px;
+    filter: grayscale(1);
+    background-position: center;
+    background-size: 320px 600px;
+    background-repeat: no-repeat;
+    background-color: rgba(217, 33, 33, 0.906);
+    /* display: flex; */
+}
+.divMenu .columna .boton:hover{
+    filter: grayscale(.3);
+    height: 600px;
+}
+.divMenu .columna .boton.btn1{
+    transition: all .5s;
+    background-image: url(../../../assets/img/admin/menu/rectangulo1.png);
+    margin-right: 10px;
+}
+.divMenu .columna .boton.btn2{
+    transition: all .5s;
+    background-image: url(../../../assets/img/admin/menu/rectangulo2.png);
+    margin-left: 10px;
+}
+.divTitulo{
+    opacity: 0;
+    width: 450px;
+    height: 120px;
+    margin: auto;
+    top: calc(50% - 60px);
+    right: 460px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all .5s;
+}
+.divMenu .columna .boton:hover .divTitulo{
+    opacity: 1;
+}
+.divTitulo.dt2{
+    right: -330px;
+}
+.divTitulo span{
+    font-size: 38px;
+    color: white;
+    margin: auto auto 0pc auto;
+    width: 100%;
+    text-align: right;
+}
+.divTitulo.dt2 span{
+    text-align: left;
+}
+.divTitulo .divCirculos{
+    position: relative;
+    width: 90px;
+    height: 40px;
+    left: 10px;
+    margin: 0px 0px auto auto;
+    display: flex;
+    transform: scale(.7);
+}
+.divTitulo.dt2 .divCirculos{
+    margin: 0px auto auto 0px;
+    left: -10px;
+}
+.divTitulo .divCirculos .circulo1{
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    border-radius: 30px;
+    background-color: white;
+}
+.divTitulo .divCirculos .circulo2{
+    width: 22px;
+    height: 22px;
+    margin: auto;
+    border-radius: 30px;
+    background-color: white;
+}
+.divTitulo .divCirculos .circulo3{
+    width: 15px;
+    height: 15px;
+    margin: auto;
+    border-radius: 30px;
+    background-color: white;
+}

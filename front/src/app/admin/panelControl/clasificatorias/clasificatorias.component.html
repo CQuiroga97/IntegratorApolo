@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        
+        <nb-card class="transparent">
+            <nb-card-header>
+                <img src="./assets/img/admin/panelControl/medal.png" alt="">
+                <span>Participantes online</span>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="container" *ngIf="users.length > 0">
+                    <div class="row row2" *ngFor="let participantes of users">
+                        <div class="col-10">
+                            <nb-card class="transparent">
+                                <span>
+        
+                                    {{participantes["nombre"]}}
+                                </span>
+                            </nb-card>
+                        </div>
+                        <div class="col-2">
+                            <span *ngIf='participantes["integral"] <= cantIntegrales'>
+                                {{participantes["integral"]}}/{{cantIntegrales}}
+                            </span>
+                            <span *ngIf='participantes["integral"] > cantIntegrales'>
+                                Finalizado
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="container" *ngIf="users.length == 0">
+                    <div class="row row2" >
+                        <div class="col-12">
+                            <nb-card class="transparent">
+                                <span>
+                                    No hay participantes en linea
+                                </span>
+                            </nb-card>
+                        </div>
+                    </div>
+                </div>
+                <span>
+                </span>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="row">
+
+        <button nbButton outline status="basic" (click)="iniciarClasificatorias()">Iniciar ronda de clasificaciones</button>
+    </div>
+</div>

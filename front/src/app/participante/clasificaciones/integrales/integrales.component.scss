@@ -1,0 +1,135 @@
+img{
+    width: 100%;
+    height: 100%;
+}
+.row{
+    margin-top: 0px;
+}
+.bg-transparent{
+    border: none;
+}
+.step-content{
+    padding-top: 0px;
+}
+nb-card.transparent.col-5 nb-card-body{
+    padding: 0px !important;
+}
+.seleccion-box{
+    background: linear-gradient(90deg, #E6B52C 0%, #EFA12C 100%);
+    display: flex;
+}
+.seleccion-box h1{
+    margin: auto;
+    font-size: 45px;
+    opacity: .7;
+    color: white;
+    transition: all .5s;
+}
+nb-card.transparent.col-5 .row{
+    margin: 0px;
+    height: 100%;
+    padding: 0px;
+    
+}
+nb-card.transparent.col-5 .row .col-10{
+    padding: 0px;
+    display: flex;
+    background-color: #e7eaec;
+}
+nb-card.transparent.col-5 .row .col-10 img{
+    margin: auto;
+    height: auto;
+    width: 100%;
+}
+nb-card.transparent.col-5 .container{
+    height: 99%;
+    padding: 0px;
+    margin: auto;
+}
+nb-card.transparent.col-5{
+    overflow: hidden;
+    height: 150px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding: 0px;
+}
+nb-card.transparent.col-5 nb-card-body{
+    display: flex;
+}
+.containerSuperior{
+    width: 1200px;
+}
+.col-12 img{
+    margin: auto;
+    height: 200px;
+    width: auto;
+}
+.col-12 .transparent .col-12{
+    background-color: #e7eaec;
+    display: flex;
+}
+nb-card.transparent.col-5:hover .seleccion-box h1{ 
+    color: black !important;
+    opacity: 1;
+}
+nb-card.transparent.col-5.checked .seleccion-box h1{ 
+    font-weight: bold;
+    color: black !important;
+    opacity: 1;
+}
+nb-card.transparent.col-5.checked{
+    border-width: 3px;
+    border-image: linear-gradient(to left, rgba(0, 0, 0, 0),#E6B52C, rgba(0, 0, 0, 0)) 28 7%;
+}
+nb-card.transparent.col-5.checked .container{
+    height: 99.5%;
+}
+.divLoading{
+    margin: auto;
+    width: 500px;
+    height: 500px;
+    display: flex;
+}
+.divLoading span{
+    margin: auto;
+    font-size: 20px;
+    color: white;
+}
+.divLoading h1{
+    margin: auto;
+    font-size: 150px;
+    color: white;
+}
+.container.timer{
+    width: 400px;
+    height: 55px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.container.timer .row{
+    height: 100%;
+}
+.container.timer .row .col-1, .container.timer .row .col-2, .container.timer .row .col-3{
+    height: 100%;
+    display: flex;
+    padding: 0px;
+}
+.container.timer nb-card{
+    height: 100%;
+    width: 100%;
+}
+.container.timer nb-card nb-card-body{
+    display: flex;
+    overflow: hidden;
+}
+.container.timer nb-card nb-card-body span{
+    margin: auto;
+    font-size: 20px;
+}
+.container.timer h1{
+    margin: auto;
+}
+.container.timer .row .col-1 img{
+    margin: auto;
+    width: auto;
+}

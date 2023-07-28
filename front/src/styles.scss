@@ -5,4 +5,181 @@
 @include nb-install() {
   @include nb-theme-global();
 };
+
 /* You can add global styles to this file, and also import other style files */
+nb-card-header{
+  border-bottom: none !important;
+}
+[nbInput].status-basic{
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+  border-color: white !important;
+  border-radius: 0px;
+}
+:root {
+  height: auto;
+  --colorPrimario: #144A2C;
+  --colorSecundario: #333645;
+  --colorTerciario: #fff7a02b;
+}
+.layout-container{
+  padding-top: 0px !important;
+}
+nb-card.transparent{
+  background: rgba(17, 17, 17, 0.5);
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0),white, rgba(0, 0, 0, 0)) 28 0%;
+  border-radius: 13px;
+  color: white;
+  box-sizing: border-box;
+}
+nb-card.transparent input{
+  background-color: transparent;
+  color: white;
+  border-radius: 0px;
+}
+nb-card.transparent input:focus{
+  border: none;
+  background-color: transparent;
+  color: white;
+}
+nb-card.transparent input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(159, 158, 158);
+  opacity: 1; /* Firefox */
+}
+nb-card.transparent nb-card-header{
+  color: white;
+}
+.mat-tab-label{
+  height: 35px !important;
+  color: black !important;
+}
+.mat-tab-body-content form{
+  padding-bottom: 10px !important;
+  display: flex;
+  flex-direction: column;
+}
+mat-tab-header{
+  width: auto;
+  height: auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  overflow: hidden;
+  margin: auto;
+  cursor: pointer;
+  margin-left: 0px;
+  border: none;
+  max-width: 100%;
+}
+.mat-tab-label-active{
+  background-color: var(--colorPrimario) !important;
+  font-weight: bold !important;
+  opacity: 1 !important;
+  color: white !important;
+}
+.mat-tab-body.mat-tab-body-active {
+  animation: fade 1s;
+}
+mat-ink-bar{
+  display: none;
+}
+h1, h2, h3, h4, h5{
+  color: white !important;
+}
+nb-accordion-item{
+  background-color: transparent !important;
+  color: white;
+}
+nb-accordion-item-header{
+  color: white;
+  height: 50px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #888;
+}
+::-webkit-scrollbar-thumb {
+  background: #0a4f06;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #12630e;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+nb-toast.status-success{
+  
+  background: linear-gradient(270deg, rgba(148, 201, 0, 0.50) 0%, rgba(39, 57, 0, 0.50) 100%);
+  
+}
+nb-toast.status-warning{
+  
+  background: linear-gradient(270deg, rgba(253, 213, 3, 0.50) 0%, rgba(243, 146, 2, 0.50) 100%);
+  
+}
+nb-toast .icon-container{
+  background-color: transparent !important;
+  color: white !important;
+}
+nb-toast{
+  margin: 0px !important;
+  backdrop-filter: blur(11px);
+  border: none;
+  border-radius: 20px 0px 0px 0px;
+}
+.mat-dialog-container{
+  border: var(--card-border-width) var(--card-border-style) var(--card-border-color);
+  background: rgba(17, 17, 17, 0.5);
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0),white, rgba(0, 0, 0, 0)) 28 0%;
+  border-radius: 13px !important;
+  color: white;
+  box-sizing: border-box !important;
+}
+input.form-control{
+  background-color: transparent;
+  color: white;
+  border-radius: 0px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+input.form-control::placeholder{
+  color: rgb(221, 217, 217);
+}
+input.form-control:focus{
+  border: none;
+  background-color: transparent;
+  color: white;
+}
+.cdk-overlay-dark-backdrop{
+  background-color: rgb(0 0 0 / 75%)
+}
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+.divMenu2{
+  width: 100%;
+  height: 100%;
+  padding-top: 140px;
+  background-repeat: no-repeat;
+  background-size:100%  auto ;
+  display: flex;
+}
+nb-stepper .header .connector{
+  background-color: white !important;
+  opacity: .5;
+}
+nb-stepper .header .connector-past{
+  opacity: 1;
+}
+nb-stepper .header .step.selected .label-index, nb-stepper .header .step.completed .label-index{
+  background: linear-gradient(90deg, #E6B52C 0%, #EFA12C 100%);
+  border: none;
+  color: black;
+}

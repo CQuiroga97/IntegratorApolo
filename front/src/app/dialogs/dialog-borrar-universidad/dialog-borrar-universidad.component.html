@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Borrar Universidad</h1>
+<div mat-dialog-content>
+  ¿Esta seguro de borrar la universidad <b>{{this.data.nombre}}</b>? 
+  <br>
+  Los estudiantes inscritos también serán eliminados.
+</div>
+<div mat-dialog-actions>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+
+                <button nbButton outline status="danger" mat-button mat-dialog-close cdkFocusInitial [mat-dialog-close]="false">Cancelar</button>
+            </div>
+            <div class="col-4">
+
+                <button nbButton outline status="basic" mat-button mat-dialog-close [mat-dialog-close]="true">Borrar</button>
+            </div>
+        </div>
+    </div>
+</div>

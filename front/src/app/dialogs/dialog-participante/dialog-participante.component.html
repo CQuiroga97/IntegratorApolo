@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>{{this.data.opcion}} participante</h1>
+<div mat-dialog-content>
+  Ingrese los nuevos datos para el participante.
+  Este participante pertenecerá a la universidad {{data.universidad}}
+</div>
+<div mat-dialog-actions>
+    <div class="container">
+        <div class="row" [formGroup]="dataParticipante">
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" formControlName="correo" placeholder="Correo">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+
+                <button nbButton outline status="danger" mat-button mat-dialog-close cdkFocusInitial [mat-dialog-close]="false">Cancelar</button>
+            </div>
+            <div class="col-3">
+
+                <button nbButton outline status="basic" (click)="modificar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
