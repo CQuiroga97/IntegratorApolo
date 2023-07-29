@@ -17,7 +17,7 @@
         }
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/e73b54a9-dd67-4852-8ac2-604796a839a6/resourceGroups/Apolo/providers/Microsoft.Web/sites/integratorapolo",
-    "appService.deploySubpath": "front\\dist\\front",
+    "appService.deploySubpath": "",
     "appService.zipIgnorePattern": [
         "node_modules{,/**}",
         ".vscode{,/**}"
