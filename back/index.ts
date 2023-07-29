@@ -1,4 +1,4 @@
-import { Server } from 'socket.io';
+/*import { Server } from 'socket.io';
 import * as socket from './sockets/socket';
 import { User } from './sockets/user';
 import http from 'http';
@@ -32,4 +32,8 @@ io.on('connection', (client:any) => {
 
 httpServer.listen(port, () => {
   console.log(`http://localhost:${port}`);
-});
+});*/
+const express = require('express')
+const app = express();
+app.get('/', (req,res)=>res.json({mensaje:"asd"}))
+app.listen(process.env.PORT || 80)
