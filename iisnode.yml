@@ -1,1 +1,1 @@
-nodeProcessCommandLine: "npm start"
+nodeProcessCommandLine: "npm install && ng serve"
