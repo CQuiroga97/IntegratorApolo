@@ -33,7 +33,9 @@ io.on('connection', (client:any) => {
 httpServer.listen(port, () => {
   console.log(`http://localhost:${port}`);
 });*/
-const express = require('express')
-const app = express();
-app.get('/', (req,res)=>res.json({mensaje:"asd"}))
-app.listen(process.env.PORT || 3001)
+var http = require('http')
+var port = process.env.PORT || 1337;
+http.createServer(function(req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello World\n');
+}).listen(port);
