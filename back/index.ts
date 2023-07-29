@@ -35,5 +35,5 @@ httpServer.listen(port, () => {
 });*/
 const express = require('express')
 const app = express();
-app.get('/', (req,res)=>res.json({mensaje:"asd"}))
+app.get('/', (req:any,res:any)=>res.json({mensaje:"asd"}))
 app.listen(process.env.PORT || 80)
