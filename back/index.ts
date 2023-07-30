@@ -1,4 +1,4 @@
-/*import { Server } from 'socket.io';
+import { Server } from 'socket.io';
 import * as socket from './sockets/socket';
 import { User } from './sockets/user';
 import http from 'http';
@@ -29,13 +29,3 @@ io.on('connection', (client:any) => {
   socket.getEstadoClasificatorias(client, io)
   socket.setIntegral(client, io)
 });
-
-httpServer.listen(port, () => {
-  console.log(`http://localhost:${port}`);
-});*/
-var http = require('http')
-var port = process.env.PORT || 80;
-http.createServer(function(req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello World\n');
-}).listen(port);
