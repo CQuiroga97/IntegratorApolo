@@ -29,7 +29,3 @@ io.on('connection', (client:any) => {
   socket.getEstadoClasificatorias(client, io)
   socket.setIntegral(client, io)
 });
-
-httpServer.listen(port, () => {
-  console.log(`http://localhost:${port}`);
-});
