@@ -48,7 +48,7 @@ import { ParticipanteService } from 'src/app/users/participante.services';
             style({ opacity: 1 }),
             animate('.3s ease-in', 
                     style({ opacity: 0 }))
-          ]
+          ] 
         )
       ]
     )
