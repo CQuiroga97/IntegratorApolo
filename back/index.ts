@@ -2,6 +2,8 @@ import { Server } from 'socket.io';
 import * as socket from './sockets/socket';
 import { User } from './sockets/user';
 import http from 'http';
+const dotenv = require('dotenv');
+dotenv.config();
 const path = require('path');
 const express = require('express');
 const app = express();
@@ -16,7 +18,6 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json());
 app.use("/api", indexRouter);
 app.use('/images', express.static(path.join(__dirname, 'controllers/integrales')));
-
 const io = new Server(httpServer, { cors: { origin: '*' } });
 
 io.on('connection', (client:any) => {
@@ -28,4 +29,7 @@ io.on('connection', (client:any) => {
   socket.iniciarClasificatorias(client, io)
   socket.getEstadoClasificatorias(client, io)
   socket.setIntegral(client, io)
+});
+httpServer.listen(port, () => {
+  console.log("Server iniciado");
 });

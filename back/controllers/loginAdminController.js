@@ -1,24 +1,6 @@
 const jwt = require("jsonwebtoken");
-const md5 = require("md5")
-var sql = require('mssql');
-var config = {
-user: 'sa',
-password: 'Cristian2396980',
-server: 'localhost',
-database: 'integrator',
-options: {
-    trustedConnection: true,
-    encrypt: true,
-    enableArithAbort: true,
-    trustServerCertificate: true,
-    }
-};
-sql.connect(config, function(err){
-    if (err) console.log(err)
-    con = new sql.Request();
-})
-var con = new sql.Request();
-exports.login = (req, res)=>{
+const md5 = require("md5");
+exports.login = (req, res, con)=>{
     console.log(`exec loginAdmin "${req.body.name}", "${md5(req.body.pass)}"`);
     
     con.query(`exec loginAdmin "${req.body.name}", "${md5(req.body.pass)}"`, (err, result)=>{

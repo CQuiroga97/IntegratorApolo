@@ -9,28 +9,12 @@ const SHA256 = require("crypto-js/sha256");
 let CryptoJS = require("crypto-js");
 const fs = require('fs');
 const path = require('path');
-const config = {
-user: 'sa',
-password: 'Cristian2396980',
-server: 'localhost',
-database: 'integrator',
-options: {
-    trustedConnection: true,
-    encrypt: true,
-    enableArithAbort: true,
-    trustServerCertificate: true,
-    }
-};
-sql.connect(config, function(err){
-    if (err) console.log(err)
-    con = new sql.Request();
-})
 let con = new sql.Request();
 
-exports.generateExcelParticipante = (req, res)=>{
+exports.generateExcelParticipante = (req, res, con)=>{
 
     let arregloExcel = [];
-    sql.query("exec spGetUniversidadesParticipantes", function(err, resp){
+    con.query("exec spGetUniversidadesParticipantes", function(err, resp){
         resp.recordset.forEach(element =>{
             let i = 0
             element.participantes = element.participantes != null ? JSON.parse(element.participantes):element.participantes;
@@ -55,7 +39,7 @@ exports.generateExcelParticipante = (req, res)=>{
       
 
 }
-exports.registerEstudiantesMassive = (req, res) => {
+exports.registerEstudiantesMassive = (req, res, con) => {
     readExcel(req).then((data) => {
         var flag = false;
         var id = 0;
@@ -97,9 +81,9 @@ exports.registerEstudiantesMassive = (req, res) => {
         });
       })
 }
-exports.borrarParticipante = (req,res)=>{
+exports.borrarParticipante = (req,res, con)=>{
     console.log(`spBorrarParticipante ${req.body.idEstudiante}`)
-    sql.query(`spBorrarParticipante ${parseInt(req.body.idEstudiante)}`, (err, res2)=>{
+    con.query(`spBorrarParticipante ${parseInt(req.body.idEstudiante)}`, (err, res2)=>{
         if(err){
             console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
@@ -107,7 +91,7 @@ exports.borrarParticipante = (req,res)=>{
                 res.status(200).send({titulo:"Participantes eliminado", texto:`El participante ha sido eliminado con éxito.`, icono:"checkmark-circle-2-outline"})
     })
 }
-exports.insertarParticipante = (req,res)=>{
+exports.insertarParticipante = (req,res, con)=>{
     let correoEncrypt = CryptoJS.AES.encrypt(req.body.data.correo, "key").toString();    
     let pass = `${req.body.data.nombre.replace(/\s/g, '')}${req.body.data.idUniversidad}`
     let mailOptions = {
@@ -123,7 +107,7 @@ exports.insertarParticipante = (req,res)=>{
     };
     emailController.enviarCorreo(mailOptions)
     
-    sql.query(`spInsertarParticipante '${req.body.data.nombre}', '${req.body.data.correo}', '${md5(pass)}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
+    con.query(`spInsertarParticipante '${req.body.data.nombre}', '${req.body.data.correo}', '${md5(pass)}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
         if(err){
             console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
@@ -131,9 +115,9 @@ exports.insertarParticipante = (req,res)=>{
                 res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
     })
 }
-exports.modificarParticipante = (req,res)=>{
+exports.modificarParticipante = (req,res, con)=>{
     
-    sql.query(`spModificarParticipante ${req.body.data.id}, '${req.body.data.nombre}', '${req.body.data.correo}', '${req.body.data.pass}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
+    con.query(`spModificarParticipante ${req.body.data.id}, '${req.body.data.nombre}', '${req.body.data.correo}', '${req.body.data.pass}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
         if(err){
             console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
@@ -141,9 +125,9 @@ exports.modificarParticipante = (req,res)=>{
                 res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
     })
 }
-exports.modificarContrasenaParticipante = (req,res)=>{
+exports.modificarContrasenaParticipante = (req,res, con)=>{
     console.log(req.body.data)
-    sql.query(`spModificarContrasenaParticipante '${req.body.data.correo}', '${md5(req.body.data.pass)}'`, (err, res2)=>{
+    con.query(`spModificarContrasenaParticipante '${req.body.data.correo}', '${md5(req.body.data.pass)}'`, (err, res2)=>{
         if(err){
             console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
@@ -151,7 +135,7 @@ exports.modificarContrasenaParticipante = (req,res)=>{
                 res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
     })
 }
-exports.loginParticipante = (req, res)=>{
+exports.loginParticipante = (req, res, con)=>{
     con.query(`exec loginParticipante "${req.body.correo}", "${md5(req.body.pass)}"`, (err, result)=>{
         if(err){
             return res.status(401).send({msg:err})
@@ -189,7 +173,7 @@ exports.getIntegrales = (req, res)=>{
       });
 }
 
-exports.guardarRespuestaParticipante = (req, res) =>{
+exports.guardarRespuestaParticipante = (req, res, con) =>{
     con.query(`spGuardarRespuestaParticipante ${req.body.numeroIntegral}, ${req.body.numeroRespuesta}, ${req.body.tiempo}, ${req.body.idParticipante}`, (err, result)=>{
         if(err){
             console.error(err);

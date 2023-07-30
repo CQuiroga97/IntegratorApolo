@@ -1,5 +1,3 @@
-create database integrator;
-use integrator;
 create table integral(idIntegral int identity(1,1) PRIMARY KEY, estado int);
 create table pregunta(idPregunta int identity(1,1) PRIMARY KEY, urlImagen varchar(120));
 create table universidad(idUniversidad int identity(1,1) PRIMARY KEY, nombre varchar(200), sede varchar(200), pais varchar(200), cantParticipantes int, correo varchar(200));
@@ -21,10 +19,8 @@ CREATE TABLE respuestas (
     FOREIGN KEY (participante) REFERENCES participante(idParticipante)
 );
 ALTER TABLE encuentro ADD minutos int, segundos int;
-
 insert into encuentro values (0, 0, 4, 30);
-select * from encuentro
-go
+
 
 create procedure crearAdmin @nombre varchar(250), @pass varchar(200)
 as
@@ -92,25 +88,7 @@ create procedure sp_setUniversidadList @universidades nvarchar(max)
                 end
         end
 go
-delete from participante;
-delete from universidad;
 
-create procedure sp_getParticipantesByUniversidad
-	as
-		declare @cantUni as int
-		declare @count as int
-		set @cantUni = (select count(*) from universidad)
-		set @count = 0
-		while @count < @cantUni
-			begin
-				select * from participante where participante.universidad = (
-					select uni.idUniversidad
-						From (select ROW_NUMBER() OVER (Order by idUniversidad asc)  as Row, universidad.idUniversidad from universidad ) uni
-						where Row = @count + 1
-				)
-				set @count = @count + 1
-			end
-go
 create procedure sp_getParticipantesByUniversidad
 	as
 		declare @cantUni as int
@@ -131,7 +109,6 @@ create procedure sp_getParticipantesByUniversidad
 			end
 
 go
-drop procedure sp_setParticipanteList 
 create procedure sp_setParticipanteList @participantes nvarchar(max)
 	as
         begin
@@ -170,9 +147,7 @@ create procedure sp_setParticipanteList @participantes nvarchar(max)
                 end
         end
 go
-select * from participante;
 
-DROP PROCEDURE spGetUniversidadesParticipantes
 
 CREATE PROCEDURE spGetUniversidadesParticipantes
 AS

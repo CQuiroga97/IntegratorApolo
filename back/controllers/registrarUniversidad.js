@@ -1,24 +1,8 @@
 var sql = require('mssql');
 const readExcel = require('read-excel-file/node')
-var config = {
-user: 'sa',
-password: 'Cristian2396980',
-server: 'localhost',
-database: 'integrator',
-options: {
-    trustedConnection: true,
-    encrypt: true,
-    enableArithAbort: true,
-    trustServerCertificate: true,
-    }
-};
-sql.connect(config, function(err){
-    if (err) console.log(err)
-    con = new sql.Request();
-})
 var con = new sql.Request();
 
-exports.registrarUniversidad = (req, res)=>{
+exports.registrarUniversidad = (req, res, con)=>{
     console.log(req.body)
    con.query(`exec sp_setUniversidad "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.cantEstudiantes}, '${req.body.correo}'`, (err, res2)=>{
         if(err)
@@ -26,7 +10,7 @@ exports.registrarUniversidad = (req, res)=>{
         return res.status(200).send({msg:"Dato almacenado con exito"})
     })
 }
-exports.modificarUniversidad = (req, res)=>{
+exports.modificarUniversidad = (req, res, con)=>{
     console.log(req.body)
    con.query(`exec spModificarUniversidad ${req.body.idUniversidad}, "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.estudiantes}, '${req.body.correo}'`, (err, res2)=>{
         if(err)
@@ -34,7 +18,7 @@ exports.modificarUniversidad = (req, res)=>{
         return res.status(200).send({msg:"Dato almacenado con exito"})
     })
 }
-exports.registrarUniversidadMultiples = (excel, res, callback)=>{
+exports.registrarUniversidadMultiples = (excel, res, con)=>{
    /*  con.query(`exec registrarUniversidad "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.cantEstudiantes}`, (err, res2)=>{
         if(err)
             return res.status(401).send({msg:"Error en la base de datos"})
