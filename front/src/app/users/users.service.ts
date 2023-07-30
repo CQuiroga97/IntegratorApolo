@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/observable";
+import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 import { Router } from '@angular/router';
 import { AuthService } from "../auth/auth.service";
