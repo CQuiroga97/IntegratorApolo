@@ -5,18 +5,54 @@
 @include nb-install() {
   @include nb-theme-global();
 };
-
+@font-face {
+  font-family: "regular";
+  src: url("./assets/fonts/MYRIADPRO-REGULAR.OTF");
+  }
+@font-face {
+  font-family: "light";
+  src: url("./assets/fonts/MyriadPro-Light.otf");
+  }
+@font-face {
+  font-family: "boldMy";
+  src: url("./assets/fonts/MYRIADPRO-BOLDCOND.OTF");
+  }
+@font-face {
+  font-family: "cond";
+  src: url("./assets/fonts/MYRIADPRO-COND.OTF");
+  }
 /* You can add global styles to this file, and also import other style files */
+*{
+  font-family: "light" !important;
+}
+h1{
+  font-family: "boldMy" !important;
+  font-size: 48px !important;
+}
+.mat-tab-label-content{
+  font-family: "cond" !important;
+  font-size: 22px !important;
+}
 nb-card-header{
   border-bottom: none !important;
 }
-[nbInput].status-basic{
+button{
+  font-family: "cond" !important;
+  font-size: 20px !important;
+}
+[nbInput].status-basic, input:-internal-autofill-selected {
   border-top: 0px !important;
   border-left: 0px !important;
   border-right: 0px !important;
   border-color: white !important;
   border-radius: 0px;
+  color: #d1d1d1 !important;
+  background-color: transparent !important;
 }
+input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s, color 0s 600000s;
+  }
 :root {
   height: auto;
   --colorPrimario: #144A2C;
@@ -182,4 +218,75 @@ nb-stepper .header .step.selected .label-index, nb-stepper .header .step.complet
   background: linear-gradient(90deg, #E6B52C 0%, #EFA12C 100%);
   border: none;
   color: black;
+}
+
+
+
+@media (max-width: 500px){
+  .row{
+    flex-direction: column !important;
+  }
+  .row .col-8, .row .col-4{
+    width: 100% !important;
+  }
+  .divMenu2{
+    padding-top: 40px !important;
+  }
+  nb-layout-header{
+    left: -100% !important;
+    width: 100%;
+    height: 100%;
+    background-color: #0a4f06cf;
+    position: absolute;
+    backdrop-filter: blur(20px);
+  }
+  nb-layout-header.active{
+    left: 0% !important;
+  }
+  nb-layout-header nb-icon{
+    position: absolute !important;
+    left: 103%;
+    top: 5px;
+    color: white !important;
+    font-size: 40px !important;
+  }
+  nb-layout-header.active nb-icon{
+    left: 90%;
+  }
+  nb-layout-header nav{
+    width: 100%;
+    height: 100%;
+  }
+  nb-layout-header nav app-cabezera{
+    flex-direction: column;
+    margin-top: 2px !important;
+    height: 100%;
+  }
+  nb-layout-header nav app-cabezera .divMenu{
+    flex-direction: column;
+    height: auto !important;
+    margin-top: 0px !important;
+  }
+  nb-layout-header nav app-cabezera .divMenu img{
+    height: auto !important;
+    width: 80% !important;
+    margin-left: 10px !important;
+    margin-bottom: 40px;
+  }
+  nb-layout-header nav app-cabezera .divMenu .divBtnMenu{
+    height: 50px !important;
+  }
+  nb-layout-header nav app-cabezera .divMenu .divBtnMenu a, nb-layout-header nav app-cabezera .divMenu .divBtnMenu span{
+    margin-left: 0px !important;
+  }
+  nb-layout-header nav app-cabezera .container{
+    margin-top: auto;
+    margin-bottom: 5px;
+  }
+  nb-layout-header nav app-cabezera .container .col-3{
+    width: 100% !important;
+  }
+  nb-layout-header nav app-cabezera .container .col-3 button{
+    width: 100%;
+  }
 }

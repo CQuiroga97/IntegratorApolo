@@ -285,3 +285,5 @@ AS
 BEGIN
     SELECT minutos as minutos, segundos as segundos from encuentro where encuentro.idEncuentro = @id
 END;
+
+exec sp_getParticipantesByUniversidad

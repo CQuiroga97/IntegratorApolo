@@ -56,11 +56,24 @@
 
 .divCuadrosStands .cuadrosStands .numberoEncuentros .numero1{
     font-size: 45px;
+    width: 45px;
 }
 
 .divCuadrosStands .cuadrosStands .numberoEncuentros .numero2{
     font-size: 35px;
     position: relative;
-    left: -10px;
+    left: 10px;
 }
-
+.divCuadrosStands .cuadrosStands .numberoEncuentros{
+    display: flex;
+}
+@media (max-width: 500px){
+    .divCuadrosStands{
+        width: 400px;
+        flex-direction: column;
+        height: 900px;
+    }
+    .divCuadrosStands .cuadrosStands{
+        width: 348px;
+    }
+  }

@@ -1,5 +1,6 @@
 <nb-layout>
-  <nb-layout-header fixed>
+  <nb-layout-header fixed [class.active]="menu">
+    <nb-icon icon="menu-outline" class="iconoNotificacion" (click)="abrirMenu()"></nb-icon>
     <app-cabezera></app-cabezera>
   </nb-layout-header>
   

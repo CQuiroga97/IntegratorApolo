@@ -54,3 +54,11 @@ iframe{
 .container{
     max-width: 1200px;
 }
+nb-card-header{
+    color: white;
+}
+@media (max-width: 500px){
+    app-datos{
+        height: auto;
+    }
+}
