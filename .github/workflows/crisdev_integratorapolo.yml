@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '18.13.0'
 
-      - name: npm install --force, build, and test
+      - name: install dependencies
         run: |
           npm install --force
           npm run build --if-present
