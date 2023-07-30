@@ -44,7 +44,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { PanelControlComponent } from './admin/panel-control/panel-control.component';
 import { ClasificatoriasComponent } from './admin/panelControl/clasificatorias/clasificatorias.component';
 import { IntegralesComponent } from './participante/clasificaciones/integrales/integrales.component';
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: 'https://integratorapi.azurewebsites.net', options: {} };
 @NgModule({
   declarations: [
     AppComponent,

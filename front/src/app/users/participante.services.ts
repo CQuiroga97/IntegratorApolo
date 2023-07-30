@@ -13,12 +13,12 @@ export class ParticipanteService{
 
     }
     getIntegralesClasificaciones(){
-        return this.http.post("http://localhost:3000/api/getIntegralesClasificaciones", this.user.getUserInfo())
+        return this.http.post("https://integratorapi.azurewebsites.net/api/getIntegralesClasificaciones", this.user.getUserInfo())
     }
     guardarRespuestaParticipante(data:any){
-        return this.http.post("http://localhost:3000/api/guardarRespuestaParticipante", data)
+        return this.http.post("https://integratorapi.azurewebsites.net/api/guardarRespuestaParticipante", data)
     }
     getTimerClasificaciones(){
-        return this.http.post("http://localhost:3000/api/getTimerClasificaciones","");
+        return this.http.post("https://integratorapi.azurewebsites.net/api/getTimerClasificaciones","");
     }
 }
