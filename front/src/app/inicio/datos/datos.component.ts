@@ -16,7 +16,7 @@ export class DatosComponent implements OnInit{
     this.userServices.getUniversidades().subscribe(res=>{
       this.cantUniversidades = res.length;
     }, (res)=>{
-      alert(res)
+      alert(res.message)
     })
   }
 }
