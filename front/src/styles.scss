@@ -241,7 +241,9 @@ nb-layout-header nb-icon{
     background-color: #0a4f06cf;
     position: absolute;
     backdrop-filter: blur(20px);
+    transition: all .5s;
   }
+  
   nb-layout-header.active{
     left: 0% !important;
   }
@@ -252,6 +254,7 @@ nb-layout-header nb-icon{
     color: white !important;
     font-size: 40px !important;
     display: block !important;
+    transition: all .5s;
   }
   nb-layout-header.active nb-icon{
     left: 90%;
@@ -291,5 +294,29 @@ nb-layout-header nb-icon{
   }
   nb-layout-header nav app-cabezera .container .col-3 button{
     width: 100%;
+  }
+  .divLogin{
+    width: 100% !important;
+    flex-direction: column !important;
+    background-size: auto 100% !important;
+    background-position: center !important;
+  }
+  .divLogin .divImg{
+    width: 90% !important;
+    margin-bottom: 5px !important;
+    height: 100px !important;
+    margin-right: auto !important;
+  }
+  .divLogin .divImg img{
+    height: 100% !important;
+    width: auto !important;
+  }
+  .divLogin nb-card{
+    width: 90% !important;
+    margin-top: 5px !important;
+    margin-left: auto !important;
+  }
+  nb-layout-column{
+    padding: 0px !important;
   }
 }
