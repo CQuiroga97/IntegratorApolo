@@ -69,11 +69,11 @@
 }
 @media (max-width: 500px){
     .divCuadrosStands{
-        width: 400px;
+        width: 100%;
         flex-direction: column;
         height: 900px;
     }
     .divCuadrosStands .cuadrosStands{
-        width: 348px;
+        width: 90%;
     }
   }

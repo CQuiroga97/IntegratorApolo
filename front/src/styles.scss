@@ -219,7 +219,9 @@ nb-stepper .header .step.selected .label-index, nb-stepper .header .step.complet
   border: none;
   color: black;
 }
-
+nb-layout-header nb-icon{
+  display: none !important;
+}
 
 
 @media (max-width: 500px){
@@ -249,6 +251,7 @@ nb-stepper .header .step.selected .label-index, nb-stepper .header .step.complet
     top: 5px;
     color: white !important;
     font-size: 40px !important;
+    display: block !important;
   }
   nb-layout-header.active nb-icon{
     left: 90%;
