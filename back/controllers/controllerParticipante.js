@@ -105,8 +105,6 @@ exports.insertarParticipante = (req,res, con)=>{
             para continuar el proceso ingresa al siguiente <a href="http://localhost:4200/changePassword?user=${correoEncrypt}">link</a></span>
             `
     };
-    emailController.enviarCorreo(mailOptions)
-    
     con.query(`spInsertarParticipante '${req.body.data.nombre}', '${req.body.data.correo}', '${md5(pass)}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
         if(err){
             console.log(err)
@@ -114,6 +112,8 @@ exports.insertarParticipante = (req,res, con)=>{
             }else
                 res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
     })
+    emailController.enviarCorreo(mailOptions)
+    
 }
 exports.modificarParticipante = (req,res, con)=>{
     
