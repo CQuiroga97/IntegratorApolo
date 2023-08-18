@@ -104,7 +104,7 @@ export class ClasificacionesComponent implements OnInit{
           this.loaded = true;
           if(res.estado){
             this.toastrService.show(`Las clasificatorias ya han empezado`, "Acceso inhabilitado", { status: "warning", destroyByClick: true, icon: "checkmark-circle-2-outline" });
-            this.router.navigate(["/"])
+            // this.router.navigate(["/"])
           }
         }
         this.loaded = false;

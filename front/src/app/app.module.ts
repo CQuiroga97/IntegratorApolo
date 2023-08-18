@@ -44,7 +44,9 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { PanelControlComponent } from './admin/panel-control/panel-control.component';
 import { ClasificatoriasComponent } from './admin/panelControl/clasificatorias/clasificatorias.component';
 import { IntegralesComponent } from './participante/clasificaciones/integrales/integrales.component';
-const config: SocketIoConfig = { url: 'https://integratorapi.azurewebsites.net', options: {} };
+import { ResultadosCompetenciaComponent } from './resultados-competencia/resultados-competencia.component';
+import { TablaResultadosComponent } from './tabla-resultados/tabla-resultados.component';
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +71,8 @@ const config: SocketIoConfig = { url: 'https://integratorapi.azurewebsites.net',
     PanelControlComponent,
     ClasificatoriasComponent,
     IntegralesComponent,
+    ResultadosCompetenciaComponent,
+    TablaResultadosComponent,
     
   ],
   imports: [

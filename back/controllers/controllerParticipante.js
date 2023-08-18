@@ -66,7 +66,7 @@ exports.registerEstudiantesMassive = (req, res, con) => {
                     <h1>Bienvenido, ${el[0]}</h1>
                     <br>
                     <span>Tu universidad te ha inscrito a nuestro noveno encuentro de integrales, puedes ingresar a nuestro aplicativo con tu correo y la contraseña '${el[2]}'
-                    para continuar el proceso ingresa al siguiente <a href="http://localhost:4200/">link</a></span>
+                    para continuar el proceso ingresa al siguiente <a href="http://localhost:3000:4200/">link</a></span>
                     `
             };
             emailController.enviarCorreo(mailOptions)
@@ -102,7 +102,7 @@ exports.insertarParticipante = (req,res, con)=>{
             <h1>Bienvenido, ${req.body.data.nombre}</h1>
             <br>
             <span>Tu universidad te ha inscrito a nuestro noveno encuentro de integrales, puedes ingresar a nuestro aplicativo con tu correo y la contraseña '${pass}'
-            para continuar el proceso ingresa al siguiente <a href="http://localhost:4200/changePassword?user=${correoEncrypt}">link</a></span>
+            para continuar el proceso ingresa al siguiente <a href="http://localhost:3000:4200/changePassword?user=${correoEncrypt}">link</a></span>
             `
     };
     con.query(`spInsertarParticipante '${req.body.data.nombre}', '${req.body.data.correo}', '${md5(pass)}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
@@ -136,7 +136,7 @@ exports.modificarContrasenaParticipante = (req,res, con)=>{
     })
 }
 exports.loginParticipante = (req, res, con)=>{
-    con.query(`exec loginParticipante "${req.body.correo}", "${md5(req.body.pass)}"`, (err, result)=>{
+    con.query(`exec loginParticipante "${req.body.correo}", '(${md5(req.body.pass)})'`, (err, result)=>{
         if(err){
             return res.status(401).send({msg:err})
         }
@@ -174,7 +174,7 @@ exports.getIntegrales = (req, res)=>{
 }
 
 exports.guardarRespuestaParticipante = (req, res, con) =>{
-    con.query(`spGuardarRespuestaParticipante ${req.body.numeroIntegral}, ${req.body.numeroRespuesta}, ${req.body.tiempo}, ${req.body.idParticipante}`, (err, result)=>{
+    con.query(`spGuardarRespuestaParticipante ${req.body.numeroIntegral}, ${req.body.numeroRespuesta}, ${req.body.tiempo}, ${req.body.idParticipante}, '${req.body.tiempoCompleto}'`, (err, result)=>{
         if(err){
             console.error(err);
             res.status(500).json({ error: 'Error en la base de datos' });
@@ -182,5 +182,45 @@ exports.guardarRespuestaParticipante = (req, res, con) =>{
         res.end();
     })
 }
+exports.calcularPuntaje = (req, res, con)=>{
+    con.query(`spObtenerRespuestasParticipante ${req.body.idParticipante}`, (err, result) =>{
+        if(err){
+            console.log(err)
+            res.send(err)
+        }else{
+            const respuestas = process.env.RESPUESTAS.split(",")
+            let puntaje = 0;
+            result.recordset.forEach(element =>{
+                if(respuestas[element.numeroIntegral - 1])
+                    if(element.numeroRespuesta == respuestas[element.numeroIntegral - 1])
+                        puntaje += (10 + (element.tiempoRespuestaSegundos / 10000))
+            })
+            con.query(`spModificarPuntajeParticipante ${req.body.idParticipante}, ${puntaje}`, (err, result)=>{
+                if(err)
+                    console.log(err)
+                res.send(result)
+            })
+        }
+    })
+}
+exports.obtenerInfoParticipantes = (req, res, con)=>{
+    con.query(`spObtenerInfoParticipantes`, (err, result)=>{
+        if(err)
+            res.send(err)
+        else{
+            const data = {};
+            data["participantes"] = result.recordset;
+            data["respuestas"]=process.env.RESPUESTAS.split(",");
+            res.send(data)
+        }
+    })
+}
 
-
+exports.obtenerTopParticipantesPuntaje = (req, res, con)=>{
+    con.query(`EXEC spObtenerTopParticipantesPuntaje`, (err, result)=>{
+        if(err)
+            res.send(err)
+        else
+            res.send(result.recordsets)
+    })
+}

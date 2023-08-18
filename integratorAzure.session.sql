@@ -1,5 +1,5 @@
 create table integral(idIntegral int identity(1,1) PRIMARY KEY, estado int);
-create table pregunta(idPregunta int identity(1,1) PRIMARY KEY, urlImagen varchar(120));
+create table pregunta(idPregunta int PRIMARY KEY, urlImagen varchar(120), correcta int);
 create table universidad(idUniversidad int identity(1,1) PRIMARY KEY, nombre varchar(200), sede varchar(200), pais varchar(200), cantParticipantes int, correo varchar(200));
 create table participante(idParticipante int identity(1,1) PRIMARY KEY, nombre varchar(200), email varchar(200), pass varchar(60), universidad int, FOREIGN KEY (universidad) REFERENCES universidad(idUniversidad));
 create table seriales(serial varchar(25) PRIMARY KEY, estado int,  universidad int, FOREIGN KEY (universidad) REFERENCES universidad(idUniversidad));
@@ -19,6 +19,9 @@ CREATE TABLE respuestas (
     FOREIGN KEY (participante) REFERENCES participante(idParticipante)
 );
 ALTER TABLE encuentro ADD minutos int, segundos int;
+ALTER TABLE participante ADD puntaje int;
+ALTER TABLE participante ALTER COLUMN puntaje float;
+ALTER TABLE respuestas ADD tiempoCompleto varchar(max)
 insert into encuentro values (0, 0, 4, 30);
 
 
@@ -135,7 +138,7 @@ create procedure sp_setParticipanteList @participantes nvarchar(max)
 							if @counter2 < 3
 								set @query = @query+ '''' + (select [value] from OpenJson(@json) where [key] = @counter2) + ''','
 							else
-								set @query = @query + '''' + (select [value] from OpenJson(@json) where [key] = @counter2) + ''')'
+								set @query = @query + '''' + (select [value] from OpenJson(@json) where [key] = @counter2) + ''', 0)'
 							set @counter2 = @counter2 + 1
 						end
 						print @query
@@ -266,16 +269,37 @@ BEGIN
         p.email = @email
         AND p.pass = @pass;
 END;
-
 CREATE PROCEDURE spGuardarRespuestaParticipante
     @numeroIntegral INT,
     @numeroRespuesta INT,
     @tiempoRespuestaSegundos INT,
-    @idParticipante INT
+    @idParticipante INT,
+    @tiempoCompleto VARCHAR(max)
 AS
 BEGIN
-    INSERT INTO respuestas (numeroIntegral, numeroRespuesta, tiempoRespuestaSegundos, participante)
-    VALUES (@numeroIntegral, @numeroRespuesta, @tiempoRespuestaSegundos, @idParticipante);
+    DECLARE @idRespuestaExistente INT;
+
+    -- Verificar si el número de integral ya fue registrado por el participante
+    SELECT @idRespuestaExistente = idRespuesta
+    FROM respuestas
+    WHERE numeroIntegral = @numeroIntegral
+        AND participante = @idParticipante;
+
+    IF @idRespuestaExistente IS NULL
+    BEGIN
+        -- Si no existe, insertar el registro
+        INSERT INTO respuestas (numeroIntegral, numeroRespuesta, tiempoRespuestaSegundos, participante, tiempoCompleto)
+        VALUES (@numeroIntegral, @numeroRespuesta, @tiempoRespuestaSegundos, @idParticipante, @tiempoCompleto);
+    END
+    ELSE
+    BEGIN
+        -- Si existe, actualizar el registro
+        UPDATE respuestas
+        SET numeroRespuesta = @numeroRespuesta,
+            tiempoRespuestaSegundos = @tiempoRespuestaSegundos,
+            tiempoCompleto = @tiempoCompleto
+        WHERE idRespuesta = @idRespuestaExistente;
+    END;
 END;
 select * from respuestas
 
@@ -286,4 +310,87 @@ BEGIN
     SELECT minutos as minutos, segundos as segundos from encuentro where encuentro.idEncuentro = @id
 END;
 
-exec sp_getParticipantesByUniversidad
+CREATE PROCEDURE spObtenerRespuestasParticipante
+    @idParticipante INT
+AS
+BEGIN
+    SELECT tiempoRespuestaSegundos, numeroRespuesta, numeroIntegral
+    FROM respuestas
+    WHERE participante = @idParticipante;
+END;
+
+CREATE PROCEDURE spModificarPuntajeParticipante
+    @idParticipante INT,
+    @nuevoPuntaje FLOAT
+AS
+BEGIN
+    UPDATE participante
+    SET puntaje = @nuevoPuntaje
+    WHERE idParticipante = @idParticipante;
+END;
+
+CREATE PROCEDURE spObtenerInfoParticipantes
+AS
+BEGIN
+    SELECT
+        p.nombre AS nombreParticipante,
+        u.nombre AS nombreUniversidad,
+        (
+            SELECT
+                r.numeroIntegral,
+                r.numeroRespuesta,
+                r.tiempoRespuestaSegundos,
+                r.tiempoCompleto
+            FROM respuestas r
+            WHERE r.participante = p.idParticipante
+            FOR JSON PATH
+        ) AS respuestasJSON
+    FROM
+        participante p
+        INNER JOIN universidad u ON p.universidad = u.idUniversidad
+    WHERE EXISTS (
+        SELECT 1
+        FROM respuestas r2
+        WHERE r2.participante = p.idParticipante
+    ) ORDER BY p.puntaje DESC;;
+END;
+EXEC spObtenerInfoParticipantes;
+
+CREATE PROCEDURE spObtenerTopParticipantesPuntaje
+AS
+BEGIN
+    -- Tabla temporal para los primeros 5 puestos
+    CREATE TABLE #Primeros5 (
+        nombreParticipante VARCHAR(200),
+        nombreUniversidad VARCHAR(200)
+    );
+
+    -- Tabla temporal para los siguientes 11 puestos
+    CREATE TABLE #Siguientes11 (
+        nombreParticipante VARCHAR(200),
+        nombreUniversidad VARCHAR(200)
+    );
+
+    -- Insertar los primeros 5 puestos
+    INSERT INTO #Primeros5 (nombreParticipante, nombreUniversidad)
+    SELECT TOP 5 p.nombre AS nombreParticipante, u.nombre AS nombreUniversidad
+    FROM participante p
+    INNER JOIN universidad u ON p.universidad = u.idUniversidad
+    ORDER BY p.puntaje DESC;
+
+    -- Insertar los siguientes 11 puestos
+    INSERT INTO #Siguientes11 (nombreParticipante, nombreUniversidad)
+    SELECT TOP 11 p.nombre AS nombreParticipante, u.nombre AS nombreUniversidad
+    FROM participante p
+    INNER JOIN universidad u ON p.universidad = u.idUniversidad
+    WHERE p.idParticipante NOT IN (SELECT TOP 5 idParticipante FROM participante ORDER BY puntaje DESC)
+    ORDER BY p.puntaje DESC;
+
+    -- Seleccionar los resultados de ambas tablas
+    SELECT * FROM #Primeros5;
+    SELECT * FROM #Siguientes11;
+
+    -- Eliminar las tablas temporales
+    DROP TABLE #Primeros5;
+    DROP TABLE #Siguientes11;
+END;

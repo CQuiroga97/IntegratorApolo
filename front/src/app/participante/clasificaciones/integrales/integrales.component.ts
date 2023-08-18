@@ -18,6 +18,7 @@ export class IntegralesComponent implements OnInit{
   public mensajeLoading = "";
   public countDown:any;
   public segundos = 4;
+  public pruebaFinalizada = false;
   public cronometroTimer:any;
   public cronometroFront:{minutos:number, segundos:number, mill:number};
   public tiempoOriginal:{minutos:number, segundos:number, mill:number};
@@ -77,14 +78,25 @@ export class IntegralesComponent implements OnInit{
     this.respuestaSeleccionada = resp;
     this.integralActual = integral + 1;
   }
+  salirPrueba(){
+    this.router.navigate(["/"])
+  }
   guardarSeleccion(){
     clearInterval(this.cronometroTimer);
     const tiempo = ((this.cronometroFront.mill) + (this.cronometroFront.segundos * 100) + (this.cronometroFront.minutos * 6000))
+    let tiempoFinal = this.cronometroFront;
+    tiempoFinal.minutos = tiempoFinal.minutos -this.tiempoOriginal.minutos;
+    tiempoFinal.mill = tiempoFinal.mill - this.tiempoOriginal.mill;
+    tiempoFinal.segundos = this.tiempoOriginal.segundos - tiempoFinal.segundos;
+    if(tiempoFinal.segundos < 0)tiempoFinal.segundos=tiempoFinal.segundos*-1;
+    if(tiempoFinal.mill < 0)tiempoFinal.mill=tiempoFinal.mill*-1;
+    console.log(tiempoFinal)
     const data = {
       idParticipante:this.userService.getUserInfo().data.idParticipante,
       numeroIntegral: this.integralActual,
       numeroRespuesta: this.respuestaSeleccionada,
-      tiempo:tiempo
+      tiempo:tiempo,
+      tiempoCompleto: JSON.stringify(tiempoFinal)
     }
     this.participanteService.guardarRespuestaParticipante(data).subscribe(res =>{
       this.toastrService.show(`Se ha guardado la integral ${this.integralActual}`, "Respuesta guardada", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
@@ -94,8 +106,11 @@ export class IntegralesComponent implements OnInit{
       this.cronometroFront = this.tiempoOriginal;
       
       if(this.integrales.integrales.length == this.integralActual){
-        
-        this.router.navigate(["/"])
+        const dataSet = {
+          idParticipante:this.userService.getUserInfo().data.idParticipante
+        }
+        this.participanteService.calcularPuntaje(dataSet).subscribe()
+        this.pruebaFinalizada = true;
       }else{
         this.cronometroTimer = this.cronometro();
       }

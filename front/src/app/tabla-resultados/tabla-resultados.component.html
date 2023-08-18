@@ -1,0 +1,53 @@
+<div class="divMenu2">
+    <div class="container">
+        <div class="row">
+            <div class="col-7 cardCol">
+                <nb-card class="cardSuperior dorado">
+                    <nb-card-body>
+                        <div class="container">
+                            <div class="row" *ngFor="let item of primeros; let i = index">
+                                <div class="col-1 cinta">
+                                    <img src="../../assets/img/resultados/cinta.png" alt="">
+                                </div>
+                                <div class="col-1 numero">
+                                    <span>
+
+                                        {{i+1}}.
+                                    </span>
+                                </div>
+                                <div class="col-10">
+                                    <nb-card class="dorado">
+                                        <nb-card-body class="primeros">
+                                            <span class="nombre">{{item["nombreParticipante"]}}</span>
+                                            <span class="universidad">{{item["nombreUniversidad"]}}</span>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-5">
+                <div class="container">
+                    <div class="row" *ngFor="let item of siguientes; let i = index">
+                        <div class="col-1 numeroSiguientes">
+                            <span>
+
+                                {{i+1}}.
+                            </span>
+                        </div>
+                        <div class="col-11">
+                            <nb-card>
+                                <nb-card-body class="siguientes">
+                                    <span class="nombre">{{item["nombreParticipante"]}}</span>
+                                    <span class="universidad">{{item["nombreUniversidad"]}}</span>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

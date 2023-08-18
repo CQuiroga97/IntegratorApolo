@@ -12,10 +12,14 @@ import { CambiarPasswordComponent } from './cambiar-password/cambiar-password.co
 import { LoginParticipanteComponent } from './login-participante/login-participante.component';
 import { ClasificacionesComponent } from './participante/clasificaciones/clasificaciones.component';
 import { PanelControlComponent } from './admin/panel-control/panel-control.component';
+import { ResultadosCompetenciaComponent } from './resultados-competencia/resultados-competencia.component';
+import { TablaResultadosComponent } from './tabla-resultados/tabla-resultados.component';
 const routes: Routes = [
   {path:"registroUni", component:RegistroUniComponent, title:"Integrator - Registrar universidad"},  
   {path:"changePassword", component:CambiarPasswordComponent, title:"Integrator - Cambiar contraseña"},  
   {path:"", component:InicioComponent, title:"Integrator - Inicio"},
+  {path:"resultados", component:ResultadosCompetenciaComponent, title:"Integrator - Resultados"},
+  {path:"tablaResultados", component:TablaResultadosComponent, title:"Integrator - Tabla de resultados"},
   {path:"login", component:LoginParticipanteComponent, title:"Integrator - Login"},
   {path:"admin/registroUniversidad", component:RegistroUniComponent, canActivate:[LoginGuard], title:"Integrator - Registrar universidad", children:[
     {path:"universidadesRegistradas", component:ListasUniversidadesComponent}

@@ -1,0 +1,74 @@
+<div class="divMenu2">
+    <div class="container containerCompleto">
+        <div class="row justify-content-center bannerResultados">
+            <div class="col-12">
+                <img src="../../assets/img/resultados/fondoResultados.png" alt="">
+                <span>
+
+                    Resultados
+                </span>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12">
+
+                <nb-card *ngFor="let item of participantes">
+                    <nb-card-body>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-2 separador">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12 nombreParticipante">
+                                                {{item.nombreParticipante}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 nombreUniversidad">
+                                                {{item.nombreUniversidad}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-10">
+                                    <div class="container totalRespeustas">
+                                        <div class="row">
+                                            <div class="col-auto" *ngFor="let respuestasP of item.respuestasJSON">
+                                                <div class="container">
+                                                    <div class="row justify-content-center">
+                                                        <div class="numIntegral">
+                                                            <span>
+                                                                {{respuestasP.numeroIntegral}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row timer">
+                                                        <div class="col-3">
+                                                            <img src="../../assets/img/resultados/correcto.png" alt="" *ngIf="respuestasP.numeroRespuesta == respuestas[respuestasP.numeroIntegral - 1]">
+                                                            <img src="../../assets/img/resultados/incorrecto.png" alt="" *ngIf="respuestasP.numeroRespuesta != respuestas[respuestasP.numeroIntegral - 1]">
+                                                        </div>
+                                                        <div class="col-9 tiempo">
+                                                            <span>
+
+                                                                0{{convert.parse(respuestasP.tiempoCompleto).minutos}}:
+                                                                {{convert.parse(respuestasP.tiempoCompleto).segundos<10?"0"+convert.parse(respuestasP.tiempoCompleto).segundos:convert.parse(respuestasP.tiempoCompleto).segundos}}.
+                                                            </span>
+                                                            <span class="mill">
+                                                                {{convert.parse(respuestasP.tiempoCompleto).mill}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+    </div>
+</div>

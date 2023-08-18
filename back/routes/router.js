@@ -82,6 +82,15 @@ router.post("/getIntegralesClasificaciones", (req, res)=>{
 router.post("/guardarRespuestaParticipante", (req, res)=>{
     participante.guardarRespuestaParticipante(req, res, con);
 })
+router.post("/calcularPuntaje", (req, res)=>{
+    participante.calcularPuntaje(req, res, con);
+})
+router.post("/obtenerInfoParticipantes", (req, res)=>{
+    participante.obtenerInfoParticipantes(req, res, con);
+})
+router.post("/obtenerTopParticipantesPuntaje", (req, res)=>{
+    participante.obtenerTopParticipantesPuntaje(req, res, con);
+})
 router.post("/getTimerClasificaciones", (req, res)=>{
     competencia.getTimerClasificaciones(req, res, con);
 })

@@ -133,3 +133,20 @@ nb-card.transparent.col-5.checked .container{
     margin: auto;
     width: auto;
 }
+.bannerFinPrueba{
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+}
+.bannerFinPrueba img{
+    width: 100%;
+    margin: auto;
+}
+.bannerFinPrueba button{
+    position: absolute;
+    bottom: 100px;
+    right: 150px;
+}
