@@ -46,6 +46,7 @@ import { ClasificatoriasComponent } from './admin/panelControl/clasificatorias/c
 import { IntegralesComponent } from './participante/clasificaciones/integrales/integrales.component';
 import { ResultadosCompetenciaComponent } from './resultados-competencia/resultados-competencia.component';
 import { TablaResultadosComponent } from './tabla-resultados/tabla-resultados.component';
+import { IngresarIntegralesComponent } from './ingresar-integrales/ingresar-integrales.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 @NgModule({
   declarations: [
@@ -73,7 +74,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     IntegralesComponent,
     ResultadosCompetenciaComponent,
     TablaResultadosComponent,
-    
+    IngresarIntegralesComponent,
+
+
   ],
   imports: [
     BrowserModule,
