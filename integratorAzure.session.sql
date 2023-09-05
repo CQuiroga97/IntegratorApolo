@@ -87,6 +87,12 @@ CREATE TABLE respuestas
     participante INT,
     FOREIGN KEY (participante) REFERENCES participante(idParticipante)
 );
+
+create table respuestasIntegrales
+(
+    nombreIntegral varchar(15),
+    respuesta int
+)
 ALTER TABLE encuentro ADD minutos int, segundos int;
 ALTER TABLE participante ADD puntaje int;
 ALTER TABLE participante ALTER COLUMN puntaje float;
@@ -557,3 +563,9 @@ BEGIN
     DROP TABLE #Primeros5;
     DROP TABLE #Siguientes11;
 END;
+CREATE PROCEDURE guardarIntegral @nombreIntegral varchar(15), @respuesta int AS
+BEGIN
+    delete from respuestasIntegrales where nombreIntegral = @nombreIntegral;
+    insert into respuestasIntegrales values (@nombreIntegral, @respuesta)
+END
+select * from respuestasIntegrales

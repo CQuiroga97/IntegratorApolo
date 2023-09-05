@@ -71,19 +71,22 @@ export class IngresarIntegralesComponent {
   }
 
 
-  guardarIntegrales() {
+  guardarIntegrales(num:number) {
+    if(this.integrales[num]){
 
-    const data = {
-      imagenes: this.integrales
+      const data = {
+        imagenes: this.integrales[num],
+        numIntegral: num
+      }
+  
+  
+  
+      this.user.ingresarIntegrales(data).subscribe(res=> {
+
+        this.toastrService.show(`Integral ${num + 1} guardada con éxito`, "Guardado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+        this.guardarIntegrales(num+1)
+      })
     }
-
-    console.log(this.integrales)
-
-
-
-    this.user.ingresarIntegrales(data).subscribe(res=> {
-      this.toastrService.show(`integrales ingresadas con éxito`, "Guardado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
-    })
 
 
     this.cerrarConfirmacion();

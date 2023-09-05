@@ -14,8 +14,8 @@ const indexRouter = require("./routes/router.js")
 const httpServer = new http.Server(app);
 const server = http.createServer();
 app.use(cors());
-app.use(bodyParser.urlencoded({extended:false}))
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '1050mb'}));
+app.use(bodyParser.urlencoded({limit: '1050mb', extended: true}));
 app.use("/api", indexRouter);
 app.use('/images', express.static(path.join(__dirname, 'controllers/integrales')));
 const io = new Server(httpServer, { cors: { origin: '*' } });

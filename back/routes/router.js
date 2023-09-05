@@ -94,4 +94,7 @@ router.post("/obtenerTopParticipantesPuntaje", (req, res)=>{
 router.post("/getTimerClasificaciones", (req, res)=>{
     competencia.getTimerClasificaciones(req, res, con);
 })
+router.post("/ingresarIntegrales", (req, res)=>{
+    competencia.ingresarIntegrales(req, res, con);
+})
 module.exports = router;

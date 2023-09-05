@@ -73,7 +73,7 @@ export class UsersService {
   }
 
   ingresarIntegrales(data: any) {
-    return this.http.post("http://localhost:3000/api/ingresarIntegrales", { data: data });
+    return this.http.post("http://localhost:3000/api/ingresarIntegrales", data);
   }
 
 
