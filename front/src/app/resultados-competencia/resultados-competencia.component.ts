@@ -8,9 +8,12 @@ import { ParticipanteService } from '../users/participante.services';
 })
 export class ResultadosCompetenciaComponent {
   public participantes:any = [];
-  public respuestas:any = [];
+  public respuestas:any = {};
   public convert = JSON;
-  constructor(participanteService:ParticipanteService){
+  constructor(
+    participanteService:ParticipanteService
+    ){
+
     participanteService.obtenerInfoParticipantes().subscribe((res:any)=>{
       console.log(res)
       res.participantes.forEach((element:any) =>{
@@ -18,8 +21,10 @@ export class ResultadosCompetenciaComponent {
       })
       console.log(res)
       this.participantes = res.participantes;
-      this.respuestas = res.respuestas;
-      console.log(this.respuestas[0])
+      res.respuestas.forEach((el:any)=>{
+        this.respuestas[el.nombreIntegral] = el.respuesta;
+      })
+      
     })
   }
 

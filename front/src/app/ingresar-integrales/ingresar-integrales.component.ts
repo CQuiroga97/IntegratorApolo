@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UsersService } from '../users/users.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { ParticipanteService } from '../users/participante.services';
 
 @Component({
   selector: 'app-ingresar-integrales',
@@ -16,11 +17,65 @@ export class IngresarIntegralesComponent {
 
   constructor(
     private user: UsersService,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private participante: ParticipanteService
   ) {
     this.integrales = [
       { selectedImage0: null, selectedImage1: null, selectedImage2: null, selectedImage3: null, selectedImage4: null, correctOption: null },
     ];
+    participante.getRespuestasIntegrales().subscribe((res:any)=>{
+      if(res.length > 0){
+
+        this.integrales = [];
+        res.forEach((el:any)=>{
+          this.integrales.push({ selectedImage0: null, selectedImage1: null, selectedImage2: null, selectedImage3: null, selectedImage4: null, correctOption: null })
+        })
+        let i = 0;
+        res.forEach(async (el:any)=>{
+          
+          let buff:any = { selectedImage0: null, selectedImage1: null, selectedImage2: null, selectedImage3: null, selectedImage4: null, correctOption: `${el.respuesta}`  }
+          let blob = await fetch(`http://localhost:3000/images/${el.nombreIntegral}/integral.png`).then(r => r.blob())
+          const reader = new FileReader();
+          reader.readAsDataURL(blob)
+          reader.onloadend = async ()=>{
+            buff.selectedImage0 = reader.result;
+            blob = await fetch(`http://localhost:3000/images/${el.nombreIntegral}/respuestas/respuesta1.png`).then(r => r.blob())
+            reader.readAsDataURL(blob)
+            reader.onloadend = async ()=>{
+              buff.selectedImage1 = reader.result;
+              blob = await fetch(`http://localhost:3000/images/${el.nombreIntegral}/respuestas/respuesta2.png`).then(r => r.blob())
+              reader.readAsDataURL(blob)
+              reader.onloadend = async ()=>{
+                buff.selectedImage2 = reader.result;
+                blob = await fetch(`http://localhost:3000/images/${el.nombreIntegral}/respuestas/respuesta3.png`).then(r => r.blob())
+                reader.readAsDataURL(blob)
+                reader.onloadend = async ()=>{
+                  buff.selectedImage3 = reader.result;
+                  blob = await fetch(`http://localhost:3000/images/${el.nombreIntegral}/respuestas/respuesta4.png`).then(r => r.blob())
+                  reader.readAsDataURL(blob)
+                  reader.onloadend = async ()=>{
+                    buff.selectedImage4 = reader.result;
+                    console.log(el)
+                    this.integrales[i] = buff;
+                    i++;
+                  }
+                }
+              }
+            }
+          }
+          
+          // fetch(`http://localhost:3000/images/${el.nombreIntegral}/integral.png`).then(res2 => res2.blob()).then(blob=>{
+          //   const reader = new FileReader();
+          //   reader.readAsDataURL(blob)
+          //   reader.onloadend = (res)=>{
+          //     buff.selectedImage0 = reader.result;
+  
+          //     this.integrales.push(buff)
+          //   }
+          // })
+        })
+      }
+    })
   }
 
 

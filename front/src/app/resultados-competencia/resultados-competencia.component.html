@@ -44,8 +44,8 @@
                                                     </div>
                                                     <div class="row timer">
                                                         <div class="col-3">
-                                                            <img src="../../assets/img/resultados/correcto.png" alt="" *ngIf="respuestasP.numeroRespuesta == respuestas[respuestasP.numeroIntegral - 1]">
-                                                            <img src="../../assets/img/resultados/incorrecto.png" alt="" *ngIf="respuestasP.numeroRespuesta != respuestas[respuestasP.numeroIntegral - 1]">
+                                                            <img src="../../assets/img/resultados/correcto.png" alt="" *ngIf="respuestasP.numeroRespuesta == respuestas['integral'+respuestasP.numeroIntegral]">
+                                                            <img src="../../assets/img/resultados/incorrecto.png" alt="" *ngIf="respuestasP.numeroRespuesta != respuestas['integral'+respuestasP.numeroIntegral]">
                                                         </div>
                                                         <div class="col-9 tiempo">
                                                             <span>

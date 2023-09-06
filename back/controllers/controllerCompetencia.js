@@ -13,6 +13,22 @@ exports.getTimerClasificaciones = (req, res, con)=>{
 }
 
 exports.ingresarIntegrales = (req, res, con)=>{
+    if(req.body.numIntegral == 0){
+        if(fs.existsSync('./controllers/integrales'))
+            fs.rmSync('./controllers/integrales', {recursive:true, force: true})
+        mkdir('./controllers/integrales');
+        con.query(`EXEC spDropRespuestas`, (error, result)=>{
+            if(!error)
+                saveIntegral(req,res,con)
+        })
+    }else{
+        saveIntegral(req,res,con)
+    }
+    
+    
+}
+
+saveIntegral=(req, res, con)=>{
     const ruta = `./controllers/integrales/integral${req.body.numIntegral + 1}`;
     if(fs.existsSync(ruta))
         fs.rmSync(ruta, {recursive:true, force: true})
@@ -50,5 +66,4 @@ exports.ingresarIntegrales = (req, res, con)=>{
             })
         })
     })
-    
 }

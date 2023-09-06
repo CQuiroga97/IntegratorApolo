@@ -91,6 +91,9 @@ router.post("/obtenerInfoParticipantes", (req, res)=>{
 router.post("/obtenerTopParticipantesPuntaje", (req, res)=>{
     participante.obtenerTopParticipantesPuntaje(req, res, con);
 })
+router.post("/getRespuestasIntegrales", (req, res)=>{
+    participante.getRespuestasIntegrales(req, res, con);
+})
 router.post("/getTimerClasificaciones", (req, res)=>{
     competencia.getTimerClasificaciones(req, res, con);
 })

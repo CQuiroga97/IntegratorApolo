@@ -94,6 +94,7 @@ exports.borrarParticipante = (req,res, con)=>{
 exports.insertarParticipante = (req,res, con)=>{
     let correoEncrypt = CryptoJS.AES.encrypt(req.body.data.correo, "key").toString();    
     let pass = `${req.body.data.nombre.replace(/\s/g, '')}${req.body.data.idUniversidad}`
+    console.log(pass)
     let mailOptions = {
         from: 'apolodigitalsolutions@gmail.com',
         to: req.body.data.correo,
@@ -136,8 +137,10 @@ exports.modificarContrasenaParticipante = (req,res, con)=>{
     })
 }
 exports.loginParticipante = (req, res, con)=>{
-    con.query(`exec loginParticipante "${req.body.correo}", '(${md5(req.body.pass)})'`, (err, result)=>{
+    console.log(`exec loginParticipante '${req.body.correo}', '(${md5(req.body.pass)})'`)
+    con.query(`exec loginParticipante '${req.body.correo}', '${md5(req.body.pass)}'`, (err, result)=>{
         if(err){
+            console.log(err)
             return res.status(401).send({msg:err})
         }
         if(result.recordset.length != 0){
@@ -183,36 +186,45 @@ exports.guardarRespuestaParticipante = (req, res, con) =>{
     })
 }
 exports.calcularPuntaje = (req, res, con)=>{
-    con.query(`spObtenerRespuestasParticipante ${req.body.idParticipante}`, (err, result) =>{
-        if(err){
-            console.log(err)
-            res.send(err)
-        }else{
-            const respuestas = process.env.RESPUESTAS.split(",")
-            let puntaje = 0;
-            result.recordset.forEach(element =>{
-                if(respuestas[element.numeroIntegral - 1])
-                    if(element.numeroRespuesta == respuestas[element.numeroIntegral - 1])
-                        puntaje += (10 + (element.tiempoRespuestaSegundos / 10000))
-            })
-            con.query(`spModificarPuntajeParticipante ${req.body.idParticipante}, ${puntaje}`, (err, result)=>{
-                if(err)
-                    console.log(err)
-                res.send(result)
-            })
-        }
+    con.query('spGetRespuestas', (err2, resp)=>{
+        console.log("----------------")
+        
+        const respuestas = resp.recordsets[0]
+        con.query(`spObtenerRespuestasParticipante ${req.body.idParticipante}`, (err, result) =>{
+            if(err){
+                console.log(err)
+                res.send(err)
+            }else{
+                const respuestas2 = process.env.RESPUESTAS.split(",")
+                let puntaje = 0;
+                result.recordset.forEach(element =>{
+                    const buffRespuesta = respuestas.filter(el=>{return el.nombreIntegral == `integral${element.numeroIntegral}`})[0]
+                    if(buffRespuesta.respuesta)
+                        if(element.numeroRespuesta == buffRespuesta.respuesta)
+                            puntaje += (10 + (element.tiempoRespuestaSegundos / 10000))
+                })
+                con.query(`spModificarPuntajeParticipante ${req.body.idParticipante}, ${puntaje}`, (err, result)=>{
+                    if(err)
+                        console.log(err)
+                    res.send(result)
+                })
+            }
+        })
     })
 }
 exports.obtenerInfoParticipantes = (req, res, con)=>{
-    con.query(`spObtenerInfoParticipantes`, (err, result)=>{
-        if(err)
-            res.send(err)
-        else{
-            const data = {};
-            data["participantes"] = result.recordset;
-            data["respuestas"]=process.env.RESPUESTAS.split(",");
-            res.send(data)
-        }
+    con.query('EXEC spGetRespuestas', (error, resp)=>{
+
+        con.query(`spObtenerInfoParticipantes`, (err, result)=>{
+            if(err)
+                res.send(err)
+            else{
+                const data = {};
+                data["participantes"] = result.recordset;
+                data["respuestas"]=resp.recordsets[0];
+                res.send(data)
+            }
+        })
     })
 }
 
@@ -222,5 +234,13 @@ exports.obtenerTopParticipantesPuntaje = (req, res, con)=>{
             res.send(err)
         else
             res.send(result.recordsets)
+    })
+}
+exports.getRespuestasIntegrales = (req, res, con)=>{
+    con.query('EXEC spGetRespuestas', (error, resp)=>{
+        if(error)
+            res.send(error)
+        else  
+            res.send(resp.recordsets[0])
     })
 }

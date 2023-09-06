@@ -95,9 +95,11 @@ create table respuestasIntegrales
 )
 ALTER TABLE encuentro ADD minutos int, segundos int;
 ALTER TABLE participante ADD puntaje int;
+ALTER TABLE participante ALTER COLUMN pass varchar(200);
 ALTER TABLE participante ALTER COLUMN puntaje float;
 ALTER TABLE respuestas ADD tiempoCompleto varchar(max)
 insert into encuentro
+select * from participante
 values
     (0, 0, 4, 30);
 
@@ -333,15 +335,16 @@ BEGIN
 END;
 go
 
-CREATE PROCEDURE spBorrarParticipante
+ALTER PROCEDURE spBorrarParticipante
     @idParticipante INT
 AS
 BEGIN
+    DELETE FROM respuestas WHERE participante = @idParticipante;
     DELETE FROM participante
     WHERE idParticipante = @idParticipante;
 END;
 go
-
+select * from participante
 
 /*  */
 
@@ -568,4 +571,7 @@ BEGIN
     delete from respuestasIntegrales where nombreIntegral = @nombreIntegral;
     insert into respuestasIntegrales values (@nombreIntegral, @respuesta)
 END
-select * from respuestasIntegrales
+create procedure spGetRespuestas as
+BEGIN
+    select * from respuestasIntegrales
+END

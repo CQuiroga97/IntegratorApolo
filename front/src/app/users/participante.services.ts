@@ -30,4 +30,7 @@ export class ParticipanteService{
     obtenerTopParticipantesPuntaje(){
         return this.http.post("http://localhost:3000/api/obtenerTopParticipantesPuntaje","");
     }
+    getRespuestasIntegrales(){
+        return this.http.post("http://localhost:3000/api/getRespuestasIntegrales","");
+    }
 }
