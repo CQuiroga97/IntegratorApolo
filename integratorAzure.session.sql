@@ -517,12 +517,13 @@ END;
 EXEC spObtenerInfoParticipantes;
 GO
 
-CREATE PROCEDURE spObtenerTopParticipantesPuntaje
+ALTER PROCEDURE spObtenerTopParticipantesPuntaje
 AS
 BEGIN
     -- Tabla temporal para los primeros 5 puestos
     CREATE TABLE #Primeros5
     (
+        idParticipante int,
         nombreParticipante VARCHAR(200),
         nombreUniversidad VARCHAR(200)
     );
@@ -530,24 +531,25 @@ BEGIN
     -- Tabla temporal para los siguientes 11 puestos
     CREATE TABLE #Siguientes11
     (
+        idParticipante int,
         nombreParticipante VARCHAR(200),
         nombreUniversidad VARCHAR(200)
     );
 
     -- Insertar los primeros 5 puestos
     INSERT INTO #Primeros5
-        (nombreParticipante, nombreUniversidad)
+        (idParticipante, nombreParticipante, nombreUniversidad)
     SELECT TOP 5
-        p.nombre AS nombreParticipante, u.nombre AS nombreUniversidad
+        p.idParticipante as idParticipante, p.nombre AS nombreParticipante, u.nombre AS nombreUniversidad
     FROM participante p
         INNER JOIN universidad u ON p.universidad = u.idUniversidad
     ORDER BY p.puntaje DESC;
 
     -- Insertar los siguientes 11 puestos
     INSERT INTO #Siguientes11
-        (nombreParticipante, nombreUniversidad)
+        (idParticipante, nombreParticipante, nombreUniversidad)
     SELECT TOP 11
-        p.nombre AS nombreParticipante, u.nombre AS nombreUniversidad
+        p.idParticipante as idParticipante,p.nombre AS nombreParticipante, u.nombre AS nombreUniversidad
     FROM participante p
         INNER JOIN universidad u ON p.universidad = u.idUniversidad
     WHERE p.idParticipante NOT IN (SELECT TOP 5
@@ -566,6 +568,7 @@ BEGIN
     DROP TABLE #Primeros5;
     DROP TABLE #Siguientes11;
 END;
+
 CREATE PROCEDURE guardarIntegral @nombreIntegral varchar(15), @respuesta int AS
 BEGIN
     delete from respuestasIntegrales where nombreIntegral = @nombreIntegral;
@@ -574,4 +577,46 @@ END
 create procedure spGetRespuestas as
 BEGIN
     select * from respuestasIntegrales
+END
+create procedure spDropRespuestas as
+BEGIN
+    DELETE from respuestasIntegrales
+END
+
+
+--Nuevo
+
+create table eliminatorias (
+    idParticipante int, 
+    encuentro int, 
+    ronda int, 
+    tiempo_1 varchar(MAX), 
+    tiempo_2 varchar(MAX), 
+    tiempo_3 varchar(MAX),
+    texto_1 varchar(MAX),
+    texto_2 varchar(MAX),
+    texto_3 varchar(MAX))
+Alter table eliminatorias ADD estado int;
+alter PROCEDURE getTop16 AS
+    BEGIN
+        SELECT TOP 16 idParticipante from participante order by puntaje desc
+    END
+
+SELECT TOP 16 * from participante order by puntaje desc
+
+update participante set puntaje = 2 where idParticipante = 125
+
+ALTER procedure crearEncuentro @id_1 int, @id_2 int, @encuentro int, @ronda int AS
+BEGIN
+    insert into eliminatorias values (@id_1, @encuentro, @ronda, '', '', '', '', '', '', 0);
+    insert into eliminatorias values (@id_2, @encuentro, @ronda, '', '', '', '', '', '', 0);
+END;
+
+select * from eliminatorias;
+
+ALTER procedure spLlamarEncuentros AS
+BEGIN
+    SELECT e.*, p.nombre, u.nombre as nombreU FROM eliminatorias e 
+    LEFT JOIN participante p on e.idParticipante = p.idParticipante
+    LEFT JOIN universidad u on u.idUniversidad = p.universidad;
 END

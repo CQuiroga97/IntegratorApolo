@@ -1,0 +1,23 @@
+.divMenu2{
+     background:linear-gradient(90.15deg, rgba(13, 47, 28, 0.9) 0.14%, rgba(13, 47, 28, 0.62) 99.88%), url(../../../assets/img/llaves/fondoLlaves.png);
+}
+.cont{
+    max-width: 100%;
+}
+nb-card{
+    z-index: 5;
+}
+.flip{
+    transform: scaleX(-1);
+    z-index: 0;
+    position: relative;
+    margin-right: auto;
+    margin-left: -30px !important;
+}
+.extraLeft{
+    margin-left: -30px !important;
+
+}
+.fantasma{
+    opacity: .3;
+}

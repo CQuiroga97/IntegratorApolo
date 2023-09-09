@@ -15,6 +15,7 @@ import { PanelControlComponent } from './admin/panel-control/panel-control.compo
 import { ResultadosCompetenciaComponent } from './resultados-competencia/resultados-competencia.component';
 import { TablaResultadosComponent } from './tabla-resultados/tabla-resultados.component';
 import { IngresarIntegralesComponent } from './ingresar-integrales/ingresar-integrales.component';
+import { LlavesComponent } from './inicio/llaves/llaves.component';
 
 const routes: Routes = [
   {path:"registroUni", component:RegistroUniComponent, title:"Integrator - Registrar universidad"},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:"", component:InicioComponent, title:"Integrator - Inicio"},
   {path:"resultados", component:ResultadosCompetenciaComponent, title:"Integrator - Resultados"},
   {path:"tablaResultados", component:TablaResultadosComponent, title:"Integrator - Tabla de resultados"},
+  {path:"llaves", component:LlavesComponent, title:"Integrator - Llaves"},
   {path:"login", component:LoginParticipanteComponent, title:"Integrator - Login"},
   {path:"admin/registroUniversidad", component:RegistroUniComponent, canActivate:[LoginGuard], title:"Integrator - Registrar universidad", children:[
     {path:"universidadesRegistradas", component:ListasUniversidadesComponent}

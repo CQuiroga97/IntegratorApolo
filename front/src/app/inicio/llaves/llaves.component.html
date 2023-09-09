@@ -1,0 +1,395 @@
+<div class="divMenu2">
+    <div class="container w-100 ms-0 me-0 cont ps-5 pe-5">
+        <div class="row">
+            <div class="col-5 p-0">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-3 p-0">
+                            
+                            <div class="container p-0">
+                                <div class="row pt-lg-4 pb-lg-4"  *ngFor="let index of [1, 2, 3, 4]">
+                                    <div class="col-12 p-0">
+            
+                                        <div class="container  p-0">
+                                            <div class="row m-0" *ngFor="let element of octavos[index+'8']">
+                                                    <nb-card class="transparent col-12 p-0 m-2">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column">
+                                                            <span>
+                                                                {{element.nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{element.nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex h-100 p-0">
+                            <div class="container h-100">
+                                <div class="row pt-0 h-100">
+                                    
+                                    <div class="row d-flex h-25">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave1.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex h-25">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave1.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex h-25">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave1.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex h-25">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave1.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 p-0 d-flex">
+                            
+                            <div class="container p-0 m-auto h-100">
+                                <div class="row h-50 pt-5 pb-5"  *ngFor="let index of [0, 1]">
+                                    <div class="col-12 p-0">
+            
+                                        <div class="container p-0 pt-4 pb-4 h-100">
+                                            
+                                            <div class="row h-50 d-flex">
+                                                <div class="col-12 mb-auto">
+
+                                                    <nb-card class="transparent" [class.fantasma]="!octavos[index+'4']">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos[index+'4']">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']">
+                                                            <span>
+                                                                {{octavos[index+'4'][0].nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos[index+'4'][0].nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                                </div>
+                                            </div>
+                                            <div class="row h-50 d-flex" >
+                                                <div class="col-12 mt-auto d-flex">
+
+                                                    <nb-card class="transparent m-0 mt-auto w-100" [class.fantasma]="!octavos[index+'4'] || octavos[index+'4']?.lenght == 1">
+                                                        
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos[index+'4'] || octavos[index+'4']?.lenght == 1">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']?.lenght == 1">
+                                                            <span>
+                                                                {{octavos[index+'4'][1].nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos[index+'4'][1].nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex h-100 p-0">
+                            <div class="container h-100">
+                                <div class="row pt-0 h-100">
+                                    
+                                    <div class="row d-flex h-50">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave2.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex h-50">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave2.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 p-0 d-flex">
+                            
+                            <div class="container p-0 m-auto h-100">
+                                <div class="row pt-lg-4 pb-lg-4 h-100">
+                                    <div class="col-12 p-0">
+            
+                                        <div class="container  p-0 h-100 d-flex flex-column pb-5">
+                                            <div class="row m-auto me-0 ms-0 pt-5 pb-lg-5">
+                                                    <nb-card class="transparent col-12 p-0 m-2" [class.fantasma]="!octavos['12']">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['12']">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['12']?.lenght == 1">
+                                                            <span>
+                                                                {{octavos['12'][0].nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos['12'][0].nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                            </div>
+                                            <div class="row m-auto me-0 ms-0 pt-5">
+                                                    <nb-card class="transparent col-12  p-0 m-2" [class.fantasma]="!octavos['12'] || octavos['12']?.lenght == 1">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['12'] || octavos['12']?.lenght == 1">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['12']?.lenght == 1">
+                                                            <span>
+                                                                {{octavos['12'][1].nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos['12'][1].nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex">
+                            <img src="../../../assets/img/llaves/llave3.png" alt="" class="m-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 p-0">
+                <div class="container  p-0">
+                    <div class="row ">
+                        <div class="col-12 d-flex">
+                            <img src="../../../assets/img/llaves/copaPiston.png" alt="" class="m-auto">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <nb-card class="transparent">
+                                <nb-card-body>Ganador xd</nb-card-body>
+                            </nb-card>
+                        </div>
+                    </div>
+                    <div class="row pt-5">
+                        <div class="col-6  p-1">
+                            <nb-card class="transparent">
+                                <nb-card-body>Ganador xd</nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-6 p-1 z-3">
+                            <nb-card class="transparent">
+                                <nb-card-body>Ganador xd</nb-card-body>
+                            </nb-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5 p-0">
+                <div class="container h-100">
+                    <div class="row h-100   d-flex flex-row-reverse">
+                        <div class="col-3 p-0">
+                            
+                            <div class="container p-0">
+                                <div class="row pt-lg-4 pb-lg-4"  *ngFor="let index of [5, 6, 7, 8]">
+                                    <div class="col-12 p-0">
+            
+                                        <div class="container  p-0">
+                                            <div class="row m-0" *ngFor="let element of octavos[index+'8']">
+                                                <nb-card class="transparent col-12 p-0 m-2">
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column">
+                                                        <span>
+                                                            {{element.nombre}}
+                                                        </span>
+                                                        <span>
+                                                            {{element.nombreU}}
+                                                        </span>
+                                                    </nb-card-body>
+                                                </nb-card>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex h-100 p-0 ps-0">
+                            <div class="container h-100">
+                                <div class="row pt-0 h-100">
+                                    
+                                    <div class="row d-flex h-25" *ngFor="let el of [0, 1, 2, 3]">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave1.png" alt="" class="flip">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 p-0 d-flex">
+                            
+                            <div class="container p-0 m-auto h-100">
+                                <div class="row h-50 pt-5 pb-5"  *ngFor="let index of [3, 4]">
+                                    <div class="col-12 p-0">
+            
+                                        <div class="container p-0 pt-4 pb-4 h-100">
+                                            
+                                            <div class="row h-50 d-flex">
+                                                <div class="col-12 mb-auto">
+
+                                                    <nb-card class="transparent" [class.fantasma]="!octavos[index+'4']">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos[index+'4']">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']">
+                                                            <span>
+                                                                {{octavos[index+'4'][0].nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos[index+'4'][0].nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                                </div>
+                                            </div>
+                                            <div class="row h-50 d-flex" >
+                                                <div class="col-12 mt-auto d-flex">
+
+                                                    <nb-card class="transparent m-0 mt-auto w-100" [class.fantasma]="!octavos[index+'4'] || octavos[index+'4']?.lenght == 1">
+                                                        
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos[index+'4'] || octavos[index+'4']?.lenght == 1">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']?.lenght == 1">
+                                                            <span>
+                                                                {{octavos[index+'4'][1].nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos[index+'4'][1].nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex h-100 p-0">
+                            <div class="container h-100">
+                                <div class="row pt-0 h-100">
+                                    
+                                    <div class="row d-flex h-50">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave2.png" alt="" class="flip">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex h-50">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave2.png" alt="" class="flip">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 p-0 d-flex">
+                            
+                            <div class="container p-0 m-auto h-100">
+                                <div class="row pt-lg-4 pb-lg-4 h-100 p-0">
+                                    <div class="container  p-0 h-100 d-flex flex-column pb-5">
+                                        <div class="row m-auto me-0 ms-0 pt-5 pb-lg-5">
+                                                <nb-card class="transparent col-12 p-0 m-2" [class.fantasma]="!octavos['22']">
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['22']">
+                                                        <span>
+                                                            Por
+                                                        </span>
+                                                        <span>
+                                                            definir
+                                                        </span>
+                                                    </nb-card-body>
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['22']?.lenght == 1">
+                                                        <span>
+                                                            {{octavos['22'][0].nombre}}
+                                                        </span>
+                                                        <span>
+                                                            {{octavos['22'][0].nombreU}}
+                                                        </span>
+                                                    </nb-card-body>
+                                                </nb-card>
+                                        </div>
+                                        <div class="row m-auto me-0 ms-0 pt-5">
+                                                <nb-card class="transparent col-12  p-0 m-2" [class.fantasma]="!octavos['22'] || octavos['22']?.lenght == 1">
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['22'] || octavos['22']?.lenght == 1">
+                                                        <span>
+                                                            Por
+                                                        </span>
+                                                        <span>
+                                                            definir
+                                                        </span>
+                                                    </nb-card-body>
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['22']?.lenght == 1">
+                                                        <span>
+                                                            {{octavos['22'][1].nombre}}
+                                                        </span>
+                                                        <span>
+                                                            {{octavos['22'][1].nombreU}}
+                                                        </span>
+                                                    </nb-card-body>
+                                                </nb-card>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex">
+                            <img src="../../../assets/img/llaves/llave3.png" alt="" class="m-auto flip extraLeft">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

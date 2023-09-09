@@ -28,6 +28,34 @@ exports.ingresarIntegrales = (req, res, con)=>{
     
 }
 
+exports.iniciarSegundaRonda = (req, res, con)=>{
+    const estructura = [
+        [1, 9],
+        [5, 13],
+        [3, 11],
+        [7, 15],
+        [2, 10],
+        [6, 14],
+        [4, 12],
+        [8, 16]
+    ]
+    con.query(`EXEC getTop16`, (err, result)=>{
+        if(err)
+            res.send(err)
+        else{
+            console.log(result.recordsets[0])
+            crearEncuentro(0, estructura, result.recordsets[0], con, res)
+        }
+    })
+}
+exports.llamarEncuentros = (req, res, con)=>{
+    con.query(`spLlamarEncuentros`, (err, result)=>{
+        if(err)
+            res.send(err)
+        else
+            res.send(result.recordsets[0])
+    })
+}
 saveIntegral=(req, res, con)=>{
     const ruta = `./controllers/integrales/integral${req.body.numIntegral + 1}`;
     if(fs.existsSync(ruta))
@@ -65,5 +93,18 @@ saveIntegral=(req, res, con)=>{
                 })
             })
         })
+    })
+}
+crearEncuentro = (index, arreglo, data, con, res)=>{
+    
+    con.query(`EXEC crearEncuentro ${data[arreglo[index][0] - 1].idParticipante}, ${data[arreglo[index][1] - 1].idParticipante}, ${index+1}, 8`, (err, result)=>{
+        if(err){
+            res.send(err)
+        }else{
+            if(arreglo.length - 1 == index)
+                res.send(["Éxito"])
+            else
+                crearEncuentro(index+1, arreglo, data, con, res);
+        }
     })
 }

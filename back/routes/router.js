@@ -100,4 +100,10 @@ router.post("/getTimerClasificaciones", (req, res)=>{
 router.post("/ingresarIntegrales", (req, res)=>{
     competencia.ingresarIntegrales(req, res, con);
 })
+router.post("/iniciarSegundaRonda", (req, res)=>{
+    competencia.iniciarSegundaRonda(req, res, con);
+})
+router.post("/llamarEncuentros", (req, res)=>{
+    competencia.llamarEncuentros(req, res, con);
+})
 module.exports = router;
