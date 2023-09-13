@@ -85,6 +85,12 @@ export class UsersService {
   llamarEncuentros(){
     return this.http.post("http://localhost:3000/api/llamarEncuentros", {});
   }
+
+  ingresarIntegralesSegundaRonda(data: any) {
+    return this.http.post("http://localhost:3000/api/ingresarIntegralesSegundaRonda", data);
+  }
+
+
   getToken() {
     return this.cookies.get("token")
   }
