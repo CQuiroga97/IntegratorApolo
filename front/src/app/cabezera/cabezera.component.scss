@@ -31,3 +31,43 @@ img{
 .justify-content-end b{
     text-align: right;
 }
+.drop{
+    overflow: hidden;
+    max-height: 100%;
+    width: 100%;
+    margin: auto;
+    height: 500px;
+    transition: all .5s;
+}
+.drop .titulo{
+    width: 100%;
+    height: 70px;
+    margin: auto;
+    position: relative;
+}
+.dropDown{
+    background: rgba(17, 17, 17, 0.5);
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0),white, rgba(0, 0, 0, 0)) 28 0%;
+  border-radius: 13px;
+  color: white;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.drop:hover{
+    max-height: 200px;
+}
+.dropDown a:hover{
+    color: black;
+    background-color: #E6B52C;
+    
+    font-size: 18px;
+    
+}
+.dropDown a{
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
+}

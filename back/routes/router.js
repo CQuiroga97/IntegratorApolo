@@ -57,6 +57,9 @@ router.post("/registrarParticipantesExcel", upload.single('filekey'), (req, res,
 router.post("/sp_getUniversidades", (req, res, next) =>{
     mostrarUniversidades.mostrarUniversidades(req, res, con);
 })
+router.post("/mostrarUniversidadesNum", (req, res, next) =>{
+    mostrarUniversidades.mostrarUniversidadesNum(req, res, con);
+})
 router.post("/BorrarUniversidadesEstudiantes", (req, res, next) =>{
     mostrarUniversidades.BorrarUniversidadesEstudiantes(req, res, con);
 })

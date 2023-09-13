@@ -4,12 +4,31 @@
 
     <div class="divBtnMenu">
         <a href="./">Inicio</a>
+        
     </div>
     <div class="divBtnMenu">
-        <a href="./resultados">Resultados</a>
+        <div class="drop">
+            <div class="titulo d-flex">
+                <span class="m-auto">Resultados</span>
+            </div>
+            <div class="dropDown  d-flex flex-column">
+                <a href="./resultados" class="p-2">1ra ronda</a>
+                <a href="./tablaResultados" class="p-2">Posiciones</a>
+                <a href="./llaves" class="p-2">Llaves</a>
+            </div>
+        </div>
     </div>
-    <div class="divBtnMenu">
-        <a href="./tablaResultados">Posiciones</a>
+    <div class="divBtnMenu" *ngIf="usuario.rol == 'Admin' && isLoggedIn">
+        <div class="drop">
+            <div class="titulo d-flex">
+                <a href="./admin/menu" class="p-2">Admin</a>
+            </div>
+            <div class="dropDown  d-flex flex-column">
+                <a href="./admin/registroUniversidad" class="p-2">Registrar universidad</a>
+                <a href="./admin/panelControl" class="p-2">Panel de control</a>
+                <a href="./admin/registroIntegrales" class="p-2">Registrar integrales</a>
+            </div>
+        </div>
     </div>
     <div class="divBtnMenu" *ngIf="usuario.rol == 'Participante' && isLoggedIn">
         <a href="./participante/clasificatorias">Pruebas clasificatorias</a>

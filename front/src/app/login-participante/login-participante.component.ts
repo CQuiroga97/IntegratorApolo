@@ -9,8 +9,8 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./login-participante.component.scss']
 })
 export class LoginParticipanteComponent {
-  name: string;
-  pass: string;
+  name: string = "participante@gmail.com";
+  pass: string = "CristhianQuiroga1";
   constructor(
     public userService:UsersService,
     private router:Router,

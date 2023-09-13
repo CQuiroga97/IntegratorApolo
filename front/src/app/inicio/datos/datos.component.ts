@@ -13,8 +13,8 @@ export class DatosComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.userServices.getUniversidades().subscribe(res=>{
-      this.cantUniversidades = res.length;
+    this.userServices.mostrarUniversidadesNum().subscribe(res=>{
+      this.cantUniversidades = res[0].length;
     }, (res)=>{
       alert(res.message)
     })

@@ -1,15 +1,15 @@
-create table integral
+CREATE TABLE integral
 (
     idIntegral int identity(1,1) PRIMARY KEY,
     estado int
 );
-create table pregunta
+CREATE TABLE pregunta
 (
     idPregunta int PRIMARY KEY,
     urlImagen varchar(120),
     correcta int
 );
-create table universidad
+CREATE TABLE universidad
 (
     idUniversidad int identity(1,1) PRIMARY KEY,
     nombre varchar(200),
@@ -18,36 +18,39 @@ create table universidad
     cantParticipantes int,
     correo varchar(200)
 );
-create table participante
+CREATE TABLE participante
 (
     idParticipante int identity(1,1) PRIMARY KEY,
     nombre varchar(200),
     email varchar(200),
-    pass varchar(60),
+    pass varchar(200),
     universidad int,
+	puntaje float,
     FOREIGN KEY (universidad) REFERENCES universidad(idUniversidad)
 );
-create table seriales
+CREATE TABLE seriales
 (
     serial varchar(25) PRIMARY KEY,
     estado int,
     universidad int,
     FOREIGN KEY (universidad) REFERENCES universidad(idUniversidad)
 );
-create table encuentro
+CREATE TABLE encuentro
 (
     idEncuentro int identity(1,1) PRIMARY KEY,
     estado int,
-    ronda int
+    ronda int,
+	minutos int, 
+	segundos int
 );
-create table encuentroParticipante
+CREATE TABLE encuentroParticipante
 (
     participante int,
     encuentro int,
     FOREIGN KEY(participante) REFERENCES participante(idParticipante),
     FOREIGN KEY(encuentro) REFERENCES encuentro(idEncuentro)
 );
-create table puntoRonda
+CREATE TABLE puntoRonda
 (
     hora date,
     participante int,
@@ -57,20 +60,20 @@ create table puntoRonda
     FOREIGN KEY(encuentro) REFERENCES encuentro(idEncuentro),
     FOREIGN KEY(integral) REFERENCES integral(idIntegral)
 );
-create table admin
+CREATE TABLE admin
 (
     idAdmin int identity(1,1) PRIMARY KEY,
     nombre varchar(250),
-    contraseña varchar(200)
+    contrase�a varchar(200)
 );
-create table jurado
+CREATE TABLE jurado
 (
     idJurado int identity(1,1) PRIMARY KEY,
     nombre varchar(250),
-    contraseña varchar(200),
+    contrase�a varchar(200),
     correo varchar(300)
 );
-create table contacto
+CREATE TABLE contacto
 (
     nombre varchar(200),
     descripcion varchar(500),
@@ -78,73 +81,88 @@ create table contacto
     hora date
 );
 
-CREATE TABLE respuestAS
+CREATE TABLE respuestas
 (
     idRespuesta INT IDENTITY(1, 1) PRIMARY KEY,
     numeroIntegral INT,
     numeroRespuesta INT,
     tiempoRespuestaSegundos INT,
     participante INT,
+	tiempoCompleto varchar(max),
     FOREIGN KEY (participante) REFERENCES participante(idParticipante)
 );
 
-create table respuestasIntegrales
+CREATE TABLE respuestasIntegrales
 (
     nombreIntegral varchar(15),
     respuesta int
-)
-ALTER TABLE encuentro ADD minutos int, segundos int;
-ALTER TABLE participante ADD puntaje int;
-ALTER TABLE participante ALTER COLUMN pass varchar(200);
-ALTER TABLE participante ALTER COLUMN puntaje float;
-ALTER TABLE respuestAS ADD tiempoCompleto varchar(max)
-insert into encuentro
-select * FROM participante
-values
-    (0, 0, 4, 30);
+);
+CREATE TABLE eliminatorias 
+(
+    idParticipante int, 
+    encuentro int, 
+    ronda int, 
+    tiempo_1 varchar(MAX), 
+    tiempo_2 varchar(MAX), 
+    tiempo_3 varchar(MAX),
+    texto_1 varchar(MAX),
+    texto_2 varchar(MAX),
+    texto_3 varchar(MAX),
+	estado int
+);
 
+-----------------------------------------
 
+--PROCEDIMIENTOS ALMACENADOS
+
+-----------------------------------------
+GO
 CREATE PROCEDURE crearAdmin
     @nombre varchar(250),
     @pass varchar(200)
 AS
-insert into admin
-values
-    (@nombre, @pass);
+	INSERT INTO admin
+	VALUES
+		(@nombre, @pass);
 GO
+
+-----------------------------------------
+
 CREATE PROCEDURE loginAdmin
     @nombre varchar(250),
     @pass varchar(200)
 AS
-DECLARE @result int;
-SET @result = (select idAdmin
-FROM admin
-WHERE nombre = @nombre AND contraseña = @pass);
-select "resultado" = @result;
+	DECLARE @result int;
+	SET @result = (select idAdmin
+	FROM admin
+	WHERE nombre = @nombre AND contrase�a = @pass);
+	SELECT "resultado" = @result;
 GO
-select *
-FROM admin;
-exec crearAdmin "adminAmerica2", "25f9e794323b453885f5181f1b624d0b" 
-GO
+
+-----------------------------------------
+
 CREATE PROCEDURE sp_getUniversidades
 AS
-select
-    universidad.*
-FROM
-    universidad;
-        
+	SELECT
+		universidad.*
+	FROM
+		universidad;
 GO
+
+-----------------------------------------
+
 CREATE PROCEDURE sp_setParticipantes
     @nombre varchar(200),
     @email varchar(200),
-    @pass varchar(60),
+    @pass varchar(200),
     @universidad int
 AS
-insert into participante
-values
-    (@nombre, @email, @pass, @universidad)
+	INSERT INTO participante
+	VALUES
+		(@nombre, @email, @pass, @universidad, 0)
 GO
 
+-----------------------------------------
 
 CREATE PROCEDURE sp_setUniversidad
     @nombre varchar(200),
@@ -153,10 +171,13 @@ CREATE PROCEDURE sp_setUniversidad
     @cantidad int,
     @correo varchar(200)
 AS
-insert into universidad
-values
-    (@nombre, @sede, @pais, @cantidad, @correo);
+	INSERT INTO universidad
+	VALUES
+		(@nombre, @sede, @pais, @cantidad, @correo);
 GO
+
+-----------------------------------------
+
 CREATE PROCEDURE sp_setUniversidadList
     @universidades nvarchar(max)
 AS
@@ -202,31 +223,36 @@ BEGIN
 END
 GO
 
+-----------------------------------------
+
 CREATE PROCEDURE sp_getParticipantesByUniversidad
 AS
-DECLARE @cantUni AS int
-DECLARE @count AS int
-SET @cantUni = (select count(*)
-FROM universidad)
-SET @count = 0
-while @count < @cantUni
-			BEGIN
-    select *
-    FROM participante
-    WHERE participante.universidad = (
-					select uni.idUniversidad
-    FROM (select ROW_NUMBER() OVER (Order by idUniversidad asc)  AS Row, universidad.idUniversidad
-        FROM universidad ) uni
-    WHERE Row = @count + 1
-				);
-    select uni.*
-    FROM (select ROW_NUMBER() OVER (Order by idUniversidad asc)  AS Row, universidad.*
-        FROM universidad ) uni
-    WHERE Row = @count + 1
-    SET @count = @count + 1
+	DECLARE @cantUni AS int
+	DECLARE @count AS int
+	SET @cantUni = (select count(*)
+	FROM universidad)
+	SET @count = 0
+	while @count < @cantUni
+				BEGIN
+		select *
+		FROM participante
+		WHERE participante.universidad = (
+						select uni.idUniversidad
+		FROM (select ROW_NUMBER() OVER (Order by idUniversidad asc)  AS Row, universidad.idUniversidad
+			FROM universidad ) uni
+		WHERE Row = @count + 1
+					);
+		select uni.*
+		FROM (select ROW_NUMBER() OVER (Order by idUniversidad asc)  AS Row, universidad.*
+			FROM universidad ) uni
+		WHERE Row = @count + 1
+		SET @count = @count + 1
 END
 
 GO
+
+-----------------------------------------
+
 CREATE PROCEDURE sp_setParticipanteList
     @participantes nvarchar(max)
 AS
@@ -275,6 +301,7 @@ BEGIN
 END
 GO
 
+-----------------------------------------
 
 CREATE PROCEDURE spGetUniversidadesParticipantes
 AS
@@ -303,6 +330,8 @@ BEGIN
 END;
 GO
 
+-----------------------------------------
+
 CREATE PROCEDURE spBorrarUniversidadesEstudiantes
     @idUniversidad INT
 AS
@@ -316,6 +345,9 @@ BEGIN
     WHERE idUniversidad = @idUniversidad;
 END;
 GO
+
+-----------------------------------------
+
 CREATE PROCEDURE spModificarUniversidad
     @idUniversidad INT,
     @nombre VARCHAR(200),
@@ -335,18 +367,19 @@ BEGIN
 END;
 GO
 
-ALTER PROCEDURE spBorrarParticipante
+-----------------------------------------
+
+CREATE PROCEDURE spBorrarParticipante
     @idParticipante INT
 AS
 BEGIN
-    DELETE FROM respuestAS WHERE participante = @idParticipante;
+    DELETE FROM respuestas WHERE participante = @idParticipante;
     DELETE FROM participante
     WHERE idParticipante = @idParticipante;
 END;
 GO
-select * FROM participante
 
-/*  */
+-----------------------------------------
 
 CREATE PROCEDURE spInsertarParticipante
     @nombre VARCHAR(200),
@@ -361,6 +394,8 @@ BEGIN
         (@nombre, @email, @pass, @universidad);
 END;
 GO
+
+-----------------------------------------
 
 CREATE PROCEDURE spModificarParticipante
     @idParticipante INT,
@@ -379,6 +414,9 @@ BEGIN
 END;
 
 GO
+
+-----------------------------------------
+
 CREATE PROCEDURE spModificarContrasenaParticipante
     @correo VARCHAR(200),
     @nuevaContrasena VARCHAR(60)
@@ -390,8 +428,7 @@ BEGIN
 END;
 GO
 
-
-
+-----------------------------------------
 
 CREATE PROCEDURE loginParticipante
     @email VARCHAR(200),
@@ -413,6 +450,8 @@ BEGIN
 END;
 GO
 
+-----------------------------------------
+
 CREATE PROCEDURE spGuardarRespuestaParticipante
     @numeroIntegral INT,
     @numeroRespuesta INT,
@@ -423,16 +462,16 @@ AS
 BEGIN
     DECLARE @idRespuestaExistente INT;
 
-    -- Verificar si el número de integral ya fue registrado por el participante
+    -- Verificar si el n�mero de integral ya fue registrado por el participante
     SELECT @idRespuestaExistente = idRespuesta
-    FROM respuestAS
+    FROM respuestas
     WHERE numeroIntegral = @numeroIntegral
         AND participante = @idParticipante;
 
     IF @idRespuestaExistente IS NULL
     BEGIN
         -- Si no existe, insertar el registro
-        INSERT INTO respuestAS
+        INSERT INTO respuestas
             (numeroIntegral, numeroRespuesta, tiempoRespuestaSegundos, participante, tiempoCompleto)
         VALUES
             (@numeroIntegral, @numeroRespuesta, @tiempoRespuestaSegundos, @idParticipante, @tiempoCompleto);
@@ -440,7 +479,7 @@ BEGIN
     ELSE
     BEGIN
         -- Si existe, actualizar el registro
-        UPDATE respuestAS
+        UPDATE respuestas
         SET numeroRespuesta = @numeroRespuesta,
             tiempoRespuestaSegundos = @tiempoRespuestaSegundos,
             tiempoCompleto = @tiempoCompleto
@@ -449,8 +488,7 @@ BEGIN
 END;
 GO
 
-
-
+-----------------------------------------
 
 CREATE PROCEDURE spGetTimerClasificaciones
     @id INT
@@ -463,16 +501,20 @@ END;
 
 GO
 
+-----------------------------------------
+
 CREATE PROCEDURE spObtenerRespuestasParticipante
     @idParticipante INT
 AS
 BEGIN
     SELECT tiempoRespuestaSegundos, numeroRespuesta, numeroIntegral
-    FROM respuestAS
+    FROM respuestas
     WHERE participante = @idParticipante;
 END;
 
 GO
+
+-----------------------------------------
 
 CREATE PROCEDURE spModificarPuntajeParticipante
     @idParticipante INT,
@@ -485,6 +527,7 @@ BEGIN
 END;
 GO
 
+-----------------------------------------
 
 CREATE PROCEDURE spObtenerInfoParticipantes
 AS
@@ -498,7 +541,7 @@ BEGIN
             r.numeroRespuesta,
             r.tiempoRespuestaSegundos,
             r.tiempoCompleto
-        FROM respuestAS r
+        FROM respuestas r
         WHERE r.participante = p.idParticipante
         FOR JSON PATH
         ) AS respuestasJSON
@@ -507,15 +550,14 @@ BEGIN
         INNER JOIN universidad u ON p.universidad = u.idUniversidad
     WHERE EXISTS (
         SELECT 1
-    FROM respuestAS r2
+    FROM respuestas r2
     WHERE r2.participante = p.idParticipante
     )
     ORDER BY p.puntaje DESC;;
 END;
-
-
-EXEC spObtenerInfoParticipantes;
 GO
+
+-----------------------------------------
 
 CREATE PROCEDURE spObtenerTopParticipantesPuntaje
 AS
@@ -558,65 +600,75 @@ BEGIN
     ORDER BY puntaje DESC)
     ORDER BY p.puntaje DESC;
 
-    -- Seleccionar los resultados de ambAS tablAS
+    -- Seleccionar los resultados de ambas tablas
     SELECT *
     FROM #Primeros5;
     SELECT *
     FROM #Siguientes11;
 
-    -- Eliminar lAS tablAS temporales
+    -- Eliminar las tablas temporales
     DROP TABLE #Primeros5;
     DROP TABLE #Siguientes11;
 END;
+GO
+
+-----------------------------------------
 
 CREATE PROCEDURE guardarIntegral @nombreIntegral varchar(15), @respuesta int AS
 BEGIN
     delete FROM respuestasIntegrales WHERE nombreIntegral = @nombreIntegral;
     insert into respuestasIntegrales values (@nombreIntegral, @respuesta)
 END
-CREATE PROCEDURE spGetRespuestAS AS
+GO
+
+-----------------------------------------
+
+CREATE PROCEDURE spGetRespuestas AS
 BEGIN
     select * FROM respuestasIntegrales
 END
-CREATE PROCEDURE spDropRespuestAS AS
+GO
+
+-----------------------------------------
+
+CREATE PROCEDURE spDropRespuestas AS
 BEGIN
     DELETE FROM respuestasIntegrales
 END
+GO
 
+-----------------------------------------
 
---Nuevo
-
-create table eliminatoriAS (
-    idParticipante int, 
-    encuentro int, 
-    ronda int, 
-    tiempo_1 varchar(MAX), 
-    tiempo_2 varchar(MAX), 
-    tiempo_3 varchar(MAX),
-    texto_1 varchar(MAX),
-    texto_2 varchar(MAX),
-    texto_3 varchar(MAX))
-Alter table eliminatorias ADD estado int;
 CREATE PROCEDURE getTop16 AS
     BEGIN
         SELECT TOP 16 idParticipante FROM participante order by puntaje desc
     END
+GO
 
-SELECT TOP 16 * FROM participante order by puntaje desc
+-----------------------------------------
 
-update participante SET puntaje = 2 WHERE idParticipante = 125
-
-ALTER procedure crearEncuentro @id_1 int, @id_2 int, @encuentro int, @ronda int AS
+CREATE PROCEDURE crearEncuentro @id_1 int, @id_2 int, @encuentro int, @ronda int AS
 BEGIN
-    insert into eliminatoriAS values (@id_1, @encuentro, @ronda, '', '', '', '', '', '', 0);
-    insert into eliminatoriAS values (@id_2, @encuentro, @ronda, '', '', '', '', '', '', 0);
+    insert into eliminatorias values (@id_1, @encuentro, @ronda, '', '', '', '', '', '', 0);
+    insert into eliminatorias values (@id_2, @encuentro, @ronda, '', '', '', '', '', '', 0);
 END;
 
-select * FROM eliminatorias;
+GO
+
+-----------------------------------------
 
 CREATE PROCEDURE spLlamarEncuentros AS
 BEGIN
-    SELECT e.*, p.nombre, u.nombre AS nombreU FROM eliminatoriAS e 
+    SELECT e.*, p.nombre, u.nombre AS nombreU FROM eliminatorias e 
     LEFT JOIN participante p on e.idParticipante = p.idParticipante
     LEFT JOIN universidad u on u.idUniversidad = p.universidad;
 END
+GO
+
+-----------------------------------------
+exec crearAdmin 'adminAmerica2', '25f9e794323b453885f5181f1b624d0b';
+
+
+insert into encuentro
+values
+    (0, 0, 4, 30);

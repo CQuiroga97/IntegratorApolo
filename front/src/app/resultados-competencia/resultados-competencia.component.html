@@ -11,7 +11,17 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-12">
-
+                <nb-card *ngIf="participantes.length == 0">
+                    <nb-card-body>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-5 nombreParticipante">
+                                    Aún no hay respuestas registradas
+                                </div>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
                 <nb-card *ngFor="let item of participantes">
                     <nb-card-body>
                         <div class="container">

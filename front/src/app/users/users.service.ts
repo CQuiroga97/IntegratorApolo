@@ -45,6 +45,9 @@ export class UsersService {
   getUniversidades(): Observable<any> {
     return this.http.post("http://localhost:3000/api/sp_getUniversidades", {});
   }
+  mostrarUniversidadesNum(): Observable<any> {
+    return this.http.post("http://localhost:3000/api/mostrarUniversidadesNum", {});
+  }
   setToken(token: string) {
     this.cookies.set("token", token);
     this.isLoggedIn()

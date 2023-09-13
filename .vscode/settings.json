@@ -14,6 +14,21 @@
             "database": "integrator",
             "username": "sa",
             "password": "Cristian2396980"
+        },
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "New_Integrator",
+            "database": "integrator",
+            "password": "!Cristian2396980",
+            "username": "sa"
         }
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/e73b54a9-dd67-4852-8ac2-604796a839a6/resourceGroups/Apolo/providers/Microsoft.Web/sites/integratorapolo",
