@@ -1,0 +1,130 @@
+.divMenu {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90.15deg, rgba(13, 47, 28, 0.9) 0.14%, rgba(13, 47, 28, 0.62) 99.88%), url(../../assets/img/admin/registroIntegrales/backgroundIntegrales.png);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  display: flex;
+}
+
+
+nb-card {
+  margin: auto;
+  padding: 10px;
+  width: 100%;
+  height: auto;
+  background: rgba(17, 17, 17, 0.5);
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0)) 28 0%;
+  border-radius: 13px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+
+.registerIntegral {
+  width: 1690px;
+  height: 800px;
+  margin-top: 10rem !important;
+}
+
+
+
+
+
+
+.box_archivo_integral {
+  background-color: white;
+  text-align: center;
+  font-family: "cond" !important;
+  display: flex;
+}
+
+
+
+.box_archivo_integral .first_letter {
+  font-size: 24px;
+
+}
+
+
+.selected-image {
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+  margin: 0 auto;
+}
+
+.selected-image-respuesta {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  max-height: fit-content;
+}
+
+.box_respuestas {
+  height: 55px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.custom-label {
+  display: block;
+  width: 324px;
+  height: 107px;
+  cursor: pointer;
+  border: solid 1px grey;
+  border-radius: 5px;
+  align-items: center;
+
+}
+
+.file-input {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.letter_opc {
+  background-color: #E6B52C;
+  font-size: 50px;
+  color: white;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 105px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+
+.confirmation-message {
+  backdrop-filter: blur(10px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.confirmation-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.confirmation-dialog p {
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}

@@ -15,6 +15,7 @@ import { PanelControlComponent } from './admin/panel-control/panel-control.compo
 import { ResultadosCompetenciaComponent } from './resultados-competencia/resultados-competencia.component';
 import { TablaResultadosComponent } from './tabla-resultados/tabla-resultados.component';
 import { IngresarIntegralesComponent } from './ingresar-integrales/ingresar-integrales.component';
+import { IntegralesRonda2Component } from './integrales-ronda2/integrales-ronda2.component';
 
 const routes: Routes = [
   {path:"registroUni", component:RegistroUniComponent, title:"Integrator - Registrar universidad"},
@@ -26,8 +27,10 @@ const routes: Routes = [
   {path:"admin/registroUniversidad", component:RegistroUniComponent, canActivate:[LoginGuard], title:"Integrator - Registrar universidad", children:[
     {path:"universidadesRegistradas", component:ListasUniversidadesComponent}
   ]},
-  {path:"admin/registroIntegrales", component:IngresarIntegralesComponent, canActivate:[LoginGuard], title:"Integrator - Registrar intgrales", children:[
-    /* {path:"universidadesRegistradas", component:ListasUniversidadesComponent} */
+  {path:"admin/registroIntegrales", component:IngresarIntegralesComponent, canActivate:[LoginGuard], title:"Integrator - Registrar integrales", children:[
+  ]},
+
+  {path:"admin/IntegralesRoda2", component:IntegralesRonda2Component, canActivate:[LoginGuard], title:"Integrator - Registrar integrales", children:[
   ]},
 
   {path:"admin/menu", component:MenuAdminComponent, canActivate:[LoginGuard], title:"Integrator - Menú de administrador", children:[

@@ -76,6 +76,10 @@ export class UsersService {
     return this.http.post("http://localhost:3000/api/ingresarIntegrales", data);
   }
 
+  ingresarIntegralesSegundaRonda(data: any) {
+    return this.http.post("http://localhost:3000/api/ingresarIntegralesSegundaRonda", data);
+  }
+
 
   getToken() {
     return this.cookies.get("token")
