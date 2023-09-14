@@ -1,0 +1,147 @@
+<div class="divMenu2">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-1">
+                            <img src="../../../assets/img/participante/clasificaciones/lineas.png" alt="" class="lineas-1">
+                        </div>
+                        <div class="col-3">
+                            <nb-card class="transparent cron">
+                                <nb-card-body class="d-flex">
+                                    <span class="m-auto fs-2">
+                                        0 0
+                                    </span>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-3">
+                            <nb-card class="transparent cron">
+                                <nb-card-body class="d-flex">
+                                    <span class="m-auto fs-2">
+                                        0 0
+                                    </span>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-3">
+                            <nb-card class="transparent cron">
+                                <nb-card-body class="d-flex">
+                                    <span class="m-auto fs-2">
+                                        0 0
+                                    </span>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-1">
+                            <img src="../../../assets/img/participante/clasificaciones/lineas.png" alt="" class="lineas-2">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9">
+                            <button nbButton outline status="basic" class="w-100" (click)="enviarIntegral()">Enviar integral</button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-1">
+                            <nb-icon icon="play-circle-outline">
+
+                            </nb-icon>
+                        </div>
+                        <div class="col-1">
+                            <nb-icon icon="stop-circle-outline">
+
+                            </nb-icon>
+                        </div>
+                        <div class="col-1">
+                            <nb-icon icon="refresh-outline">
+
+                            </nb-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <nb-card class="transparent h-75">
+                    <nb-card-header class="h-25 p-2">
+                        Siguiente integral
+                    </nb-card-header>
+                    <nb-card-body class="d-flex p-0">
+                        <img [src]="siguienteIntegral" alt="" class="lineas-1 m-auto">
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <nb-card class="transparent divImagen">
+                    <nb-card-header>
+                        Integral actual
+                    </nb-card-header>
+                    <nb-card-body class="d-flex">
+                        <img [src]="integralActual" alt="" class="lineas-1 m-auto">
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-6">
+                <nb-card class="w-100 transparent">
+                    <nb-card-body>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6 d-flex">
+                                    <span class="m-auto ms-0 fs-5">
+                                        Nombre
+                                    </span>
+                                </div>
+                                <div class="col-4 d-flex flex-column">
+                                    <button nbButton outline status="basic" class="w-100 mb-2"> +1</button>
+                                    <button nbButton outline status="basic"> -1</button>
+                                </div>
+                                <div class="col-2">
+                                    <nb-card class="transparent h-100">
+                                        <nb-card-body class="d-flex">
+                                            <span class="m-auto fs-2">
+                                                0
+                                            </span>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-6">
+                <nb-card class="w-100 transparent">
+                    <nb-card-body>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6 d-flex">
+                                    <span class="m-auto ms-0 fs-5">
+                                        Nombre
+                                    </span>
+                                </div>
+                                <div class="col-4 d-flex flex-column">
+                                    <button nbButton outline status="basic" class="w-100 mb-2"> +1</button>
+                                    <button nbButton outline status="basic"> -1</button>
+                                </div>
+                                <div class="col-2">
+                                    <nb-card class="transparent h-100">
+                                        <nb-card-body class="d-flex">
+                                            <span class="m-auto fs-2">
+                                                0
+                                            </span>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+    </div>
+</div>

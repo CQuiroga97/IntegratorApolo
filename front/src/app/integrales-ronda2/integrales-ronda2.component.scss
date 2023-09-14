@@ -128,3 +128,15 @@ nb-card {
   color: white;
   text-align: center;
 }
+
+.colImagen{
+  height: 150px;
+  background-color: #ebefe9;
+  position: relative;
+}
+.colImagen nb-icon{
+  color: rgb(147, 8, 8);
+  position: absolute;
+  right: 5px;
+  cursor: pointer;
+}

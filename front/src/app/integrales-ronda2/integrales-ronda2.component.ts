@@ -11,7 +11,7 @@ import { ParticipanteService } from '../users/participante.services';
 })
 export class IntegralesRonda2Component {
   integrales: any[] = [];
-
+  public integralesCreadas:any = [];
 
   constructor(
     private user: UsersService,
@@ -19,7 +19,7 @@ export class IntegralesRonda2Component {
     private participante: ParticipanteService
   ){
 
-
+    this.llamarIntegrales()
     this.integrales = [
       { selectedImage0: null, selectedImage1: null, selectedImage2: null, selectedImage3: null, selectedImage4: null, correctOption: null },
     ];
@@ -27,18 +27,30 @@ export class IntegralesRonda2Component {
 
 
   fileUpload(event: any, index: number, indice: number): void {
-    const file = event.target.files[0];
+    let i = 1;
+    Array.from(event.target.files).forEach((file:any)=>{
 
-    if (file) {
-      const reader = new FileReader();
+      if (file) {
+        const reader = new FileReader();
+  
+        reader.onload = (e: any) => {
+          
+          this.user.guardarIntegral({imagen:e.target.result}).subscribe((res:any)=>{
+            if(res[0]){
+              console.log(`Subiendo ${i} de ${event.target.files.length}`)
+              if(i == event.target.files.length){
+                this.llamarIntegrales()
 
-      reader.onload = (e: any) => {
-        const selectedImageProperty = 'selectedImage' + indice;
-        this.integrales[index][selectedImageProperty] = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    }
+              }
+              i++;
+            }
+          })
+        };
+  
+        reader.readAsDataURL(file);
+  
+      }
+    })
 
     console.log(this.integrales)
 
@@ -53,8 +65,30 @@ export class IntegralesRonda2Component {
   deleteCard(index: number) {
     this.integrales.splice(index, 1);
   }
+  borrar(id:any){
+    const data = {idIntegral:id}
+    this.user.borrarIntegral(data).subscribe(res=>{
+      console.log(res);
+      this.llamarIntegrales()
+    })
+  }
+  llamarIntegrales(){
+    
+    this.user.llamarIntegrales().subscribe((result:any)=>{
+      this.integralesCreadas = []
+      result.forEach(async (el:any)=>{
+        let blob = await fetch(`http://localhost:3000/integralesFinales/${el.idIntegral}.png?key=akjjyglc`).then(r => r.blob())
+        const reader = new FileReader();
+        reader.readAsDataURL(blob)
+        reader.onloadend = async ()=>{
+          this.integralesCreadas.push({imagen:reader.result, id:el.idIntegral, estado:el.estado})
+          console.log(this.integralesCreadas)
+        }
 
-
+      })
+    })
+  }
+ 
   /* Mensaje de confirmacion  */
 
 

@@ -5,9 +5,9 @@
     <span style="font-size: 29px; color: white; font-weight: bold; position: relative;">
       Ingrese las integrales de la segunda ronda:
     </span>
-    <nb-card class="transparent h-50" *ngFor="let item of integrales; let i = index" style="margin-top: 15px;">
+    <nb-card class="transparent h-auto" *ngFor="let item of integrales; let i = index" style="margin-top: 15px;">
       <nb-card-body class="container overflow-hidden display-flex">
-        <div class="container row card_integral d-flex justify-content-center m-auto h-100 overflow-hidden">
+        <div class="container row card_integral d-flex justify-content-center m-auto h-100 overflow-hidden mb-5">
 
 
           <div class="box_archivo_integral col-5 position-relative m-auto d-flex h-100 align-items-center justify-content-center" style="left: 250px;">
@@ -16,7 +16,7 @@
             <label for="fileInput{{ i }}">
 
 
-              <input type="file" id="fileInput{{ i }}" (change)="fileUpload($event, i, 0)" accept=".png, .jpg"
+              <input type="file" id="fileInput{{ i }}" (change)="fileUpload($event, i, 0)" accept=".png, .jpg" multiple
                 style="display:none">
 
               <nb-icon *ngIf="!item.selectedImage0" icon="upload-outline" status="basic"></nb-icon>
@@ -40,12 +40,17 @@
 
 
 
-          <div class="box_delete col-1 m-auto position-relative" (click)="deleteCard(i) "
-            style="left: 150px; cursor: pointer;">
-            <img src="../../assets/img/admin/registroUniversidades/delete.png" alt="">
+
+
+        </div>
+        <div class="container w-100">
+          <div class="row justify-content-center">
+            <div class="col-3 p-1 colImagen m-2 d-flex" *ngFor="let item of integralesCreadas" [class.opacity-50]="item.estado == 1 || item.estado == 3">
+              <nb-icon icon="close-circle-outline" nbTooltip="Borrar integral" (click)="borrar(item.id)" *ngIf="!(item.estado == 1 || item.estado == 3)"></nb-icon>
+              {{item.estado}}
+              <img [src]="item.imagen" alt="" class="w-75 m-auto "  >
+            </div>
           </div>
-
-
         </div>
       </nb-card-body>
     </nb-card>

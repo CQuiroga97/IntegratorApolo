@@ -17,6 +17,7 @@ import { TablaResultadosComponent } from './tabla-resultados/tabla-resultados.co
 import { IngresarIntegralesComponent } from './ingresar-integrales/ingresar-integrales.component';
 import { LlavesComponent } from './inicio/llaves/llaves.component';
 import { IntegralesRonda2Component } from './integrales-ronda2/integrales-ronda2.component';
+import { PanelEliminatoriasComponent } from './admin/panel-eliminatorias/panel-eliminatorias.component';
 
 const routes: Routes = [
   {path:"registroUni", component:RegistroUniComponent, title:"Integrator - Registrar universidad"},
@@ -39,6 +40,9 @@ const routes: Routes = [
 
   ]},
   {path:"admin/panelControl", component:PanelControlComponent, canActivate:[LoginGuard], title:"Integrator - Panel de control", children:[
+
+  ]},
+  {path:"admin/panelControlEliminatorias", component:PanelEliminatoriasComponent, canActivate:[LoginGuard], title:"Integrator - Panel de control eliminatorias", children:[
 
   ]},
   {path:"loginAdmin", component:LoginAdminComponent, title:"Integrator - Login Administración"},

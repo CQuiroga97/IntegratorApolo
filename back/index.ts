@@ -13,11 +13,18 @@ const port = (process.env.PORT || 3000);
 const indexRouter = require("./routes/router.js")
 const httpServer = new http.Server(app);
 const server = http.createServer();
+app.get('/integralesFinales/*', function(req:any, res:any, next:any){
+  if(req.query["key"]=="akjjyglc")
+    next()
+  else
+    res.send("Acceso prohibido");
+})
 app.use(cors());
 app.use(bodyParser.json({limit: '1050mb'}));
 app.use(bodyParser.urlencoded({limit: '1050mb', extended: true}));
 app.use("/api", indexRouter);
 app.use('/images', express.static(path.join(__dirname, 'controllers/integrales')));
+app.use('/integralesFinales', express.static(path.join(__dirname, 'controllers/integralesFinales')));
 const io = new Server(httpServer, { cors: { origin: '*' } });
 
 io.on('connection', (client:any) => {

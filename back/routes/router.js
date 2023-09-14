@@ -109,4 +109,19 @@ router.post("/iniciarSegundaRonda", (req, res)=>{
 router.post("/llamarEncuentros", (req, res)=>{
     competencia.llamarEncuentros(req, res, con);
 })
+router.post("/llamarIntegrales", (req, res)=>{
+    competencia.llamarIntegrales(req, res, con);
+})
+router.post("/guardarIntegral", (req, res)=>{
+    competencia.guardarIntegral(req, res, con);
+})
+router.post("/borrarIntegral", (req, res)=>{
+    competencia.borrarIntegral(req, res, con);
+})
+router.post("/getIntegralesAdmin", (req, res)=>{
+    competencia.getIntegralesAdmin(req, res, con);
+})
+router.post("/modificarIntegral", (req, res)=>{
+    competencia.modificarIntegral(req, res, con);
+})
 module.exports = router;

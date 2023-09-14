@@ -666,7 +666,53 @@ END
 GO
 
 -----------------------------------------
+
+GO
+CREATE PROCEDURE spLlamarIntegrales AS
+BEGIN
+    SELECT * from integral ORDER BY idIntegral;
+END
+
+-----------------------------------------
+
+GO
+CREATE PROCEDURE spGuardarIntegral AS
+BEGIN
+    INSERT INTO integral VALUES (0);
+    SELECT SCOPE_IDENTITY() 'id'
+END
+
+-----------------------------------------
+
+GO
+CREATE PROCEDURE spBorrarIntegral @id int AS
+BEGIN
+    DELETE FROM integral where idIntegral = @id
+END
+
+-----------------------------------------
+
+GO
+CREATE PROCEDURE spGetIntegralesAdmin AS
+BEGIN
+    SELECT TOP 1
+        * FROM integral WHERE estado = 0 ORDER BY idIntegral DESC
+    SELECT TOP 1
+        * FROM integral WHERE estado = 1 ORDER BY idIntegral DESC
+END
+
+-----------------------------------------
 exec crearAdmin 'adminAmerica2', '25f9e794323b453885f5181f1b624d0b';
+
+-----------------------------------------
+
+GO
+CREATE PROCEDURE spModificarIntegral @integral int, @estado int AS
+BEGIN
+    UPDATE integral SET estado = @estado where idIntegral = @integral
+END
+
+-----------------------------------------
 
 
 insert into encuentro

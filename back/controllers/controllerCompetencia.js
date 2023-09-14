@@ -1,6 +1,6 @@
 const fs = require('fs')
 const { mkdir } = require('fs/promises');
-
+const md5 = require('md5')
 exports.getTimerClasificaciones = (req, res, con)=>{
     con.query(`exec spGetTimerClasificaciones 1`, (err, resp)=>{
         if(err){
@@ -54,6 +54,111 @@ exports.llamarEncuentros = (req, res, con)=>{
             res.send(err)
         else
             res.send(result.recordsets[0])
+    })
+}
+exports.llamarIntegrales = (req, res, con)=>{
+    con.query(`spLlamarIntegrales`, (err, result)=>{
+        if(err)
+            res.send(err)
+        else{
+            result.recordsets[0].forEach(el=>{
+
+                el.idIntegral = md5(el.idIntegral)
+            })
+            res.send(result.recordsets[0])
+        }
+    })
+}
+exports.guardarIntegral = (req, res, con)=>{
+    const ruta = `./controllers/integralesFinales`
+    if(!fs.existsSync(ruta))
+        mkdir(ruta).then(()=>{
+            saveIntegralEliminatoria(req.body.imagen.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2], res, con)
+        })
+    else
+        saveIntegralEliminatoria(req.body.imagen.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2], res, con)
+}
+exports.borrarIntegral = (req, res, con)=>{
+    const ruta = `./controllers/integralesFinales/${req.body.idIntegral}.png`
+    fs.rmSync(ruta, {recursive:true, force: true})
+    con.query(`spLlamarIntegrales`, (err, result)=>{
+        if(err)
+            res.send(err)
+        else{
+            let flag = true;
+            result.recordsets[0].forEach(el=>{
+
+                if(req.body.idIntegral == md5(el.idIntegral)){
+                    con.query(`spBorrarIntegral ${el.idIntegral}`, (err, result)=>{
+                        if(err){
+                            res.send(err)}
+                        else{
+                            res.send(result)
+                        }
+                        
+                    })
+                    flag = false;
+                }
+            })
+            if(flag)
+                res.send([false])
+        }
+    })
+    
+}
+exports.getIntegralesAdmin = (req, res, con)=>{
+    con.query("EXEC spGetIntegralesAdmin", (error, result)=>{
+        if(error) res.send(error)
+        else{
+            console.log(result.recordsets)
+            result.recordsets.forEach(el=>{
+                if(el.length>0)
+                    el[0].idIntegral = md5(el[0].idIntegral)
+            })
+            res.send(result.recordsets)
+        }
+    })
+}
+saveIntegralEliminatoria = (imagen, res, con)=>{
+    con.query(`spGuardarIntegral`, (err, result)=>{
+        console.log(result.recordsets[0])
+        if(err)
+            res.send(err)
+        else{
+            const imagenBuff = Buffer.from(imagen,'base64')
+
+            fs.writeFile(`./controllers/integralesFinales/${md5(result.recordsets[0][0].id)}.png`,imagenBuff , (error)=>{
+                if(error)
+                    res.send(error)
+                else
+                    res.send([true])
+            })
+        }
+    })
+}
+exports.modificarIntegral = (req, res, con)=>{
+    con.query(`spLlamarIntegrales`, (err, result)=>{
+        if(err)
+            res.send(err)
+        else{
+            let flag = true;
+            result.recordsets[0].forEach(el=>{
+                if(req.body.idIntegral == md5(el.idIntegral)){
+                    console.log(`spModificarIntegral ${el.idIntegral}, ${el.estado}`)
+                    con.query(`spModificarIntegral ${el.idIntegral}, ${req.body.estado}`, (err, result)=>{
+                        if(err){
+                            res.send(err)}
+                        else{
+                            res.send(result)
+                        }
+                        
+                    })
+                    flag = false;
+                }
+            })
+            if(flag)
+                res.send([false])
+        }
     })
 }
 saveIntegral=(req, res, con)=>{

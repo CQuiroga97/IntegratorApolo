@@ -85,6 +85,21 @@ export class UsersService {
   llamarEncuentros(){
     return this.http.post("http://localhost:3000/api/llamarEncuentros", {});
   }
+  llamarIntegrales(){
+    return this.http.post("http://localhost:3000/api/llamarIntegrales", {});
+  }
+  guardarIntegral(data:any){
+    return this.http.post("http://localhost:3000/api/guardarIntegral", data);
+  }
+  borrarIntegral(data:any){
+    return this.http.post("http://localhost:3000/api/borrarIntegral", data);
+  }
+  modificarIntegral(data:any){
+    return this.http.post("http://localhost:3000/api/modificarIntegral", data);
+  }
+  getIntegralesAdmin(){
+    return this.http.post("http://localhost:3000/api/getIntegralesAdmin", {});
+  }
 
   ingresarIntegralesSegundaRonda(data: any) {
     return this.http.post("http://localhost:3000/api/ingresarIntegralesSegundaRonda", data);
