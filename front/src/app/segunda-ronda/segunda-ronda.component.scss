@@ -62,3 +62,32 @@
 .row_teclado{
   width: 60%;
 }
+
+
+.cont_padre_segunda_ronda{
+  height: 90%; top: 5%;
+}
+
+.cont_teclado_segunda_ronda{
+  position: relative;
+  top: 4%;
+}
+
+
+.box_watch{
+  display: flex;
+  background: rgba(0,0,0,0.9);
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0),white, rgba(0, 0, 0, 0)) 48 0%;
+  border-radius: 13px;
+  font-size: 85px;
+  text-align: center;
+  align-items: center;
+  color: white;
+  font-family: url("../../assets/fonts/Orbitron-VariableFont_wght.ttf");
+
+}
+
+.box_watch span{
+  position: relative;
+  margin: auto;
+}

@@ -19,6 +19,11 @@ export class SegundaRondaComponent {
     this.formulaRespuesta += symbol;
   }
 
+  imgIntegralActual: string = '../../assets/img/streaming/Group 70.png';
+
+  hours: string =  "00";
+  minuts: string = "00";
+  seconds: string = "00";
 
  /*  mathequations = ['H = \\ sum_ {i = 1} ^ {m} p_ {i} log_ {2} (p_ {i})']
 
