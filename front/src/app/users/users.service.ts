@@ -100,6 +100,9 @@ export class UsersService {
   getIntegralesAdmin(){
     return this.http.post("http://localhost:3000/api/getIntegralesAdmin", {});
   }
+  getTopUniversidades(){
+    return this.http.post("http://localhost:3000/api/getTopUniversidades", {});
+  }
 
   ingresarIntegralesSegundaRonda(data: any) {
     return this.http.post("http://localhost:3000/api/ingresarIntegralesSegundaRonda", data);

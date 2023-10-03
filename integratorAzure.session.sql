@@ -99,7 +99,6 @@ ALTER TABLE participante ALTER COLUMN pass varchar(200);
 ALTER TABLE participante ALTER COLUMN puntaje float;
 ALTER TABLE respuestAS ADD tiempoCompleto varchar(max)
 insert into encuentro
-select * FROM participante
 values
     (0, 0, 4, 30);
 
@@ -620,3 +619,13 @@ BEGIN
     LEFT JOIN participante p on e.idParticipante = p.idParticipante
     LEFT JOIN universidad u on u.idUniversidad = p.universidad;
 END
+
+
+select * from integral
+delete from integral
+select * from participante
+delete from eliminatorias
+update universidad set puntaje = 0;
+update participante set puntaje = 0;
+
+exec sp_setUniversidad "Universidad n", "Colombia", "Bogotá", 10, 'u@u.com'

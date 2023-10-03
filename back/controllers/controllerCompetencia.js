@@ -28,6 +28,13 @@ exports.ingresarIntegrales = (req, res, con)=>{
     
 }
 
+exports.getTopUniversidades = (req, res, con)=>{
+    con.query("EXEC getTopUniversidades", (error, result)=>{
+        if(error) res.send([false])
+        else res.send(result.recordsets[0])
+    })
+}
+
 exports.iniciarSegundaRonda = (req, res, con)=>{
     const estructura = [
         [1, 9],

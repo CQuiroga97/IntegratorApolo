@@ -109,7 +109,7 @@ export class IntegralesComponent implements OnInit{
         const dataSet = {
           idParticipante:this.userService.getUserInfo().data.idParticipante
         }
-        this.participanteService.calcularPuntaje(dataSet).subscribe()
+        // this.participanteService.calcularPuntaje(dataSet).subscribe()
         this.pruebaFinalizada = true;
       }else{
         this.cronometroTimer = this.cronometro();

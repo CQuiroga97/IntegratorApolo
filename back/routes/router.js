@@ -124,4 +124,7 @@ router.post("/getIntegralesAdmin", (req, res)=>{
 router.post("/modificarIntegral", (req, res)=>{
     competencia.modificarIntegral(req, res, con);
 })
+router.post("/getTopUniversidades", (req, res)=>{
+    competencia.getTopUniversidades(req, res, con);
+})
 module.exports = router;

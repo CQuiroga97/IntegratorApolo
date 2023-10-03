@@ -18,6 +18,8 @@ CREATE TABLE universidad
     cantParticipantes int,
     correo varchar(200)
 );
+ALTER TABLE universidad ADD puntaje FLOAT;
+
 CREATE TABLE participante
 (
     idParticipante int identity(1,1) PRIMARY KEY,
@@ -164,7 +166,7 @@ GO
 
 -----------------------------------------
 
-CREATE PROCEDURE sp_setUniversidad
+ALTER PROCEDURE sp_setUniversidad
     @nombre varchar(200),
     @pais varchar(200),
     @sede varchar(200),
@@ -173,7 +175,7 @@ CREATE PROCEDURE sp_setUniversidad
 AS
 	INSERT INTO universidad
 	VALUES
-		(@nombre, @sede, @pais, @cantidad, @correo);
+		(@nombre, @sede, @pais, @cantidad, @correo, 0);
 GO
 
 -----------------------------------------
@@ -452,14 +454,32 @@ GO
 
 -----------------------------------------
 
-CREATE PROCEDURE spGuardarRespuestaParticipante
+ALTER PROCEDURE spGuardarRespuestaParticipante
     @numeroIntegral INT,
     @numeroRespuesta INT,
     @tiempoRespuestaSegundos INT,
     @idParticipante INT,
-    @tiempoCompleto VARCHAR(max)
+    @tiempoCompleto VARCHAR(max),
+    @puntaje FLOAT,
+    @puntajeU INT
 AS
 BEGIN
+    UPDATE participante
+    SET puntaje = puntaje + @puntaje
+    WHERE idParticipante = @idParticipante;
+
+    DECLARE @cantUniversidad INT;
+    DECLARE @idUniversidad INT;
+    SELECT @idUniversidad = universidad FROM participante WHERE idParticipante = @idParticipante;
+
+    SELECT @cantUniversidad = COUNT(*) FROM participante WHERE universidad = @idUniversidad;
+    SELECT COUNT(*) FROM participante WHERE universidad = @idUniversidad;
+
+    DECLARE @puntajeTotal FLOAT
+    SET @puntajeTotal = (CAST(@puntajeU AS FLOAT)/CAST(@cantUniversidad AS FLOAT))
+
+    UPDATE universidad SET puntaje = puntaje + @puntajeTotal WHERE idUniversidad = @idUniversidad;
+
     DECLARE @idRespuestaExistente INT;
 
     -- Verificar si el n�mero de integral ya fue registrado por el participante
@@ -522,7 +542,7 @@ CREATE PROCEDURE spModificarPuntajeParticipante
 AS
 BEGIN
     UPDATE participante
-    SET puntaje = @nuevoPuntaje
+    SET puntaje = puntaje + @nuevoPuntaje
     WHERE idParticipante = @idParticipante;
 END;
 GO
@@ -668,9 +688,9 @@ GO
 -----------------------------------------
 
 GO
-CREATE PROCEDURE spLlamarIntegrales AS
+ALTER PROCEDURE spLlamarIntegrales AS
 BEGIN
-    SELECT * from integral ORDER BY idIntegral;
+    SELECT * from integral ORDER BY idIntegral DESC;
 END
 
 -----------------------------------------
@@ -714,6 +734,12 @@ END
 
 -----------------------------------------
 
+CREATE PROCEDURE getTopUniversidades AS
+BEGIN
+    SELECT * FROM universidad ORDER BY puntaje DESC
+END
+
+-----------------------------------------
 
 insert into encuentro
 values

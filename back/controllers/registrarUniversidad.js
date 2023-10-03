@@ -3,7 +3,7 @@ const readExcel = require('read-excel-file/node')
 var con = new sql.Request();
 
 exports.registrarUniversidad = (req, res, con)=>{
-    console.log(req.body)
+    console.log(`exec sp_setUniversidad "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.cantEstudiantes}, '${req.body.correo}'`)
    con.query(`exec sp_setUniversidad "${req.body.nombre}", "${req.body.pais}", "${req.body.ciudad}", ${req.body.cantEstudiantes}, '${req.body.correo}'`, (err, res2)=>{
         if(err)
             return res.status(401).send({msg:"Error en la base de datos"})

@@ -177,40 +177,70 @@ exports.getIntegrales = (req, res)=>{
 }
 
 exports.guardarRespuestaParticipante = (req, res, con) =>{
-    con.query(`spGuardarRespuestaParticipante ${req.body.numeroIntegral}, ${req.body.numeroRespuesta}, ${req.body.tiempo}, ${req.body.idParticipante}, '${req.body.tiempoCompleto}'`, (err, result)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({ error: 'Error en la base de datos' });
-        }
-        res.end();
-    })
-}
-exports.calcularPuntaje = (req, res, con)=>{
     con.query('spGetRespuestas', (err2, resp)=>{
-        console.log("----------------")
-        
         const respuestas = resp.recordsets[0]
-        con.query(`spObtenerRespuestasParticipante ${req.body.idParticipante}`, (err, result) =>{
+        const buffRespuesta = respuestas.filter(el=>{return el.nombreIntegral == `integral${req.body.numeroIntegral}`})[0]
+        console.log(req.body)
+        let puntaje = 0;
+        let puntajeU = 0;
+        if(buffRespuesta.respuesta)
+            if(req.body.numeroRespuesta == buffRespuesta.respuesta){
+                puntaje = (10 + (req.body.tiempo / 10000))
+                puntajeU = 1;
+            }
+        console.log(`spGuardarRespuestaParticipante 
+        ${req.body.numeroIntegral}, 
+        ${req.body.numeroRespuesta}, 
+        ${req.body.tiempo}, 
+        ${req.body.idParticipante}, 
+        '${req.body.tiempoCompleto}', 
+        ${puntaje},
+        ${puntajeU}`)
+        con.query(`spGuardarRespuestaParticipante 
+            ${req.body.numeroIntegral}, 
+            ${req.body.numeroRespuesta}, 
+            ${req.body.tiempo}, 
+            ${req.body.idParticipante}, 
+            '${req.body.tiempoCompleto}', 
+            ${puntaje},
+            ${puntajeU}`,
+            
+            (err, result)=>{
             if(err){
-                console.log(err)
-                res.send(err)
+                console.error(err);
+                res.status(500).json({ error: 'Error en la base de datos' });
             }else{
-                const respuestas2 = process.env.RESPUESTAS.split(",")
-                let puntaje = 0;
-                result.recordset.forEach(element =>{
-                    const buffRespuesta = respuestas.filter(el=>{return el.nombreIntegral == `integral${element.numeroIntegral}`})[0]
-                    if(buffRespuesta.respuesta)
-                        if(element.numeroRespuesta == buffRespuesta.respuesta)
-                            puntaje += (10 + (element.tiempoRespuestaSegundos / 10000))
-                })
-                con.query(`spModificarPuntajeParticipante ${req.body.idParticipante}, ${puntaje}`, (err, result)=>{
-                    if(err)
-                        console.log(err)
-                    res.send(result)
-                })
+                
+                res.end();
             }
         })
     })
+}
+exports.calcularPuntaje = (req, res, con)=>{
+    // con.query('spGetRespuestas', (err2, resp)=>{
+    //     console.log("----------------")
+        
+    //     const respuestas = resp.recordsets[0]
+    //     con.query(`spObtenerRespuestasParticipante ${req.body.idParticipante}`, (err, result) =>{
+    //         if(err){
+    //             console.log(err)
+    //             res.send(err)
+    //         }else{
+    //             let puntaje = 0;
+    //             result.recordset.forEach(element =>{
+    //                 const buffRespuesta = respuestas.filter(el=>{return el.nombreIntegral == `integral${element.numeroIntegral}`})[0]
+    //                 if(buffRespuesta.respuesta)
+    //                     if(element.numeroRespuesta == buffRespuesta.respuesta)
+    //                         puntaje += (10 + (element.tiempoRespuestaSegundos / 10000))
+    //             })
+    //             con.query(`spModificarPuntajeParticipante ${req.body.idParticipante}, ${puntaje}`, (err, result)=>{
+    //                 if(err)
+    //                     console.log(err)
+    //                 res.send(result)
+    //             })
+    //         }
+    //     })
+    // })
 }
 exports.obtenerInfoParticipantes = (req, res, con)=>{
     con.query('EXEC spGetRespuestas', (error, resp)=>{
