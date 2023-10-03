@@ -50,6 +50,8 @@ import { IngresarIntegralesComponent } from './ingresar-integrales/ingresar-inte
 import { LlavesComponent } from './inicio/llaves/llaves.component';
 import { IntegralesRonda2Component } from './integrales-ronda2/integrales-ronda2.component';
 import { PanelEliminatoriasComponent } from './admin/panel-eliminatorias/panel-eliminatorias.component';
+import { StreamSegundaRondaComponent } from './stream-segunda-ronda/stream-segunda-ronda.component';
+import { SegundaRondaComponent } from './segunda-ronda/segunda-ronda.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     LlavesComponent,
     IntegralesRonda2Component,
     PanelEliminatoriasComponent,
+    StreamSegundaRondaComponent,
+    SegundaRondaComponent,
 
 
   ],

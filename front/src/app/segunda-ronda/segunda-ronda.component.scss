@@ -1,0 +1,93 @@
+.div_segunda_ronda{
+  background-color: #144A2C;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.btn-symbol{
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 120;
+  width: 30%;
+  border: solid 1xp ;
+  border-color: gray;
+  margin: auto;
+  margin-top: 10px;
+  padding-left: 15px;
+  width: 120px;
+}
+
+
+.btn-symbol:hover{
+  background-color: white;
+  color: black;
+}
+
+
+.cont_respuesta_segunda_ronda{
+  position: relative;
+  top: 2vw;
+  display: flex;
+}
+
+.integral_acual{
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.50);
+  backdrop-filter: blur(15px);
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0),white, rgba(0, 0, 0, 0)) 48 0%;
+  border-radius: 13px;
+  background-color: white;
+  display: flex;
+}
+
+.integral_acual img{
+  width: 90%;
+  height: 90%;
+  position: relative;
+  margin: auto;
+}
+
+
+.entrada{
+  background: rgba(0,0,0,0.5);
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0),white, rgba(0, 0, 0, 0)) 48 0%;
+  border-radius: 13px;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+}
+
+.row_teclado{
+  width: 60%;
+}
+
+
+.cont_padre_segunda_ronda{
+  height: 90%; top: 5%;
+}
+
+.cont_teclado_segunda_ronda{
+  position: relative;
+  top: 4%;
+}
+
+
+.box_watch{
+  display: flex;
+  background: rgba(0,0,0,0.9);
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0),white, rgba(0, 0, 0, 0)) 48 0%;
+  border-radius: 13px;
+  font-size: 85px;
+  text-align: center;
+  align-items: center;
+  color: white;
+  font-family: url("../../assets/fonts/Orbitron-VariableFont_wght.ttf");
+
+}
+
+.box_watch span{
+  position: relative;
+  margin: auto;
+}
