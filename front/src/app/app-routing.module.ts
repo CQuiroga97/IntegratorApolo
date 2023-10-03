@@ -16,6 +16,8 @@ import { ResultadosCompetenciaComponent } from './resultados-competencia/resulta
 import { TablaResultadosComponent } from './tabla-resultados/tabla-resultados.component';
 import { IngresarIntegralesComponent } from './ingresar-integrales/ingresar-integrales.component';
 import { IntegralesRonda2Component } from './integrales-ronda2/integrales-ronda2.component';
+import { StreamSegundaRondaComponent } from './stream-segunda-ronda/stream-segunda-ronda.component';
+import { SegundaRondaComponent } from './segunda-ronda/segunda-ronda.component';
 
 const routes: Routes = [
   {path:"registroUni", component:RegistroUniComponent, title:"Integrator - Registrar universidad"},
@@ -24,6 +26,10 @@ const routes: Routes = [
   {path:"resultados", component:ResultadosCompetenciaComponent, title:"Integrator - Resultados"},
   {path:"tablaResultados", component:TablaResultadosComponent, title:"Integrator - Tabla de resultados"},
   {path:"login", component:LoginParticipanteComponent, title:"Integrator - Login"},
+
+  {path:"streamSegundaRonda", component:StreamSegundaRondaComponent, title:"Integrator - Sigue la segunda ronda"},
+  {path:"segundaRonda", component:SegundaRondaComponent, title:"Integrator - Segunda ronda"},
+
   {path:"admin/registroUniversidad", component:RegistroUniComponent, canActivate:[LoginGuard], title:"Integrator - Registrar universidad", children:[
     {path:"universidadesRegistradas", component:ListasUniversidadesComponent}
   ]},
