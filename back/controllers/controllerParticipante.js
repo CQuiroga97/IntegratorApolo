@@ -82,10 +82,8 @@ exports.registerEstudiantesMassive = (req, res, con) => {
       })
 }
 exports.borrarParticipante = (req,res, con)=>{
-    console.log(`spBorrarParticipante ${req.body.idEstudiante}`)
     con.query(`spBorrarParticipante ${parseInt(req.body.idEstudiante)}`, (err, res2)=>{
         if(err){
-            console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
             }else
                 res.status(200).send({titulo:"Participantes eliminado", texto:`El participante ha sido eliminado con éxito.`, icono:"checkmark-circle-2-outline"})
@@ -94,7 +92,6 @@ exports.borrarParticipante = (req,res, con)=>{
 exports.insertarParticipante = (req,res, con)=>{
     let correoEncrypt = CryptoJS.AES.encrypt(req.body.data.correo, "key").toString();    
     let pass = `${req.body.data.nombre.replace(/\s/g, '')}${req.body.data.idUniversidad}`
-    console.log(pass)
     let mailOptions = {
         from: 'apolodigitalsolutions@gmail.com',
         to: req.body.data.correo,
@@ -108,7 +105,6 @@ exports.insertarParticipante = (req,res, con)=>{
     };
     con.query(`spInsertarParticipante '${req.body.data.nombre}', '${req.body.data.correo}', '${md5(pass)}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
         if(err){
-            console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
             }else
                 res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
@@ -120,31 +116,25 @@ exports.modificarParticipante = (req,res, con)=>{
     
     con.query(`spModificarParticipante ${req.body.data.id}, '${req.body.data.nombre}', '${req.body.data.correo}', '${req.body.data.pass}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
         if(err){
-            console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
             }else
                 res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
     })
 }
 exports.modificarContrasenaParticipante = (req,res, con)=>{
-    console.log(req.body.data)
     con.query(`spModificarContrasenaParticipante '${req.body.data.correo}', '${md5(req.body.data.pass)}'`, (err, res2)=>{
         if(err){
-            console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
             }else
                 res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
     })
 }
 exports.loginParticipante = (req, res, con)=>{
-    console.log(`exec loginParticipante '${req.body.correo}', '(${md5(req.body.pass)})'`)
     con.query(`exec loginParticipante '${req.body.correo}', '${md5(req.body.pass)}'`, (err, result)=>{
         if(err){
-            console.log(err)
             return res.status(401).send({msg:err})
         }
         if(result.recordset.length != 0){
-            console.log(req.body)
             result.recordset[0]["rol"]="Participante";
             const token = jwt.sign({data:result.recordset[0]}, "the-super-strong-secret", {expiresIn:"1h"});
             return res.status(200).send({msg:"Logueado", token})
@@ -156,7 +146,6 @@ exports.loginParticipante = (req, res, con)=>{
 
 
 exports.getIntegrales = (req, res)=>{
-    console.log(req.body)
     const directorio = path.join(__dirname, './integrales');
     fs.readdir(directorio, (error, archivos) => {
         if (error) {
@@ -180,7 +169,6 @@ exports.guardarRespuestaParticipante = (req, res, con) =>{
     con.query('spGetRespuestas', (err2, resp)=>{
         const respuestas = resp.recordsets[0]
         const buffRespuesta = respuestas.filter(el=>{return el.nombreIntegral == `integral${req.body.numeroIntegral}`})[0]
-        console.log(req.body)
         let puntaje = 0;
         let puntajeU = 0;
         if(buffRespuesta.respuesta)
@@ -188,14 +176,6 @@ exports.guardarRespuestaParticipante = (req, res, con) =>{
                 puntaje = (10 + (req.body.tiempo / 10000))
                 puntajeU = 1;
             }
-        console.log(`spGuardarRespuestaParticipante 
-        ${req.body.numeroIntegral}, 
-        ${req.body.numeroRespuesta}, 
-        ${req.body.tiempo}, 
-        ${req.body.idParticipante}, 
-        '${req.body.tiempoCompleto}', 
-        ${puntaje},
-        ${puntajeU}`)
         con.query(`spGuardarRespuestaParticipante 
             ${req.body.numeroIntegral}, 
             ${req.body.numeroRespuesta}, 
@@ -217,30 +197,7 @@ exports.guardarRespuestaParticipante = (req, res, con) =>{
     })
 }
 exports.calcularPuntaje = (req, res, con)=>{
-    // con.query('spGetRespuestas', (err2, resp)=>{
-    //     console.log("----------------")
-        
-    //     const respuestas = resp.recordsets[0]
-    //     con.query(`spObtenerRespuestasParticipante ${req.body.idParticipante}`, (err, result) =>{
-    //         if(err){
-    //             console.log(err)
-    //             res.send(err)
-    //         }else{
-    //             let puntaje = 0;
-    //             result.recordset.forEach(element =>{
-    //                 const buffRespuesta = respuestas.filter(el=>{return el.nombreIntegral == `integral${element.numeroIntegral}`})[0]
-    //                 if(buffRespuesta.respuesta)
-    //                     if(element.numeroRespuesta == buffRespuesta.respuesta)
-    //                         puntaje += (10 + (element.tiempoRespuestaSegundos / 10000))
-    //             })
-    //             con.query(`spModificarPuntajeParticipante ${req.body.idParticipante}, ${puntaje}`, (err, result)=>{
-    //                 if(err)
-    //                     console.log(err)
-    //                 res.send(result)
-    //             })
-    //         }
-    //     })
-    // })
+    
 }
 exports.obtenerInfoParticipantes = (req, res, con)=>{
     con.query('EXEC spGetRespuestas', (error, resp)=>{
@@ -272,5 +229,23 @@ exports.getRespuestasIntegrales = (req, res, con)=>{
             res.send(error)
         else  
             res.send(resp.recordsets[0])
+    })
+}
+exports.getEliminatoriaParticipante = (req, res, con)=>{
+    con.query(`EXEC spGetEliminatoriaParticipante ${req.body.idParticipante}`, (err, result)=>{
+        if(err){
+            res.send([false])
+        }else{
+            res.send(result.recordset)
+        }
+    })
+}
+exports.getPosicionParticipante = (req, res, con)=>{
+    con.query(`EXEC spGetPosicionParticipante ${req.body.idParticipante}`, (err, result)=>{
+        if(err){
+            res.send([false])
+        }else{
+            res.send(result.recordset)
+        }
     })
 }

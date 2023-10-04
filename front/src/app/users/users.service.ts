@@ -79,6 +79,9 @@ export class UsersService {
     return this.http.post("http://localhost:3000/api/ingresarIntegrales", data);
   }
   
+  getEliminatoriaActiva(){
+    return this.http.post("http://localhost:3000/api/getEliminatoriaActiva", {});
+  }
   iniciarSegundaRonda(){
     return this.http.post("http://localhost:3000/api/iniciarSegundaRonda", {});
   }
@@ -124,7 +127,6 @@ export class UsersService {
   }
   logoutAdmin() {
     this.cookies.delete("token");
-    console.log(this.cookies.get("token"))
     /* this.authService.dropDecodedToken(); */
     this.router.navigate(["./login"])
     this.isLoggedInSubject.next(false)

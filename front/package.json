@@ -37,6 +37,7 @@
     "ngx-cookie-service": "^15.0.0",
     "ngx-socket-io": "^4.5.1",
     "ngx-toastr": "^17.0.2",
+    "peerjs": "^1.5.1",
     "rxjs": "^6.6.7",
     "rxjs-compat": "^6.6.7",
     "ts-xlsx": "^0.0.11",

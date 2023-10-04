@@ -596,6 +596,7 @@ create table eliminatoriAS (
     texto_2 varchar(MAX),
     texto_3 varchar(MAX))
 Alter table eliminatorias ADD estado int;
+Alter table eliminatorias ADD puntaje int;
 CREATE PROCEDURE getTop16 AS
     BEGIN
         SELECT TOP 16 idParticipante FROM participante order by puntaje desc
@@ -605,10 +606,10 @@ SELECT TOP 16 * FROM participante order by puntaje desc
 
 update participante SET puntaje = 2 WHERE idParticipante = 125
 
-ALTER procedure crearEncuentro @id_1 int, @id_2 int, @encuentro int, @ronda int AS
+ALTER procedure crearEncuentro @id_1 int, @id_2 int, @encuentro int, @ronda int, @estado INT AS
 BEGIN
-    insert into eliminatoriAS values (@id_1, @encuentro, @ronda, '', '', '', '', '', '', 0);
-    insert into eliminatoriAS values (@id_2, @encuentro, @ronda, '', '', '', '', '', '', 0);
+    insert into eliminatorias values (@id_1, @encuentro, @ronda, '', '', '', '', '', '', @estado, 0);
+    insert into eliminatorias values (@id_2, @encuentro, @ronda, '', '', '', '', '', '', @estado, 0);
 END;
 
 select * FROM eliminatorias;
@@ -620,12 +621,30 @@ BEGIN
     LEFT JOIN universidad u on u.idUniversidad = p.universidad;
 END
 
+CREATE PROCEDURE spGetEliminatoriaParticipante @idParticipante INT AS
+    BEGIN
+        SELECT * FROM eliminatorias WHERE idParticipante = @idParticipante AND estado = 1;
+    END;
 
-select * from integral
+CREATE OR ALTER PROCEDURE spGetEliminatoriaActiva AS
+    BEGIN
+        SELECT * FROM eliminatorias e
+        LEFT JOIN participante p ON p.idParticipante = e.idParticipante
+        WHERE e.estado = 1
+        ORDER BY p.puntaje DESC;
+    END;
+
+CREATE PROCEDURE spGetPosicionParticipante @idParticipante INT AS
+    BEGIN
+        select puntaje from participante p where p.puntaje > (select puntaje from participante where idParticipante = @idParticipante) ORDER BY p.puntaje DESC;
+    END
+select * from eliminatorias
+update eliminatorias set puntaje = 0
 delete from integral
-select * from participante
+
+select * from participante  ORDER BY puntaje DESC;
 delete from eliminatorias
 update universidad set puntaje = 0;
 update participante set puntaje = 0;
 
-exec sp_setUniversidad "Universidad n", "Colombia", "Bogotá", 10, 'u@u.com'
+exec spGetEliminatoriaParticipante 18

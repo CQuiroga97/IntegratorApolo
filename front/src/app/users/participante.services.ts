@@ -33,4 +33,10 @@ export class ParticipanteService{
     getRespuestasIntegrales(){
         return this.http.post("http://localhost:3000/api/getRespuestasIntegrales","");
     }
+    getEliminatoriaParticipante(data:any){
+        return this.http.post("http://localhost:3000/api/getEliminatoriaParticipante",data);
+    }
+    getPosicionParticipante(data:any){
+        return this.http.post("http://localhost:3000/api/getPosicionParticipante",data);
+    }
 }

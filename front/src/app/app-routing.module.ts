@@ -30,29 +30,29 @@ const routes: Routes = [
   {path:"llaves", component:LlavesComponent, title:"Integrator - Llaves"},
   {path:"login", component:LoginParticipanteComponent, title:"Integrator - Login"},
 
-  {path:"streamSegundaRonda", component:StreamSegundaRondaComponent, title:"Integrator - Sigue la segunda ronda"},
-  {path:"segundaRonda", component:SegundaRondaComponent, title:"Integrator - Segunda ronda"},
-
+  
   {path:"admin/registroUniversidad", component:RegistroUniComponent, canActivate:[LoginGuard], title:"Integrator - Registrar universidad", children:[
     {path:"universidadesRegistradas", component:ListasUniversidadesComponent}
   ]},
   {path:"admin/registroIntegrales", component:IngresarIntegralesComponent, canActivate:[LoginGuard], title:"Integrator - Registrar integrales", children:[
   ]},
-
+  
   {path:"admin/IntegralesRoda2", component:IntegralesRonda2Component, canActivate:[LoginGuard], title:"Integrator - Registrar integrales", children:[
   ]},
-
+  
   {path:"admin/menu", component:MenuAdminComponent, canActivate:[LoginGuard], title:"Integrator - Menú de administrador", children:[
-
+    
   ]},
   {path:"admin/panelControl", component:PanelControlComponent, canActivate:[LoginGuard], title:"Integrator - Panel de control", children:[
-
+    
   ]},
   {path:"admin/panelControlEliminatorias", component:PanelEliminatoriasComponent, canActivate:[LoginGuard], title:"Integrator - Panel de control eliminatorias", children:[
-
+    
   ]},
   {path:"loginAdmin", component:LoginAdminComponent, title:"Integrator - Login Administración"},
-  {path:"participante/clasificatorias", component:ClasificacionesComponent, title:"Integrator - Ronda de clasificaciones", canActivate:[ParticipanteGuardGuard]}
+  {path:"participante/clasificatorias", component:ClasificacionesComponent, title:"Integrator - Ronda de clasificaciones", canActivate:[ParticipanteGuardGuard]},
+  {path:"streamSegundaRonda", component:StreamSegundaRondaComponent, title:"Integrator - Sigue la segunda ronda"},
+  {path:"participante/segundaRonda", component:SegundaRondaComponent, title:"Integrator - Segunda ronda", canActivate:[ParticipanteGuardGuard]},
 ];
 
 @NgModule({

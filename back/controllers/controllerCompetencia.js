@@ -4,7 +4,6 @@ const md5 = require('md5')
 exports.getTimerClasificaciones = (req, res, con)=>{
     con.query(`exec spGetTimerClasificaciones 1`, (err, resp)=>{
         if(err){
-            console.log(err)
             res.status(500).send("Error en la base de datos")
         }else{
             res.status(200).send(resp.recordset[0])
@@ -34,6 +33,12 @@ exports.getTopUniversidades = (req, res, con)=>{
         else res.send(result.recordsets[0])
     })
 }
+exports.getEliminatoriaActiva = (req, res, con)=>{
+    con.query("EXEC spGetEliminatoriaActiva", (error, result)=>{
+        if(error) res.send([false])
+        else res.send(result.recordsets[0])
+    })
+}
 
 exports.iniciarSegundaRonda = (req, res, con)=>{
     const estructura = [
@@ -50,7 +55,6 @@ exports.iniciarSegundaRonda = (req, res, con)=>{
         if(err)
             res.send(err)
         else{
-            console.log(result.recordsets[0])
             crearEncuentro(0, estructura, result.recordsets[0], con, res)
         }
     })
@@ -117,7 +121,6 @@ exports.getIntegralesAdmin = (req, res, con)=>{
     con.query("EXEC spGetIntegralesAdmin", (error, result)=>{
         if(error) res.send(error)
         else{
-            console.log(result.recordsets)
             result.recordsets.forEach(el=>{
                 if(el.length>0)
                     el[0].idIntegral = md5(el[0].idIntegral)
@@ -128,7 +131,6 @@ exports.getIntegralesAdmin = (req, res, con)=>{
 }
 saveIntegralEliminatoria = (imagen, res, con)=>{
     con.query(`spGuardarIntegral`, (err, result)=>{
-        console.log(result.recordsets[0])
         if(err)
             res.send(err)
         else{
@@ -151,7 +153,6 @@ exports.modificarIntegral = (req, res, con)=>{
             let flag = true;
             result.recordsets[0].forEach(el=>{
                 if(req.body.idIntegral == md5(el.idIntegral)){
-                    console.log(`spModificarIntegral ${el.idIntegral}, ${el.estado}`)
                     con.query(`spModificarIntegral ${el.idIntegral}, ${req.body.estado}`, (err, result)=>{
                         if(err){
                             res.send(err)}
@@ -175,33 +176,25 @@ saveIntegral=(req, res, con)=>{
         fs.rmSync(ruta, {recursive:true, force: true})
     mkdir(ruta).then(()=>{
         mkdir(ruta + "/respuestas").then(()=>{
-
-            console.log(ruta)
             let imagen =  req.body.imagenes.selectedImage0.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2];
             let imagenBuff = Buffer.from(imagen,'base64')
             fs.writeFile(ruta+"/integral.png", imagenBuff, (err)=>{
-                console.log(err)
                 imagen =  req.body.imagenes.selectedImage1.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2];
                 imagenBuff = Buffer.from(imagen,'base64')
                 fs.writeFile(ruta + "/respuestas/respuesta1.png", imagenBuff, (err)=>{
-                    console.log(err)
         
                     imagen =  req.body.imagenes.selectedImage2.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2];
                     imagenBuff = Buffer.from(imagen,'base64')
                     fs.writeFile(ruta + "/respuestas/respuesta2.png", imagenBuff, (err)=>{
-                        console.log(err)
                 
                         imagen =  req.body.imagenes.selectedImage3.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2];
                         imagenBuff = Buffer.from(imagen,'base64')
                         fs.writeFile(ruta + "/respuestas/respuesta3.png", imagenBuff, (err)=>{
-                            console.log(err)
-                    
                             imagen =  req.body.imagenes.selectedImage4.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2];
                             imagenBuff = Buffer.from(imagen,'base64')
                             fs.writeFile(ruta + "/respuestas/respuesta4.png", imagenBuff, (err)=>{
-                                console.log(err)
                                 con.query(`guardarIntegral 'integral${req.body.numIntegral + 1}', ${parseInt(req.body.imagenes.correctOption)}`, (err, result)=>{
-                                    console.log(err)
+  
                                     res.send(["Done"])
                                 })
                             })
@@ -213,8 +206,9 @@ saveIntegral=(req, res, con)=>{
     });
 }
 crearEncuentro = (index, arreglo, data, con, res)=>{
-    
-    con.query(`EXEC crearEncuentro ${data[arreglo[index][0] - 1].idParticipante}, ${data[arreglo[index][1] - 1].idParticipante}, ${index+1}, 8`, (err, result)=>{
+    let estado = 0;
+    if(index == 0) estado = 1;
+    con.query(`EXEC crearEncuentro ${data[arreglo[index][0] - 1].idParticipante}, ${data[arreglo[index][1] - 1].idParticipante}, ${index+1}, 8, ${estado}`, (err, result)=>{
         if(err){
             res.send(err)
         }else{

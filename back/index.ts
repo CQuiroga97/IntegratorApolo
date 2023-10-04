@@ -1,6 +1,7 @@
 import { Server } from 'socket.io';
 import * as socket from './sockets/socket';
 import { User } from './sockets/user';
+import { UserSegundaRonda } from './sockets/usersSegundaRonda';
 import http from 'http';
 const dotenv = require('dotenv');
 dotenv.config();
@@ -28,14 +29,22 @@ app.use('/integralesFinales', express.static(path.join(__dirname, 'controllers/i
 const io = new Server(httpServer, { cors: { origin: '*' } });
 
 io.on('connection', (client:any) => {
+  // Primera ronda
   io.emit('users-online', User.getUserList());
-
+  io.emit('usersOnlineSegunda', UserSegundaRonda.getUserList());
   socket.disconnectClient(client, io);
   socket.addUserOnline(client, io);
   socket.removeUserOnline(client, io);
   socket.iniciarClasificatorias(client, io)
   socket.getEstadoClasificatorias(client, io)
   socket.setIntegral(client, io)
+  socket.editarTexto(client, io)
+  socket.pedirLlamada(client, io)
+  socket.iniciarIntegral(client, io)
+  socket.participantePreparado(client, io)
+  socket.iniciarCronometro(client, io)
+  // Segunda ronda
+  socket.loginSegundaRonda(client, io)
 });
 httpServer.listen(port, () => {
   console.log("Server iniciado");

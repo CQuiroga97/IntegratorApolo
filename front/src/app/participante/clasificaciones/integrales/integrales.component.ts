@@ -90,7 +90,6 @@ export class IntegralesComponent implements OnInit{
     tiempoFinal.segundos = this.tiempoOriginal.segundos - tiempoFinal.segundos;
     if(tiempoFinal.segundos < 0)tiempoFinal.segundos=tiempoFinal.segundos*-1;
     if(tiempoFinal.mill < 0)tiempoFinal.mill=tiempoFinal.mill*-1;
-    console.log(tiempoFinal)
     const data = {
       idParticipante:this.userService.getUserInfo().data.idParticipante,
       numeroIntegral: this.integralActual,
@@ -115,7 +114,6 @@ export class IntegralesComponent implements OnInit{
         this.cronometroTimer = this.cronometro();
       }
     },()=>{
-      console.log("Error!!!")
     })
   }
 }

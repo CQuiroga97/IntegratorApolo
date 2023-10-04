@@ -37,7 +37,6 @@ export class IntegralesRonda2Component {
           
           this.user.guardarIntegral({imagen:e.target.result}).subscribe((res:any)=>{
             if(res[0]){
-              console.log(`Subiendo ${i} de ${event.target.files.length}`)
               if(i == event.target.files.length){
                 this.llamarIntegrales()
 
@@ -51,8 +50,6 @@ export class IntegralesRonda2Component {
   
       }
     })
-
-    console.log(this.integrales)
 
   }
 
@@ -68,7 +65,6 @@ export class IntegralesRonda2Component {
   borrar(id:any){
     const data = {idIntegral:id}
     this.user.borrarIntegral(data).subscribe(res=>{
-      console.log(res);
       this.llamarIntegrales()
     })
   }
@@ -82,7 +78,6 @@ export class IntegralesRonda2Component {
         reader.readAsDataURL(blob)
         reader.onloadend = async ()=>{
           this.integralesCreadas.push({imagen:reader.result, id:el.idIntegral, estado:el.estado})
-          console.log(this.integralesCreadas)
         }
 
       })

@@ -19,7 +19,6 @@ exports.mostrarUniversidadesNum = (req, res, con)=>{
 exports.BorrarUniversidadesEstudiantes = (req, res, con)=>{
     
     con.query(`exec spBorrarUniversidadesEstudiantes ${req.body.idu}`, (err, res2)=>{
-        console.log(res2)
         if(err)
             return res.status(401).send(con)
         else

@@ -35,7 +35,6 @@ export class ClasificatoriasComponent implements OnInit{
   }
   iniciarSegundaRonda(){
     this.usersService.iniciarSegundaRonda().subscribe(res => {
-      console.log(res)
     });
   }
 }

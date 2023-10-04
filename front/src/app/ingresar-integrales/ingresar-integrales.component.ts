@@ -55,7 +55,6 @@ export class IngresarIntegralesComponent {
                   reader.readAsDataURL(blob)
                   reader.onloadend = async ()=>{
                     buff.selectedImage4 = reader.result;
-                    console.log(el)
                     this.integrales[i] = buff;
                     i++;
                   }
@@ -94,8 +93,6 @@ export class IngresarIntegralesComponent {
 
       reader.readAsDataURL(file);
     }
-
-    console.log(this.integrales)
 
   }
 

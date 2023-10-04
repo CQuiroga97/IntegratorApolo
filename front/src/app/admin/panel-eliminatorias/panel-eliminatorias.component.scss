@@ -16,3 +16,20 @@ nb-icon{
 .divImagen{
     height: 200px;
 }
+.online{
+    color: rgb(97, 232, 97);
+}
+.offline{
+    color: rgb(211, 54, 54);
+}
+.noDisponible{
+    opacity: .7;
+    pointer-events: none;
+}
+.divSuperior{
+    top: 0px;
+    background-color: #144a2cc4;
+  }
+  *{
+    color: white;
+  }

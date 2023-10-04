@@ -3,6 +3,7 @@
   width: 100%;
   height: 100%;
   display: flex;
+  position: relative;
   flex-direction: column;
 }
 
@@ -90,4 +91,16 @@
 .box_watch span{
   position: relative;
   margin: auto;
+}
+.math{
+  border: none;
+}
+.math:focus{
+  border: none !important;
+}
+.divSuperior{
+  background-color: #144a2cc4;
+}
+*{
+  color: white;
 }

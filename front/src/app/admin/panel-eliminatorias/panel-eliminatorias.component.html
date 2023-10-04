@@ -1,4 +1,4 @@
-<div class="divMenu2">
+<div class="divMenu2 position-relative">
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-4">
@@ -11,7 +11,7 @@
                             <nb-card class="transparent cron">
                                 <nb-card-body class="d-flex">
                                     <span class="m-auto fs-2">
-                                        0 0
+                                        {{cronometroFront.minutos<10?'0'+cronometroFront.minutos:cronometroFront.minutos}}
                                     </span>
                                 </nb-card-body>
                             </nb-card>
@@ -20,7 +20,7 @@
                             <nb-card class="transparent cron">
                                 <nb-card-body class="d-flex">
                                     <span class="m-auto fs-2">
-                                        0 0
+                                        {{cronometroFront.segundos<10?'0'+cronometroFront.segundos:cronometroFront.segundos}}
                                     </span>
                                 </nb-card-body>
                             </nb-card>
@@ -29,7 +29,7 @@
                             <nb-card class="transparent cron">
                                 <nb-card-body class="d-flex">
                                     <span class="m-auto fs-2">
-                                        0 0
+                                        {{cronometroFront.mill<10?'0'+cronometroFront.mill:cronometroFront.mill}}
                                     </span>
                                 </nb-card-body>
                             </nb-card>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-9">
-                            <button nbButton outline status="basic" class="w-100" (click)="enviarIntegral()">Enviar integral</button>
+                            <button nbButton outline status="basic" class="w-100" (click)="enviarIntegral()" [disabled]="enCompetencia">Enviar integral</button>
                         </div>
                     </div>
                     <div class="row justify-content-center mt-3">
@@ -87,14 +87,30 @@
         </div>
         <div class="row mt-4">
             <div class="col-6">
-                <nb-card class="w-100 transparent">
+                <nb-card class="w-100 transparent" [class.noDisponible] = "!participante![0]!['online']">
                     <nb-card-body>
                         <div class="container">
                             <div class="row">
-                                <div class="col-6 d-flex">
-                                    <span class="m-auto ms-0 fs-5">
-                                        Nombre
-                                    </span>
+                                <div class="col-6 d-flex container flex-column">
+                                    <div class="row m-auto mb-1 ms-0">
+
+                                        <span class="m-auto ms-0 fs-5 col w-auto" *ngIf="!participante[0]['idParticipante']">
+                                            Participante 1
+                                        </span>
+                                        <span class="fs-5 col w-auto" *ngIf="participante[0]['idParticipante']">
+                                            {{participante[0]['nombre']}}
+                                        </span>
+                                    </div>
+                                    <div class="row m-auto mt-1  ms-0" *ngIf="participante[0]['idParticipante']">
+
+                                        <span class="m-auto ms-0 fs-5 fw-bold online" *ngIf="participante![0]['online']">
+                                            Online
+                                        </span>
+                                        <span class="m-auto ms-0 fs-5  fw-bold col-12 offline" *ngIf="!participante![0]['online']">
+                                            Offline
+                                        </span>
+                                    </div>
+
                                 </div>
                                 <div class="col-4 d-flex flex-column">
                                     <button nbButton outline status="basic" class="w-100 mb-2"> +1</button>
@@ -103,8 +119,11 @@
                                 <div class="col-2">
                                     <nb-card class="transparent h-100">
                                         <nb-card-body class="d-flex">
-                                            <span class="m-auto fs-2">
+                                            <span class="m-auto fs-2" *ngIf="!participante[0]['idParticipante']">
                                                 0
+                                            </span>
+                                            <span class="m-auto fs-2" *ngIf="participante[0]['idParticipante']">
+                                                {{participante[0]['puntaje'][0]}}
                                             </span>
                                         </nb-card-body>
                                     </nb-card>
@@ -115,14 +134,30 @@
                 </nb-card>
             </div>
             <div class="col-6">
-                <nb-card class="w-100 transparent">
+                <nb-card class="w-100 transparent" [class.noDisponible] = "!participante![1]!['online']">
                     <nb-card-body>
                         <div class="container">
                             <div class="row">
-                                <div class="col-6 d-flex">
-                                    <span class="m-auto ms-0 fs-5">
-                                        Nombre
-                                    </span>
+                                <div class="col-6 d-flex container flex-column">
+                                    <div class="row m-auto mb-1 ms-0">
+
+                                        <span class="m-auto ms-0 fs-5 col w-auto" *ngIf="!participante[1]['idParticipante']">
+                                            Participante 1
+                                        </span>
+                                        <span class="fs-5 col w-auto" *ngIf="participante[1]['idParticipante']">
+                                            {{participante[1]['nombre']}}
+                                        </span>
+                                    </div>
+                                    <div class="row m-auto mt-1  ms-0" *ngIf="participante[1]['idParticipante']">
+
+                                        <span class="m-auto ms-0 fs-5 fw-bold online" *ngIf="participante![1]['online']">
+                                            Online
+                                        </span>
+                                        <span class="m-auto ms-0 fs-5 fw-bold col-12 offline" *ngIf="!participante![1]['online']">
+                                            Offline
+                                        </span>
+                                    </div>
+
                                 </div>
                                 <div class="col-4 d-flex flex-column">
                                     <button nbButton outline status="basic" class="w-100 mb-2"> +1</button>
@@ -131,8 +166,11 @@
                                 <div class="col-2">
                                     <nb-card class="transparent h-100">
                                         <nb-card-body class="d-flex">
-                                            <span class="m-auto fs-2">
+                                            <span class="m-auto fs-2" *ngIf="!participante[1]['idParticipante']">
                                                 0
+                                            </span>
+                                            <span class="m-auto fs-2" *ngIf="participante[1]['idParticipante']">
+                                                {{participante[1]['puntaje'][0]}}
                                             </span>
                                         </nb-card-body>
                                     </nb-card>
@@ -144,4 +182,16 @@
             </div>
         </div>
     </div>
+    <div class="w-100 h-100 position-absolute z-3 divSuperior d-flex" *ngIf="estado == 3">
+        <div class="container m-auto">
+          <div class="row justify-content-center">
+            <div class="col-5 fs-1 d-flex">
+                <span class="m-auto">
+
+                    {{segundos}}
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>

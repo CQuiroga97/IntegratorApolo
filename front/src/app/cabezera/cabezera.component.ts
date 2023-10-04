@@ -23,7 +23,6 @@ export class CabezeraComponent implements OnInit{
     this.isLoggedIn = isLoggedIn;
     if(isLoggedIn){
       this.usuario = this.userService.getUserInfo().data
-      console.log(this.usuario)
     }
    })
   }

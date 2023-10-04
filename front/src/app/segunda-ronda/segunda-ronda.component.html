@@ -1,4 +1,4 @@
-<div class="div_segunda_ronda">
+<div class="div_segunda_ronda z-0">
 
   <div
     class="container cont_padre_segunda_ronda d-flex flex-column w-100 m-auto justify-content-around position-relative">
@@ -7,10 +7,29 @@
 
       <div class="integral_acual w-75 h-100 m-auto">
 
-        <img [src]="imgIntegralActual" alt="" class="integral_actual" width="100%" height="100%">
+        <img [src]="integral" alt="" class="integral_actual" width="100%" height="100%" *ngIf="integral && enCompetencia">
+        <img [src]="imagenDefault" alt="" class="integral_actual" width="100%" height="100%" *ngIf="!enCompetencia">
 
       </div>
-
+      <div class="container time_container w-50 h-50 position-relative m-auto d-flex justify-content-between" style="top: -30%;">
+        <img src="../../assets/img/segundaRonda/lines1.png" >
+        <div class="box_watch w-25">
+          <span>
+            {{cronometroFront.minutos<10?'0'+cronometroFront.minutos:cronometroFront.minutos}}
+          </span>
+        </div>
+        <div class="box_watch w-25">
+          <span>
+            {{cronometroFront.segundos<10?'0'+cronometroFront.segundos:cronometroFront.segundos}}
+          </span>
+        </div>
+        <div class="box_watch w-25">
+          <span>
+            {{cronometroFront.mill<10?'0'+cronometroFront.mill:cronometroFront.mill}}
+          </span>
+        </div>
+        <img src="../../assets/img/segundaRonda/lines2.png" >
+      </div>
 
     </div>
 
@@ -22,28 +41,12 @@
       <div class="container respuesta-container w-75 h-100 z-3">
         <!-- <ng-katex [equation] ="mathequations[0]"> </ng-katex> -->
 
-        <input [(ngModel)]="formulaRespuesta" class="entrada z-3" style="width: 100%; height: 100%;" />
-
-
-        <div class="container time_container w-50 h-50 position-relative m-auto d-flex justify-content-between" style="top: -30%;">
-          <img src="../../assets/img/segundaRonda/lines1.png" >
-          <div class="box_watch w-25">
-            <span>
-              {{hours}}
-            </span>
-          </div>
-          <div class="box_watch w-25">
-            <span>
-              {{minuts}}
-            </span>
-          </div>
-          <div class="box_watch w-25">
-            <span>
-              {{seconds}}
-            </span>
-          </div>
-          <img src="../../assets/img/segundaRonda/lines2.png" >
+        <div class="entrada z-3 wrapper d-flex" style="width: 100%; height: 100%;" >
+          <div id="math-field" class="m-auto fs-5 math" (keyup)="validate($event)"></div>
+          <span tabindex=0 id="substitue-id"></span>
         </div>
+
+        
 
 
 
@@ -61,7 +64,7 @@
     <div class="container cont_teclado_segunda_ronda h-50 w-100 d-flex justify-content-center">
       <div class="row row_teclado d-flex align-items-center m-auto position-relative">
         <div class="col-2" *ngFor="let symbol of symbols">
-          <button class="btn btn-symbol" (click)="onButtonClick(symbol)">{{ symbol }}</button>
+          <button class="btn btn-symbol" (click)="onClickMathButton(symbol.latex)">{{ symbol.simbolo }}</button>
         </div>
       </div>
 
@@ -75,4 +78,34 @@
 
 
 
+  <div class="w-100 h-100 position-absolute z-3 divSuperior d-flex" *ngIf="!enCompetencia">
+    <div class="container m-auto">
+      <div class="row justify-content-center" >
+        <div class="col-5 fs-1 d-flex" *ngIf="estado == 0">
+          <span class="m-auto">
+          
+            Esperando indicaciones del jurado...
+          </span>
+        </div>
+        <div class="col-5 fs-1 d-flex" *ngIf="estado == 1">
+          <span class="m-auto">
+          
+            Cargando integral...
+          </span>
+        </div>
+        <div class="col-5 fs-1 d-flex" *ngIf="estado == 2">
+          <span class="m-auto">
+          
+            Integral lista, iniciando...
+          </span>
+        </div>
+        <div class="col-5 fs-1 d-flex" *ngIf="estado == 3">
+          <span class="m-auto">
+          
+          </span>
+          {{segundos}}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

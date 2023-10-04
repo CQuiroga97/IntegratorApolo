@@ -31,4 +31,38 @@ export class SocketService {
     setIntegral(integral:number): void{
         this.socket.emit("setIntegral", integral);
     }
+    loginSegundaRonda(user:any, clasificacion:number):void{
+        this.socket.emit('loginSegundaRonda', user, clasificacion)
+    }
+    editarTexto(texto:number):void{
+        this.socket.emit('editarTexto', texto)
+    }
+    getUsersOnlineSegunda(): Observable<any> {
+        return this.socket.fromEvent<any>('usersOnlineSegunda');
+    }
+    volverALlamar(): Observable<any> {
+        return this.socket.fromEvent<any>('volverALlamar');
+    }
+    pedirLlamada(): void {
+        this.socket.emit('pedirLlamada');
+    }
+    iniciarIntegral(): void {
+        this.socket.emit('iniciarIntegral');
+    }
+    iniciarIntegralParticipante(): Observable<any> {
+        return this.socket.fromEvent<any>('iniciarIntegralParticipante');
+    }
+    participantePreparado(estado:boolean):void{
+        this.socket.emit('participantePreparado', estado)
+    }
+    usuariosPreparados(): Observable<any> {
+        return this.socket.fromEvent<any>('usuariosPreparados');
+    }
+    iniciarCronometro():void{
+        this.socket.emit('iniciarCronometro')
+    }
+    iniciarCronometroParticipante(): Observable<any> {
+        return this.socket.fromEvent<any>('iniciarCronometroParticipante');
+    }
+
 }

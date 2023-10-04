@@ -115,7 +115,6 @@ export class ClasificacionesComponent implements OnInit{
     })
     this.socket.getEstadoClasificatoriasEmit();
     const fechaActual = new Date();
-    console.log(fechaActual>this.inicioCompetencia)
     const diff = Math.abs(this.inicioCompetencia.getTime() - fechaActual.getTime())
     this.dias = Math.ceil(diff / (1000 * 3600 * 24))
     this.dias = isNaN(this.dias)?0:this.dias;

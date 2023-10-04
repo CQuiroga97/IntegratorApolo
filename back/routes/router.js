@@ -97,6 +97,12 @@ router.post("/obtenerTopParticipantesPuntaje", (req, res)=>{
 router.post("/getRespuestasIntegrales", (req, res)=>{
     participante.getRespuestasIntegrales(req, res, con);
 })
+router.post("/getEliminatoriaParticipante", (req, res)=>{
+    participante.getEliminatoriaParticipante(req, res, con);
+})
+router.post("/getPosicionParticipante", (req, res)=>{
+    participante.getPosicionParticipante(req, res, con);
+})
 router.post("/getTimerClasificaciones", (req, res)=>{
     competencia.getTimerClasificaciones(req, res, con);
 })
@@ -126,5 +132,8 @@ router.post("/modificarIntegral", (req, res)=>{
 })
 router.post("/getTopUniversidades", (req, res)=>{
     competencia.getTopUniversidades(req, res, con);
+})
+router.post("/getEliminatoriaActiva", (req, res)=>{
+    competencia.getEliminatoriaActiva(req, res, con);
 })
 module.exports = router;

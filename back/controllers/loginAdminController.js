@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const md5 = require("md5");
 exports.login = (req, res, con)=>{
-    console.log(`exec loginAdmin "${req.body.name}", "${md5(req.body.pass)}"`);
     
     con.query(`exec loginAdmin "${req.body.name}", "${md5(req.body.pass)}"`, (err, result)=>{
         if(err){
@@ -17,11 +16,5 @@ exports.login = (req, res, con)=>{
         }
     })
     
-    /* 
-    var pass = md5("contraseñaAdministrador")
-    con.query(`exec crearAdmin "adminAmerica", "${pass}"`, function(err){
-        if(err) console.log(err);
-        console.log("Done")
-    }); */
     
 }

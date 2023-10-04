@@ -60,7 +60,6 @@ export class ListasUniversidadesComponent implements OnDestroy {
     }
     updateUniversidades(data:any){
       this.universidades = [];
-      console.log(data)
       var count = 0;
       var buff = [""];
       data.forEach((element: any) => {
@@ -73,13 +72,11 @@ export class ListasUniversidadesComponent implements OnDestroy {
       });
     }
     fileUpload(archivo:any){
-      console.log(1)
       this.fileName = archivo.value.split("\\", 3 )[2];
       this.fileSize = `${archivo.files[0].size / 100000} Mb`
       this.file = archivo.files.item(0);
     }
     generateExcelParticipante(){
-      console.log("asd")
       this.user.generateExcelEstudiantes().subscribe(data=>{
         let downloadURL = window.URL.createObjectURL(data);
         saveAs(downloadURL);
@@ -136,7 +133,6 @@ export class ListasUniversidadesComponent implements OnDestroy {
       }).afterClosed().subscribe((res)=>{
         if(res)
         this.userService.borrarParticipante(idParticipante).subscribe(res=>{
-          console.log(res)
           if(res){
             this.toastrService.show(`Participante eliminado con éxito`, "Registro eliminado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
           }else{
@@ -147,7 +143,6 @@ export class ListasUniversidadesComponent implements OnDestroy {
       });
     }
     crearParticipante(participante:any, universidad:any){
-      console.log(universidad)
       this.dialog.open(DialogParticipanteComponent, {
         data: {participante: participante, universidad: universidad.nombre, opcion:"Crear nuevo "},
         width: '600px',
@@ -155,7 +150,6 @@ export class ListasUniversidadesComponent implements OnDestroy {
         if(res){
           res["idUniversidad"] = universidad.idUniversidad;
           this.userService.insertarParticipante(res).subscribe(res2=>{
-            console.log(res2)
             if(res2){
               this.toastrService.show(`Participante creado con éxito`, "Registro creado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
             }else{
@@ -167,7 +161,6 @@ export class ListasUniversidadesComponent implements OnDestroy {
       })
     }
     modificarParticipante(participante:any, universidad:any){
-      console.log(participante)
       this.dialog.open(DialogParticipanteComponent, {
         data: {participante: participante, universidad: universidad.nombre, opcion:"Crear nuevo "},
         width: '600px',
@@ -176,9 +169,7 @@ export class ListasUniversidadesComponent implements OnDestroy {
           res["idUniversidad"] = universidad.idUniversidad;
           res["id"] = participante.idParticipante;
           res["pass"] = participante.pass;
-          console.log(res)
           this.userService.modificarParticipante(res).subscribe(res2=>{
-            console.log(res2)
             if(res2){
               this.toastrService.show(`Participante modificado con éxito`, "Registro modificado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
             }else{

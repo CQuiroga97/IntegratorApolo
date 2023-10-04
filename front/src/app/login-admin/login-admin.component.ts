@@ -26,12 +26,10 @@ export class LoginAdminComponent {
 
   login(){
     const user = {name:this.name, pass:this.pass}
-    console.log(user)
     this.userService.login(user).subscribe(data => {
     this.userService.setToken(data.token);
     this.router.navigate(["admin/menu"])
     }, error =>{
-      console.log("error")
     })
   }
 }

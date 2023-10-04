@@ -16,7 +16,6 @@ export class AuthService {
   ) { }
   setDecodedToken(){
     const token = this.cookieService.get('token');
-    console.log(this.cookieService.get('token'))
     const helper = new JwtHelperService();
     this.user = helper.decodeToken(token);
     this.decodedTokenSubject.next(this.user);

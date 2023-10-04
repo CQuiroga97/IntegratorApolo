@@ -31,7 +31,6 @@ export class LoginParticipanteComponent {
       this.userService.getUserInfo()
       this.router.navigate(["/participante/clasificatorias"])
     }, error =>{
-      console.log("error")
     })
   }
 }

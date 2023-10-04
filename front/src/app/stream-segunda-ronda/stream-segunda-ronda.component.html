@@ -6,8 +6,8 @@
     <!-- Transmision primer participante -->
     <div class="container cont-participante-1 col-3 d-flex flex-column">
       <div class="container d-flex flex-column cont_video1 video_transmition col-10 w-100 h-50 m-auto">
-        <div class="video_1">
-
+        <div class="video_1 overflow-hidden">
+          <video *ngIf="video_1" [srcObject]="video_1.srcObject" (loadedmetadata)="onLoadedMetadata($event)" class="h-100"></video>
         </div>
         <div class="logo_universiad">
           <img class="img_logo_universidad" [src]="imagenUni_1" alt="" width="90%" height="90%">
@@ -17,9 +17,9 @@
             </p>
           </div>
         </div>
-        <div class="nombre_universidad">
+        <div class="nombre_universidad" *ngIf="participantes">
           <p>
-            {{nombreUni_1}}
+            {{participantes[0]!.nombre}}
           </p>
         </div>
 
@@ -37,11 +37,13 @@
 
       <div class="container cont_Opciones_transmision w-100 h-75 d-flex justify-content-evenly">
         <div class="exercise_1 col-5 d-flex align-items-center">
-          <img src="../../assets/img/streaming/image 4.png" class="position-relative m-auto" alt=""  >
+          <div id="math-field_0" class="m-auto fs-5 math"></div>
+          <span tabindex=0 id="substitue-id"></span>
         </div>
         <div class="linea"></div>
         <div class="exercise_2 col-5 d-flex align-items-center">
-          <img src="../../assets/img/streaming/image 4.png" class="position-relative m-auto" alt="">
+          <div id="math-field_1" class="m-auto fs-5 math"></div>
+          <span tabindex=0 id="substitue-id"></span>
         </div>
       </div>
 
@@ -55,8 +57,8 @@
     <!-- Transmision segundo participante -->
     <div class="container cont-participante-2 col-3 d-flex flex-column">
       <div class="container d-flex flex-column cont_video1 video_transmition col-10 w-100 h-50 m-auto">
-        <div class="video_1">
-
+        <div class="video_1 overflow-hidden">
+          <video *ngIf="video_2" [srcObject]="video_2.srcObject" (loadedmetadata)="onLoadedMetadata($event)" class="h-100"></video>
         </div>
         <div class="logo_universiad">
           <img class="img_logo_universidad" [src]="imagenUni_2" alt="" width="90%" height="90%">
@@ -66,9 +68,9 @@
             </p>
           </div>
         </div>
-        <div class="nombre_universidad">
+        <div class="nombre_universidad" *ngIf="participantes">
           <p>
-            {{nombreUni_2}}
+            {{participantes[1]!.nombre}}
           </p>
         </div>
 
