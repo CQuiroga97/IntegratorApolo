@@ -64,5 +64,32 @@ export class SocketService {
     iniciarCronometroParticipante(): Observable<any> {
         return this.socket.fromEvent<any>('iniciarCronometroParticipante');
     }
+    pausarCronometroStream(): Observable<any> {
+        return this.socket.fromEvent<any>('pausarCronometroStream');
+    }
+    pausarCronometro(participante:any): void {
+        this.socket.emit('pausarCronometro', participante)
+    }
+    confirmarTiempoParticipante(): Observable<any> {
+        return this.socket.fromEvent<any>('confirmarTiempoParticipante');
+    }
+    confirmarTiempo(data:any): void {
+        this.socket.emit('confirmarTiempo', data)
+    }
+    sumarPuntajeParticipante(): Observable<any> {
+        return this.socket.fromEvent<any>('sumarPuntajeParticipante');
+    }
+    sumarPuntaje(): void {
+        this.socket.emit('sumarPuntaje')
+    }
+    finalizarParticipante(): Observable<any> {
+        return this.socket.fromEvent<any>('finalizarParticipante');
+    }
+    finalizar(): void {
+        this.socket.emit('finalizar')
+    }
+    conectarCamara(): void {
+        this.socket.emit('conectarCamara')
+    }
 
 }

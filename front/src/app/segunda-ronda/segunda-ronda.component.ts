@@ -16,7 +16,7 @@ import { Peer } from "peerjs";
 export class SegundaRondaComponent{
   removeCharPressed = false;
   formulaRespuesta: string = '';
-  
+  public participante:any = null;
   public dataParticipante:any;
   public cantLlamadas = 0;
   public cronometroTimer:any;
@@ -26,6 +26,7 @@ export class SegundaRondaComponent{
   public countDown:any;
   public integral:any = null;
   public estado = 0;
+  public respuestaEnviada = false
   public imagenDefault:any = '../../assets/img/streaming/Group 70.png';
   public enCompetencia = false;
   MQ:any = null;
@@ -71,9 +72,10 @@ export class SegundaRondaComponent{
   ){
     
     this.cronometroFront = {minutos:5,segundos:0, mill:0}
+    this.tiempoOriginal = this.cronometroFront
     this.dataParticipante = userService.getUserInfo().data;
     const peer = new Peer("integrator-call-"+this.dataParticipante.idParticipante);
-
+    this.finalizar()
     this.iniciarIntegralParticipante()
 
     peer.on("call", (call) => {
@@ -82,11 +84,44 @@ export class SegundaRondaComponent{
       ).then((stream) => {
         call.answer(stream); // Answer the call with an A/V stream.
         
+      }).catch((error:any)=>{
+        console.log(error)
       });
     });
     this.getEliminatoriaParticipante();
     this.iniciarCronometroParticipante();
+    this.confirmarTiempoParticipante();
+    this.llamarEliminatorias();
+    this.sumarPuntajeParticipante();
+    setTimeout(()=>{
 
+      socket.conectarCamara();
+    }, 1000)
+  }
+  finalizar(){
+    this.socket.finalizarParticipante().subscribe(()=>{
+      window.location.href = "./"
+    })
+  }
+  llamarEliminatorias(){
+    this.user.getEliminatoriaActiva().subscribe((res:any)=>{
+      if(res){
+        res.forEach((el:any)=>{
+          if(el.idParticipante[0] == this.dataParticipante.idParticipante)
+            this.participante = el;
+        })
+        
+      }
+      setTimeout(()=>{
+
+        this.socket.pedirLlamada();
+      }, 1000)
+    })
+  }
+  sumarPuntajeParticipante(){
+    this.socket.sumarPuntajeParticipante().subscribe(()=>{
+      this.reiniciar();
+    })
   }
   countDownSeconds(){
     return setInterval(()=>{
@@ -103,6 +138,22 @@ export class SegundaRondaComponent{
       this.estado = 3
       this.countDown = this.countDownSeconds();
     })
+  }
+  pausarCronometro(){
+    this.guardarRespuesta()
+    clearInterval(this.cronometroTimer);
+    this.socket.pausarCronometro(this.dataParticipante.idParticipante)
+  } 
+  reiniciar(){
+    if(!this.respuestaEnviada)
+      this.guardarRespuesta()
+    this.cronometroFront = this.tiempoOriginal;
+    this.estado = 0;
+    this.integral = null;
+    this.enCompetencia = false;
+    this.mathField.latex("")
+    this.validate(null)
+    this.llamarEliminatorias();
   }
   getEliminatoriaParticipante(){
     this.participanteService.getEliminatoriaParticipante(this.dataParticipante).subscribe((result:any)=>{
@@ -121,13 +172,46 @@ export class SegundaRondaComponent{
       }
     })
   }
+  guardarRespuesta(){
+    this.respuestaEnviada = true;
+    this.enCompetencia = false;
+    if(this.participante.texto_1 == "")
+      this.participante.texto_1 = this.mathField.latex()
+    else if(this.participante.texto_2 == "")
+      this.participante.texto_2 = this.mathField.latex()
+    else if(this.participante.texto_3 == "")
+      this.participante.texto_3 = this.mathField.latex()
+    if(this.participante.tiempo_1 == "")
+      this.participante.tiempo_1 = `${this.cronometroFront.minutos}:${this.cronometroFront.segundos}:${this.cronometroFront.mill}`
+    else if(this.participante.tiempo_2 == "")
+      this.participante.tiempo_2 = `${this.cronometroFront.minutos}:${this.cronometroFront.segundos}:${this.cronometroFront.mill}`
+    else if(this.participante.tiempo_3 == "")
+      this.participante.tiempo_3 = `${this.cronometroFront.minutos}:${this.cronometroFront.segundos}:${this.cronometroFront.mill}`
+    this.participanteService.updateTexto(this.participante).subscribe(res=>{
+      console.log(res)
+    })
+
+  }
+  confirmarTiempoParticipante(){
+    this.socket.confirmarTiempoParticipante().subscribe((res)=>{
+      if(this.dataParticipante.idParticipante == res.idParticipante){
+        this.cronometroFront = {
+          minutos:res.minutos,
+          segundos:res.segundos,
+          mill:res.mill,
+
+        }
+      }
+    })
+  }
   iniciarIntegralParticipante(){
     this.socket.iniciarIntegralParticipante().subscribe(()=>{
       this.estado = 1;
       this.user.getIntegralesAdmin().subscribe((res:any)=>{
+        console.log(res)
         res.forEach(async (el:any)=>{
           if(el[0].estado == 1){
-            let blob = await fetch(`http://localhost:3000/integralesFinales/${res[0][0].idIntegral}.png?key=akjjyglc`).then(r => r.blob())
+            let blob = await fetch(`http://localhost:3000/integralesFinales/${res[1][0].idIntegral}.png?key=akjjyglc`).then(r => r.blob())
             const reader = new FileReader();
             reader.readAsDataURL(blob)
             reader.onloadend = async ()=>{
@@ -144,6 +228,9 @@ export class SegundaRondaComponent{
   }
   validate(evt:any) {
     this.socket.editarTexto(this.mathField.latex())
+  }
+  focus(){
+    this.mathField.focus();
   }
   
   onClickMathButton(button:any) {

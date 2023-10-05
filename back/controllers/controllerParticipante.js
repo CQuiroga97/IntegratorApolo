@@ -249,3 +249,21 @@ exports.getPosicionParticipante = (req, res, con)=>{
         }
     })
 }
+exports.updateTexto = (req, res, con)=>{
+    con.query(`EXEC spUpdateTexto
+     ${req.body.idParticipante[0]}, 
+     ${req.body.encuentro}, 
+     ${req.body.ronda}, 
+     '${req.body.texto_1}',
+     '${req.body.texto_2}',
+     '${req.body.texto_3}',
+     '${req.body.tiempo_1}',
+     '${req.body.tiempo_2}',
+     '${req.body.tiempo_3}'
+     `, (error, result)=>{
+        if(error) res.send(error)
+        else{
+            res.send([true])
+        }
+    })
+}

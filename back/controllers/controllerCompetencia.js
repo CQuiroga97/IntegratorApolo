@@ -129,6 +129,33 @@ exports.getIntegralesAdmin = (req, res, con)=>{
         }
     })
 }
+exports.updatePuntaje = (req, res, con)=>{
+    con.query(`EXEC spUpdatePuntaje ${req.body.idParticipante}, ${req.body.encuentro}, ${req.body.ronda}, ${req.body.puntaje}`, (error, result)=>{
+        if(error) res.send(error)
+        else{
+            res.send([true])
+        }
+    })
+}
+exports.updateEncuentro = (req, res, con)=>{
+    con.query(`EXEC spUpdateEncuentro 
+    ${req.body.encuentro}, 
+    ${req.body.ronda}, 
+    ${req.body.idGanador}, 
+    ${req.body.idPerdedor},
+    ${req.body.nuevaRonda},
+    ${req.body.nuevoEncuentro},
+    ${req.body.encuentroPasar},
+    ${req.body.rondaPasar},
+    ${req.body.tercerPuesto}
+    `, (error, result)=>{
+        if(error) res.send(error)
+        else{
+            res.send([true])
+        }
+    })
+}
+
 saveIntegralEliminatoria = (imagen, res, con)=>{
     con.query(`spGuardarIntegral`, (err, result)=>{
         if(err)

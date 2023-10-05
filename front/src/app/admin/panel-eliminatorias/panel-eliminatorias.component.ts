@@ -13,12 +13,15 @@ export class PanelEliminatoriasComponent implements OnInit{
   public siguienteIntegralNum:any = "";
   public integralActual:any = "";
   public integralActuallNum:any = "";
+  public ronda = null;
+  public encuentro = null;
   public cronometroTimer:any;
   public estado = 0;
   public cronometroFront:{minutos:number, segundos:number, mill:number};
   public tiempoOriginal:{minutos:number, segundos:number, mill:number};
   public segundos = 3;
   public countDown:any;
+  public primerParticipante = null;
   public participante:any = [
     {online:false},
     {online:false}
@@ -29,7 +32,7 @@ export class PanelEliminatoriasComponent implements OnInit{
   ){
     this.cronometroFront = {minutos:5,segundos:0, mill:0}
     socket.usuariosPreparados().subscribe((res)=>{
-      let cant = 0;
+      let cant = 0; 
       res.forEach((el:any)=>{
         if(el.estado)
           cant++;
@@ -42,6 +45,84 @@ export class PanelEliminatoriasComponent implements OnInit{
       }
     })
     this.getIntegralesAdmin()
+    this.pausarCronometroStream()
+    this.llamarUsuarioOnline()
+  }
+  updatePuntaje(puntaje:number, idParticipante:number){
+    const data = {
+      puntaje:puntaje,
+      idParticipante:idParticipante,
+      encuentro:this.encuentro,
+      ronda:this.ronda
+    }
+    this.user.updatePuntaje(data).subscribe((res:any)=>{
+      if(res[0]){
+        if(this.integralActual != ""){
+
+          const data2 = {
+            idIntegral:this.integralActuallNum,
+            estado:3
+          }
+          this.user.modificarIntegral(data2).subscribe(res=>{
+            this.integralActual = "";
+            this.getIntegralesAdmin()
+            this.llamarEliminatorias()
+            this.socket.sumarPuntaje();
+          })
+        }else{
+          this.getIntegralesAdmin()
+          this.llamarEliminatorias()
+          this.socket.sumarPuntaje();
+        }
+      }
+    }) 
+  }
+  finalizarRonda(idGanador:number, idPerdedor:number){
+    let nuevaRonda = this.encuentro==this.ronda?(this.ronda!/2):this.ronda;
+    let nuevoEncuentro = this.encuentro==this.ronda?1:this.encuentro+1;
+    let encuentroPasar = (this.encuentro!%2)==0?this.encuentro!/2:((this.encuentro!/2)+0.5)
+    let rondaPasar = this.ronda!/2;
+    let tercerPuesto = 0;
+    if(this.ronda == 2){
+      tercerPuesto = 1;
+    }
+    if(this.ronda == 2 && this.encuentro == 2){
+      nuevaRonda = 0;
+    }
+    if(this.ronda == 0){
+      nuevaRonda = 1;
+      nuevoEncuentro = 1;
+      tercerPuesto = 2;
+    }
+    if(this.ronda == 1 && this.encuentro == 1){
+      tercerPuesto = 2;
+      nuevaRonda = 666
+    }
+    const data = {
+      ronda:this.ronda,
+      encuentro:this.encuentro,
+      idGanador:idGanador,
+      idPerdedor:idPerdedor,
+      nuevaRonda:nuevaRonda,
+      nuevoEncuentro:nuevoEncuentro,
+      encuentroPasar:encuentroPasar,
+      rondaPasar:rondaPasar,
+      tercerPuesto:tercerPuesto
+    }
+    console.log(data)
+
+      this.user.updateEncuentro(data).subscribe((res:any)=>{
+        if(res[0]){
+          if(this.ronda == 1 && this.encuentro == 1){
+            console.log("Ganador!")
+          }else{
+
+            this.socket.finalizar();
+            this.llamarEliminatorias();
+          }
+        }
+      })
+    
   }
   countDownSeconds(){
     return setInterval(()=>{
@@ -53,6 +134,25 @@ export class PanelEliminatoriasComponent implements OnInit{
       }
       this.segundos--;
     }, 1000)
+  }
+  pausarCronometroStream(){
+    this.socket.pausarCronometroStream().subscribe((res)=>{
+      let index = 0;
+      this.participante.forEach((el:any)=>{
+        if(res == el.idParticipante[0]){
+          if(this.primerParticipante == null){
+            this.primerParticipante = res;
+          }else{
+            console.log(this.primerParticipante)
+            if(this.primerParticipante != res){
+              clearInterval(this.cronometroTimer);
+              this.enCompetencia = false;
+            }
+          }
+        }
+        index++
+      })
+    })
   }
   cronometro(){
     return setInterval(()=>{
@@ -73,16 +173,20 @@ export class PanelEliminatoriasComponent implements OnInit{
   llamarEliminatorias(){
     this.user.getEliminatoriaActiva().subscribe((res:any)=>{
       if(res){
+        this.encuentro = res[0].encuentro;
+        this.ronda = res[0].ronda;
         this.participante = res
         this.participante.forEach((el:any)=>{
           el.online = false;
         })
-        this.llamarUsuarioOnline()
+        
       }
+      this.socket.pedirLlamada();
     })
   }
   llamarUsuarioOnline(){
     this.socket.getUsersOnlineSegunda().subscribe((result:any)=>{
+      console.log(result)
       if(this.participante[0].idParticipante)
       this.participante.forEach((el:any)=>{
         el.online = false;
@@ -98,26 +202,29 @@ export class PanelEliminatoriasComponent implements OnInit{
     this.llamarEliminatorias()
   }
   enviarIntegral(){
-    this.socket.iniciarIntegral();
-    // const data = {
-    //   idIntegral:this.siguienteIntegralNum,
-    //   estado:1
-    // }
-    // this.user.modificarIntegral(data).subscribe(res=>{
-    //   if(this.integralActual != ""){
-    //     const data2 = {
-    //       idIntegral:this.integralActuallNum,
-    //       estado:3
-    //     }
-    //     this.user.modificarIntegral(data2).subscribe(res=>{
-          
-    //       this.getIntegralesAdmin()
     
-    //     })
-    //   }else
-    //     this.getIntegralesAdmin()
+    const data = {
+      idIntegral:this.siguienteIntegralNum,
+      estado:1
+    }
+    this.user.modificarIntegral(data).subscribe(res=>{
 
-    // })
+      if(this.integralActual != ""){
+        const data2 = {
+          idIntegral:this.integralActuallNum,
+          estado:3 
+        }
+        this.user.modificarIntegral(data2).subscribe(res=>{
+          this.socket.iniciarIntegral();
+          this.getIntegralesAdmin()
+    
+        })
+      }else{
+        this.socket.iniciarIntegral();
+        this.getIntegralesAdmin()
+      }
+
+    })
   }
   getIntegralesAdmin(){
     this.user.getIntegralesAdmin().subscribe((res:any)=>{

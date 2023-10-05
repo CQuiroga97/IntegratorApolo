@@ -39,4 +39,7 @@ export class ParticipanteService{
     getPosicionParticipante(data:any){
         return this.http.post("http://localhost:3000/api/getPosicionParticipante",data);
     }
+    updateTexto(data:any){
+        return this.http.post("http://localhost:3000/api/updateTexto",data);
+    }
 }

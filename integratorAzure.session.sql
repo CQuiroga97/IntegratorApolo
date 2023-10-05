@@ -614,11 +614,12 @@ END;
 
 select * FROM eliminatorias;
 
-CREATE PROCEDURE spLlamarEncuentros AS
+CREATE OR ALTER PROCEDURE spLlamarEncuentros AS
 BEGIN
     SELECT e.*, p.nombre, u.nombre AS nombreU FROM eliminatoriAS e 
     LEFT JOIN participante p on e.idParticipante = p.idParticipante
-    LEFT JOIN universidad u on u.idUniversidad = p.universidad;
+    LEFT JOIN universidad u on u.idUniversidad = p.universidad
+    ORDER BY e.ronda DESC;
 END
 
 CREATE PROCEDURE spGetEliminatoriaParticipante @idParticipante INT AS
@@ -638,13 +639,77 @@ CREATE PROCEDURE spGetPosicionParticipante @idParticipante INT AS
     BEGIN
         select puntaje from participante p where p.puntaje > (select puntaje from participante where idParticipante = @idParticipante) ORDER BY p.puntaje DESC;
     END
-select * from eliminatorias
-update eliminatorias set puntaje = 0
-delete from integral
 
-select * from participante  ORDER BY puntaje DESC;
-delete from eliminatorias
-update universidad set puntaje = 0;
-update participante set puntaje = 0;
+CREATE OR ALTER PROCEDURE spUpdatePuntaje @idParticipante INT, @encuentro INT, @ronda INT, @puntaje INT AS
+    BEGIN
+        DECLARE @puntajeAdd INT;
+        SELECT @puntajeAdd = puntaje FROM eliminatorias WHERE idParticipante = @idParticipante AND encuentro = @encuentro AND ronda = @ronda;
+        UPDATE eliminatorias SET puntaje = @puntaje + @puntajeAdd WHERE idParticipante = @idParticipante AND encuentro = @encuentro AND ronda = @ronda;
+        PRINT @puntajeAdd
+    END;
+CREATE OR ALTER PROCEDURE spUpdateTexto
+    @idParticipante INT, 
+    @encuentro INT, 
+    @ronda INT, 
+    @texto_1 VARCHAR(MAX), 
+    @texto_2 VARCHAR(MAX), 
+    @texto_3 VARCHAR(MAX), 
+    @tiempo_1 VARCHAR(MAX), 
+    @tiempo_2 VARCHAR(MAX), 
+    @tiempo_3 VARCHAR(MAX)
+    AS
+    BEGIN
+        DECLARE @puntajeAdd INT;
+        UPDATE eliminatorias SET 
+            texto_1 = @texto_1,
+            texto_2 = @texto_2,
+            texto_3 = @texto_3,
+            tiempo_1 = @tiempo_1,
+            tiempo_2 = @tiempo_2,
+            tiempo_3 = @tiempo_3
+            
+            WHERE idParticipante = @idParticipante AND encuentro = @encuentro AND ronda = @ronda;
+    END;
+CREATE OR ALTER PROCEDURE spUpdateEncuentro
+    @encuentro INT, 
+    @ronda INT, 
+    @idGanador INT,
+    @idPerdedor INT,
+    @nuevaRonda INT,
+    @nuevoEncuentro INT,
+    @encuentroPasar INT,
+    @rondaPasar INT,
+    @tercerPuesto INT
+    AS
+    BEGIN
+        IF (@tercerPuesto = 1)
+            BEGIN
+                INSERT INTO eliminatorias values(@idPerdedor,1, 0, '', '', '', '', '', '', 0, 0);
+            END
+        IF (@tercerPuesto != 2)
+            BEGIN
 
-exec spGetEliminatoriaParticipante 18
+                INSERT INTO eliminatorias values(@idGanador,@encuentroPasar, @rondaPasar, '', '', '', '', '', '', 0, 0);
+            END
+        UPDATE eliminatorias SET 
+            estado = 2
+            WHERE idParticipante = @idGanador AND encuentro = @encuentro AND ronda = @ronda;
+        UPDATE eliminatorias SET 
+            estado = 3
+            WHERE idParticipante = @idPerdedor AND encuentro = @encuentro AND ronda = @ronda;
+        UPDATE eliminatorias SET 
+            estado = 1
+            WHERE encuentro = @nuevoEncuentro AND ronda = @nuevaRonda;
+    END;
+
+SELECT * FROM eliminatorias ORDER BY ronda DESC;
+DELETE FROM eliminatorias;
+UPDATE eliminatorias SET 
+            texto_1 = '',
+            texto_2 = '',
+            texto_3 = '',
+            tiempo_1 = '',
+            tiempo_2 = '',
+            tiempo_3 = '';
+SELECT * FROM integral;
+UPDATE integral SET estado = 0;

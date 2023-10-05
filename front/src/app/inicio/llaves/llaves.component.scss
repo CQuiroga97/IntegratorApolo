@@ -21,3 +21,12 @@ nb-card{
 .fantasma{
     opacity: .3;
 }
+nb-card{
+    overflow: hidden;
+}
+.ganador{
+    background-color: rgba(63, 246, 63, 0.317);
+}
+.perdedor{
+    background-color: rgba(246, 63, 63, 0.317);
+}

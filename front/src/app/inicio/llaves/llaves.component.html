@@ -13,7 +13,7 @@
                                         <div class="container  p-0">
                                             <div class="row m-0" *ngFor="let element of octavos[index+'8']">
                                                     <nb-card class="transparent col-12 p-0 m-2">
-                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column"  [class.ganador]="element.estado == 2" [class.perdedor]="element.estado == 3">
                                                             <span>
                                                                 {{element.nombre}}
                                                             </span>
@@ -58,7 +58,7 @@
                         <div class="col-3 p-0 d-flex">
                             
                             <div class="container p-0 m-auto h-100">
-                                <div class="row h-50 pt-5 pb-5"  *ngFor="let index of [0, 1]">
+                                <div class="row h-50 pt-5 pb-5"  *ngFor="let index of [1, 2]">
                                     <div class="col-12 p-0">
             
                                         <div class="container p-0 pt-4 pb-4 h-100">
@@ -75,7 +75,7 @@
                                                                 definir
                                                             </span>
                                                         </nb-card-body>
-                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']" [class.ganador]="octavos[index+'4'][0].estado == 2" [class.perdedor]="octavos[index+'4'][0].estado == 3">
                                                             <span>
                                                                 {{octavos[index+'4'][0].nombre}}
                                                             </span>
@@ -99,7 +99,7 @@
                                                                 definir
                                                             </span>
                                                         </nb-card-body>
-                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']?.lenght == 1">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos![index+'4']![1]" [class.ganador]="octavos[index+'4'][1].estado == 2" [class.perdedor]="octavos[index+'4'][1].estado == 3">
                                                             <span>
                                                                 {{octavos[index+'4'][1].nombre}}
                                                             </span>
@@ -149,7 +149,7 @@
                                                                 definir
                                                             </span>
                                                         </nb-card-body>
-                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['12']?.lenght == 1">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['12']"  [class.ganador]="octavos['12'][0].estado == 2" [class.perdedor]="octavos['12'][0].estado == 3">
                                                             <span>
                                                                 {{octavos['12'][0].nombre}}
                                                             </span>
@@ -169,7 +169,7 @@
                                                                 definir
                                                             </span>
                                                         </nb-card-body>
-                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['12']?.lenght == 1">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['12']"  [class.ganador]="octavos['12'][1].estado == 2" [class.perdedor]="octavos['12'][1].estado == 3">
                                                             <span>
                                                                 {{octavos['12'][1].nombre}}
                                                             </span>
@@ -207,12 +207,34 @@
                     <div class="row pt-5">
                         <div class="col-6  p-1">
                             <nb-card class="transparent">
-                                <nb-card-body>Ganador xd</nb-card-body>
+                                <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['11'] || octavos['11']?.lenght == 1">
+                                    <span>
+                                        Por
+                                    </span>
+                                    <span>
+                                        definir
+                                    </span>
+                                </nb-card-body>
+                                <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['11']">
+                                    <span>
+                                        {{octavos['11'][0].nombre}}
+                                    </span>
+                                    <span>
+                                        {{octavos['11'][0].nombreU}}
+                                    </span>
+                                </nb-card-body>
                             </nb-card>
                         </div>
                         <div class="col-6 p-1 z-3">
                             <nb-card class="transparent">
-                                <nb-card-body>Ganador xd</nb-card-body>
+                                <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['11']">
+                                    <span>
+                                        {{octavos['11'][1].nombre}}
+                                    </span>
+                                    <span>
+                                        {{octavos['11'][1].nombreU}}
+                                    </span>
+                                </nb-card-body>
                             </nb-card>
                         </div>
                     </div>
@@ -230,7 +252,7 @@
                                         <div class="container  p-0">
                                             <div class="row m-0" *ngFor="let element of octavos[index+'8']">
                                                 <nb-card class="transparent col-12 p-0 m-2">
-                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column">
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column"  [class.ganador]="element.estado == 2" [class.perdedor]="element.estado == 3">
                                                         <span>
                                                             {{element.nombre}}
                                                         </span>
@@ -249,7 +271,7 @@
                             <div class="container h-100">
                                 <div class="row pt-0 h-100">
                                     
-                                    <div class="row d-flex h-25" *ngFor="let el of [0, 1, 2, 3]">
+                                    <div class="row d-flex h-25" *ngFor="let el of [1, 2, 3, 4]">
                                         <div class="col-12 m-auto">
                                             <img src="../../../assets/img/llaves/llave1.png" alt="" class="flip">
                                         </div>
@@ -277,7 +299,7 @@
                                                                 definir
                                                             </span>
                                                         </nb-card-body>
-                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']" [class.ganador]="octavos[index+'4'][0].estado == 2" [class.perdedor]="octavos[index+'4'][0].estado == 3">
                                                             <span>
                                                                 {{octavos[index+'4'][0].nombre}}
                                                             </span>
@@ -301,7 +323,7 @@
                                                                 definir
                                                             </span>
                                                         </nb-card-body>
-                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']?.lenght == 1">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']" [class.ganador]="octavos[index+'4'][1].estado == 2" [class.perdedor]="octavos[index+'4'][1].estado == 3">
                                                             <span>
                                                                 {{octavos[index+'4'][1].nombre}}
                                                             </span>
@@ -349,7 +371,7 @@
                                                             definir
                                                         </span>
                                                     </nb-card-body>
-                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['22']?.lenght == 1">
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['22']"  [class.ganador]="octavos['22'][0].estado == 2" [class.perdedor]="octavos['22'][0].estado == 3">
                                                         <span>
                                                             {{octavos['22'][0].nombre}}
                                                         </span>
@@ -369,7 +391,7 @@
                                                             definir
                                                         </span>
                                                     </nb-card-body>
-                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['22']?.lenght == 1">
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['22']"  [class.ganador]="octavos['22'][1].estado == 2" [class.perdedor]="octavos['22'][1].estado == 3">
                                                         <span>
                                                             {{octavos['22'][1].nombre}}
                                                         </span>

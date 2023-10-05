@@ -162,3 +162,24 @@
   top: -85px;
   position: relative;
 }
+.divSuperior{
+  background-color: #144a2cc4;
+}
+.putaje{
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  border: 1px solid black;
+  position: absolute;
+  background-color: #144a2c;
+  color: white;
+  display: flex;
+}
+.putaje span{
+  font-size: 30px;
+  font-weight: bold;
+  margin: auto;
+}
+.putaje.der{
+  right: 0px;
+}

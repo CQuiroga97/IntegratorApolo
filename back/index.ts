@@ -19,7 +19,7 @@ app.get('/integralesFinales/*', function(req:any, res:any, next:any){
     next()
   else
     res.send("Acceso prohibido");
-})
+}) 
 app.use(cors());
 app.use(bodyParser.json({limit: '1050mb'}));
 app.use(bodyParser.urlencoded({limit: '1050mb', extended: true}));
@@ -43,6 +43,11 @@ io.on('connection', (client:any) => {
   socket.iniciarIntegral(client, io)
   socket.participantePreparado(client, io)
   socket.iniciarCronometro(client, io)
+  socket.pausarCronometro(client, io)
+  socket.confirmarTiempo(client, io)
+  socket.conectarCamara(client, io)
+  socket.sumarPuntaje(client, io)
+  socket.finalizar(client, io)
   // Segunda ronda
   socket.loginSegundaRonda(client, io)
 });

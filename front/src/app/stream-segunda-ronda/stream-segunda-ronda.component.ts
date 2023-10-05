@@ -15,6 +15,16 @@ export class StreamSegundaRondaComponent  implements OnInit{
   public participantes:any;
   public participantesRespuestas:any;
   public primeraEntrada = true;
+  public cronometroTimer:any;
+  public cronometroFront:{minutos:number, segundos:number, mill:number};
+  public tiempoOriginal:{minutos:number, segundos:number, mill:number};
+  public tiempoRespuestas:{minutos:number, segundos:number, mill:number, respuesta:boolean}[] = [];
+  public segundos = 3;
+  public estado = 0;
+  public countDown:any;
+  public integral:any = null;
+  public enCompetencia = false;
+  public imagenDefault:any = '../../assets/img/streaming/Group 70.png';
   MQ:any = null;
   public video_1:VideoElement;
   public video_2:VideoElement;
@@ -36,18 +46,112 @@ export class StreamSegundaRondaComponent  implements OnInit{
     private user:UsersService,
     private socket:SocketService
   ){
-    socket.volverALlamar().subscribe(()=>{
-    })
+    this.pausarCronometroStream()
     this.llamarEliminatorias()
-    
+    this.iniciarCronometroParticipante()
+    this.sumarPuntajeParticipante()
+    this.iniciarIntegralParticipante()
+    this.finalizar()
   }
   ngOnInit(): void {
+    this.tiempoRespuestas.push({minutos:0, segundos:0,mill:0,respuesta:false})
+    this.tiempoRespuestas.push({minutos:0, segundos:0,mill:0,respuesta:false})
+    this.cronometroFront = {minutos:5,segundos:0, mill:0}
+    this.tiempoOriginal = this.cronometroFront
     this.peer = new Peer("integrator-call-1");
     this.socket.volverALlamar().subscribe((res)=>{
       this.crearPeer(res);
     })
   }
-
+  pausarCronometroStream(){
+    this.socket.pausarCronometroStream().subscribe((res)=>{
+      let index = 0;
+      this.participantes.forEach((el:any)=>{
+        if(res == el.idParticipante[0]){
+          this.tiempoRespuestas[index] = {
+            minutos:this.cronometroFront.minutos, 
+            segundos:this.cronometroFront.segundos,
+            mill:this.cronometroFront.mill,
+            respuesta:true}
+          let buffCronometro = {
+            minutos:this.cronometroFront.minutos, 
+            segundos:this.cronometroFront.segundos,
+            mill:this.cronometroFront.mill,
+            idParticipante:res};
+            this.socket.confirmarTiempo(buffCronometro)
+        }
+        index++
+      })
+    })
+  }
+  cronometro(){
+    return setInterval(()=>{
+      let {minutos, segundos, mill} = this.cronometroFront
+      if(mill == 0){
+        segundos = segundos==0?59:segundos-1;
+        if(segundos == 59)
+          minutos--;
+      }
+      mill = mill==0?99:mill-1;
+      this.cronometroFront = {minutos, segundos, mill}
+      if(minutos==0 && segundos==0 && mill==0){
+        // 
+        clearInterval(this.cronometroTimer);
+      }
+    }, 10)
+  }
+  iniciarIntegralParticipante(){
+    this.socket.iniciarIntegralParticipante().subscribe(()=>{
+      this.estado = 1;
+      this.user.getIntegralesAdmin().subscribe((res:any)=>{
+        console.log(res)
+        res.forEach(async (el:any)=>{
+          if(el[0].estado == 1){
+            let blob = await fetch(`http://localhost:3000/integralesFinales/${res[1][0].idIntegral}.png?key=akjjyglc`).then(r => r.blob())
+            const reader = new FileReader();
+            reader.readAsDataURL(blob)
+            reader.onloadend = async ()=>{
+              this.integral = reader.result;
+              if(this.integral){
+                this.estado = 2
+              }
+            }
+          }
+        })
+      })
+    })
+  }
+  iniciarCronometroParticipante(){
+    this.socket.iniciarCronometroParticipante().subscribe(()=>{
+      this.estado = 3
+      this.countDown = this.countDownSeconds();
+    })
+  }
+  countDownSeconds(){
+    return setInterval(()=>{
+      if(this.segundos == 0){
+        clearInterval(this.countDown);
+        this.enCompetencia = true;
+        this.estado = 0
+        this.cronometroTimer = this.cronometro();
+      }
+      this.segundos--;
+    }, 1000)
+  }
+  sumarPuntajeParticipante(){
+    this.socket.sumarPuntajeParticipante().subscribe(()=>{
+      this.reiniciar();
+    })
+  }
+  reiniciar(){
+    console.log("d")
+    this.cronometroFront = this.tiempoOriginal;
+    this.estado = 0;
+    this.mathField[0].latex("")
+    this.mathField[1].latex("")
+    this.integral = null;
+    this.llamarEliminatorias();
+  }
   crearPeer(participantes:any){
     participantes.forEach((el:any)=>{
         setTimeout(()=>{
@@ -75,6 +179,7 @@ export class StreamSegundaRondaComponent  implements OnInit{
                 }
                 i = false;
               })
+              
               // Show stream in some <video> element.
             });
           });
@@ -84,7 +189,7 @@ export class StreamSegundaRondaComponent  implements OnInit{
   }
   actualizarTeclado(){
     let index = 0;
-    this.participantes.forEach((el:any)=>{
+    this.participantesRespuestas.forEach((el:any)=>{
       this.mathField[index].latex(el.texto_1)
       index++;
     })
@@ -101,6 +206,13 @@ export class StreamSegundaRondaComponent  implements OnInit{
         })
         this.llamarParticipantesOnline()
       }
+    })
+  }
+  finalizar(){
+    this.socket.finalizarParticipante().subscribe(()=>{
+      // this.peer
+      
+      this.reiniciar();
     })
   }
   onLoadedMetadata(event: Event) {

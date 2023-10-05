@@ -100,6 +100,12 @@ export class UsersService {
   modificarIntegral(data:any){
     return this.http.post("http://localhost:3000/api/modificarIntegral", data);
   }
+  updatePuntaje(data:any){
+    return this.http.post("http://localhost:3000/api/updatePuntaje", data);
+  }
+  updateEncuentro(data:any){
+    return this.http.post("http://localhost:3000/api/updateEncuentro", data);
+  }
   getIntegralesAdmin(){
     return this.http.post("http://localhost:3000/api/getIntegralesAdmin", {});
   }
