@@ -5,8 +5,6 @@ name: Build and deploy Node.js app to Azure Web App - integratorapi
 
 on:
   push:
-    paths:
-      - 'back/**'
     branches:
       - CrisDev
   workflow_dispatch:
