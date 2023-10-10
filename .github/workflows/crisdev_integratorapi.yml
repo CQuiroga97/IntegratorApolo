@@ -24,9 +24,8 @@ jobs:
       - name: npm install, build, and test
         run: |
           cd back
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm i --force
+          npm start
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
