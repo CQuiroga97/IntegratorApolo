@@ -23,7 +23,6 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          cd back
           npm i --force
           npm start
 
@@ -31,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: ./back
 
   deploy:
     runs-on: ubuntu-latest

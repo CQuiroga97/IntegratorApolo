@@ -10,10 +10,10 @@
             "server": "localhost",
             "port": 1433,
             "driver": "MSSQL",
-            "name": "Integrator",
+            "name": "New_Integrator",
             "database": "integrator",
-            "username": "sa",
-            "password": "Cristian2396980"
+            "password": "!Cristian2396980",
+            "username": "sa"
         },
         {
             "mssqlOptions": {
@@ -22,13 +22,13 @@
                 "encrypt": true
             },
             "previewLimit": 50,
-            "server": "localhost",
+            "server": "integratorapolo.database.windows.net",
             "port": 1433,
             "driver": "MSSQL",
-            "name": "New_Integrator",
+            "name": "Integrator",
             "database": "integrator",
-            "password": "!Cristian2396980",
-            "username": "sa"
+            "username": "integratorAdmin",
+            "password": "!Admon123"
         }
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/e73b54a9-dd67-4852-8ac2-604796a839a6/resourceGroups/Apolo/providers/Microsoft.Web/sites/integratorapolo",
