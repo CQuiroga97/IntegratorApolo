@@ -52,5 +52,6 @@ io.on('connection', (client:any) => {
   socket.loginSegundaRonda(client, io)
 });
 httpServer.listen(port, () => {
+  console.log(process.env.SERVER)
   console.log("Server iniciado");
 });
