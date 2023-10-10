@@ -23,6 +23,7 @@ jobs:
 
       - name: install dependencies
         run: |
+          cd back
           npm install --force
           npm run build --if-present
           npm run test --if-present
