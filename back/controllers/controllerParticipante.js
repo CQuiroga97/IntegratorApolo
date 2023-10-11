@@ -30,11 +30,17 @@ exports.generateExcelParticipante = (req, res, con)=>{
             }
             
         })
-        const workSheet = XLSX.utils.aoa_to_sheet(arregloExcel);
-        const workBook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workBook, workSheet, 'Sheet 1');
-        XLSX.writeFile(workBook, './temp/sample.xlsx');
-        res.download('./temp/sample.xlsx');
+        try{
+
+            const workSheet = XLSX.utils.aoa_to_sheet(arregloExcel);
+            const workBook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workBook, workSheet, 'Sheet 1');
+            XLSX.writeFile(workBook, './back/back/temp/sample.xlsx');
+            res.download('./back/back/temp/sample.xlsx');
+        }catch(error){
+            console.log(error)
+            res.send([false])
+        }
     })
       
 
