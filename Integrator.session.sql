@@ -1193,3 +1193,6 @@ USE [master]
 GO
 ALTER DATABASE [integrator] SET  READ_WRITE 
 GO
+SELECT * FROM participante
+
+exec crearAdmin "adminAmerica2", "25f9e794323b453885f5181f1b624d0b" 

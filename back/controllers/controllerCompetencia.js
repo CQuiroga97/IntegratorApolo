@@ -12,16 +12,23 @@ exports.getTimerClasificaciones = (req, res, con)=>{
 }
 
 exports.ingresarIntegrales = (req, res, con)=>{
-    if(req.body.numIntegral == 0){
-        if(fs.existsSync('./controllers/integrales'))
-            fs.rmSync('./controllers/integrales', {recursive:true, force: true})
-        mkdir('./controllers/integrales');
-        con.query(`EXEC spDropRespuestas`, (error, result)=>{
-            if(!error)
-                saveIntegral(req,res,con)
-        })
-    }else{
-        saveIntegral(req,res,con)
+    console.log("3- Num integral", req.body.numIntegral)
+    try{
+        if(req.body.numIntegral == 0){
+    
+            if(fs.existsSync('./back/back/controllers/integrales'))
+                fs.rmSync('./back/back/controllers/integrales', {recursive:true, force: true})
+            console.log("Acá 2")
+            mkdir('./back/back/controllers/integrales', { recursive: true });
+            con.query(`EXEC spDropRespuestas`, (error, result)=>{
+                if(!error)
+                    saveIntegral(req,res,con)
+            })
+        }else{
+            saveIntegral(req,res,con)
+        }
+    }catch(error){
+        console.log(error)
     }
     
     
@@ -81,16 +88,17 @@ exports.llamarIntegrales = (req, res, con)=>{
     })
 }
 exports.guardarIntegral = (req, res, con)=>{
-    const ruta = `./controllers/integralesFinales`
+    const ruta = `./back/back/controllers/integralesFinales`
+    console.log(ruta)
     if(!fs.existsSync(ruta))
-        mkdir(ruta).then(()=>{
+        mkdir(ruta, { recursive: true }).then(()=>{
             saveIntegralEliminatoria(req.body.imagen.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2], res, con)
         })
     else
         saveIntegralEliminatoria(req.body.imagen.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2], res, con)
 }
 exports.borrarIntegral = (req, res, con)=>{
-    const ruta = `./controllers/integralesFinales/${req.body.idIntegral}.png`
+    const ruta = `.back/back/controllers/integralesFinales/${req.body.idIntegral}.png`
     fs.rmSync(ruta, {recursive:true, force: true})
     con.query(`spLlamarIntegrales`, (err, result)=>{
         if(err)
@@ -163,7 +171,7 @@ saveIntegralEliminatoria = (imagen, res, con)=>{
         else{
             const imagenBuff = Buffer.from(imagen,'base64')
 
-            fs.writeFile(`./controllers/integralesFinales/${md5(result.recordsets[0][0].id)}.png`,imagenBuff , (error)=>{
+            fs.writeFile(`./back/back/controllers/integralesFinales/${md5(result.recordsets[0][0].id)}.png`,imagenBuff , (error)=>{
                 if(error)
                     res.send(error)
                 else
@@ -197,12 +205,13 @@ exports.modificarIntegral = (req, res, con)=>{
     })
 }
 saveIntegral=(req, res, con)=>{
-    const ruta = `./controllers/integrales/integral${req.body.numIntegral + 1}`;
-    
+    const ruta = `./back/back/controllers/integrales/integral${req.body.numIntegral + 1}`;
+    console.log(ruta)
     if(fs.existsSync(ruta))
         fs.rmSync(ruta, {recursive:true, force: true})
-    mkdir(ruta).then(()=>{
-        mkdir(ruta + "/respuestas").then(()=>{
+    mkdir(ruta,  { recursive: true }).then(()=>{
+        console.log(fs.existsSync(ruta), "Ruta creada")
+        mkdir(ruta + "/respuestas", { recursive: true }).then(()=>{
             let imagen =  req.body.imagenes.selectedImage0.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2];
             let imagenBuff = Buffer.from(imagen,'base64')
             fs.writeFile(ruta+"/integral.png", imagenBuff, (err)=>{
@@ -230,6 +239,8 @@ saveIntegral=(req, res, con)=>{
                 })
             })
         });
+    }).catch((err)=>{
+        console.log("Error: ",error)
     });
 }
 crearEncuentro = (index, arreglo, data, con, res)=>{

@@ -2,7 +2,7 @@ import { Server } from 'socket.io';
 import * as socket from './sockets/socket';
 import { User } from './sockets/user';
 import { UserSegundaRonda } from './sockets/usersSegundaRonda';
-import http from 'https';
+import http from 'http';
 const dotenv = require('dotenv');
 dotenv.config();
 const path = require('path');
@@ -53,9 +53,10 @@ io.on('connection', (client:any) => {
   socket.loginSegundaRonda(client, io)
 });
 httpServer.listen(port, () => {
+  console.log(process.env.PORT)
   console.log(process.env.SERVER)
   console.log(process.env.USERDB)
   console.log(process.env.PASSWORD)
   console.log(process.env.DATABASE)
-  console.log("Server iniciado");
+  console.log("Server iniciado V2");
 });

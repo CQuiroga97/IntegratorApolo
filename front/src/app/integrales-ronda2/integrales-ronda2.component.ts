@@ -36,6 +36,7 @@ export class IntegralesRonda2Component {
         reader.onload = (e: any) => {
           
           this.user.guardarIntegral({imagen:e.target.result}).subscribe((res:any)=>{
+            console.log(res)
             if(res[0]){
               if(i == event.target.files.length){
                 this.llamarIntegrales()
