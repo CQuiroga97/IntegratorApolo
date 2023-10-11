@@ -14,6 +14,7 @@ const port = (process.env.PORT || 8080);
 const indexRouter = require("./routes/router.js")
 const httpServer = new http.Server(app);
 const server = http.createServer();
+
 app.get('/integralesFinales/*', function(req:any, res:any, next:any){
   if(req.query["key"]=="akjjyglc")
     next()
