@@ -73,7 +73,7 @@ export class IntegralesRonda2Component {
     this.user.llamarIntegrales().subscribe((result:any)=>{
       this.integralesCreadas = []
       result.forEach(async (el:any)=>{
-        let blob = await fetch(`http://localhost:3000/integralesFinales/${el.idIntegral}.png?key=akjjyglc`).then(r => r.blob())
+        let blob = await fetch(`https://integratorapi.azurewebsites.net/integralesFinales/${el.idIntegral}.png?key=akjjyglc`).then(r => r.blob())
         const reader = new FileReader();
         reader.readAsDataURL(blob)
         reader.onloadend = async ()=>{

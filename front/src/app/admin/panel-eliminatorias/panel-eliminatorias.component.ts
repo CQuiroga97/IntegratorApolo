@@ -232,7 +232,7 @@ export class PanelEliminatoriasComponent implements OnInit{
 
         if(el[0]){
 
-          let blob = await fetch(`http://localhost:3000/integralesFinales/${el[0].idIntegral}.png?key=akjjyglc`).then(r => r.blob())
+          let blob = await fetch(`https://integratorapi.azurewebsites.net/integralesFinales/${el[0].idIntegral}.png?key=akjjyglc`).then(r => r.blob())
           const reader = new FileReader();
           reader.readAsDataURL(blob)
           reader.onloadend = async ()=>{

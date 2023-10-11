@@ -211,7 +211,7 @@ export class SegundaRondaComponent{
         console.log(res)
         res.forEach(async (el:any)=>{
           if(el[0].estado == 1){
-            let blob = await fetch(`http://localhost:3000/integralesFinales/${res[1][0].idIntegral}.png?key=akjjyglc`).then(r => r.blob())
+            let blob = await fetch(`https://integratorapi.azurewebsites.net/integralesFinales/${res[1][0].idIntegral}.png?key=akjjyglc`).then(r => r.blob())
             const reader = new FileReader();
             reader.readAsDataURL(blob)
             reader.onloadend = async ()=>{

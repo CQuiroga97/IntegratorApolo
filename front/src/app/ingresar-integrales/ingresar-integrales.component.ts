@@ -34,24 +34,24 @@ export class IngresarIntegralesComponent {
         res.forEach(async (el:any)=>{
           
           let buff:any = { selectedImage0: null, selectedImage1: null, selectedImage2: null, selectedImage3: null, selectedImage4: null, correctOption: `${el.respuesta}`  }
-          let blob = await fetch(`http://localhost:3000/images/${el.nombreIntegral}/integral.png`).then(r => r.blob())
+          let blob = await fetch(`https://integratorapi.azurewebsites.net/images/${el.nombreIntegral}/integral.png`).then(r => r.blob())
           const reader = new FileReader();
           reader.readAsDataURL(blob)
           reader.onloadend = async ()=>{
             buff.selectedImage0 = reader.result;
-            blob = await fetch(`http://localhost:3000/images/${el.nombreIntegral}/respuestas/respuesta1.png`).then(r => r.blob())
+            blob = await fetch(`https://integratorapi.azurewebsites.net/images/${el.nombreIntegral}/respuestas/respuesta1.png`).then(r => r.blob())
             reader.readAsDataURL(blob)
             reader.onloadend = async ()=>{
               buff.selectedImage1 = reader.result;
-              blob = await fetch(`http://localhost:3000/images/${el.nombreIntegral}/respuestas/respuesta2.png`).then(r => r.blob())
+              blob = await fetch(`https://integratorapi.azurewebsites.net/images/${el.nombreIntegral}/respuestas/respuesta2.png`).then(r => r.blob())
               reader.readAsDataURL(blob)
               reader.onloadend = async ()=>{
                 buff.selectedImage2 = reader.result;
-                blob = await fetch(`http://localhost:3000/images/${el.nombreIntegral}/respuestas/respuesta3.png`).then(r => r.blob())
+                blob = await fetch(`https://integratorapi.azurewebsites.net/images/${el.nombreIntegral}/respuestas/respuesta3.png`).then(r => r.blob())
                 reader.readAsDataURL(blob)
                 reader.onloadend = async ()=>{
                   buff.selectedImage3 = reader.result;
-                  blob = await fetch(`http://localhost:3000/images/${el.nombreIntegral}/respuestas/respuesta4.png`).then(r => r.blob())
+                  blob = await fetch(`https://integratorapi.azurewebsites.net/images/${el.nombreIntegral}/respuestas/respuesta4.png`).then(r => r.blob())
                   reader.readAsDataURL(blob)
                   reader.onloadend = async ()=>{
                     buff.selectedImage4 = reader.result;
@@ -63,7 +63,7 @@ export class IngresarIntegralesComponent {
             }
           }
           
-          // fetch(`http://localhost:3000/images/${el.nombreIntegral}/integral.png`).then(res2 => res2.blob()).then(blob=>{
+          // fetch(`https://integratorapi.azurewebsites.net/images/${el.nombreIntegral}/integral.png`).then(res2 => res2.blob()).then(blob=>{
           //   const reader = new FileReader();
           //   reader.readAsDataURL(blob)
           //   reader.onloadend = (res)=>{

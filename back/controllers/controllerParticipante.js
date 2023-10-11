@@ -66,7 +66,7 @@ exports.registerEstudiantesMassive = (req, res, con) => {
                     <h1>Bienvenido, ${el[0]}</h1>
                     <br>
                     <span>Tu universidad te ha inscrito a nuestro noveno encuentro de integrales, puedes ingresar a nuestro aplicativo con tu correo y la contraseña '${el[2]}'
-                    para continuar el proceso ingresa al siguiente <a href="http://localhost:3000:4200/">link</a></span>
+                    para continuar el proceso ingresa al siguiente <a href="https://integratorapi.azurewebsites.net:4200/">link</a></span>
                     `
             };
             emailController.enviarCorreo(mailOptions)
@@ -100,7 +100,7 @@ exports.insertarParticipante = (req,res, con)=>{
             <h1>Bienvenido, ${req.body.data.nombre}</h1>
             <br>
             <span>Tu universidad te ha inscrito a nuestro noveno encuentro de integrales, puedes ingresar a nuestro aplicativo con tu correo y la contraseña '${pass}'
-            para continuar el proceso ingresa al siguiente <a href="http://localhost:3000:4200/changePassword?user=${correoEncrypt}">link</a></span>
+            para continuar el proceso ingresa al siguiente <a href="https://integratorapi.azurewebsites.net:4200/changePassword?user=${correoEncrypt}">link</a></span>
             `
     };
     con.query(`spInsertarParticipante '${req.body.data.nombre}', '${req.body.data.correo}', '${md5(pass)}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{

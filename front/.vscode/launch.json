@@ -7,14 +7,14 @@
       "type": "pwa-chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:3000:4200/"
+      "url": "https://integratorapi.azurewebsites.net:4200/"
     },
     {
       "name": "ng test",
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: test",
-      "url": "http://localhost:3000:9876/debug.html"
+      "url": "https://integratorapi.azurewebsites.net:9876/debug.html"
     }
   ]
 }

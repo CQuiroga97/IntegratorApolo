@@ -24,29 +24,29 @@ export class UsersService {
   }
 
   login(user: any): Observable<any> {
-    return this.http.post("http://localhost:3000/api/login", user);
+    return this.http.post("https://integratorapi.azurewebsites.net/api/login", user);
   }
   loginParticipante(user: any): Observable<any> {
-    return this.http.post("http://localhost:3000/api/loginParticipante", user);
+    return this.http.post("https://integratorapi.azurewebsites.net/api/loginParticipante", user);
   }
   registrUniversidad(universidad: any): Observable<any> {
-    return this.http.post("http://localhost:3000/api/registrarUniversidad", universidad)
+    return this.http.post("https://integratorapi.azurewebsites.net/api/registrarUniversidad", universidad)
   }
   registrarUniversidadExcel(excel: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('filekey', excel, excel.name)
-    return this.http.post("http://localhost:3000/api/registrarUniversidadExcel", formData)
+    return this.http.post("https://integratorapi.azurewebsites.net/api/registrarUniversidadExcel", formData)
   }
   registrarParticipantesExcel(excel: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('filekey', excel, excel.name)
-    return this.http.post("http://localhost:3000/api/registrarParticipantesExcel", formData)
+    return this.http.post("https://integratorapi.azurewebsites.net/api/registrarParticipantesExcel", formData)
   }
   getUniversidades(): Observable<any> {
-    return this.http.post("http://localhost:3000/api/sp_getUniversidades", {});
+    return this.http.post("https://integratorapi.azurewebsites.net/api/sp_getUniversidades", {});
   }
   mostrarUniversidadesNum(): Observable<any> {
-    return this.http.post("http://localhost:3000/api/mostrarUniversidadesNum", {});
+    return this.http.post("https://integratorapi.azurewebsites.net/api/mostrarUniversidadesNum", {});
   }
   setToken(token: string) {
     this.cookies.set("token", token);
@@ -54,67 +54,67 @@ export class UsersService {
     /* this.authService.setDecodedToken() */
   }
   generateExcelEstudiantes() {
-    return this.http.get("http://localhost:3000/api/generateExcelParticipante", { responseType: 'blob' });
+    return this.http.get("https://integratorapi.azurewebsites.net/api/generateExcelParticipante", { responseType: 'blob' });
   }
   borrarUniversidadesEstudiantes(idu: any) {
-    return this.http.post("http://localhost:3000/api/borrarUniversidadesEstudiantes", { idu: idu });
+    return this.http.post("https://integratorapi.azurewebsites.net/api/borrarUniversidadesEstudiantes", { idu: idu });
   }
   modificarUniversidad(universidad: any) {
-    return this.http.post("http://localhost:3000/api/modificarUniversidad", universidad);
+    return this.http.post("https://integratorapi.azurewebsites.net/api/modificarUniversidad", universidad);
   }
   borrarParticipante(idEstudiante: any) {
-    return this.http.post("http://localhost:3000/api/borrarParticipante", { idEstudiante: idEstudiante });
+    return this.http.post("https://integratorapi.azurewebsites.net/api/borrarParticipante", { idEstudiante: idEstudiante });
   }
   insertarParticipante(data: any) {
-    return this.http.post("http://localhost:3000/api/insertarParticipante", { data: data });
+    return this.http.post("https://integratorapi.azurewebsites.net/api/insertarParticipante", { data: data });
   }
   modificarParticipante(data: any) {
-    return this.http.post("http://localhost:3000/api/modificarParticipante", { data: data });
+    return this.http.post("https://integratorapi.azurewebsites.net/api/modificarParticipante", { data: data });
   }
   modificarContrasenaParticipante(data: any) {
-    return this.http.post("http://localhost:3000/api/modificarContrasenaParticipante", { data: data });
+    return this.http.post("https://integratorapi.azurewebsites.net/api/modificarContrasenaParticipante", { data: data });
   }
 
   ingresarIntegrales(data: any) {
-    return this.http.post("http://localhost:3000/api/ingresarIntegrales", data);
+    return this.http.post("https://integratorapi.azurewebsites.net/api/ingresarIntegrales", data);
   }
   
   getEliminatoriaActiva(){
-    return this.http.post("http://localhost:3000/api/getEliminatoriaActiva", {});
+    return this.http.post("https://integratorapi.azurewebsites.net/api/getEliminatoriaActiva", {});
   }
   iniciarSegundaRonda(){
-    return this.http.post("http://localhost:3000/api/iniciarSegundaRonda", {});
+    return this.http.post("https://integratorapi.azurewebsites.net/api/iniciarSegundaRonda", {});
   }
   llamarEncuentros(){
-    return this.http.post("http://localhost:3000/api/llamarEncuentros", {});
+    return this.http.post("https://integratorapi.azurewebsites.net/api/llamarEncuentros", {});
   }
   llamarIntegrales(){
-    return this.http.post("http://localhost:3000/api/llamarIntegrales", {});
+    return this.http.post("https://integratorapi.azurewebsites.net/api/llamarIntegrales", {});
   }
   guardarIntegral(data:any){
-    return this.http.post("http://localhost:3000/api/guardarIntegral", data);
+    return this.http.post("https://integratorapi.azurewebsites.net/api/guardarIntegral", data);
   }
   borrarIntegral(data:any){
-    return this.http.post("http://localhost:3000/api/borrarIntegral", data);
+    return this.http.post("https://integratorapi.azurewebsites.net/api/borrarIntegral", data);
   }
   modificarIntegral(data:any){
-    return this.http.post("http://localhost:3000/api/modificarIntegral", data);
+    return this.http.post("https://integratorapi.azurewebsites.net/api/modificarIntegral", data);
   }
   updatePuntaje(data:any){
-    return this.http.post("http://localhost:3000/api/updatePuntaje", data);
+    return this.http.post("https://integratorapi.azurewebsites.net/api/updatePuntaje", data);
   }
   updateEncuentro(data:any){
-    return this.http.post("http://localhost:3000/api/updateEncuentro", data);
+    return this.http.post("https://integratorapi.azurewebsites.net/api/updateEncuentro", data);
   }
   getIntegralesAdmin(){
-    return this.http.post("http://localhost:3000/api/getIntegralesAdmin", {});
+    return this.http.post("https://integratorapi.azurewebsites.net/api/getIntegralesAdmin", {});
   }
   getTopUniversidades(){
-    return this.http.post("http://localhost:3000/api/getTopUniversidades", {});
+    return this.http.post("https://integratorapi.azurewebsites.net/api/getTopUniversidades", {});
   }
 
   ingresarIntegralesSegundaRonda(data: any) {
-    return this.http.post("http://localhost:3000/api/ingresarIntegralesSegundaRonda", data);
+    return this.http.post("https://integratorapi.azurewebsites.net/api/ingresarIntegralesSegundaRonda", data);
   }
 
 
