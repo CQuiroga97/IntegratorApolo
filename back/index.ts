@@ -2,7 +2,7 @@ import { Server } from 'socket.io';
 import * as socket from './sockets/socket';
 import { User } from './sockets/user';
 import { UserSegundaRonda } from './sockets/usersSegundaRonda';
-import http from 'http';
+import http from 'https';
 const dotenv = require('dotenv');
 dotenv.config();
 const path = require('path');
