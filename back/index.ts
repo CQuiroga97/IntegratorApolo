@@ -53,7 +53,7 @@ io.on('connection', (client:any) => {
 });
 httpServer.listen(port, () => {
   console.log(process.env.SERVER)
-  console.log(process.env.USER)
+  console.log(process.env.USERDB)
   console.log(process.env.PASSWORD)
   console.log(process.env.DATABASE)
   console.log("Server iniciado");

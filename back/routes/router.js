@@ -10,7 +10,7 @@ const router = express.Router();
 const multer = require('multer');
 const upload = multer();
 let config = {
-    user: process.env.USER,
+    user: process.env.USERDB,
     password: process.env.PASSWORD,
     server: process.env.SERVER,
     database: process.env.DATABASE,
