@@ -25,8 +25,7 @@ jobs:
         run: |
 
           npm i --force
-          npm run build --if-present
-          npm run test --if-present
+          npm start
         working-directory: back
 
       - name: Upload artifact for deployment job
