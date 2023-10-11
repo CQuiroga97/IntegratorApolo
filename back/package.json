@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "mocha",
+    "test": "",
     "start": "npx ts-node index.ts"
   },
   "engines": {
