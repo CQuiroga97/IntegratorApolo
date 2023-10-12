@@ -1,10 +1,12 @@
 .divTransmision {
   width: 100%;
   height: 100%;
-  background: rgb(104, 179, 85);
+
+  background: linear-gradient(90.15deg, rgba(13, 47, 28, 0.9) 0.14%, rgba(13, 47, 28, 0.62) 99.88%), url(../../assets/img/admin/registroIntegrales/backgroundIntegrales.png);
+  /* background: rgb(104, 179, 85);
   background: -moz-linear-gradient(90deg, rgba(13, 25, 10, 1) 0%, rgba(13, 47, 28, 1) 50%, rgba(13, 25, 10, 1) 100%);
   background: -webkit-linear-gradient(90deg, rgba(13, 25, 10, 1) 0%, rgba(13, 47, 28, 1) 50%, rgba(13, 25, 10, 1) 100%);
-  background: linear-gradient(90deg, rgb(51 81 44) 0%, rgb(33 89 58) 50%, rgb(51 81 44) 100%);
+  background: linear-gradient(90deg, rgb(51 81 44) 0%, rgb(33 89 58) 50%, rgb(51 81 44) 100%); */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0d190a", endColorstr="#0d190a", GradientType=1);
   background-repeat: no-repeat;
   background-size: 100% auto;
@@ -64,7 +66,7 @@
   display: flex;
   width: 70px;
   height: 70px;
-  border-radius: 50%;
+  border-radius: 53%;
   border: solid black 1px;
   background-color: white;
   position: relative;
@@ -74,8 +76,8 @@
 
 
 .logo_universiad .img_logo_universidad{
-  width: 70%;
-  height: 70%;
+  width: 50%;
+  height: 50%;
   position: relative;
   margin: auto;
 }
@@ -182,4 +184,15 @@
 }
 .putaje.der{
   right: 0px;
+}
+
+
+.leftTriangules{
+  top: 100px;
+  left: 25px;
+}
+.second-tringule{
+  top: 70%;
+  right: -5%;
+  transform: rotate(180deg);
 }
