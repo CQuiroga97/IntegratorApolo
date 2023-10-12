@@ -53,6 +53,7 @@ import { PanelEliminatoriasComponent } from './admin/panel-eliminatorias/panel-e
 import { StreamSegundaRondaComponent } from './stream-segunda-ronda/stream-segunda-ronda.component';
 import { SegundaRondaComponent } from './segunda-ronda/segunda-ronda.component';
 const config: SocketIoConfig = { url: 'https://integratorapi.azurewebsites.net', options: {} };
+/* const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} }; */
 @NgModule({
   declarations: [
     AppComponent,

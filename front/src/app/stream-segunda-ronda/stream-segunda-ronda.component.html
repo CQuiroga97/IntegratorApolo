@@ -5,9 +5,11 @@
 
     <!-- Transmision primer participante -->
     <div class="container cont-participante-1 col-3 d-flex flex-column">
-      <div class="container d-flex flex-column cont_video1 video_transmition col-10 w-100 h-75 m-auto">
+      <img src="../../assets/img/streaming/Vector1.png" class="position-absolute z-1" alt="">
+      <div class="container d-flex flex-column cont_video1 video_transmition col-10 w-100 h-75 m-auto z-2">
         <div class="row justify-content-center"  *ngIf="!tiempoRespuestas[0].respuesta">
-          
+
+
           <div class="col-3">
               <nb-card class="transparent cron">
                   <nb-card-body class="d-flex">
@@ -37,7 +39,7 @@
           </div>
         </div>
         <div class="row justify-content-center"  *ngIf="tiempoRespuestas[0].respuesta">
-          
+
           <div class="col-3">
               <nb-card class="transparent cron">
                   <nb-card-body class="d-flex">
@@ -125,7 +127,7 @@
     <div class="container cont-participante-2 col-3 d-flex flex-column">
       <div class="container d-flex flex-column cont_video1 video_transmition col-10 w-100 h-75 m-auto">
         <div class="row justify-content-center" *ngIf="!tiempoRespuestas[1].respuesta">
-          
+
           <div class="col-3">
               <nb-card class="transparent cron">
                   <nb-card-body class="d-flex">
@@ -155,7 +157,7 @@
           </div>
         </div>
         <div class="row justify-content-center"*ngIf="tiempoRespuestas[1].respuesta">
-          
+
           <div class="col-3">
               <nb-card class="transparent cron">
                   <nb-card-body class="d-flex">
@@ -209,6 +211,7 @@
 
       </div>
 
+      <img src="../../assets/img/streaming/Vector.png" class="second-tringule position-absolute z-0" alt="">
 
     </div>
 
