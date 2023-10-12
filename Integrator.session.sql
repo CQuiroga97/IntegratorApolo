@@ -131,6 +131,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
 CREATE TABLE [dbo].[encuentro](
 	[idEncuentro] [int] IDENTITY(1,1) NOT NULL,
 	[estado] [int] NULL,
@@ -1196,3 +1197,11 @@ GO
 SELECT * FROM participante
 
 exec crearAdmin "adminAmerica2", "25f9e794323b453885f5181f1b624d0b" 
+
+SELECT * FROM respuestasIntegrales
+UPDATE participante SET pass = '25f9e794323b453885f5181f1b624d0b';
+
+DELETE FROM eliminatorias
+insert into encuentro values (0, 0, 5, 0)
+SELECT * FROM 
+    -- respuestas;

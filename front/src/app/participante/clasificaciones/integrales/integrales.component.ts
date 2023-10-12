@@ -36,6 +36,7 @@ export class IntegralesComponent implements OnInit{
     this.participanteService.getIntegralesClasificaciones().subscribe(res =>{
       this.mensajeLoading = "Recopilando información..."
       this.participanteService.getTimerClasificaciones().subscribe((res2:any) =>{
+        console.log(res2)
         this.mensajeLoading = "Iniciando prueba..."
         res2.mill = 0;
         this.tiempoOriginal = res2;
@@ -84,10 +85,20 @@ export class IntegralesComponent implements OnInit{
   guardarSeleccion(){
     clearInterval(this.cronometroTimer);
     const tiempo = ((this.cronometroFront.mill) + (this.cronometroFront.segundos * 100) + (this.cronometroFront.minutos * 6000))
-    let tiempoFinal = this.cronometroFront;
-    tiempoFinal.minutos = tiempoFinal.minutos -this.tiempoOriginal.minutos;
-    tiempoFinal.mill = tiempoFinal.mill - this.tiempoOriginal.mill;
-    tiempoFinal.segundos = this.tiempoOriginal.segundos - tiempoFinal.segundos;
+    let tiempoFinal = {segundos:this.cronometroFront.segundos, minutos:this.cronometroFront.minutos, mill: this.cronometroFront.mill};
+    if(tiempoFinal.segundos > this.tiempoOriginal.segundos){
+      
+      tiempoFinal.minutos = this.tiempoOriginal.minutos - tiempoFinal.minutos - 1;
+      tiempoFinal.segundos = this.tiempoOriginal.segundos - tiempoFinal.segundos;
+    }else{
+      
+      tiempoFinal.minutos = this.tiempoOriginal.minutos - tiempoFinal.minutos;
+      tiempoFinal.segundos = this.tiempoOriginal.segundos - tiempoFinal.segundos;
+    }
+    tiempoFinal.mill = 99 - tiempoFinal.mill;
+    if(this.tiempoOriginal.segundos == 0)
+      tiempoFinal.segundos = 60 - this.cronometroFront.segundos;
+    
     if(tiempoFinal.segundos < 0)tiempoFinal.segundos=tiempoFinal.segundos*-1;
     if(tiempoFinal.mill < 0)tiempoFinal.mill=tiempoFinal.mill*-1;
     const data = {
