@@ -1205,3 +1205,4 @@ DELETE FROM eliminatorias
 insert into encuentro values (0, 0, 5, 0)
 SELECT * FROM 
     -- respuestas;
+    eliminatorias
