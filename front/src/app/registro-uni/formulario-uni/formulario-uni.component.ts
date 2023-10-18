@@ -52,6 +52,40 @@ export class FormularioUniComponent {
     correo: ['', [Validators.required, Validators.email]],
   });
   submit() {
+    const camposFaltantes: string[] = [];
+
+
+    for (const controlName of Object.keys(this.dataUniversidad.controls)) {
+      const control = this.dataUniversidad.get(controlName);
+      if (control && control.invalid) {
+        camposFaltantes.push(controlName);
+      }
+    }
+
+    if (camposFaltantes.length > 0) {
+      const errorMessage = `Los siguientes campos son obligatorios: ${camposFaltantes.join(', ')}`;
+      this.toastrService.show(errorMessage, "Error en el formulario", { status: "warning", destroyByClick: true, icon: "alert-triangle-outline" });
+    } else {
+      const universidad = {
+        nombre: this.dataUniversidad.value.nombre,
+        pais: this.dataUniversidad.value.pais,
+        ciudad: this.dataUniversidad.value.ciudad,
+        cantEstudiantes: this.dataUniversidad.value.estudiantes,
+        correo: this.dataUniversidad.value.correo,
+      };
+
+      this.userService.registrUniversidad(universidad).subscribe(
+        () => {
+          this.dataUniversidad.reset();
+          this.toastrService.show(`La universidad '${this.dataUniversidad.value.nombre}' ha sido guardada con éxito`, "Guardado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+        },
+        () => {
+          this.toastrService.show("No se pudo registrar la universidad", "Error", { status: "danger", destroyByClick: true, icon: "alert-circle-outline" });
+        }
+      );
+    }
+  }
+/*   submit() {
     if (!this.dataUniversidad.valid) {
       if (!this.dataUniversidad.get('estudiantes')!.hasError('min')) {
         this.toastrService.show("Hay campos vacios", "Error en el formulario", { status: "warning", destroyByClick: true, icon: "alert-triangle-outline" });
@@ -70,7 +104,7 @@ export class FormularioUniComponent {
 
       })
     }
-  }
+  } */
   registrarUniversidadExcel() {
     this.userService.registrarUniversidadExcel(this.file).subscribe((data) => {
       if (data) {

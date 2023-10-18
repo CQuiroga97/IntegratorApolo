@@ -55,17 +55,17 @@ img{
   color: white;
   box-sizing: border-box;
   overflow: hidden;
+
 }
 .drop:hover{
-    max-height: 200px;
+    max-height: max-content;
 }
 .dropDown a:hover{
     color: black;
     background-color: #E6B52C;
-    
     font-size: 18px;
-    
 }
+
 .dropDown a{
     font-size: 15px;
     text-align: center;
