@@ -1,8 +1,16 @@
-.divMenu{
+button{
+    letter-spacing: 1px;
+     background-color: transparent !important;
+}
+button:hover{
+     background-color: #f0cb00 !important;
+}
+.container{
     width: 100%;
     height: 70px;
     margin: auto;
     display: flex;
+    max-width: 100%;
 }
 .divBtnMenu{
     width: 200px;
@@ -38,6 +46,26 @@ img{
     margin: auto;
     height: 500px;
     transition: all .5s;
+    
+    position: relative;
+}
+.drop span, .drop a{
+    position: relative;
+    top: -17px;
+    font-family: "cond" !important;
+
+}
+.alin{
+    text-align: right;
+}
+.dropDown a{
+    font-size: 15px !important;
+    top: 0px !important;
+}
+a, span{
+    letter-spacing: 1px;
+    font-size: 20px !important;
+    font-family: "cond" !important;
 }
 .drop .titulo{
     width: 100%;

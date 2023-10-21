@@ -713,3 +713,5 @@ UPDATE eliminatorias SET
             tiempo_3 = '';
 SELECT * FROM integral;
 UPDATE integral SET estado = 0;
+select * from admin
+delete from respuestas

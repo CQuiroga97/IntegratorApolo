@@ -1204,5 +1204,6 @@ UPDATE participante SET pass = '25f9e794323b453885f5181f1b624d0b';
 DELETE FROM eliminatorias
 insert into encuentro values (0, 0, 5, 0)
 SELECT * FROM 
+    participante ORDER BY puntaje DESC
     -- respuestas;
-    eliminatorias
+    -- eliminatorias

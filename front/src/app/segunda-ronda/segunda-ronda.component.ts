@@ -140,6 +140,7 @@ export class SegundaRondaComponent{
     })
   }
   pausarCronometro(){
+    this.estado = 4
     this.guardarRespuesta()
     clearInterval(this.cronometroTimer);
     this.socket.pausarCronometro(this.dataParticipante.idParticipante)

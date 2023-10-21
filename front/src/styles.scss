@@ -53,6 +53,10 @@ input:-webkit-autofill,
   input:-webkit-autofill:focus {
     transition: background-color 0s 600000s, color 0s 600000s;
   }
+  nb-layout-header.fixed{
+    backdrop-filter: blur(8px);
+    box-shadow: 0px -3px 26px 0px rgba(0,0,0,0.75);
+  }
 :root {
   height: auto;
   --colorPrimario: #144A2C;
@@ -241,6 +245,9 @@ math-field {
 .mq-textarea textarea:focus{
   caret-color: white !important;
 }
+nb-layout .layout{
+  background: linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%) !important;
+}
 @media (max-width: 500px){
   .row{
     flex-direction: column !important;
@@ -284,6 +291,7 @@ math-field {
     flex-direction: column;
     margin-top: 2px !important;
     height: 100%;
+    height: 100px !important;
   }
   nb-layout-header nav app-cabezera .divMenu{
     flex-direction: column;

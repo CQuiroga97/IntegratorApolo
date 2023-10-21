@@ -9,7 +9,8 @@ import { UsersService } from 'src/app/users/users.service';
   styleUrls: ['./llaves.component.scss']
 })
 export class LlavesComponent {
-
+  public loading = true;
+  public transition = true;
   public octavos:any = {};
   constructor(
     private _userService:UsersService,
@@ -23,6 +24,11 @@ export class LlavesComponent {
         this.octavos[`${el.encuentro}${el.ronda}`] = []
       this.octavos[`${el.encuentro}${el.ronda}`].push(el)
     })
+    this.loading = false;
+    setTimeout(()=>{
+
+      this.transition = false;
+    }, 10)
       console.log(this.octavos)
       console.log(this.octavos["14"].length)
       if(!this.octavos['18']){

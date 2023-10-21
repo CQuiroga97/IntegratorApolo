@@ -1,4 +1,4 @@
-<div class="divCuadrosStands">
+<div class="divCuadrosStands" *ngIf="!loading" [class.init]="!transition">
     <div class="cuadrosStands">
     <div class="tittle">
             <h1>
@@ -7,10 +7,9 @@
         </div>
         <div class="numberoEncuentros">
             <h1 class="numero1">
-                35/
+                {{cantEncuentros}}/16
             </h1>
             <h1 class="numero2">
-                150
             </h1>
         </div>
         <div class="subtittle">
@@ -36,7 +35,7 @@
             </p>
         </div>
     </div>
-    <div class="cuadrosStands">
+    <div class="cuadrosStands paises">
         <div class="tittle">
             <h1>
                 Paises

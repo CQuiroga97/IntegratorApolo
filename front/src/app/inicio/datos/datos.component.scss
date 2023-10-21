@@ -4,6 +4,11 @@
     height: 300px;
     margin: auto;
     display: flex;
+    opacity: 0;
+    transition: all .8s;
+}
+.divCuadrosStands.init{
+    opacity: 1;
 }
 .divCuadrosStands .cuadrosStands{
     width: 380px;
@@ -76,4 +81,8 @@
     .divCuadrosStands .cuadrosStands{
         width: 90%;
     }
+  }
+  .paises{
+    opacity: 0;
+    pointer-events: none;
   }

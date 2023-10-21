@@ -1,9 +1,12 @@
 .divFechas{
     width: 100%;
     height: 140px;
-    background-color: #2f6b14;
-    background:linear-gradient(90.15deg, rgba(13, 47, 28, 0.9) 0.14%, rgba(13, 47, 28, 0.62) 99.88%), url(../../assets/img/llaves/fondoLlaves.png);
+    background:linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%), url(../../assets/img/llaves/fondoLlaves.png);
     display: flex;
+}
+.divMenu2{
+    background-image: url(../../assets/img/backgrounds/bannerPoli.jpg);
+    background-size: 100% auto;
 }
 app-transmision{
     width: 100%;
@@ -15,7 +18,6 @@ app-resultados{
     width: 100%;
     height: auto;
     display: flex;
-    background-color: #bde899;
     flex-wrap: wrap;
     flex-direction: column;
     padding-top: 40px;
@@ -32,11 +34,11 @@ app-datos{
     width: 100%;
     height: 360px;
     display: flex;
-    background-color: #144A2C;
 }
 nb-card{
     margin: auto auto auto 0px;
-    padding: 10px;
+    padding: 0px;
+    overflow: hidden;
     background: rgba(17, 17, 17, 0.5);
     box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
     -webkit-backdrop-filter: blur(15px);
@@ -46,6 +48,11 @@ nb-card{
     box-sizing: border-box;
     height: 100%;
     color: white !important;
+}
+nb-card-body{
+    
+    background-size: 100% auto;
+    background-position: center;
 }
 iframe{
     background-color: aliceblue;

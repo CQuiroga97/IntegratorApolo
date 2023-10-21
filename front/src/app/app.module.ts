@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NbThemeModule, NbLayoutModule, NbTabsetModule, NbToastrModule, NbToastrService, NbGlobalPhysicalPosition, NbStepperModule, NbTooltipModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbTabsetModule, NbToastrModule, NbToastrService, NbGlobalPhysicalPosition, NbStepperModule, NbTooltipModule, NbSpinnerModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSidebarModule } from '@nebular/theme';
 import { NbActionsModule } from '@nebular/theme';
@@ -90,6 +90,7 @@ const config: SocketIoConfig = { url: 'https://integratorapi.azurewebsites.net',
 
   ],
   imports: [
+    NbSpinnerModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
