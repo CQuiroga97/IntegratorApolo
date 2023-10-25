@@ -248,7 +248,7 @@ math-field {
 nb-layout .layout{
   background: linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%) !important;
 }
-@media (max-width: 500px){
+@media (max-width: 767px){
   .row{
     flex-direction: column !important;
   }
@@ -343,5 +343,13 @@ nb-layout .layout{
   }
   nb-layout-column{
     padding: 0px !important;
+  }
+}
+@media (max-width: 767px){
+
+}
+@media (max-width: 1200px){
+  .container{
+    max-width: 900px !important;
   }
 }

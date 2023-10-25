@@ -99,3 +99,60 @@ a, span{
     text-align: center;
     width: 100%;
 }
+@media (max-width: 1570px){
+    .container{
+        width: 100% !important;
+        max-width: none !important;
+    }
+    .divBtnMenu{
+        width: 100px !important;
+    }
+    a, span, button{
+        font-size: 17px !important;
+    }
+    .col-4 img{
+        width: 100%;
+        height: auto;
+        margin: auto;
+    }
+  }
+  @media (max-width: 767px){
+    .row{
+        flex-direction: row !important;
+    }
+    .container{
+        height: 100% !important;
+    }
+    .h-100{
+        height: auto !important;
+    }
+    .col-1{
+        width: 100% !important;
+        margin-top: 15px;
+    }
+    .col-4{
+        margin-bottom: 150px;
+    }
+    .drop{
+        height: 50px;
+    }
+    .drop:hover{
+        height: 230px;
+    }
+    .titulo{
+        height: 43px;
+
+    }
+    a, span, button{
+        font-size: 20px !important;
+    }
+    .titulo span{
+        top: 0px !important;
+    }
+    .row.justify-content-end{
+        width: 100%;
+    }
+    .row.justify-content-end .col-1{
+        margin: auto;
+    }
+  }

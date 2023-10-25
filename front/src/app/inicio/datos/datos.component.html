@@ -1,55 +1,41 @@
-<div class="divCuadrosStands" *ngIf="!loading" [class.init]="!transition">
-    <div class="cuadrosStands">
-    <div class="tittle">
-            <h1>
-                Encuentros
-            </h1>
-        </div>
-        <div class="numberoEncuentros">
-            <h1 class="numero1">
-                {{cantEncuentros}}/16
-            </h1>
-            <h1 class="numero2">
-            </h1>
-        </div>
-        <div class="subtittle">
-            <p>
-                Encuentros disputados
-            </p>
-        </div>
-    </div>
-    <div class="cuadrosStands">
+<div class="container" *ngIf="!loading" [class.init]="!transition">
+    <div class="row">
+
+        <div class="cuadrosStands col-3">
         <div class="tittle">
-            <h1>
-                Universidades
-            </h1>
-        </div>     
-        <div class="numberoEncuentros">
-            <h1 class="numero1">
-                {{cantUniversidades}}
-            </h1>            
-        </div>   
-        <div class="subtittle">
-            <p>
-                Universidades inscritas
-            </p>
+                <h1>
+                    Encuentros
+                </h1>
+            </div>
+            <div class="numberoEncuentros">
+                <h1 class="numero1">
+                    {{cantEncuentros}}/16
+                </h1>
+                <h1 class="numero2">
+                </h1>
+            </div>
+            <div class="subtittle">
+                <p>
+                    Encuentros disputados
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="cuadrosStands paises">
-        <div class="tittle">
-            <h1>
-                Paises
-            </h1>
-        </div>
-        <div class="numberoEncuentros">
-            <h1 class="numero1">
-                25
-            </h1>            
-        </div>  
-        <div class="subtittle">
-            <p>
-                Paises representantes
-            </p>
+        <div class="cuadrosStands col-3">
+            <div class="tittle">
+                <h1>
+                    Universidades
+                </h1>
+            </div>     
+            <div class="numberoEncuentros">
+                <h1 class="numero1">
+                    {{cantUniversidades}}
+                </h1>            
+            </div>   
+            <div class="subtittle">
+                <p>
+                    Universidades inscritas
+                </p>
+            </div>
         </div>
     </div>
 </div>

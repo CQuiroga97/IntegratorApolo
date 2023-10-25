@@ -10,6 +10,7 @@ export class ResultadosCompetenciaComponent {
   public participantes:any = [];
   public respuestas:any = {};
   public convert = JSON;
+  public anterior:any;
   constructor(
     private participanteService:ParticipanteService
     ){
@@ -17,7 +18,7 @@ export class ResultadosCompetenciaComponent {
     this.getInfo()
     setInterval(()=>{
       this.getInfo()
-    },500)
+    },1500)
   }
   getInfo(){
 
@@ -25,10 +26,14 @@ export class ResultadosCompetenciaComponent {
         res.participantes.forEach((element:any) =>{
           element.respuestasJSON = JSON.parse(element.respuestasJSON)
         })
-        this.participantes = res.participantes;
-        res.respuestas.forEach((el:any)=>{
-          this.respuestas[el.nombreIntegral] = el.respuesta;
-        })
+        if(this.anterior !== JSON.stringify(res.participantes) ){
+          this.anterior = JSON.stringify(res.participantes);
+          this.participantes = res.participantes;
+          res.respuestas.forEach((el:any)=>{
+            this.respuestas[el.nombreIntegral] = el.respuesta;
+          })
+          
+        }
         
       })
   }
