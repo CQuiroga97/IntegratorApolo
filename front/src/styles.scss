@@ -4,43 +4,56 @@
 
 @include nb-install() {
   @include nb-theme-global();
-};
+}
+
+;
+
 @font-face {
   font-family: "regular";
   src: url("./assets/fonts/MYRIADPRO-REGULAR.OTF");
-  }
+}
+
 @font-face {
   font-family: "light";
   src: url("./assets/fonts/MyriadPro-Light.otf");
-  }
+}
+
 @font-face {
   font-family: "boldMy";
   src: url("./assets/fonts/MYRIADPRO-BOLDCOND.OTF");
-  }
+}
+
 @font-face {
   font-family: "cond";
   src: url("./assets/fonts/MYRIADPRO-COND.OTF");
-  }
+}
+
 /* You can add global styles to this file, and also import other style files */
-*{
+* {
   font-family: "light" !important;
 }
-h1{
+
+h1 {
   font-family: "boldMy" !important;
   font-size: 48px !important;
 }
-.mat-tab-label-content{
+
+.mat-tab-label-content {
   font-family: "cond" !important;
   font-size: 22px !important;
 }
-nb-card-header{
+
+nb-card-header {
   border-bottom: none !important;
 }
-button{
+
+button {
   font-family: "cond" !important;
   font-size: 20px !important;
 }
-[nbInput].status-basic, input:-internal-autofill-selected {
+
+[nbInput].status-basic,
+input:-internal-autofill-selected {
   border-top: 0px !important;
   border-left: 0px !important;
   border-right: 0px !important;
@@ -49,60 +62,84 @@ button{
   color: #d1d1d1 !important;
   background-color: transparent !important;
 }
+
 input:-webkit-autofill,
-  input:-webkit-autofill:focus {
-    transition: background-color 0s 600000s, color 0s 600000s;
-  }
-  nb-layout-header.fixed{
-    backdrop-filter: blur(8px);
-    box-shadow: 0px -3px 26px 0px rgba(0,0,0,0.75);
-  }
+input:-webkit-autofill:focus {
+  transition: background-color 0s 600000s, color 0s 600000s;
+}
+
+nb-layout-header.fixed {
+  backdrop-filter: blur(8px);
+  box-shadow: 0px -3px 26px 0px rgba(0, 0, 0, 0.75);
+}
+
+
+nb-layout-footer.fixed{
+  background-color: transparent;
+}
+
+nb-layout .layout .layout-container .content nb-layout-footer nav{
+  background-color: transparent;
+
+}
+
 :root {
   height: auto;
   --colorPrimario: #144A2C;
   --colorSecundario: #333645;
   --colorTerciario: #fff7a02b;
 }
-.layout-container{
+
+.layout-container {
   padding-top: 0px !important;
 }
-nb-card.transparent{
+
+nb-card.transparent {
   background: rgba(17, 17, 17, 0.5);
   box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(15px);
   /* Note: backdrop-filter has minimal browser support */
-  border-image: linear-gradient(to left, rgba(0, 0, 0, 0),white, rgba(0, 0, 0, 0)) 28 0%;
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0)) 28 0%;
   border-radius: 13px;
   color: white;
   box-sizing: border-box;
 }
-nb-card.transparent input{
+
+nb-card.transparent input {
   background-color: transparent;
   color: white;
   border-radius: 0px;
 }
-nb-card.transparent input:focus{
+
+nb-card.transparent input:focus {
   border: none;
   background-color: transparent;
   color: white;
 }
-nb-card.transparent input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+
+nb-card.transparent input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: rgb(159, 158, 158);
-  opacity: 1; /* Firefox */
+  opacity: 1;
+  /* Firefox */
 }
-nb-card.transparent nb-card-header{
+
+nb-card.transparent nb-card-header {
   color: white;
 }
-.mat-tab-label{
+
+.mat-tab-label {
   height: 35px !important;
   color: black !important;
 }
-.mat-tab-body-content form{
+
+.mat-tab-body-content form {
   padding-bottom: 10px !important;
   display: flex;
   flex-direction: column;
 }
-mat-tab-header{
+
+mat-tab-header {
   width: auto;
   height: auto;
   background-color: white;
@@ -116,149 +153,198 @@ mat-tab-header{
   border: none;
   max-width: 100%;
 }
-.mat-tab-label-active{
+
+.mat-tab-label-active {
   background-color: var(--colorPrimario) !important;
   font-weight: bold !important;
   opacity: 1 !important;
   color: white !important;
 }
+
 .mat-tab-body.mat-tab-body-active {
   animation: fade 1s;
 }
-mat-ink-bar{
+
+mat-ink-bar {
   display: none;
 }
-h1, h2, h3, h4, h5{
+
+h1,
+h2,
+h3,
+h4,
+h5 {
   color: white !important;
 }
-nb-accordion-item{
+
+nb-accordion-item {
   background-color: transparent !important;
   color: white;
 }
-nb-accordion-item-header{
+
+nb-accordion-item-header {
   color: white;
   height: 50px;
 }
+
 ::-webkit-scrollbar {
   width: 10px;
 }
+
 ::-webkit-scrollbar-track {
   background: #888;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #0a4f06;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #12630e;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-nb-toast.status-success{
-  
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+nb-toast.status-success {
+
   background: linear-gradient(270deg, rgba(148, 201, 0, 0.50) 0%, rgba(39, 57, 0, 0.50) 100%);
-  
+
 }
-nb-toast.status-warning{
-  
+
+nb-toast.status-warning {
+
   background: linear-gradient(270deg, rgba(253, 213, 3, 0.50) 0%, rgba(243, 146, 2, 0.50) 100%);
-  
+
 }
-nb-toast .icon-container{
+
+nb-toast .icon-container {
   background-color: transparent !important;
   color: white !important;
 }
-nb-toast{
+
+nb-toast {
   margin: 0px !important;
   backdrop-filter: blur(11px);
   border: none;
   border-radius: 20px 0px 0px 0px;
 }
-.mat-dialog-container{
+
+.mat-dialog-container {
   border: var(--card-border-width) var(--card-border-style) var(--card-border-color);
   background: rgba(17, 17, 17, 0.5);
   box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(15px);
-  border-image: linear-gradient(to left, rgba(0, 0, 0, 0),white, rgba(0, 0, 0, 0)) 28 0%;
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0)) 28 0%;
   border-radius: 13px !important;
   color: white;
   box-sizing: border-box !important;
 }
-input.form-control{
+
+input.form-control {
   background-color: transparent;
   color: white;
   border-radius: 0px;
   border: none;
   border-bottom: 1px solid #ccc;
 }
-input.form-control::placeholder{
+
+input.form-control::placeholder {
   color: rgb(221, 217, 217);
 }
-input.form-control:focus{
+
+input.form-control:focus {
   border: none;
   background-color: transparent;
   color: white;
 }
-.cdk-overlay-dark-backdrop{
+
+.cdk-overlay-dark-backdrop {
   background-color: rgb(0 0 0 / 75%)
 }
+
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
-.divMenu2{
+
+.divMenu2 {
   width: 100%;
   height: 100%;
   padding-top: 140px;
   background-repeat: no-repeat;
-  background-size:100%  auto ;
+  background-size: 100% auto;
   display: flex;
 }
-nb-stepper .header .connector{
+
+nb-stepper .header .connector {
   background-color: white !important;
   opacity: .5;
 }
-nb-stepper .header .connector-past{
+
+nb-stepper .header .connector-past {
   opacity: 1;
 }
-nb-stepper .header .step.selected .label-index, nb-stepper .header .step.completed .label-index{
+
+nb-stepper .header .step.selected .label-index,
+nb-stepper .header .step.completed .label-index {
   background: linear-gradient(90deg, #E6B52C 0%, #EFA12C 100%);
   border: none;
   color: black;
 }
-nb-layout-header nb-icon{
+
+nb-layout-header nb-icon {
   display: none !important;
 }
+
 math-field {
   --caret-color: white !important;
- }
-.mq-cursor{
+}
+
+.mq-cursor {
   border-left: 1px solid white !important;
 }
-.mq-focused{
+
+.mq-focused {
   outline: none !important;
-  border:1px solid transparent !important;
+  border: 1px solid transparent !important;
   box-shadow: 0 0 10px transparent !important;
   caret-color: white !important;
 }
-.mq-textarea textarea{
+
+.mq-textarea textarea {
   color: white !important;
   caret-color: white !important;
 }
-.mq-textarea textarea:focus{
+
+.mq-textarea textarea:focus {
   caret-color: white !important;
 }
-nb-layout .layout{
+
+nb-layout .layout {
   background: linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%) !important;
 }
-@media (max-width: 767px){
-  .row{
+
+@media (max-width: 767px) {
+  .row {
     flex-direction: column !important;
   }
-  .row .col-8, .row .col-4{
+
+  .row .col-8,
+  .row .col-4 {
     width: 100% !important;
   }
-  .divMenu2{
+
+  .divMenu2 {
     padding-top: 40px !important;
   }
-  nb-layout-header{
+
+  nb-layout-header {
     left: -100% !important;
     width: 100%;
     height: 100%;
@@ -267,11 +353,12 @@ nb-layout .layout{
     backdrop-filter: blur(20px);
     transition: all .5s;
   }
-  
-  nb-layout-header.active{
+
+  nb-layout-header.active {
     left: 0% !important;
   }
-  nb-layout-header nb-icon{
+
+  nb-layout-header nb-icon {
     position: absolute !important;
     left: 103%;
     top: 5px;
@@ -280,76 +367,92 @@ nb-layout .layout{
     display: block !important;
     transition: all .5s;
   }
-  nb-layout-header.active nb-icon{
+
+  nb-layout-header.active nb-icon {
     left: 90%;
   }
-  nb-layout-header nav{
+
+  nb-layout-header nav {
     width: 100%;
     height: 100%;
   }
-  nb-layout-header nav app-cabezera{
+
+  nb-layout-header nav app-cabezera {
     flex-direction: column;
     margin-top: 2px !important;
     height: 100%;
     height: 100px !important;
   }
-  nb-layout-header nav app-cabezera .divMenu{
+
+  nb-layout-header nav app-cabezera .divMenu {
     flex-direction: column;
     height: auto !important;
     margin-top: 0px !important;
   }
-  nb-layout-header nav app-cabezera .divMenu img{
+
+  nb-layout-header nav app-cabezera .divMenu img {
     height: auto !important;
     width: 80% !important;
     margin-left: 10px !important;
     margin-bottom: 40px;
   }
-  nb-layout-header nav app-cabezera .divMenu .divBtnMenu{
+
+  nb-layout-header nav app-cabezera .divMenu .divBtnMenu {
     height: 50px !important;
   }
-  nb-layout-header nav app-cabezera .divMenu .divBtnMenu a, nb-layout-header nav app-cabezera .divMenu .divBtnMenu span{
+
+  nb-layout-header nav app-cabezera .divMenu .divBtnMenu a,
+  nb-layout-header nav app-cabezera .divMenu .divBtnMenu span {
     margin-left: 0px !important;
   }
-  nb-layout-header nav app-cabezera .container{
+
+  nb-layout-header nav app-cabezera .container {
     margin-top: auto;
     margin-bottom: 5px;
   }
-  nb-layout-header nav app-cabezera .container .col-3{
+
+  nb-layout-header nav app-cabezera .container .col-3 {
     width: 100% !important;
   }
-  nb-layout-header nav app-cabezera .container .col-3 button{
+
+  nb-layout-header nav app-cabezera .container .col-3 button {
     width: 100%;
   }
-  .divLogin{
+
+  .divLogin {
     width: 100% !important;
     flex-direction: column !important;
     background-size: auto 100% !important;
     background-position: center !important;
   }
-  .divLogin .divImg{
+
+  .divLogin .divImg {
     width: 90% !important;
     margin-bottom: 5px !important;
     height: 100px !important;
     margin-right: auto !important;
   }
-  .divLogin .divImg img{
+
+  .divLogin .divImg img {
     height: 100% !important;
     width: auto !important;
   }
-  .divLogin nb-card{
+
+  .divLogin nb-card {
     width: 90% !important;
     margin-top: 5px !important;
     margin-left: auto !important;
   }
-  nb-layout-column{
+
+  nb-layout-column {
     padding: 0px !important;
   }
 }
-@media (max-width: 767px){
 
-}
-@media (max-width: 1200px){
-  .container{
+@media (max-width: 767px) {}
+
+@media (max-width: 1200px) {
+  .container {
     max-width: 900px !important;
   }
 }

@@ -3,10 +3,10 @@
     <nb-icon icon="menu-outline" class="iconoNotificacion" (click)="abrirMenu()"></nb-icon>
     <app-cabezera></app-cabezera>
   </nb-layout-header>
-  
+
   <nb-layout-column>
     <router-outlet></router-outlet>
-    
+
     <div class="notificacionAbajo">
       <div class="divClose">
         <nb-icon icon="close-circle-outline" (click)="cerrarModalNotificacion()"></nb-icon>
@@ -17,7 +17,7 @@
     </div>
   </nb-layout-column>
   <nb-layout-footer fixed>
-  <!-- Insert footer here -->
+    <app-footer></app-footer>
   </nb-layout-footer>
 
 </nb-layout>

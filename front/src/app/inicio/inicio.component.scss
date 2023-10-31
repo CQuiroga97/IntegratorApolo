@@ -2,6 +2,7 @@
     width: 100%;
     height: 140px;
     background:linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%), url(../../assets/img/llaves/fondoLlaves.png);
+    background-size: cover;
     display: flex;
 }
 .divMenu2{
@@ -52,7 +53,7 @@ nb-card{
     color: white !important;
 }
 nb-card-body{
-    
+
     background-size: 100% auto;
     background-position: center;
 }
