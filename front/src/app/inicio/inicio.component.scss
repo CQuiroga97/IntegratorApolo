@@ -1,13 +1,15 @@
 .divFechas{
     width: 100%;
     height: 140px;
-    background:linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%), url(../../assets/img/llaves/fondoLlaves.png);
+    /* background:linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%), url(../../assets/img/llaves/fondoLlaves.png); */
     background-size: cover;
     display: flex;
 }
 .divMenu2{
-    background-image: url(../../assets/img/backgrounds/bannerPoli.jpg);
+    /* background-image: url(../../assets/img/backgrounds/bannerPoli.jpg); */
+    background:linear-gradient(235deg, transparent .71%, #166136bb 90.00%), url(../../assets/img/backgrounds/bannerPoli.jpg);
     background-size: 100% auto;
+    /* background-position-y: -20px; */
 }
 app-transmision{
     width: 100%;
