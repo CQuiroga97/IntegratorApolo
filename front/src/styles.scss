@@ -206,6 +206,8 @@ nb-accordion-item-header {
 html,
 body {
   height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 body {

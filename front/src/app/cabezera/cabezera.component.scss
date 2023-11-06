@@ -33,8 +33,10 @@ button{
     margin: auto 0px auto auto;
 }
 img{
-    margin: auto 0px auto 50px;
-    height: 43px;
+    margin: auto 0px auto 0px;
+    height: 75px;
+    position: relative;
+    top: -20px;
 }
 .justify-content-end b{
     text-align: right;
@@ -46,7 +48,7 @@ img{
     margin: auto;
     height: 500px;
     transition: all .5s;
-    
+
     position: relative;
 }
 .drop span, .drop a{
