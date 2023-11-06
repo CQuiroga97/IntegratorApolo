@@ -32,9 +32,24 @@ button:hover{
 button{
     margin: auto 0px auto auto;
 }
+
+
+.cont-logos{
+  display: flex;
+  align-items: center;
+}
+
 img{
-    margin: auto 0px auto 50px;
-    height: 43px;
+
+    height: 75px;
+    position: relative;
+
+}
+
+.white-line{
+  width: 2px;
+  height: 50px;
+  background-color: white;
 }
 .justify-content-end b{
     text-align: right;
@@ -46,7 +61,7 @@ img{
     margin: auto;
     height: 500px;
     transition: all .5s;
-    
+
     position: relative;
 }
 .drop span, .drop a{

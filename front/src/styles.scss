@@ -196,16 +196,18 @@ nb-accordion-item-header {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0a4f06;
+  background: #636363;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #12630e;
+  background: #989898;
 }
 
 html,
 body {
   height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 body {

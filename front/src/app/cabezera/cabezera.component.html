@@ -3,12 +3,14 @@
         <div class="col-7 h-100 pb-4">
             <div class="container h-100">
                 <div class="row h-100 w-100">
-                    <div class="col-4 h-100">
-                        <img src="../../assets/img/logos/america.png" alt="">
+                    <div class="col-4 h-100 cont-logos">
+                        <img src="../../assets/img/logos/logo-ameri.png" alt="">
+                        <div class="white-line"></div>
+                        <img  src="../../assets/img/logos/logo-poli.png" alt="">
                     </div>
+
                     <div class="divBtnMenu col-1 h-100">
                         <a href="./">INICIO</a>
-                        
                     </div>
                     <div class="divBtnMenu col-1 h-100">
                         <div class="drop">
@@ -63,7 +65,7 @@
                         </div>
                     </div>
                     <div class="col-1">
-            
+
                         <button nbButton outline status="basic" (click) = "goLogin()" *ngIf="!isLoggedIn">Iniciar Sesión</button>
                         <button nbButton outline status="basic" (click) = "logOut()" *ngIf="isLoggedIn">Cerrar Sesión</button>
                     </div>
