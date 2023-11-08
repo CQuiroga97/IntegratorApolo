@@ -79,7 +79,8 @@ nb-layout-footer.fixed{
 }
 
 nb-layout .layout .layout-container .content nb-layout-footer nav{
-  background-color: transparent;
+  /* background-color: transparent; */
+  background:linear-gradient(235deg, transparent .71%, #166136bb 90.00%);
 
 }
 
@@ -206,7 +207,7 @@ nb-accordion-item-header {
 html,
 body {
   height: 100%;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   overflow-x: hidden;
 }
 
