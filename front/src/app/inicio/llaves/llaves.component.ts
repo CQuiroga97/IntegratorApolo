@@ -18,7 +18,6 @@ export class LlavesComponent {
     private toast:NbToastrService
   ){
     _userService.llamarEncuentros().subscribe((res:any)=>{
-      console.log(res)
       res.forEach((el:any)=>{
         if(!this.octavos[`${el.encuentro}${el.ronda}`])
         this.octavos[`${el.encuentro}${el.ronda}`] = []
@@ -29,8 +28,6 @@ export class LlavesComponent {
 
       this.transition = false;
     }, 10)
-      console.log(this.octavos)
-      console.log(this.octavos["14"].length)
       if(!this.octavos['18']){
         router.navigate(["./"])
         toast.warning("Vuelve más tarde", "Las llaves aún no se han creado")

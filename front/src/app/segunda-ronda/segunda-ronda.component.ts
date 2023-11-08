@@ -120,10 +120,12 @@ export class SegundaRondaComponent{
   }
   sumarPuntajeParticipante(){
     this.socket.sumarPuntajeParticipante().subscribe(()=>{
+      this.pausarCronometro()
       this.reiniciar();
     })
   }
   countDownSeconds(){
+    this.segundos = 3;
     return setInterval(()=>{
       if(this.segundos == 0){
         clearInterval(this.countDown);
@@ -136,6 +138,7 @@ export class SegundaRondaComponent{
   iniciarCronometroParticipante(){
     this.socket.iniciarCronometroParticipante().subscribe(()=>{
       this.estado = 3
+      clearInterval(this.countDown);
       this.countDown = this.countDownSeconds();
     })
   }

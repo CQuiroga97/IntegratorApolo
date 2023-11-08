@@ -119,6 +119,9 @@ export class UsersService {
   ingresarIntegralesSegundaRonda(data: any) {
     return this.http.post("https://integratorapi.azurewebsites.net/api/ingresarIntegralesSegundaRonda", data);
   }
+  quemarIntegral(data: any) {
+    return this.http.post("https://integratorapi.azurewebsites.net/api/quemarIntegral", data);
+  }
 
 
   getToken() {

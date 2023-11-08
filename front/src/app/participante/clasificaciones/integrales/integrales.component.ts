@@ -29,7 +29,14 @@ export class IntegralesComponent implements OnInit{
     private router:Router,
     private socket:SocketService,
   ){
-
+    document.addEventListener("visibilitychange", (event) => {
+      if (document.visibilityState == "visible") {
+        // console.log("tab is active")
+      } else {
+        this.toastrService.show(`Has cambiado la pestaña`, "Prueba finalizada", { status: "warning", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+        window.location.href = "./";
+      }
+    });
   }
   ngOnInit(): void {
     this.mensajeLoading = "Cargando prueba..."

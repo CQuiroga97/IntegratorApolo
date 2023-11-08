@@ -82,37 +82,48 @@ export class ClasificacionesComponent implements OnInit{
     this.participanteService.getTimerClasificaciones().subscribe((res2:any) =>{
       this.tiempo = res2;
     })
-    this.socket.getEstadoClasificatorias().subscribe(res =>{
-      if(!res.estado){
-        this.bannerLobby = !res.estado;
-        setTimeout(()=>{
-          this.bannerEspera = res.estado;
-        }, 510)
-        if(!this.loaded){
-          this.loaded = true;
-          if(this.inicioCompetencia>fechaActual){
-            this.timerComienzo = this.timer();
-          }else{
-            this.bannerLobby = false;
+    this.user.llamarEncuentros().subscribe((re2s:any)=>{
+      if(re2s.length == 0){
+        this.toastrService.show(`Las clasificatorias ya han empezado`, "Acceso inhabilitado", { status: "warning", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+        this.router.navigate(["/"])
+        this.socket.getEstadoClasificatorias().subscribe(res =>{
+          console.log(res)
+          if(!res.estado){
+            this.bannerLobby = !res.estado;
             setTimeout(()=>{
-              this.bannerEspera = true;
+              this.bannerEspera = res.estado;
+            }, 510)
+            if(!this.loaded){
+              this.loaded = true;
+              if(this.inicioCompetencia>fechaActual){
+                this.timerComienzo = this.timer();
+              }else{
+                this.bannerLobby = false;
+                setTimeout(()=>{
+                  this.bannerEspera = true;
+                }, 510)
+              }
+            }
+          }else{
+            if(!this.loaded){
+              this.loaded = true;
+              if(res.estado){
+                this.toastrService.show(`Las clasificatorias ya han empezado`, "Acceso inhabilitado", { status: "warning", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+                this.router.navigate(["/"])
+                
+              }
+            }
+            this.loaded = false;
+            setTimeout(()=>{
+              this.enPrueba = true;
             }, 510)
           }
-        }
+        })
       }else{
-        if(!this.loaded){
-          this.loaded = true;
-          if(res.estado){
-            this.toastrService.show(`Las clasificatorias ya han empezado`, "Acceso inhabilitado", { status: "warning", destroyByClick: true, icon: "checkmark-circle-2-outline" });
-            // this.router.navigate(["/"])
-          }
-        }
-        this.loaded = false;
-        setTimeout(()=>{
-          this.enPrueba = true;
-        }, 510)
+        window.location.href = "./participante/segundaRonda"
       }
     })
+    
     this.socket.getEstadoClasificatoriasEmit();
     const fechaActual = new Date();
     const diff = Math.abs(this.inicioCompetencia.getTime() - fechaActual.getTime())

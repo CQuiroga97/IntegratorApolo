@@ -40,7 +40,8 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-9">
-                            <button nbButton outline status="basic" class="w-100" (click)="enviarIntegral()" [disabled]="enCompetencia">Enviar integral</button>
+                            <button nbButton outline status="basic" class="w-100" 
+                            (click)="enviarIntegral()" [disabled]="enCompetencia || (!participante![1]['online'] || !participante![0]['online'])">Enviar integral</button>
                         </div>
                     </div>
                     <div class="row justify-content-center mt-3">
@@ -69,6 +70,7 @@
                     </nb-card-header>
                     <nb-card-body class="d-flex p-0">
                         <img [src]="siguienteIntegral" alt="" class="lineas-1 m-auto">
+                        <nb-icon icon="trash-2-outline" class="quemar" (click)="quemarIntegral()"></nb-icon>
                     </nb-card-body>
                 </nb-card>
             </div>
@@ -194,6 +196,11 @@
                         </div>
                     </nb-card-footer>
                 </nb-card>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 mb-4">
+                <button nbButton status="success" class="w-100" (click)="empate()">Declarar empate</button>
             </div>
         </div>
     </div>

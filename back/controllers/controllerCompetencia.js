@@ -220,6 +220,16 @@ exports.guardarLogoUniversidad=(req,res,con)=>{
         res.send(["Error"])
     });
 }
+exports.quemarIntegral = (req,res,con)=>{
+    con.query(`EXEC quemarIntegral ${req.body.idIntegral}`, (err, resp)=>{
+        if(err){
+            res.send(["error"])
+        }else{
+
+            res.send(["done"])
+        }
+    })
+}
 saveIntegral=(req, res, con)=>{
     const ruta = `./back/back/controllers/integrales/integral${req.body.numIntegral + 1}`;
     if(fs.existsSync(ruta))

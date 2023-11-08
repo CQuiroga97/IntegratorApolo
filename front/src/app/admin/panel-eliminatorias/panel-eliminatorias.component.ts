@@ -22,6 +22,7 @@ export class PanelEliminatoriasComponent implements OnInit{
   public segundos = 3;
   public countDown:any;
   public primerParticipante = null;
+  public cantPausas = 0;
   public participante:any = [
     {online:false},
     {online:false}
@@ -40,6 +41,7 @@ export class PanelEliminatoriasComponent implements OnInit{
       if(cant == 2){
         this.enCompetencia = true;
         socket.iniciarCronometro();
+        clearInterval(this.countDown);
         this.countDown = this.countDownSeconds();
         this.estado = 3;
       }
@@ -49,6 +51,7 @@ export class PanelEliminatoriasComponent implements OnInit{
     this.llamarUsuarioOnline()
   }
   updatePuntaje(puntaje:number, idParticipante:number){
+    this.reiniciar();
     const data = {
       puntaje:puntaje,
       idParticipante:idParticipante,
@@ -76,6 +79,33 @@ export class PanelEliminatoriasComponent implements OnInit{
         }
       }
     }) 
+  }
+  quemarIntegral(){
+    console.log(this.siguienteIntegralNum)
+    this.user.modificarIntegral({idIntegral:this.siguienteIntegralNum, estado:3}).subscribe(res=>{
+      this.getIntegralesAdmin()
+    })
+  }
+  empate(){
+    this.reiniciar();
+    console.log(this.integralActual)
+    if(this.integralActual != ""){
+
+      const data2 = {
+        idIntegral:this.integralActuallNum,
+        estado:3
+      }
+      this.user.modificarIntegral(data2).subscribe(res=>{
+        this.integralActual = "";
+        this.getIntegralesAdmin()
+        this.llamarEliminatorias()
+        this.socket.sumarPuntaje();
+      })
+    }else{
+      this.getIntegralesAdmin()
+      this.llamarEliminatorias()
+      this.socket.sumarPuntaje();
+    }
   }
   finalizarRonda(idGanador:number, idPerdedor:number){
     let nuevaRonda = this.encuentro==this.ronda?(this.ronda!/2):this.ronda;
@@ -124,7 +154,13 @@ export class PanelEliminatoriasComponent implements OnInit{
       })
     
   }
+  reiniciar(){
+    this.enCompetencia = false;
+    this.cronometroFront = {minutos:5,segundos:0, mill:0}
+    this.cantPausas = 0;
+  }
   countDownSeconds(){
+    this.segundos = 3;
     return setInterval(()=>{
       if(this.segundos == 0){
         this.estado = 0;
@@ -138,20 +174,13 @@ export class PanelEliminatoriasComponent implements OnInit{
   pausarCronometroStream(){
     this.socket.pausarCronometroStream().subscribe((res)=>{
       let index = 0;
-      this.participante.forEach((el:any)=>{
-        if(res == el.idParticipante[0]){
-          if(this.primerParticipante == null){
-            this.primerParticipante = res;
-          }else{
-            console.log(this.primerParticipante)
-            if(this.primerParticipante != res){
-              clearInterval(this.cronometroTimer);
-              this.enCompetencia = false;
-            }
-          }
-        }
-        index++
-      })
+      console.log(this.cantPausas)
+      this.cantPausas++;
+      if(this.cantPausas == 2){
+        this.cantPausas = 0;
+        clearInterval(this.cronometroTimer);
+      }
+     
     })
   }
   cronometro(){
