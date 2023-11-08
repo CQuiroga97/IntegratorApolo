@@ -82,6 +82,37 @@ export class ListasUniversidadesComponent implements OnDestroy {
         saveAs(downloadURL);
         })
     }
+    
+    imagenUniversidad(event: any, index: number, indice: number): void {
+      console.log(index)
+      let i = 1;
+      Array.from(event.target.files).forEach((file:any)=>{
+  
+        if (file) {
+          const reader = new FileReader();
+    
+          reader.onload = (e: any) => {
+            console.log(e.target.result)
+            this.user.guardarLogoUniversidad({imagen:e.target.result, universidad:index}).subscribe((res:any)=>{
+              console.log(res)
+              this.traerUniversidades();
+              // if(res[0]){
+              //   if(i == event.target.files.length){
+              //     this.llamarIntegrales()
+  
+              //   }
+              //   i++;
+              // }
+            })
+          };
+    
+          reader.readAsDataURL(file);
+    
+        }
+      })
+  
+    }
+  
     registrarParticipantesExcel(){
       this.userService.registrarParticipantesExcel(this.file).subscribe((data)=>{
         this.regUni.setActiveUniFunc();

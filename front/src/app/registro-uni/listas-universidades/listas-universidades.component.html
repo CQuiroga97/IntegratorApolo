@@ -52,12 +52,29 @@
                   <!-- <img src="{{item.imageUrl}}" class="accordion-header-image"> -->
                   <div class="container">
                     <div class="row">
+                      <div class="col-1">
+                        <div class="divImagenU d-flex">
+                          <label for="fileInput{{ item.universidad.idUniversidad }}">
+
+
+                            <input type="file" id="fileInput{{ item.universidad.idUniversidad }}" (change)="imagenUniversidad($event, item.universidad.idUniversidad, 0)" accept=".png, .jpg" multiple
+                              style="display:none">
+              
+                            <nb-icon icon="camera-outline" class="m-auto" style="color: white;"></nb-icon>
+
+                            <img [src]="'https://integratorapi.azurewebsites.net/logos/logo_'+item.universidad.idUniversidad+'.png'" alt="">
+              
+              
+                          </label>
+                        </div>
+                      </div>
                       <div class="col-sm-1">
+                        
                         <span>
                           <nb-icon icon="edit-outline" style="color: white;" class="d-flex justify-content-center text-center" (click)="modificarUniversidad(item)"></nb-icon>
                         </span>
                       </div>
-                      <div class="col-md-10">
+                      <div class="col-md-9">
                         <span>
 
                           {{item.universidad["nombre"]}}

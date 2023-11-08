@@ -194,7 +194,6 @@ exports.modificarIntegral = (req, res, con)=>{
                         else{
                             res.send(result)
                         }
-                        
                     })
                     flag = false;
                 }
@@ -204,9 +203,25 @@ exports.modificarIntegral = (req, res, con)=>{
         }
     })
 }
+exports.guardarLogoUniversidad=(req,res,con)=>{
+    const ruta = `./back/back/controllers/logos`;
+    // const ruta = `./controllers/logos`;
+    if(fs.existsSync(ruta))
+        fs.rmSync(ruta, {recursive:true, force: true})
+    mkdir(ruta,  { recursive: true }).then(()=>{
+        console.log(fs.existsSync(ruta), "Ruta creada")
+        let imagen =  req.body.imagen.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/)[2];
+        let imagenBuff = Buffer.from(imagen,'base64')
+        fs.writeFile(`${ruta}/logo_${req.body.universidad}.png`, imagenBuff, (err)=>{
+            res.send(["Done"])
+        })
+    }).catch((err)=>{
+        console.log("Error: ",error)
+        res.send(["Error"])
+    });
+}
 saveIntegral=(req, res, con)=>{
     const ruta = `./back/back/controllers/integrales/integral${req.body.numIntegral + 1}`;
-    console.log(ruta)
     if(fs.existsSync(ruta))
         fs.rmSync(ruta, {recursive:true, force: true})
     mkdir(ruta,  { recursive: true }).then(()=>{
