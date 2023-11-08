@@ -10,8 +10,8 @@ import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
   styleUrls: ['./login-participante.component.scss']
 })
 export class LoginParticipanteComponent {
-  name: string = "participante@gmail.com";
-  pass: string = "123456789";
+  name: string = "";
+  pass: string = "";
   constructor(
     public userService:UsersService,
     private router:Router,

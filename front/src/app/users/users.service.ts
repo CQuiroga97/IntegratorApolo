@@ -94,6 +94,9 @@ export class UsersService {
   guardarIntegral(data:any){
     return this.http.post("https://integratorapi.azurewebsites.net/api/guardarIntegral", data);
   }
+  guardarLogoUniversidad(data:any){
+    return this.http.post("https://integratorapi.azurewebsites.net/api/guardarLogoUniversidad", data);
+  }
   borrarIntegral(data:any){
     return this.http.post("https://integratorapi.azurewebsites.net/api/borrarIntegral", data);
   }
@@ -115,6 +118,9 @@ export class UsersService {
 
   ingresarIntegralesSegundaRonda(data: any) {
     return this.http.post("https://integratorapi.azurewebsites.net/api/ingresarIntegralesSegundaRonda", data);
+  }
+  quemarIntegral(data: any) {
+    return this.http.post("https://integratorapi.azurewebsites.net/api/quemarIntegral", data);
   }
 
 

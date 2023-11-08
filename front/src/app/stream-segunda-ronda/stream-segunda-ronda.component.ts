@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { SocketService } from '../users/socket.service';
 import { UsersService } from '../users/users.service';
 import { Peer } from "peerjs";
+import { enc } from 'crypto-js';
 interface VideoElement {
   muted: boolean;
   srcObject: MediaStream;
@@ -64,27 +65,35 @@ export class StreamSegundaRondaComponent  implements OnInit{
     })
   }
   pausarCronometroStream(){
+    console.log(this.enCompetencia)
+    
     this.socket.pausarCronometroStream().subscribe((res)=>{
-      let index = 0;
-      this.participantes.forEach((el:any)=>{
-        if(res == el.idParticipante[0]){
-          this.tiempoRespuestas[index] = {
-            minutos:this.cronometroFront.minutos, 
-            segundos:this.cronometroFront.segundos,
-            mill:this.cronometroFront.mill,
-            respuesta:true}
-          let buffCronometro = {
-            minutos:this.cronometroFront.minutos, 
-            segundos:this.cronometroFront.segundos,
-            mill:this.cronometroFront.mill,
-            idParticipante:res};
-            this.socket.confirmarTiempo(buffCronometro)
-        }
-        index++
-      })
+      if(this.enCompetencia){
+
+        console.log(res)
+        let index = 0;
+        this.participantes.forEach((el:any)=>{
+          if(res == el.idParticipante[0]){
+            this.tiempoRespuestas[index] = {
+              minutos:this.cronometroFront.minutos, 
+              segundos:this.cronometroFront.segundos,
+              mill:this.cronometroFront.mill,
+              respuesta:true}
+            let buffCronometro = {
+              minutos:this.cronometroFront.minutos, 
+              segundos:this.cronometroFront.segundos,
+              mill:this.cronometroFront.mill,
+              idParticipante:res};
+              this.socket.confirmarTiempo(buffCronometro)
+          }
+          index++
+        })
+      }
     })
   }
+  
   cronometro(){
+    console.log(this.tiempoRespuestas)
     return setInterval(()=>{
       let {minutos, segundos, mill} = this.cronometroFront
       if(mill == 0){
@@ -112,9 +121,7 @@ export class StreamSegundaRondaComponent  implements OnInit{
             reader.readAsDataURL(blob)
             reader.onloadend = async ()=>{
               this.integral = reader.result;
-              if(this.integral){
-                this.estado = 2
-              }
+              
             }
           }
         })
@@ -123,12 +130,19 @@ export class StreamSegundaRondaComponent  implements OnInit{
   }
   iniciarCronometroParticipante(){
     this.socket.iniciarCronometroParticipante().subscribe(()=>{
-      this.estado = 3
-      this.countDown = this.countDownSeconds();
+      if(this.estado != 3){
+
+        this.estado = 3
+        clearInterval(this.countDown);
+        this.countDown = this.countDownSeconds();
+      }
     })
   }
   countDownSeconds(){
+    this.segundos = 3
     return setInterval(()=>{
+      console.log(this.estado)
+
       if(this.segundos == 0){
         clearInterval(this.countDown);
         this.enCompetencia = true;
@@ -145,7 +159,13 @@ export class StreamSegundaRondaComponent  implements OnInit{
   }
   reiniciar(){
     console.log("d")
+    clearInterval(this.cronometroTimer);
     this.cronometroFront = this.tiempoOriginal;
+    let buffTiempo:any = this.tiempoOriginal;
+    buffTiempo["respuesta"]=false;
+    this.enCompetencia = false;
+    this.tiempoRespuestas[0] = buffTiempo;
+    this.tiempoRespuestas[1] = buffTiempo;
     this.estado = 0;
     this.mathField[0].latex("")
     this.mathField[1].latex("")

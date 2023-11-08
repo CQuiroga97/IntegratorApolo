@@ -19,22 +19,31 @@ export class ClasificatoriasComponent implements OnInit{
     private usersService:UsersService
   ) {}
   ngOnInit(): void {
-    this.socket.getUsersOnline().subscribe(res =>{
-      this.users = []
-      res.forEach((el:any) => {
-        this.users.push(el)
-      });
-      this.participanteService.getIntegralesClasificaciones().subscribe((res:any)=>{
-        this.cantIntegrales = res.integrales.length;
-      })
+    this.usersService.llamarEncuentros().subscribe((res:any)=>{
+      if(res.length > 0){
+        window.location.href = "./admin/panelControlEliminatorias"
+      }else{
+        this.socket.getUsersOnline().subscribe(res =>{
+          this.users = []
+          res.forEach((el:any) => {
+            this.users.push(el)
+          });
+          this.participanteService.getIntegralesClasificaciones().subscribe((res:any)=>{
+            this.cantIntegrales = res.integrales.length;
+          })
+        })
+      }
     })
+    
 
   }
   iniciarClasificatorias(){
     this.socket.iniciarClasificatorias();
+    
   }
   iniciarSegundaRonda(){
     this.usersService.iniciarSegundaRonda().subscribe(res => {
+      window.location.href = "./admin/panelControlEliminatorias"
     });
   }
 }

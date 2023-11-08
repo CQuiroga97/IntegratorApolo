@@ -100,7 +100,7 @@
     <!-- transmision ejercicio -->
     <div class="container cont_transmision col-6 d-flex flex-column">
       <div class="cont_Integral_Actual position-relative m-auto w-50">
-        <img [src]="integral" alt="" class="integral_actual" width="100%" height="100%" *ngIf="integral && enCompetencia">
+        <img [src]="integral" alt="" class="integral_actual" width="100%" height="100%" *ngIf="integral && enCompetencia && estado != 3">
         <img [src]="imagenDefault" alt="" class="integral_actual" width="100%" height="100%" *ngIf="!enCompetencia">
       </div>
 

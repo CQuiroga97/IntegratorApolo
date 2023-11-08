@@ -145,5 +145,11 @@ router.post("/updatePuntaje", (req, res)=>{
 router.post("/updateEncuentro", (req, res)=>{
     competencia.updateEncuentro(req, res, con);
 })
+router.post("/guardarLogoUniversidad", (req, res)=>{
+    competencia.guardarLogoUniversidad(req, res, con);
+})
+router.post("/quemarIntegral", (req, res)=>{
+    competencia.quemarIntegral(req, res, con);
+})
 
 module.exports = router;
