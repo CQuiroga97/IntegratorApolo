@@ -8,10 +8,12 @@
 }
 
 .cont-redes{
-  align-items: center;
+  position: relative;
   align-items: center;
   justify-content: space-between;
   /* background-color: aqua; */
+  top: -5px;
+  left: 12px;
 }
 
 
@@ -27,10 +29,12 @@
   background-color: white;
   height: 3px;
   width: 70px;
+  top: -6px;
+  position: relative;
 }
 
 .logo-apolo-footer{
-  width: 130px;
+  width: 95px;
   position: relative;
   margin: auto;
   top: -8px;
@@ -39,12 +43,20 @@
 .anio{
   position: relative;
   margin: auto;
-  top: 10px;
+  top: -6px;
   left: 20px;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.anio p{
+.anio .anio-1{
   color: white !important;
-  font-size: 20px;
+  font-size: 15px;
+  align-items: center;
+  text-align: center;
 
 }
+
+
