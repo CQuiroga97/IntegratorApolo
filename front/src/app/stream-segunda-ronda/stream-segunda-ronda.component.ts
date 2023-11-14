@@ -57,7 +57,7 @@ export class StreamSegundaRondaComponent  implements OnInit{
   ngOnInit(): void {
     this.tiempoRespuestas.push({minutos:0, segundos:0,mill:0,respuesta:false})
     this.tiempoRespuestas.push({minutos:0, segundos:0,mill:0,respuesta:false})
-    this.cronometroFront = {minutos:5,segundos:0, mill:0}
+    this.cronometroFront = {minutos:3,segundos:0, mill:0}
     this.tiempoOriginal = this.cronometroFront
     this.peer = new Peer("integrator-call-1");
     this.socket.volverALlamar().subscribe((res)=>{

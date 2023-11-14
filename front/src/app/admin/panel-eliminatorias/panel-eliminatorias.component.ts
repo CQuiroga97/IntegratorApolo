@@ -31,7 +31,7 @@ export class PanelEliminatoriasComponent implements OnInit{
     private user:UsersService,
     private socket:SocketService
   ){
-    this.cronometroFront = {minutos:5,segundos:0, mill:0}
+    this.cronometroFront = {minutos:3,segundos:0, mill:0}
     socket.usuariosPreparados().subscribe((res)=>{
       let cant = 0; 
       res.forEach((el:any)=>{
@@ -156,7 +156,7 @@ export class PanelEliminatoriasComponent implements OnInit{
   }
   reiniciar(){
     this.enCompetencia = false;
-    this.cronometroFront = {minutos:5,segundos:0, mill:0}
+    this.cronometroFront = {minutos:3,segundos:0, mill:0}
     this.cantPausas = 0;
   }
   countDownSeconds(){

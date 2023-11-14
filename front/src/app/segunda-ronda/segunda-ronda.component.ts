@@ -71,7 +71,7 @@ export class SegundaRondaComponent{
     private user:UsersService
   ){
     
-    this.cronometroFront = {minutos:5,segundos:0, mill:0}
+    this.cronometroFront = {minutos:3,segundos:0, mill:0}
     this.tiempoOriginal = this.cronometroFront
     this.dataParticipante = userService.getUserInfo().data;
     const peer = new Peer("integrator-call-"+this.dataParticipante.idParticipante);
