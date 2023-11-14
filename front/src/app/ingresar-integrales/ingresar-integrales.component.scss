@@ -20,6 +20,7 @@ nb-card {
   border-radius: 13px;
   margin-bottom: 10px;
   box-sizing: border-box;
+
 }
 
 
@@ -27,6 +28,7 @@ nb-card {
   width: 1690px;
   height: 800px;
   margin-top: 10rem !important;
+  font-family: regular;
 }
 
 
@@ -64,6 +66,18 @@ nb-card {
   height: 100%;
   max-height: fit-content;
   border-radius: 0px 10px 10px 0px;
+  width: 100%;
+  height: 100%;
+  background-size: 159%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+}
+
+.noselected-img{
+  position: relative; margin: auto; left: 110px; width: 100%; height: 100%;
+  background-image: url('../../assets/img/admin/registroIntegrales/Layer_1.png');
+  background-size: 25%;    background-position-y: 17px;    background-repeat: no-repeat;
 }
 
 .box_respuestas {
@@ -104,9 +118,10 @@ nb-card {
   display: flex;
   align-items: center;
   text-align: center;
-  height: 104px;
+  height: 104.8px;
   border-radius: 5px 0px 0px 5px;
-  font-weight: bold;
+
+  font-family: light !important;
 }
 
 
