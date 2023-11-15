@@ -84,8 +84,6 @@ export class ClasificacionesComponent implements OnInit{
     })
     this.user.llamarEncuentros().subscribe((re2s:any)=>{
       if(re2s.length == 0){
-        this.toastrService.show(`Las clasificatorias ya han empezado`, "Acceso inhabilitado", { status: "warning", destroyByClick: true, icon: "checkmark-circle-2-outline" });
-        this.router.navigate(["/"])
         this.socket.getEstadoClasificatorias().subscribe(res =>{
           console.log(res)
           if(!res.estado){
