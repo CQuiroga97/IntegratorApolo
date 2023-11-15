@@ -33,6 +33,7 @@ export class SegundaRondaComponent{
   public imagenDefault:any = '../../assets/img/streaming/Group 70.png';
   public enCompetencia = false;
   public video_1:VideoElement;
+  public video_2:VideoElement;
   MQ:any = null;
   mathFieldSpan:any;
   fillInTheBlank:any;
@@ -82,13 +83,18 @@ export class SegundaRondaComponent{
     this.finalizar()
     this.iniciarIntegralParticipante()
 
-    peer.on("call", (call) => {
+    peer.on("call", (call:any) => {
       navigator.mediaDevices.getUserMedia(
         { video: true, audio: true }
       ).then((stream) => {
-
-        this.video_1 = {
+        console.log(call);
+        console.log(stream)
+        this.video_2 = {
           muted: false,
+          srcObject: call
+        }
+        this.video_1 = {
+          muted: true,
           srcObject: stream
         }
         call.answer(stream); // Answer the call with an A/V stream.

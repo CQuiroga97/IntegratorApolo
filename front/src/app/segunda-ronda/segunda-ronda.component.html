@@ -1,9 +1,10 @@
 <div class="div_segunda_ronda z-0">
-  
+  <video *ngIf="video_2" [srcObject]="video_2.srcObject" class="w-100 m-auto" (loadedmetadata)="onLoadedMetadata($event)" style="display: none;"></video>
+
   <div
     class="container cont_padre_segunda_ronda d-flex flex-column w-100 m-auto justify-content-around position-relative">
     <div class="divCamara">
-      <video *ngIf="video_1" [srcObject]="video_1.srcObject" class="w-100 m-auto" (loadedmetadata)="onLoadedMetadata($event)" ></video>
+      <video *ngIf="video_1" [srcObject]="video_1.srcObject" class="w-100 m-auto" (loadedmetadata)="onLoadedMetadata($event)"></video>
     </div>
     <div class="container cont_pregunta_segundaRonda h-25 w-100">
       <div class="row">
