@@ -28,7 +28,7 @@ exports.registrarUniversidadMultiples = (excel, res, con)=>{
         const json = JSON.stringify(data);
         con.query(`exec sp_setUniversidadList '${json}'`, (err, res2)=>{
             if(err)
-                res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
+                res.status(401).send({titulo:"Error", texto:json, icono:"alert-triangle-outline"})
             else
                 res.status(200).send({titulo:"Universidades registradas", texto:`Se han registrado ${data.length} universidades.`, icono:"file-add-outline"})
         });
