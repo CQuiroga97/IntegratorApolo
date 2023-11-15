@@ -6,7 +6,10 @@ import { ToastrService } from 'ngx-toastr';
 import { NbToastrService } from '@nebular/theme';
 import { SocketService } from '../users/socket.service';
 import { Peer } from "peerjs";
-
+interface VideoElement {
+  muted: boolean;
+  srcObject: MediaStream;
+}
 @Component({
   selector: 'app-segunda-ronda',
   templateUrl: './segunda-ronda.component.html',
@@ -29,6 +32,7 @@ export class SegundaRondaComponent{
   public respuestaEnviada = false
   public imagenDefault:any = '../../assets/img/streaming/Group 70.png';
   public enCompetencia = false;
+  public video_1:VideoElement;
   MQ:any = null;
   mathFieldSpan:any;
   fillInTheBlank:any;
@@ -82,6 +86,11 @@ export class SegundaRondaComponent{
       navigator.mediaDevices.getUserMedia(
         { video: true, audio: true }
       ).then((stream) => {
+
+        this.video_1 = {
+          muted: false,
+          srcObject: stream
+        }
         call.answer(stream); // Answer the call with an A/V stream.
         
       }).catch((error:any)=>{
@@ -147,6 +156,7 @@ export class SegundaRondaComponent{
     this.guardarRespuesta()
     clearInterval(this.cronometroTimer);
     this.socket.pausarCronometro(this.dataParticipante.idParticipante)
+    this.validate()
   } 
   reiniciar(){
     if(!this.respuestaEnviada)
@@ -156,7 +166,7 @@ export class SegundaRondaComponent{
     this.integral = null;
     this.enCompetencia = false;
     this.mathField.latex("")
-    this.validate(null)
+    this.validate()
     this.llamarEliminatorias();
   }
   getEliminatoriaParticipante(){
@@ -192,7 +202,7 @@ export class SegundaRondaComponent{
     else if(this.participante.tiempo_3 == "")
       this.participante.tiempo_3 = `${this.cronometroFront.minutos}:${this.cronometroFront.segundos}:${this.cronometroFront.mill}`
     this.participanteService.updateTexto(this.participante).subscribe(res=>{
-      console.log(res)
+
     })
 
   }
@@ -212,7 +222,6 @@ export class SegundaRondaComponent{
     this.socket.iniciarIntegralParticipante().subscribe(()=>{
       this.estado = 1;
       this.user.getIntegralesAdmin().subscribe((res:any)=>{
-        console.log(res)
         res.forEach(async (el:any)=>{
           if(el[0].estado == 1){
             let blob = await fetch(`https://integratorapi.azurewebsites.net/integralesFinales/${res[1][0].idIntegral}.png?key=akjjyglc`).then(r => r.blob())
@@ -230,7 +239,7 @@ export class SegundaRondaComponent{
       })
     })
   }
-  validate(evt:any) {
+  validate() {
     this.socket.editarTexto(this.mathField.latex())
   }
   focus(){
@@ -243,6 +252,7 @@ export class SegundaRondaComponent{
       this.mathField.cmd(el);
     })
     this.mathField.focus();
+    this.validate()
   }
   ngAfterViewInit() {
     this.mathFieldSpan = document.getElementById('math-field');
@@ -296,9 +306,12 @@ export class SegundaRondaComponent{
       this.cronometroFront = {minutos, segundos, mill}
       if(minutos==0 && segundos==0 && mill==0){
         // 
-        clearInterval(this.cronometroTimer);
+        this.pausarCronometro()
       }
     }, 10)
+  }
+  onLoadedMetadata(event: Event) {
+    (event.target as HTMLVideoElement).play();
   }
 
  /*  mathequations = ['H = \\ sum_ {i = 1} ^ {m} p_ {i} log_ {2} (p_ {i})']

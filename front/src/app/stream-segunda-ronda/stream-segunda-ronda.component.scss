@@ -88,14 +88,15 @@ body{
 
 .number{
   background-color: #0C4024;
-  width: 35px;
+  width: 55px;
   height: 35px;
-  border-radius: 50%;
+  border-radius: 50px;
   position: absolute;
   margin: auto;
   color: white;
   top: 53px;
-  left: 15px;
+  left: 8px;
+  overflow: hidden;
 
 }
 

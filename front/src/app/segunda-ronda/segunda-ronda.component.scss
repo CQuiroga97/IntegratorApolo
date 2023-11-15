@@ -18,7 +18,7 @@
   margin: auto;
   margin-top: 10px;
   padding-left: 15px;
-  width: 120px;
+  width: 90px;
 }
 
 
@@ -61,7 +61,7 @@
 }
 
 .row_teclado{
-  width: 60%;
+  width: 90%;
 }
 
 
@@ -106,4 +106,17 @@
 }
 .entrada{
   cursor: text;
+}
+.time_container{
+  transform: scale(.5);
+  position: relative;
+}
+.divCamara{
+  width: 250px;
+  height: 200px;
+  position: absolute;
+  background-color: black;
+  top: 0px;
+  left: -100px;
+  display: flex;
 }

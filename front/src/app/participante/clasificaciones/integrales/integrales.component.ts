@@ -31,7 +31,7 @@ export class IntegralesComponent implements OnInit{
   ){
     document.addEventListener("visibilitychange", (event) => {
       if (document.visibilityState == "visible") {
-        // console.log("tab is active")
+        
       } else {
         this.toastrService.show(`Has cambiado la pestaña`, "Prueba finalizada", { status: "warning", destroyByClick: true, icon: "checkmark-circle-2-outline" });
         window.location.href = "./";
@@ -43,7 +43,6 @@ export class IntegralesComponent implements OnInit{
     this.participanteService.getIntegralesClasificaciones().subscribe(res =>{
       this.mensajeLoading = "Recopilando información..."
       this.participanteService.getTimerClasificaciones().subscribe((res2:any) =>{
-        console.log(res2)
         this.mensajeLoading = "Iniciando prueba..."
         res2.mill = 0;
         this.tiempoOriginal = res2;

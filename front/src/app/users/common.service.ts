@@ -12,4 +12,10 @@ export class CommonService {
     getUpdate(): Observable<any> { //the receiver component calls this function 
         return this.subjectName.asObservable(); //it returns as an observable to which the receiver funtion will subscribe
     }
+    getApiUrl(){
+        if(window.location.hostname == "localhost")
+            return "http://localhost:8080/api/"
+        return "https://integratorapi.azurewebsites.net/api/"
+        
+    }
 }

@@ -84,7 +84,6 @@ export class ListasUniversidadesComponent implements OnDestroy {
     }
     
     imagenUniversidad(event: any, index: number, indice: number): void {
-      console.log(index)
       let i = 1;
       Array.from(event.target.files).forEach((file:any)=>{
   
@@ -92,9 +91,7 @@ export class ListasUniversidadesComponent implements OnDestroy {
           const reader = new FileReader();
     
           reader.onload = (e: any) => {
-            console.log(e.target.result)
             this.user.guardarLogoUniversidad({imagen:e.target.result, universidad:index}).subscribe((res:any)=>{
-              console.log(res)
               this.traerUniversidades();
               // if(res[0]){
               //   if(i == event.target.files.length){

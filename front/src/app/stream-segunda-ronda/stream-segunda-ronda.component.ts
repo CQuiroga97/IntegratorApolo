@@ -65,12 +65,8 @@ export class StreamSegundaRondaComponent  implements OnInit{
     })
   }
   pausarCronometroStream(){
-    console.log(this.enCompetencia)
-    
     this.socket.pausarCronometroStream().subscribe((res)=>{
       if(this.enCompetencia){
-
-        console.log(res)
         let index = 0;
         this.participantes.forEach((el:any)=>{
           if(res == el.idParticipante[0]){
@@ -93,7 +89,6 @@ export class StreamSegundaRondaComponent  implements OnInit{
   }
   
   cronometro(){
-    console.log(this.tiempoRespuestas)
     return setInterval(()=>{
       let {minutos, segundos, mill} = this.cronometroFront
       if(mill == 0){
@@ -113,7 +108,6 @@ export class StreamSegundaRondaComponent  implements OnInit{
     this.socket.iniciarIntegralParticipante().subscribe(()=>{
       this.estado = 1;
       this.user.getIntegralesAdmin().subscribe((res:any)=>{
-        console.log(res)
         res.forEach(async (el:any)=>{
           if(el[0].estado == 1){
             let blob = await fetch(`https://integratorapi.azurewebsites.net/integralesFinales/${res[1][0].idIntegral}.png?key=akjjyglc`).then(r => r.blob())
@@ -141,7 +135,6 @@ export class StreamSegundaRondaComponent  implements OnInit{
   countDownSeconds(){
     this.segundos = 3
     return setInterval(()=>{
-      console.log(this.estado)
 
       if(this.segundos == 0){
         clearInterval(this.countDown);
@@ -158,7 +151,6 @@ export class StreamSegundaRondaComponent  implements OnInit{
     })
   }
   reiniciar(){
-    console.log("d")
     clearInterval(this.cronometroTimer);
     this.cronometroFront = this.tiempoOriginal;
     let buffTiempo:any = this.tiempoOriginal;

@@ -130,11 +130,9 @@ export class IngresarIntegralesComponent {
         imagenes: this.integrales[num],
         numIntegral: num
       }
-      console.log(data)
   
   
       this.user.ingresarIntegrales(data).subscribe(res=> {
-        console.log(res)
         this.toastrService.show(`Integral ${num + 1} guardada con éxito`, "Guardado", { status: "success", destroyByClick: true, icon: "checkmark-circle-2-outline" });
         this.guardarIntegrales(num+1)
       })

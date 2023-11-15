@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from "../auth/auth.service";
 import { BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { CommonService } from "./common.service";
 @Injectable({
   providedIn: "root"
 })
@@ -14,39 +15,42 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class UsersService {
   private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
+  api = "";
   constructor(
     private http: HttpClient,
     private cookies: CookieService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private common:CommonService
   ) {
     this.isLoggedIn()
+    this.api = common.getApiUrl()
   }
 
   login(user: any): Observable<any> {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/login", user);
+    return this.http.post(this.api+"login", user);
   }
   loginParticipante(user: any): Observable<any> {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/loginParticipante", user);
+    return this.http.post(this.api+"loginParticipante", user);
   }
   registrUniversidad(universidad: any): Observable<any> {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/registrarUniversidad", universidad)
+    return this.http.post(this.api+"registrarUniversidad", universidad)
   }
   registrarUniversidadExcel(excel: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('filekey', excel, excel.name)
-    return this.http.post("https://integratorapi.azurewebsites.net/api/registrarUniversidadExcel", formData)
+    return this.http.post(this.api+"registrarUniversidadExcel", formData)
   }
   registrarParticipantesExcel(excel: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('filekey', excel, excel.name)
-    return this.http.post("https://integratorapi.azurewebsites.net/api/registrarParticipantesExcel", formData)
+    return this.http.post(this.api+"registrarParticipantesExcel", formData)
   }
   getUniversidades(): Observable<any> {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/sp_getUniversidades", {});
+    return this.http.post(this.api+"sp_getUniversidades", {});
   }
   mostrarUniversidadesNum(): Observable<any> {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/mostrarUniversidadesNum", {});
+    return this.http.post(this.api+"mostrarUniversidadesNum", {});
   }
   setToken(token: string) {
     this.cookies.set("token", token);
@@ -54,73 +58,73 @@ export class UsersService {
     /* this.authService.setDecodedToken() */
   }
   generateExcelEstudiantes() {
-    return this.http.get("https://integratorapi.azurewebsites.net/api/generateExcelParticipante", { responseType: 'blob' });
+    return this.http.get(this.api+"generateExcelParticipante", { responseType: 'blob' });
   }
   borrarUniversidadesEstudiantes(idu: any) {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/borrarUniversidadesEstudiantes", { idu: idu });
+    return this.http.post(this.api+"borrarUniversidadesEstudiantes", { idu: idu });
   }
   modificarUniversidad(universidad: any) {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/modificarUniversidad", universidad);
+    return this.http.post(this.api+"modificarUniversidad", universidad);
   }
   borrarParticipante(idEstudiante: any) {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/borrarParticipante", { idEstudiante: idEstudiante });
+    return this.http.post(this.api+"borrarParticipante", { idEstudiante: idEstudiante });
   }
   insertarParticipante(data: any) {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/insertarParticipante", { data: data });
+    return this.http.post(this.api+"insertarParticipante", { data: data });
   }
   modificarParticipante(data: any) {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/modificarParticipante", { data: data });
+    return this.http.post(this.api+"modificarParticipante", { data: data });
   }
   modificarContrasenaParticipante(data: any) {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/modificarContrasenaParticipante", { data: data });
+    return this.http.post(this.api+"modificarContrasenaParticipante", { data: data });
   }
 
   ingresarIntegrales(data: any) {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/ingresarIntegrales", data);
+    return this.http.post(this.api+"ingresarIntegrales", data);
   }
   
   getEliminatoriaActiva(){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/getEliminatoriaActiva", {});
+    return this.http.post(this.api+"getEliminatoriaActiva", {});
   }
   iniciarSegundaRonda(){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/iniciarSegundaRonda", {});
+    return this.http.post(this.api+"iniciarSegundaRonda", {});
   }
   llamarEncuentros(){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/llamarEncuentros", {});
+    return this.http.post(this.api+"llamarEncuentros", {});
   }
   llamarIntegrales(){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/llamarIntegrales", {});
+    return this.http.post(this.api+"llamarIntegrales", {});
   }
   guardarIntegral(data:any){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/guardarIntegral", data);
+    return this.http.post(this.api+"guardarIntegral", data);
   }
   guardarLogoUniversidad(data:any){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/guardarLogoUniversidad", data);
+    return this.http.post(this.api+"guardarLogoUniversidad", data);
   }
   borrarIntegral(data:any){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/borrarIntegral", data);
+    return this.http.post(this.api+"borrarIntegral", data);
   }
   modificarIntegral(data:any){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/modificarIntegral", data);
+    return this.http.post(this.api+"modificarIntegral", data);
   }
   updatePuntaje(data:any){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/updatePuntaje", data);
+    return this.http.post(this.api+"updatePuntaje", data);
   }
   updateEncuentro(data:any){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/updateEncuentro", data);
+    return this.http.post(this.api+"updateEncuentro", data);
   }
   getIntegralesAdmin(){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/getIntegralesAdmin", {});
+    return this.http.post(this.api+"getIntegralesAdmin", {});
   }
   getTopUniversidades(){
-    return this.http.post("https://integratorapi.azurewebsites.net/api/getTopUniversidades", {});
+    return this.http.post(this.api+"getTopUniversidades", {});
   }
 
   ingresarIntegralesSegundaRonda(data: any) {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/ingresarIntegralesSegundaRonda", data);
+    return this.http.post(this.api+"ingresarIntegralesSegundaRonda", data);
   }
   quemarIntegral(data: any) {
-    return this.http.post("https://integratorapi.azurewebsites.net/api/quemarIntegral", data);
+    return this.http.post(this.api+"quemarIntegral", data);
   }
 
 

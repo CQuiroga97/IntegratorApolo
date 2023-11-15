@@ -78,16 +78,19 @@
           <video *ngIf="video_1" [srcObject]="video_1.srcObject" (loadedmetadata)="onLoadedMetadata($event)" class="h-100"></video>
         </div>
         <div class="logo_universiad">
-          <img class="img_logo_universidad" [src]="imagenUni_1" alt="" width="90%" height="90%">
+          <img class="img_logo_universidad" [src]="'https://integratorapi.azurewebsites.net/logos/logo_'+participantes[0]!.universidad+'.png'" alt="" width="90%" height="90%">
           <div class="number d-flex align-content-center">
             <p>
-              {{numeroUniversidad_1}}
+              {{participantes[0]!.puntajeU.toFixed(2)}}
             </p>
           </div>
         </div>
         <div class="nombre_universidad" *ngIf="participantes">
           <p>
             {{participantes[0]!.nombre}}
+          </p>
+          <p>
+            {{participantes[0]!.nombreU}}
           </p>
         </div>
 
@@ -196,16 +199,19 @@
           <video *ngIf="video_2" [srcObject]="video_2.srcObject" (loadedmetadata)="onLoadedMetadata($event)" class="h-100"></video>
         </div>
         <div class="logo_universiad">
-          <img class="img_logo_universidad" [src]="imagenUni_2" alt="" width="90%" height="90%">
+          <img class="img_logo_universidad" [src]="'https://integratorapi.azurewebsites.net/logos/logo_'+participantes[1]!.universidad+'.png'" alt="" width="90%" height="90%">
           <div class="number d-flex align-content-center">
             <p>
-              {{numeroUniversidad_2}}
+              {{participantes[1]!.puntajeU.toFixed(2)}}
             </p>
           </div>
         </div>
         <div class="nombre_universidad" *ngIf="participantes">
           <p>
             {{participantes[1]!.nombre}}
+          </p>
+          <p>
+            {{participantes[1]!.nombreU}}
           </p>
         </div>
 

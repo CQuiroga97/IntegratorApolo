@@ -81,14 +81,12 @@ export class PanelEliminatoriasComponent implements OnInit{
     }) 
   }
   quemarIntegral(){
-    console.log(this.siguienteIntegralNum)
     this.user.modificarIntegral({idIntegral:this.siguienteIntegralNum, estado:3}).subscribe(res=>{
       this.getIntegralesAdmin()
     })
   }
   empate(){
     this.reiniciar();
-    console.log(this.integralActual)
     if(this.integralActual != ""){
 
       const data2 = {
@@ -139,12 +137,11 @@ export class PanelEliminatoriasComponent implements OnInit{
       rondaPasar:rondaPasar,
       tercerPuesto:tercerPuesto
     }
-    console.log(data)
 
       this.user.updateEncuentro(data).subscribe((res:any)=>{
         if(res[0]){
           if(this.ronda == 1 && this.encuentro == 1){
-            console.log("Ganador!")
+
           }else{
 
             this.socket.finalizar();
@@ -174,7 +171,6 @@ export class PanelEliminatoriasComponent implements OnInit{
   pausarCronometroStream(){
     this.socket.pausarCronometroStream().subscribe((res)=>{
       let index = 0;
-      console.log(this.cantPausas)
       this.cantPausas++;
       if(this.cantPausas == 2){
         this.cantPausas = 0;
@@ -215,7 +211,6 @@ export class PanelEliminatoriasComponent implements OnInit{
   }
   llamarUsuarioOnline(){
     this.socket.getUsersOnlineSegunda().subscribe((result:any)=>{
-      console.log(result)
       if(this.participante[0].idParticipante)
       this.participante.forEach((el:any)=>{
         el.online = false;
