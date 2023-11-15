@@ -13,6 +13,7 @@ export class CommonService {
         return this.subjectName.asObservable(); //it returns as an observable to which the receiver funtion will subscribe
     }
     getApiUrl(){
+        console.log(window.location.hostname)
         if(window.location.hostname == "localhost")
             return "http://localhost:8080/api/"
         return "https://integratorapi.azurewebsites.net/api/"

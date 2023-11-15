@@ -42,6 +42,7 @@ export const iniciarClasificatorias = (client: Socket, io: socketIO.Server) =>{
 }
 export const getEstadoClasificatorias = (client: Socket, io: socketIO.Server) =>{
   client.on('getEstadoClasificatorias', ()=>{
+    console.log("asd")
     client.emit('getEstadoClasificatorias', Competencia.getEstadoClasificatorias());
   })
 }

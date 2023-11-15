@@ -75,7 +75,10 @@ export class ClasificacionesComponent implements OnInit{
 
   }
   ngOnInit(): void {
+    setTimeout(()=>{
 
+      this.socket.getEstadoClasificatoriasEmit();
+    }, 1000)
     this.participanteService.getIntegralesClasificaciones().subscribe((res:any)=>{
       this.cantIntegrales = res.integrales.length;
     })
@@ -84,6 +87,7 @@ export class ClasificacionesComponent implements OnInit{
     })
     this.user.llamarEncuentros().subscribe((re2s:any)=>{
       if(re2s.length == 0){
+        console.log("Asd")
         this.socket.getEstadoClasificatorias().subscribe(res =>{
           console.log(res)
           if(!res.estado){
@@ -122,7 +126,7 @@ export class ClasificacionesComponent implements OnInit{
       }
     })
     
-    this.socket.getEstadoClasificatoriasEmit();
+    
     const fechaActual = new Date();
     const diff = Math.abs(this.inicioCompetencia.getTime() - fechaActual.getTime())
     this.dias = Math.ceil(diff / (1000 * 3600 * 24))

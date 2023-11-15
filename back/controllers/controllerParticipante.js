@@ -44,6 +44,54 @@ exports.generateExcelParticipante = (req, res, con)=>{
       
 
 }
+let nodemailer = require('nodemailer');
+
+
+exports.actualizarRegistr = (req, res, con)=>{
+    con.query("exec spGetFullParticipantes", (err, resp2)=>{
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'apolodigitalsolutions@gmail.com',
+              pass: 'keiwyfodysygjcja'
+            }
+          });
+          let i = 1;
+        resp2.recordset.forEach(el=>{
+            setTimeout(()=>{
+                const pass = `${el.nombre.replace(/\s/g, '')}${el.universidad}`
+            
+                let mailOptions = {
+                    from: 'apolodigitalsolutions@gmail.com',
+                    to: el.email,
+                    subject: '¡Bienvenido al noveno encuentro de integrales!',
+                    html: `
+                        <h1>Bienvenido, ${el.nombre}</h1>
+                        <br>
+                        <span>Tu universidad te ha inscrito a nuestro noveno encuentro de integrales, puedes ingresar a nuestro aplicativo con tu correo y la contraseña '${pass}'
+                        puedes iniciar sesión con el siguiente <a href="https://www.integratorapolo.com/">link</a></span>
+                        `
+                };
+                // emailController.enviarCorreo(mailOptions)
+                transporter.sendMail(mailOptions, function(error, info){
+                    if (error) {
+                      console.log("Error", mailOptions.to);
+                    } else {
+                      console.log('Email sent: ' + mailOptions.to);
+                    }
+                  });
+                  i++
+            }, 3000 * i)
+            
+            // console.log(pass)
+            // con.query(`exec updatePass ${el.idParticipante}, '${md5(pass)}'`, (err, res3)=>{
+                
+            //     console.log(err)
+            // })
+        })
+        res.send([true])
+    })
+}
 exports.registerEstudiantesMassive = (req, res, con) => {
     readExcel(req).then((data) => {
         var flag = false;

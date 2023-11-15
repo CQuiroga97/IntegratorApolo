@@ -39,6 +39,9 @@ router.post("/login", (req, res, next) =>{
 router.post("/loginParticipante", (req, res, next) =>{
     participante.loginParticipante(req, res, con)
 })
+router.post("/arreglarParticipantes", (req, res, next) =>{
+    participante.actualizarRegistr(req, res, con)
+})
 router.post("/modificarUniversidad", (req, res, next) =>{
     regUni.modificarUniversidad(req, res, con);
 })
