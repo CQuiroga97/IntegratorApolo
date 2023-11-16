@@ -54,7 +54,7 @@ export class SegundaRondaComponent{
     {simbolo:"cosh(■)", latex:["\\cosh", "("]},
     {simbolo:"tanh(■)", latex:["\\tanh", "("]},
     {simbolo:"e", latex:["e", "^"]},
-    {simbolo:"√", latex:["e", "\\sqrt"]},
+    {simbolo:"√", latex:["\\sqrt"]},
     {simbolo:"arcsin(■)", latex:["\\arcsin", "("]},
     {simbolo:"arcos(■)", latex:["\\arcos", "("]},
     {simbolo:"arctan(■)", latex:["\\arctan", "("]},
