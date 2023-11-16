@@ -91,7 +91,7 @@ export class SegundaRondaComponent{
         console.log(stream)
         this.video_2 = {
           muted: false,
-          srcObject: call
+          srcObject: call._remoteStream
         }
         this.video_1 = {
           muted: true,
