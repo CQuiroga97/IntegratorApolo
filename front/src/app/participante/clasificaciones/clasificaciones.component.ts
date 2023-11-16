@@ -57,7 +57,7 @@ import { ParticipanteService } from 'src/app/users/participante.services';
 export class ClasificacionesComponent implements OnInit{
   public bannerEspera = false;
   public bannerLobby = false;
-  public inicioCompetencia = new Date("2023-11-16T08:30:00");
+  public inicioCompetencia = new Date("2023-11-16T07:30:00");
   public dias = 0;
   public loaded = false;
   public timerComienzo:any;
