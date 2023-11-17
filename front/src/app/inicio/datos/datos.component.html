@@ -1,56 +1,41 @@
-<div class="divCuadrosStands">
-    <div class="cuadrosStands">
-    <div class="tittle">
-            <p>
-                Encuentros
-            </p>
-        </div>
-        <div class="numberoEncuentros">
-            <span class="numero1">
-                35/
-            </span>
-            <span class="numero2">
-                150
-            </span>
-        </div>
-        <div class="subtittle">
-            <p>
-                Encuentros disputados
-            </p>
-        </div>
-    </div>
-    <div class="cuadrosStands">
+<div class="container" *ngIf="!loading" [class.init]="!transition">
+    <div class="row">
+
+        <div class="cuadrosStands col-3">
         <div class="tittle">
-            <p>
-                Universidades
-            </p>
-        </div>     
-        <div class="numberoEncuentros">
-            <span class="numero1">
-                {{cantUniversidades}}
-            </span>            
-        </div>   
-        <div class="subtittle">
-            <p>
-                Universidades inscritas
-            </p>
+                <h1>
+                    Encuentros
+                </h1>
+            </div>
+            <div class="numberoEncuentros">
+                <h1 class="numero1">
+                    {{cantEncuentros}}/16
+                </h1>
+                <h1 class="numero2">
+                </h1>
+            </div>
+            <div class="subtittle">
+                <p>
+                    Encuentros disputados
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="cuadrosStands">
-        <div class="tittle">
-            <p>
-                Paises
-            </p>
-        </div>
-        <div class="numberoEncuentros">
-            <span class="numero1">
-                25
-            </span>            
-        </div>  
-        <div class="subtittle">
-            <p>
-                Paises representantes
-            </p>
+        <div class="cuadrosStands col-3">
+            <div class="tittle">
+                <h1>
+                    Universidades
+                </h1>
+            </div>     
+            <div class="numberoEncuentros">
+                <h1 class="numero1">
+                    {{cantUniversidades}}
+                </h1>            
+            </div>   
+            <div class="subtittle">
+                <p>
+                    Universidades inscritas
+                </p>
+            </div>
         </div>
     </div>
 </div>

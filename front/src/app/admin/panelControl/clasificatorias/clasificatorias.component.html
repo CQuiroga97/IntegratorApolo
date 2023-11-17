@@ -1,50 +1,65 @@
-<div class="container">
-    <div class="row">
-        
-        <nb-card class="transparent">
-            <nb-card-header>
-                <img src="./assets/img/admin/panelControl/medal.png" alt="">
-                <span>Participantes online</span>
-            </nb-card-header>
-            <nb-card-body>
-                <div class="container" *ngIf="users.length > 0">
-                    <div class="row row2" *ngFor="let participantes of users">
-                        <div class="col-10">
-                            <nb-card class="transparent">
-                                <span>
-        
-                                    {{participantes["nombre"]}}
-                                </span>
-                            </nb-card>
-                        </div>
-                        <div class="col-2">
-                            <span *ngIf='participantes["integral"] <= cantIntegrales'>
-                                {{participantes["integral"]}}/{{cantIntegrales}}
-                            </span>
-                            <span *ngIf='participantes["integral"] > cantIntegrales'>
-                                Finalizado
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="container" *ngIf="users.length == 0">
-                    <div class="row row2" >
-                        <div class="col-12">
-                            <nb-card class="transparent">
-                                <span>
-                                    No hay participantes en linea
-                                </span>
-                            </nb-card>
-                        </div>
-                    </div>
-                </div>
-                <span>
-                </span>
-            </nb-card-body>
-        </nb-card>
-    </div>
-    <div class="row">
+<div class="container w-100">
+    <div class="row justify-content-center">
+        <div class="col-4">
 
-        <button nbButton outline status="basic" (click)="iniciarClasificatorias()">Iniciar ronda de clasificaciones</button>
+            <div class="container">
+                <div class="row">
+                    
+                    <nb-card class="transparent">
+                        <nb-card-header>
+                            <img src="./assets/img/admin/panelControl/medal.png" alt="">
+                            <span>Participantes online</span>
+                        </nb-card-header>
+                        <nb-card-body>
+                            <div class="container" *ngIf="users.length > 0">
+                                <div class="row row2" *ngFor="let participantes of users">
+                                    <div class="col-10">
+                                        <nb-card class="transparent">
+                                            <span>
+                    
+                                                {{participantes["nombre"]}}
+                                            </span>
+                                        </nb-card>
+                                    </div>
+                                    <div class="col-2">
+                                        <span *ngIf='participantes["integral"] <= cantIntegrales'>
+                                            {{participantes["integral"]}}/{{cantIntegrales}}
+                                        </span>
+                                        <span *ngIf='participantes["integral"] > cantIntegrales'>
+                                            Finalizado
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container" *ngIf="users.length == 0">
+                                <div class="row row2" >
+                                    <div class="col-12">
+                                        <nb-card class="transparent">
+                                            <span>
+                                                No hay participantes en linea
+                                            </span>
+                                        </nb-card>
+                                    </div>
+                                </div>
+                            </div>
+                            <span>
+                            </span>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="row">
+            
+                    <button nbButton outline status="basic" (click)="iniciarClasificatorias()">Iniciar ronda de clasificaciones</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 d-flex flex-column p-3">
+            <span class="m-auto mb-2 fs-4">
+                <nb-icon icon="alert-circle-outline"></nb-icon>
+                Una vez se haya cumplido el tiempo de las preguntas, se podrá acceder a la segunda ronda del evento, 
+                al iniciar se crearán las llaves con los encuentros programados con los puntajes actuales y quedarán registrados en esta ronda.
+            </span>
+            <button nbButton outline status="basic" (click)="iniciarSegundaRonda()" class="m-auto mt-2">Iniciar segunda ronda</button>
+        </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
-var nodemailer = require('nodemailer');
+let nodemailer = require('nodemailer');
 
-var transporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'apolodigitalsolutions@gmail.com',
@@ -9,12 +9,13 @@ var transporter = nodemailer.createTransport({
 });
 
 exports.enviarCorreo = (mailOptions)=>{
-
+  setTimeout(()=>{
     transporter.sendMail(mailOptions, function(error, info){
       if (error) {
         console.log(error);
       } else {
-        console.log('Email sent: ' + info.response);
+        console.log('Email sent: ' + mailOptions.to);
       }
     });
+  }, 2000)
 }

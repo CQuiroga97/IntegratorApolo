@@ -31,4 +31,65 @@ export class SocketService {
     setIntegral(integral:number): void{
         this.socket.emit("setIntegral", integral);
     }
+    loginSegundaRonda(user:any, clasificacion:number):void{
+        this.socket.emit('loginSegundaRonda', user, clasificacion)
+    }
+    editarTexto(texto:number):void{
+        this.socket.emit('editarTexto', texto)
+    }
+    getUsersOnlineSegunda(): Observable<any> {
+        return this.socket.fromEvent<any>('usersOnlineSegunda');
+    }
+    volverALlamar(): Observable<any> {
+        return this.socket.fromEvent<any>('volverALlamar');
+    }
+    pedirLlamada(): void {
+        this.socket.emit('pedirLlamada');
+    }
+    iniciarIntegral(): void {
+        this.socket.emit('iniciarIntegral');
+    }
+    iniciarIntegralParticipante(): Observable<any> {
+        return this.socket.fromEvent<any>('iniciarIntegralParticipante');
+    }
+    participantePreparado(estado:boolean):void{
+        this.socket.emit('participantePreparado', estado)
+    }
+    usuariosPreparados(): Observable<any> {
+        return this.socket.fromEvent<any>('usuariosPreparados');
+    }
+    iniciarCronometro():void{
+        this.socket.emit('iniciarCronometro')
+    }
+    iniciarCronometroParticipante(): Observable<any> {
+        return this.socket.fromEvent<any>('iniciarCronometroParticipante');
+    }
+    pausarCronometroStream(): Observable<any> {
+        return this.socket.fromEvent<any>('pausarCronometroStream');
+    }
+    pausarCronometro(participante:any): void {
+        this.socket.emit('pausarCronometro', participante)
+    }
+    confirmarTiempoParticipante(): Observable<any> {
+        return this.socket.fromEvent<any>('confirmarTiempoParticipante');
+    }
+    confirmarTiempo(data:any): void {
+        this.socket.emit('confirmarTiempo', data)
+    }
+    sumarPuntajeParticipante(): Observable<any> {
+        return this.socket.fromEvent<any>('sumarPuntajeParticipante');
+    }
+    sumarPuntaje(): void {
+        this.socket.emit('sumarPuntaje')
+    }
+    finalizarParticipante(): Observable<any> {
+        return this.socket.fromEvent<any>('finalizarParticipante');
+    }
+    finalizar(): void {
+        this.socket.emit('finalizar')
+    }
+    conectarCamara(): void {
+        this.socket.emit('conectarCamara')
+    }
+
 }

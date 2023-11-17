@@ -1,0 +1,225 @@
+<div class="divMenu2 position-relative">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-1">
+                            <img src="../../../assets/img/participante/clasificaciones/lineas.png" alt="" class="lineas-1">
+                        </div>
+                        <div class="col-3">
+                            <nb-card class="transparent cron">
+                                <nb-card-body class="d-flex">
+                                    <span class="m-auto fs-2">
+                                        {{cronometroFront.minutos<10?'0'+cronometroFront.minutos:cronometroFront.minutos}}
+                                    </span>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-3">
+                            <nb-card class="transparent cron">
+                                <nb-card-body class="d-flex">
+                                    <span class="m-auto fs-2">
+                                        {{cronometroFront.segundos<10?'0'+cronometroFront.segundos:cronometroFront.segundos}}
+                                    </span>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-3">
+                            <nb-card class="transparent cron">
+                                <nb-card-body class="d-flex">
+                                    <span class="m-auto fs-2">
+                                        {{cronometroFront.mill<10?'0'+cronometroFront.mill:cronometroFront.mill}}
+                                    </span>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-1">
+                            <img src="../../../assets/img/participante/clasificaciones/lineas.png" alt="" class="lineas-2">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9">
+                            <button nbButton outline status="basic" class="w-100" 
+                            (click)="enviarIntegral()" [disabled]="enCompetencia || (!participante![1]['online'] || !participante![0]['online'])">Enviar integral</button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-1">
+                            <nb-icon icon="play-circle-outline">
+
+                            </nb-icon>
+                        </div>
+                        <div class="col-1">
+                            <nb-icon icon="stop-circle-outline">
+
+                            </nb-icon>
+                        </div>
+                        <div class="col-1">
+                            <nb-icon icon="refresh-outline">
+
+                            </nb-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <nb-card class="transparent h-75">
+                    <nb-card-header class="h-25 p-2">
+                        Siguiente integral
+                    </nb-card-header>
+                    <nb-card-body class="d-flex p-0">
+                        <img [src]="siguienteIntegral" alt="" class="lineas-1 m-auto">
+                        <nb-icon icon="trash-2-outline" class="quemar" (click)="quemarIntegral()"></nb-icon>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <nb-card class="transparent divImagen">
+                    <nb-card-header>
+                        Integral actual
+                    </nb-card-header>
+                    <nb-card-body class="d-flex">
+                        <img [src]="integralActual" alt="" class="lineas-1 m-auto">
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-6">
+                <nb-card class="w-100 transparent" [class.noDisponible] = "!participante![0]!['online']">
+                    <nb-card-body>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6 d-flex container flex-column">
+                                    <div class="row m-auto mb-1 ms-0">
+
+                                        <span class="m-auto ms-0 fs-5 col w-auto" *ngIf="!participante[0]['idParticipante']">
+                                            Participante 1
+                                        </span>
+                                        <span class="fs-5 col w-auto" *ngIf="participante[0]['idParticipante']">
+                                            {{participante[0]['nombre']}}
+                                        </span>
+                                        <span class="fs-5 col w-auto" *ngIf="participante[0]['idParticipante']">
+                                            {{participante[0]['email']}}
+                                        </span>
+                                    </div>
+                                    <div class="row m-auto mt-1  ms-0" *ngIf="participante[0]['idParticipante']">
+
+                                        <span class="m-auto ms-0 fs-5 fw-bold online" *ngIf="participante![0]['online']">
+                                            Online
+                                        </span>
+                                        <span class="m-auto ms-0 fs-5  fw-bold col-12 offline" *ngIf="!participante![0]['online']">
+                                            Offline
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="col-4 d-flex flex-column" *ngIf="participante[0]['idParticipante']">
+                                    <button nbButton outline status="basic" class="w-100 mb-2" (click)="updatePuntaje(1, participante[0]['idParticipante'][0])"> +1</button>
+                                    <button nbButton outline status="basic" (click)="updatePuntaje(-1, participante[0]['idParticipante'][0])"> -1</button>
+                                </div>
+                                <div class="col-2">
+                                    <nb-card class="transparent h-100">
+                                        <nb-card-body class="d-flex">
+                                            <span class="m-auto fs-2" *ngIf="!participante[0]['idParticipante']">
+                                                0
+                                            </span>
+                                            <span class="m-auto fs-2" *ngIf="participante[0]['idParticipante']">
+                                                {{participante[0]['puntaje'][0]}}
+                                            </span>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </nb-card-body>
+                    <nb-card-footer>
+                        <div class="row">
+                            <div class="col-12">
+                                <button nbButton status="success" *ngIf="participante[0]['idParticipante']" (click)="finalizarRonda(participante[0]['idParticipante'][0], participante[1]['idParticipante'][0])">Nombrar ganador</button>
+                            </div>
+                        </div>
+                    </nb-card-footer>
+                </nb-card>
+            </div>
+            <div class="col-6">
+                <nb-card class="w-100 transparent" [class.noDisponible] = "!participante![1]!['online']">
+                    <nb-card-body>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6 d-flex container flex-column">
+                                    <div class="row m-auto mb-1 ms-0">
+
+                                        <span class="m-auto ms-0 fs-5 col w-auto" *ngIf="!participante[1]['idParticipante']">
+                                            Participante 1
+                                        </span>
+                                        <span class="fs-5 col w-auto" *ngIf="participante[1]['idParticipante']">
+                                            {{participante[1]['nombre']}}
+                                        </span>
+                                        <span class="fs-5 col w-auto" *ngIf="participante[0]['idParticipante']">
+                                            {{participante[1]['email']}}
+                                        </span>
+                                    </div>
+                                    <div class="row m-auto mt-1  ms-0" *ngIf="participante[1]['idParticipante']">
+
+                                        <span class="m-auto ms-0 fs-5 fw-bold online" *ngIf="participante![1]['online']">
+                                            Online
+                                        </span>
+                                        <span class="m-auto ms-0 fs-5 fw-bold col-12 offline" *ngIf="!participante![1]['online']">
+                                            Offline
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="col-4 d-flex flex-column"  *ngIf="participante[1]['idParticipante']">
+                                    <button nbButton outline status="basic" class="w-100 mb-2" (click)="updatePuntaje(1, participante[1]['idParticipante'][0])"> +1</button>
+                                    <button nbButton outline status="basic" (click)="updatePuntaje(-1, participante[1]['idParticipante'][0])"> -1</button>
+                                </div>
+                                <div class="col-2">
+                                    <nb-card class="transparent h-100">
+                                        <nb-card-body class="d-flex">
+                                            <span class="m-auto fs-2" *ngIf="!participante[1]['idParticipante']">
+                                                0
+                                            </span>
+                                            <span class="m-auto fs-2" *ngIf="participante[1]['idParticipante']">
+                                                {{participante[1]['puntaje'][0]}}
+                                            </span>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                    <nb-card-footer>
+                        <div class="row">
+                            <div class="col-12">
+                                <button nbButton status="success" *ngIf="participante[0]['idParticipante']" (click)="finalizarRonda(participante[1]['idParticipante'][0], participante[0]['idParticipante'][0])">Nombrar ganador</button>
+                            </div>
+                        </div>
+                    </nb-card-footer>
+                </nb-card>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 mb-4">
+                <button nbButton status="success" class="w-100" (click)="empate()">Declarar empate</button>
+            </div>
+        </div>
+    </div>
+    <div class="w-100 h-100 position-absolute z-3 divSuperior d-flex" *ngIf="estado == 3">
+        <div class="container m-auto">
+          <div class="row justify-content-center">
+            <div class="col-5 fs-1 d-flex">
+                <span class="m-auto">
+
+                    {{segundos}}
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

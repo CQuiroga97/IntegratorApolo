@@ -10,10 +10,25 @@
             "server": "localhost",
             "port": 1433,
             "driver": "MSSQL",
+            "name": "New_Integrator",
+            "database": "integrator",
+            "password": "!Cristian2396980",
+            "username": "sa"
+        },
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "integratorapolo.database.windows.net",
+            "port": 1433,
+            "driver": "MSSQL",
             "name": "Integrator",
             "database": "integrator",
-            "username": "sa",
-            "password": "Cristian2396980"
+            "username": "integratorAdmin",
+            "password": "!Admon123"
         }
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/e73b54a9-dd67-4852-8ac2-604796a839a6/resourceGroups/Apolo/providers/Microsoft.Web/sites/integratorapolo",

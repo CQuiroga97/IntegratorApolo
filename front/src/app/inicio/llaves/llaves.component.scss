@@ -1,0 +1,46 @@
+.divMenu2{
+     background:linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%), url(../../../assets/img/llaves/fondoLlaves.png);
+}
+.cont{
+    max-width: 100%;
+}
+nb-card{
+    z-index: 5;
+}
+.flip{
+    transform: scaleX(-1);
+    z-index: 0;
+    position: relative;
+    margin-right: auto;
+    margin-left: -30px !important;
+}
+.extraLeft{
+    margin-left: -30px !important;
+
+}
+.fantasma{
+    opacity: .3;
+}
+nb-card{
+    overflow: hidden;
+}
+nb-card-body{
+    font-size: 13px !important;
+}
+.ganador{
+    background-color: rgba(63, 246, 63, 0.317);
+}
+.perdedor{
+    background-color: rgba(246, 63, 63, 0.317);
+}
+.llaves{
+    opacity: 0;
+    transition: all .5s;
+}
+.llaves.init{
+    opacity: 1;
+}
+.tercero{
+    top: -20px;
+    text-align: center;
+}

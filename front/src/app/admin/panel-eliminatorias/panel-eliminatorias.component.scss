@@ -1,0 +1,40 @@
+.divMenu2{
+    background:linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%), url(../../../assets/img/admin/panelControl/backgrundPanel.png);
+}
+.cron{
+    height: 100px;
+}
+.lineas-1, .lineas-2{
+    height: 100px;
+}
+.lineas-2{
+    transform: rotate(180deg);
+}
+nb-icon{
+    color: white;
+}
+.divImagen{
+    height: 200px;
+}
+.online{
+    color: rgb(97, 232, 97);
+}
+.offline{
+    color: rgb(211, 54, 54);
+}
+.noDisponible{
+    opacity: .7;
+}
+.divSuperior{
+    top: 0px;
+    background-color: #144a2cc4;
+  }
+  *{
+    color: white;
+  }
+.quemar{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}

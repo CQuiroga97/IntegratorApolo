@@ -1,8 +1,16 @@
+
 .divFechas{
     width: 100%;
     height: 140px;
-    background-color: #2f6b14;
+    /* background:linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%), url(../../assets/img/llaves/fondoLlaves.png); */
+    background-size: cover;
     display: flex;
+}
+.divMenu2{
+    /* background-image: url(../../assets/img/backgrounds/bannerPoli.jpg); */
+    background:linear-gradient(235deg, transparent .71%, #166136bb 90.00%), url(../../assets/img/backgrounds/bannerPoli.png);
+    background-size: 100% auto;
+    overflow-y: hidden;
 }
 app-transmision{
     width: 100%;
@@ -14,7 +22,6 @@ app-resultados{
     width: 100%;
     height: auto;
     display: flex;
-    background-color: #bde899;
     flex-wrap: wrap;
     flex-direction: column;
     padding-top: 40px;
@@ -29,13 +36,15 @@ app-resumen-rondas{
 }
 app-datos{
     width: 100%;
-    height: 360px;
+    padding: 10px;
+    padding-bottom: 50px;
+    height: auto;
     display: flex;
-    background-color: #144A2C;
 }
 nb-card{
     margin: auto auto auto 0px;
-    padding: 10px;
+    padding: 0px;
+    overflow: hidden;
     background: rgba(17, 17, 17, 0.5);
     box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
     -webkit-backdrop-filter: blur(15px);
@@ -46,6 +55,11 @@ nb-card{
     height: 100%;
     color: white !important;
 }
+nb-card-body{
+
+    background-size: 100% auto;
+    background-position: center;
+}
 iframe{
     background-color: aliceblue;
     width: 100%;
@@ -53,4 +67,26 @@ iframe{
 }
 .container{
     max-width: 1200px;
+}
+nb-card-header{
+    color: white;
+}
+@media (max-width: 500px){
+    app-datos{
+        height: auto;
+    }
+    iframe{
+        height: 250px !important;
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 1570px){
+    .divMenu2{
+
+        background-size: auto 100%;
+    }
+    .divMenu2 .container .row .col-8{
+        width: 100% !important;
+        margin: auto !important;
+    }
 }

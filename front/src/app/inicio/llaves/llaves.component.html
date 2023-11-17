@@ -1,0 +1,471 @@
+<div class="divMenu2">
+    <div class="container w-100 ms-0 me-0 cont ps-5 pe-5 llaves" *ngIf="!loading" [class.init]="!transition">
+        <div class="row">
+            <div class="col-5 p-0">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-3 p-0">
+                            
+                            <div class="container p-0">
+                                <div class="row pt-lg-4 pb-lg-4"  *ngFor="let index of [1, 2, 3, 4]">
+                                    <div class="col-12 p-0">
+            
+                                        <div class="container  p-0">
+                                            <div class="row m-0" *ngFor="let element of octavos[index+'8']">
+                                                    <nb-card class="transparent col-12 p-0 m-2">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column"  [class.ganador]="element?.estado == 2" [class.perdedor]="element?.estado == 3">
+                                                            <span>
+                                                                {{element?.nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{element?.nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex h-100 p-0">
+                            <div class="container h-100">
+                                <div class="row pt-0 h-100">
+                                    
+                                    <div class="row d-flex h-25">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave1.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex h-25">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave1.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex h-25">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave1.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex h-25">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave1.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 p-0 d-flex">
+                            
+                            <div class="container p-0 m-auto h-100">
+                                <div class="row h-50 pt-5 pb-5"  *ngFor="let index of [1, 2]">
+                                    <div class="col-12 p-0">
+            
+                                        <div class="container p-0 pt-4 pb-4 h-100">
+                                            
+                                            <div class="row h-50 d-flex">
+                                                <div class="col-12 mb-auto">
+
+                                                    <nb-card class="transparent" [class.fantasma]="!octavos[index+'4']">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos[index+'4']">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']" [class.ganador]="octavos[index+'4'][0]?.estado == 2" [class.perdedor]="octavos[index+'4'][0]?.estado == 3">
+                                                            <span>
+                                                                {{octavos[index+'4'][0]?.nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos[index+'4'][0]?.nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                                </div>
+                                            </div>
+                                            <div class="row h-50 d-flex" >
+                                                <div class="col-12 mt-auto d-flex">
+
+                                                    <nb-card class="transparent m-0 mt-auto w-100" [class.fantasma]="!octavos[index+'4'] || octavos[index+'4']?.length == 1">
+                                                        
+                                                        <!-- <nb-card-body class="p-2 ps-4 d-flex flex-column"> -->
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos[index+'4'] || octavos[index+'4']?.length == 1">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos![index+'4']?.length > 1" [class.ganador]="octavos[index+'4']![1]?.estado == 2" [class.perdedor]="octavos[index+'4']![1]?.estado == 3">
+                                                            <span>
+                                                                {{octavos[index+'4']![1]?.nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos[index+'4']![1]?.nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex h-100 p-0">
+                            <div class="container h-100">
+                                <div class="row pt-0 h-100">
+                                    
+                                    <div class="row d-flex h-50">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave2.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex h-50">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave2.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 p-0 d-flex">
+                            
+                            <div class="container p-0 m-auto h-100">
+                                <div class="row pt-lg-4 pb-lg-4 h-100">
+                                    <div class="col-12 p-0">
+            
+                                        <div class="container  p-0 h-100 d-flex flex-column pb-5">
+                                            <div class="row m-auto me-0 ms-0 pt-5 pb-lg-5">
+                                                    <nb-card class="transparent col-12 p-0 m-2" [class.fantasma]="!octavos['12']">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['12']">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['12']"  [class.ganador]="octavos['12'][0]?.estado == 2" [class.perdedor]="octavos['12'][0]?.estado == 3">
+                                                            <span>
+                                                                {{octavos['12'][0]?.nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos['12'][0]?.nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                            </div>
+                                            <div class="row m-auto me-0 ms-0 pt-5">
+                                                    <nb-card class="transparent col-12  p-0 m-2" [class.fantasma]="!octavos['12'] || octavos['12']?.length == 1">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['12'] || octavos['12']?.length == 1">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['12']?.length>0"  [class.ganador]="octavos['12']![1]?.estado == 2" [class.perdedor]="octavos['12']![1]?.estado == 3">
+                                                            <span>
+                                                                {{octavos['12']![1]?.nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos['12']![1]?.nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex">
+                            <img src="../../../assets/img/llaves/llave3.png" alt="" class="m-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 p-0">
+                <div class="container  p-0">
+                    <div class="row ">
+                        <div class="col-12 d-flex">
+                            <img src="../../../assets/img/llaves/copaPiston.png" alt="" class="m-auto">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <nb-card class="transparent">
+                                <nb-card-body *ngIf="!octavos['11'] || octavos['11']?.length<2">Ganador</nb-card-body>
+                                <nb-card-body style="text-align: center;" *ngIf="octavos['11']?.length > 1">
+                                    <span *ngIf="octavos['11'][0]?.estado == 2" class="fs-4">
+                                        1. {{octavos['11'][0]?.nombre}}
+                                        <br>
+                                        2. {{octavos['11'][1]?.nombre}}
+                                    </span>
+                                    <span *ngIf="octavos['11'][1]?.estado == 2" class="fs-4">
+                                        1. {{octavos['11'][1]?.nombre}}
+                                        <br>
+                                        2. {{octavos['11'][0]?.nombre}}
+                                    </span>
+                                    
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                    </div>
+                    <div class="row pt-5 position-relative">
+                        <div class="col-6  p-1">
+                            <nb-card class="transparent">
+                                <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['11'] || octavos['11']?.length == 0">
+                                    <span>
+                                        Por
+                                    </span>
+                                    <span>
+                                        definir
+                                    </span>
+                                </nb-card-body>
+                                <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['11']">
+                                    <span>
+                                       1. {{octavos['11'][0]?.nombre}}
+                                    </span>
+                                    <span>
+                                        2. {{octavos['11'][1]?.nombre}}
+                                    </span>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <nb-card class="position-absolute tercero transparent" *ngIf="octavos['10']?.length>1">
+                            <nb-card-body class="p-1">
+                                <span *ngIf="octavos['10'][1]?.estado == 3">
+                                    <span class="fs-5">
+
+                                        3. {{octavos['10'][0]?.nombre}}
+                                    </span>
+                                    <br>
+                                    <span class="fs-6">
+
+                                        4. {{octavos['10'][1]?.nombre}}
+                                    </span>
+
+                                </span>
+                                <span *ngIf="octavos['10'][0]?.estado == 3">
+                                    <span class="fs-5">
+
+                                        3. {{octavos['10'][1]?.nombre}}
+                                    </span>
+                                    <br>
+                                    <span class="fs-6">
+
+                                        4. {{octavos['10'][0]?.nombre}}
+                                    </span>
+                                </span>
+                            </nb-card-body>
+                        </nb-card>
+                        <div class="col-6 p-1 z-3">
+                            <nb-card class="transparent">
+                                <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['11'] || octavos['11']?.length == 1">
+                                    <span>
+                                        Por
+                                    </span>
+                                    <span>
+                                        definir
+                                    </span>
+                                </nb-card-body>
+                                <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['11']">
+                                    <span>
+                                        {{octavos['11']![1]?.nombre}}
+                                    </span>
+                                    <span>
+                                        {{octavos['11']![1]?.nombreU}}
+                                    </span>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5 p-0">
+                <div class="container h-100">
+                    <div class="row h-100   d-flex flex-row-reverse">
+                        <div class="col-3 p-0">
+                            
+                            <div class="container p-0">
+                                <div class="row pt-lg-4 pb-lg-4"  *ngFor="let index of [5, 6, 7, 8]">
+                                    <div class="col-12 p-0">
+            
+                                        <div class="container  p-0">
+                                            <div class="row m-0" *ngFor="let element of octavos[index+'8']">
+                                                <nb-card class="transparent col-12 p-0 m-2">
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column"  [class.ganador]="element?.estado == 2" [class.perdedor]="element?.estado == 3">
+                                                        <span>
+                                                            {{element?.nombre}}
+                                                        </span>
+                                                        <span>
+                                                            {{element?.nombreU}}
+                                                        </span>
+                                                    </nb-card-body>
+                                                </nb-card>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex h-100 p-0 ps-0">
+                            <div class="container h-100">
+                                <div class="row pt-0 h-100">
+                                    
+                                    <div class="row d-flex h-25" *ngFor="let el of [1, 2, 3, 4]">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave1.png" alt="" class="flip">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 p-0 d-flex">
+                            
+                            <div class="container p-0 m-auto h-100">
+                                <div class="row h-50 pt-5 pb-5"  *ngFor="let index of [3, 4]">
+                                    <div class="col-12 p-0">
+            
+                                        <div class="container p-0 pt-4 pb-4 h-100">
+                                            
+                                            <div class="row h-50 d-flex">
+                                                <div class="col-12 mb-auto">
+
+                                                    <nb-card class="transparent" [class.fantasma]="!octavos[index+'4']">
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos[index+'4']">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']" [class.ganador]="octavos[index+'4'][0]?.estado == 2" [class.perdedor]="octavos[index+'4'][0]?.estado == 3">
+                                                            <span>
+                                                                {{octavos[index+'4'][0]?.nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos[index+'4'][0]?.nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                                </div>
+                                            </div>
+                                            <div class="row h-50 d-flex" >
+                                                <div class="col-12 mt-auto d-flex">
+
+                                                    <nb-card class="transparent m-0 mt-auto w-100" [class.fantasma]="!octavos[index+'4'] || octavos[index+'4']?.length == 1">
+                                                        
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos[index+'4'] || octavos[index+'4']?.length == 1">
+                                                            <span>
+                                                                Por
+                                                            </span>
+                                                            <span>
+                                                                definir
+                                                            </span>
+                                                        </nb-card-body>
+                                                        <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos[index+'4']" [class.ganador]="octavos[index+'4']![1]?.estado == 2" [class.perdedor]="octavos[index+'4']![1]?.estado == 3">
+                                                            <span>
+                                                                {{octavos[index+'4']![1]?.nombre}}
+                                                            </span>
+                                                            <span>
+                                                                {{octavos[index+'4']![1]?.nombreU}}
+                                                            </span>
+                                                        </nb-card-body>
+                                                    </nb-card>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex h-100 p-0">
+                            <div class="container h-100">
+                                <div class="row pt-0 h-100">
+                                    
+                                    <div class="row d-flex h-50">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave2.png" alt="" class="flip">
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex h-50">
+                                        <div class="col-12 m-auto">
+                                            <img src="../../../assets/img/llaves/llave2.png" alt="" class="flip">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 p-0 d-flex">
+                            
+                            <div class="container p-0 m-auto h-100">
+                                <div class="row pt-lg-4 pb-lg-4 h-100 p-0">
+                                    <div class="container  p-0 h-100 d-flex flex-column pb-5">
+                                        <div class="row m-auto me-0 ms-0 pt-5 pb-lg-5">
+                                                <nb-card class="transparent col-12 p-0 m-2" [class.fantasma]="!octavos['22']">
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['22']">
+                                                        <span>
+                                                            Por
+                                                        </span>
+                                                        <span>
+                                                            definir
+                                                        </span>
+                                                    </nb-card-body>
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['22']"  [class.ganador]="octavos['22'][0]?.estado == 2" [class.perdedor]="octavos['22'][0]?.estado == 3">
+                                                        <span>
+                                                            {{octavos['22'][0]?.nombre}}
+                                                        </span>
+                                                        <span>
+                                                            {{octavos['22'][0]?.nombreU}}
+                                                        </span>
+                                                    </nb-card-body>
+                                                </nb-card>
+                                        </div>
+                                        <div class="row m-auto me-0 ms-0 pt-5">
+                                                <nb-card class="transparent col-12  p-0 m-2" [class.fantasma]="!octavos['22'] || octavos['22']?.length == 1">
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="!octavos['22'] || octavos['22']?.length == 1">
+                                                        <span>
+                                                            Por
+                                                        </span>
+                                                        <span>
+                                                            definir
+                                                        </span>
+                                                    </nb-card-body>
+                                                    <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['22']?.length>0"  [class.ganador]="octavos['22']![1]?.estado == 2" [class.perdedor]="octavos['22']![1]?.estado == 3">
+                                                        <span>
+                                                            {{octavos['22']![1]?.nombre}}
+                                                        </span>
+                                                        <span>
+                                                            {{octavos['22']![1]?.nombreU}}
+                                                        </span>
+                                                    </nb-card-body>
+                                                </nb-card>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1 d-flex">
+                            <img src="../../../assets/img/llaves/llave3.png" alt="" class="m-auto flip extraLeft">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container h-100" *ngIf="loading">
+        <nb-card [nbSpinner]="loading" nbSpinnerStatus="danger" class="h-100 bg-transparent border-0">
+            <nb-card-body></nb-card-body>
+          </nb-card>
+    </div>
+</div>

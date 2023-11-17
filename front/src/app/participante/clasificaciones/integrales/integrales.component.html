@@ -4,7 +4,11 @@
         {{segundos}}
     </h1>
 </div>
-<nb-card class="bg-transparent" *ngIf="iniciarPrueba">
+<div class="bannerFinPrueba" *ngIf="pruebaFinalizada">
+    <img src="../../../assets/img/participante/clasificaciones/bannerFinPrueba.png" alt="">
+    <button outline status="basic"  nbButton (click)="salirPrueba()">Salir</button>
+</div>
+<nb-card class="bg-transparent" *ngIf="iniciarPrueba && !pruebaFinalizada">
     <nb-card-body>
         <div class="container timer">
             <div class="row justify-content-md-center">
@@ -61,7 +65,7 @@
                                     <div class="row">
                                         <div class="col-12">
 
-                                            <img [src]='"http://localhost:3000/images/"+integral.Nombre+"/"+integral.Imagenes[0]' alt="">
+                                            <img [src]='"https://integratorapi.azurewebsites.net/images/"+integral.Nombre+"/"+integral.Imagenes[0]' alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +84,7 @@
                                         </h1>
                                     </div>
                                     <div class="col-10">
-                                        <img [src]='"http://localhost:3000/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[0]' alt="">
+                                        <img [src]='"https://integratorapi.azurewebsites.net/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[0]' alt="">
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +100,7 @@
                                         </h1>
                                     </div>
                                     <div class="col-10">
-                                        <img [src]='"http://localhost:3000/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[1]' alt="">
+                                        <img [src]='"https://integratorapi.azurewebsites.net/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[1]' alt="">
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +119,7 @@
                                         </h1>
                                     </div>
                                     <div class="col-10">
-                                        <img [src]='"http://localhost:3000/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[2]' alt="">
+                                        <img [src]='"https://integratorapi.azurewebsites.net/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[2]' alt="">
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +135,7 @@
                                         </h1>
                                     </div>
                                     <div class="col-10">
-                                        <img [src]='"http://localhost:3000/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[3]' alt="">
+                                        <img [src]='"https://integratorapi.azurewebsites.net/images/"+integral.Nombre+"/respuestas/"+integral.Respuestas[3]' alt="">
                                     </div>
                                 </div>
                             </div>

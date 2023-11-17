@@ -28,7 +28,6 @@ export class CambiarPasswordComponent {
     pass2: ["", [Validators.required]],
   });
   submit(){
-    console.log(this.dataParticipante.get('pass1'))
     if(this.dataParticipante.valid){
       if(this.dataParticipante.value.pass1 == this.dataParticipante.value.pass2){
         let data = {

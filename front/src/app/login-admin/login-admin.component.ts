@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UsersService } from '../users/users.service';
 import { AuthService } from '../auth/auth.service';
 import { AppComponent } from '../app.component';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 @Component({
   selector: 'app-login-admin',
   templateUrl: './login-admin.component.html',
@@ -15,10 +16,11 @@ export class LoginAdminComponent {
     public userService:UsersService,
     private router:Router,
     private authService:AuthService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private toastrService: NbToastrService
     ){
   }
-  
+
   checkEnter(e:any){
     if(e.key == "Enter")
       this.login()
@@ -26,12 +28,11 @@ export class LoginAdminComponent {
 
   login(){
     const user = {name:this.name, pass:this.pass}
-    console.log(user)
     this.userService.login(user).subscribe(data => {
     this.userService.setToken(data.token);
     this.router.navigate(["admin/menu"])
     }, error =>{
-      console.log("error")
+      this.toastrService.show("Login invalido", "Correo o contraseña invalidos", { status: "warning", destroyByClick: true, icon: "alert-triangle-outline" });
     })
   }
 }

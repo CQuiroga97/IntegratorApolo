@@ -1,14 +1,18 @@
 
 .divCuadrosStands{
-    width: 1300px;
     height: 300px;
     margin: auto;
     display: flex;
+    opacity: 0;
+    transition: all .8s;
 }
-.divCuadrosStands .cuadrosStands{
+.divCuadrosStands.init{
+    opacity: 1;
+}
+ .cuadrosStands{
     width: 380px;
     height: 250px;
-    margin: auto;
+    margin: 10px;
     padding-top: 15px;
     background: rgba(17, 17, 17, 0.5);
     box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
@@ -20,33 +24,32 @@
     box-sizing: border-box;
 }
 
-.divCuadrosStands .cuadrosStands .tittle {
+ .cuadrosStands .tittle {
     position: relative;
     left: 30px;
     margin-top: 10px;
 }
 
-.divCuadrosStands .cuadrosStands .subtittle {
+ .cuadrosStands .subtittle {
     position: relative;
     left: 30px;
     top: 35px;
 }
 
-
-.divCuadrosStands .cuadrosStands .subtittle p{
+ .cuadrosStands .subtittle p{
     font-size: 20px;
     color: white;
     
 }
 
-.divCuadrosStands .cuadrosStands .tittle p{
+ .cuadrosStands .tittle p{
     color: white;
     font-size: 25px;
     margin-bottom: 30px;
 
 
 }
-.divCuadrosStands .cuadrosStands .numberoEncuentros {
+ .cuadrosStands .numberoEncuentros {
     position: relative;
     left: 30px;
     color: white;
@@ -54,13 +57,36 @@
     font-size: 25px;
 }
 
-.divCuadrosStands .cuadrosStands .numberoEncuentros .numero1{
+ .cuadrosStands .numberoEncuentros .numero1{
     font-size: 45px;
+    width: 45px;
 }
 
-.divCuadrosStands .cuadrosStands .numberoEncuentros .numero2{
+ .cuadrosStands .numberoEncuentros .numero2{
     font-size: 35px;
     position: relative;
-    left: -10px;
+    left: 10px;
 }
-
+ .cuadrosStands .numberoEncuentros{
+    display: flex;
+}
+@media (max-width: 500px){
+    .divCuadrosStands{
+        width: 100%;
+        flex-direction: column;
+        height: 900px;
+    }
+ .cuadrosStands{
+        width: 90%;
+    }
+  }
+  .paises{
+    opacity: 0;
+    pointer-events: none;
+  }
+  @media (max-width: 1570px){
+    .cuadrosStands{
+        margin: auto;
+        margin-top: 15px;
+    }
+  }

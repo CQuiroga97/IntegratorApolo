@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NbThemeModule, NbLayoutModule, NbTabsetModule, NbToastrModule, NbToastrService, NbGlobalPhysicalPosition, NbStepperModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbTabsetModule, NbToastrModule, NbToastrService, NbGlobalPhysicalPosition, NbStepperModule, NbTooltipModule, NbSpinnerModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSidebarModule } from '@nebular/theme';
 import { NbActionsModule } from '@nebular/theme';
@@ -44,7 +44,17 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { PanelControlComponent } from './admin/panel-control/panel-control.component';
 import { ClasificatoriasComponent } from './admin/panelControl/clasificatorias/clasificatorias.component';
 import { IntegralesComponent } from './participante/clasificaciones/integrales/integrales.component';
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+import { ResultadosCompetenciaComponent } from './resultados-competencia/resultados-competencia.component';
+import { TablaResultadosComponent } from './tabla-resultados/tabla-resultados.component';
+import { IngresarIntegralesComponent } from './ingresar-integrales/ingresar-integrales.component';
+import { LlavesComponent } from './inicio/llaves/llaves.component';
+import { IntegralesRonda2Component } from './integrales-ronda2/integrales-ronda2.component';
+import { PanelEliminatoriasComponent } from './admin/panel-eliminatorias/panel-eliminatorias.component';
+import { StreamSegundaRondaComponent } from './stream-segunda-ronda/stream-segunda-ronda.component';
+import { SegundaRondaComponent } from './segunda-ronda/segunda-ronda.component';
+import { FooterComponent } from './footer/footer.component';
+// const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
+ const config: SocketIoConfig = { url: 'https://integratorapi.azurewebsites.net', options: {} }; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,9 +79,20 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     PanelControlComponent,
     ClasificatoriasComponent,
     IntegralesComponent,
-    
+    ResultadosCompetenciaComponent,
+    TablaResultadosComponent,
+    IngresarIntegralesComponent,
+    LlavesComponent,
+    IntegralesRonda2Component,
+    PanelEliminatoriasComponent,
+    StreamSegundaRondaComponent,
+    SegundaRondaComponent,
+    FooterComponent,
+
+
   ],
   imports: [
+    NbSpinnerModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -94,6 +115,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MatTabsModule,
     NgbModule,
     MatDialogModule,
+    NbTooltipModule,
     SocketIoModule.forRoot(config),
     NbToastrModule.forRoot({
       position: NbGlobalPhysicalPosition.BOTTOM_RIGHT

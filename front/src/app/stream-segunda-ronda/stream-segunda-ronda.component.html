@@ -1,0 +1,240 @@
+<div class="divTransmision">
+
+  <div class="cont_transmition d-flex position-relative m-auto h-75 justify-content-evenly">
+
+
+    <!-- Transmision primer participante -->
+    <div class="container cont-participante-1 col-3 d-flex flex-column">
+      <img src="../../assets/img/streaming/Vector1.png" class="position-absolute z-1" alt="">
+      <div class="container d-flex flex-column cont_video1 video_transmition col-10 w-100 h-75 m-auto z-2">
+        <div class="row justify-content-center"  *ngIf="!tiempoRespuestas[0].respuesta">
+
+
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{cronometroFront.minutos<10?'0'+cronometroFront.minutos:cronometroFront.minutos}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{cronometroFront.segundos<10?'0'+cronometroFront.segundos:cronometroFront.segundos}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{cronometroFront.mill<10?'0'+cronometroFront.mill:cronometroFront.mill}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+        </div>
+        <div class="row justify-content-center"  *ngIf="tiempoRespuestas[0].respuesta">
+
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{tiempoRespuestas[0].minutos<10?'0'+tiempoRespuestas[0].minutos:tiempoRespuestas[0].minutos}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{tiempoRespuestas[0].segundos<10?'0'+tiempoRespuestas[0].segundos:tiempoRespuestas[0].segundos}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{tiempoRespuestas[0].mill<10?'0'+tiempoRespuestas[0].mill:tiempoRespuestas[0].mill}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+        </div>
+        <div class="video_1 overflow-hidden">
+          <div class="putaje der">
+            <span *ngIf="participantes">
+
+              {{participantes[0].puntaje[0]}}
+            </span>
+          </div>
+          <video *ngIf="video_1" [srcObject]="video_1.srcObject" (loadedmetadata)="onLoadedMetadata($event)" class="h-100"></video>
+        </div>
+        <div class="logo_universiad">
+          <img class="img_logo_universidad" [src]="'https://integratorapi.azurewebsites.net/logos/logo_'+participantes[0]!.universidad+'.png'" alt="" width="90%" height="90%">
+          <div class="number d-flex align-content-center">
+            <p>
+              {{participantes[0]!.puntajeU.toFixed(2)}}
+            </p>
+          </div>
+        </div>
+        <div class="nombre_universidad" *ngIf="participantes">
+          <p>
+            {{participantes[0]!.nombre}}
+          </p>
+          <p>
+            {{participantes[0]!.nombreU}}
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- transmision ejercicio -->
+    <div class="container cont_transmision col-6 d-flex flex-column">
+      <div class="cont_Integral_Actual position-relative m-auto w-50">
+        <img [src]="integral" alt="" class="integral_actual" width="100%" height="100%" *ngIf="integral && enCompetencia && estado != 3">
+        <img [src]="imagenDefault" alt="" class="integral_actual" width="100%" height="100%" *ngIf="!enCompetencia">
+      </div>
+
+      <div class="container cont_Opciones_transmision w-100 h-75 d-flex justify-content-evenly">
+        <div class="exercise_1 col-5 d-flex align-items-center">
+          <div id="math-field_0" class="m-auto fs-5 math border-0"></div>
+          <span tabindex=0 id="substitue-id"></span>
+        </div>
+        <div class="linea"></div>
+        <div class="exercise_2 col-5 d-flex align-items-center">
+          <div id="math-field_1" class="m-auto fs-5 math border-0"></div>
+          <span tabindex=0 id="substitue-id"></span>
+        </div>
+      </div>
+
+      <div class="cont_time"></div>
+
+
+    </div>
+
+
+
+    <!-- Transmision segundo participante -->
+    <div class="container cont-participante-2 col-3 d-flex flex-column">
+      <div class="container d-flex flex-column cont_video1 video_transmition col-10 w-100 h-75 m-auto">
+        <div class="row justify-content-center" *ngIf="!tiempoRespuestas[1].respuesta">
+
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{cronometroFront.minutos<10?'0'+cronometroFront.minutos:cronometroFront.minutos}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{cronometroFront.segundos<10?'0'+cronometroFront.segundos:cronometroFront.segundos}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{cronometroFront.mill<10?'0'+cronometroFront.mill:cronometroFront.mill}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+        </div>
+        <div class="row justify-content-center"*ngIf="tiempoRespuestas[1].respuesta">
+
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{tiempoRespuestas[1].minutos<10?'0'+tiempoRespuestas[1].minutos:tiempoRespuestas[1].minutos}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{tiempoRespuestas[1].segundos<10?'0'+tiempoRespuestas[1].segundos:tiempoRespuestas[1].segundos}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+          <div class="col-3">
+              <nb-card class="transparent cron">
+                  <nb-card-body class="d-flex">
+                      <span class="m-auto fs-2">
+                          {{tiempoRespuestas[1].mill<10?'0'+tiempoRespuestas[1].mill:tiempoRespuestas[1].mill}}
+                      </span>
+                  </nb-card-body>
+              </nb-card>
+          </div>
+        </div>
+        <div class="video_1 overflow-hidden">
+          <div class="putaje izq">
+            <span *ngIf="participantes">
+
+              {{participantes[1].puntaje[0]}}
+            </span>
+          </div>
+          <video *ngIf="video_2" [srcObject]="video_2.srcObject" (loadedmetadata)="onLoadedMetadata($event)" class="h-100"></video>
+        </div>
+        <div class="logo_universiad">
+          <img class="img_logo_universidad" [src]="'https://integratorapi.azurewebsites.net/logos/logo_'+participantes[1]!.universidad+'.png'" alt="" width="90%" height="90%">
+          <div class="number d-flex align-content-center">
+            <p>
+              {{participantes[1]!.puntajeU.toFixed(2)}}
+            </p>
+          </div>
+        </div>
+        <div class="nombre_universidad" *ngIf="participantes">
+          <p>
+            {{participantes[1]!.nombre}}
+          </p>
+          <p>
+            {{participantes[1]!.nombreU}}
+          </p>
+        </div>
+
+      </div>
+
+      <img src="../../assets/img/streaming/Vector.png" class="second-tringule position-absolute z-0" alt="">
+
+    </div>
+
+
+
+
+  </div>
+
+  <div class="w-100 h-100 position-absolute z-3 divSuperior d-flex" *ngIf="estado == 3">
+    <div class="container m-auto">
+      <div class="row justify-content-center">
+        <div class="col-5 fs-1 d-flex">
+            <span class="m-auto">
+                {{segundos}}
+            </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

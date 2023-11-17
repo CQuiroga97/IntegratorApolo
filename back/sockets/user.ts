@@ -11,7 +11,6 @@ export class User {
         if(el.id == user)
           el.integral = integral;
       })
-      console.log(this.userList.find((currentUser) => currentUser.id == user));
     }
     public static addUser(user: any) {
       const added = this.userList.find((currentUser) => currentUser.id == user.id);

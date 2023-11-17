@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { UsersService } from '../users/users.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-cabezera',
   templateUrl: './cabezera.component.html',
@@ -12,7 +13,8 @@ export class CabezeraComponent implements OnInit{
   constructor(
     public userService:UsersService,
     public router:Router,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private appComp: AppComponent,
   ){
 
   }
@@ -21,7 +23,6 @@ export class CabezeraComponent implements OnInit{
     this.isLoggedIn = isLoggedIn;
     if(isLoggedIn){
       this.usuario = this.userService.getUserInfo().data
-      console.log(this.usuario)
     }
    })
   }
@@ -33,6 +34,7 @@ export class CabezeraComponent implements OnInit{
     this.userService.logoutAdmin();
   }
   goLogin(){
+    this.appComp.menu = false;
     this.router.navigate(["/login"])
   }
 }

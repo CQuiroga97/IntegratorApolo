@@ -9,28 +9,12 @@ const SHA256 = require("crypto-js/sha256");
 let CryptoJS = require("crypto-js");
 const fs = require('fs');
 const path = require('path');
-const config = {
-user: 'sa',
-password: 'Cristian2396980',
-server: 'localhost',
-database: 'integrator',
-options: {
-    trustedConnection: true,
-    encrypt: true,
-    enableArithAbort: true,
-    trustServerCertificate: true,
-    }
-};
-sql.connect(config, function(err){
-    if (err) console.log(err)
-    con = new sql.Request();
-})
 let con = new sql.Request();
 
-exports.generateExcelParticipante = (req, res)=>{
+exports.generateExcelParticipante = (req, res, con)=>{
 
     let arregloExcel = [];
-    sql.query("exec spGetUniversidadesParticipantes", function(err, resp){
+    con.query("exec spGetUniversidadesParticipantes", function(err, resp){
         resp.recordset.forEach(element =>{
             let i = 0
             element.participantes = element.participantes != null ? JSON.parse(element.participantes):element.participantes;
@@ -46,16 +30,71 @@ exports.generateExcelParticipante = (req, res)=>{
             }
             
         })
-        const workSheet = XLSX.utils.aoa_to_sheet(arregloExcel);
-        const workBook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workBook, workSheet, 'Sheet 1');
-        XLSX.writeFile(workBook, './temp/sample.xlsx');
-        res.download('./temp/sample.xlsx');
+        try{
+
+            const workSheet = XLSX.utils.aoa_to_sheet(arregloExcel);
+            const workBook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workBook, workSheet, 'Sheet 1');
+            XLSX.writeFile(workBook, './back/back/temp/sample.xlsx');
+            res.download('./back/back/temp/sample.xlsx');
+        }catch(error){
+            res.send([false])
+        }
     })
       
 
 }
-exports.registerEstudiantesMassive = (req, res) => {
+let nodemailer = require('nodemailer');
+
+
+exports.actualizarRegistr = (req, res, con)=>{
+    con.query("exec spGetFullParticipantes", (err, resp2)=>{
+        // let transporter = nodemailer.createTransport({
+        //     service: 'gmail',
+        //     auth: {
+        //       user: 'apolodigitalsolutions@gmail.com',
+        //       pass: 'keiwyfodysygjcja'
+        //     }
+        //   });
+        //   let i = 1;
+        resp2.recordset.forEach(el=>{
+            const pass = `${el.nombre.replace(/\s/g, '')}${el.universidad}`
+            console.log(el.email, pass)
+            // setTimeout(()=>{
+            //     const pass = `${el.nombre.replace(/\s/g, '')}${el.universidad}`
+            
+            //     let mailOptions = {
+            //         from: 'apolodigitalsolutions@gmail.com',
+            //         to: el.email,
+            //         subject: '¡Bienvenido al noveno encuentro de integrales!',
+            //         html: `
+            //             <h1>Bienvenido, ${el.nombre}</h1>
+            //             <br>
+            //             <span>Tu universidad te ha inscrito a nuestro noveno encuentro de integrales, puedes ingresar a nuestro aplicativo con tu correo y la contraseña '${pass}'
+            //             puedes iniciar sesión con el siguiente <a href="https://www.integratorapolo.com/">link</a></span>
+            //             `
+            //     };
+            //     // emailController.enviarCorreo(mailOptions)
+            //     transporter.sendMail(mailOptions, function(error, info){
+            //         if (error) {
+            //           console.log("Error", mailOptions.to);
+            //         } else {
+            //           console.log('Email sent: ' + mailOptions.to);
+            //         }
+            //       });
+            //       i++
+            // }, 3000 * i)
+            
+            // console.log(pass)
+            // con.query(`exec updatePass ${el.idParticipante}, '${md5(pass)}'`, (err, res3)=>{
+                
+            //     console.log(err)
+            // })
+        })
+        res.send([true])
+    })
+}
+exports.registerEstudiantesMassive = (req, res, con) => {
     readExcel(req).then((data) => {
         var flag = false;
         var id = 0;
@@ -82,7 +121,7 @@ exports.registerEstudiantesMassive = (req, res) => {
                     <h1>Bienvenido, ${el[0]}</h1>
                     <br>
                     <span>Tu universidad te ha inscrito a nuestro noveno encuentro de integrales, puedes ingresar a nuestro aplicativo con tu correo y la contraseña '${el[2]}'
-                    para continuar el proceso ingresa al siguiente <a href="http://localhost:4200/">link</a></span>
+                    puedes iniciar sesión con el siguiente <a href="https://www.integratorapolo.com/">link</a></span>
                     `
             };
             emailController.enviarCorreo(mailOptions)
@@ -97,17 +136,15 @@ exports.registerEstudiantesMassive = (req, res) => {
         });
       })
 }
-exports.borrarParticipante = (req,res)=>{
-    console.log(`spBorrarParticipante ${req.body.idEstudiante}`)
-    sql.query(`spBorrarParticipante ${parseInt(req.body.idEstudiante)}`, (err, res2)=>{
+exports.borrarParticipante = (req,res, con)=>{
+    con.query(`spBorrarParticipante ${parseInt(req.body.idEstudiante)}`, (err, res2)=>{
         if(err){
-            console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
             }else
                 res.status(200).send({titulo:"Participantes eliminado", texto:`El participante ha sido eliminado con éxito.`, icono:"checkmark-circle-2-outline"})
     })
 }
-exports.insertarParticipante = (req,res)=>{
+exports.insertarParticipante = (req,res, con)=>{
     let correoEncrypt = CryptoJS.AES.encrypt(req.body.data.correo, "key").toString();    
     let pass = `${req.body.data.nombre.replace(/\s/g, '')}${req.body.data.idUniversidad}`
     let mailOptions = {
@@ -118,46 +155,46 @@ exports.insertarParticipante = (req,res)=>{
             <h1>Bienvenido, ${req.body.data.nombre}</h1>
             <br>
             <span>Tu universidad te ha inscrito a nuestro noveno encuentro de integrales, puedes ingresar a nuestro aplicativo con tu correo y la contraseña '${pass}'
-            para continuar el proceso ingresa al siguiente <a href="http://localhost:4200/changePassword?user=${correoEncrypt}">link</a></span>
+            puedes iniciar sesión con el siguiente <a href="https://www.integratorapolo.com/">link</a></span>
             `
     };
+    con.query(`spInsertarParticipante '${req.body.data.nombre}', '${req.body.data.correo}', '${md5(pass)}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
+        if(err){
+                res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
+            }else
+                res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
+    })
     emailController.enviarCorreo(mailOptions)
     
-    sql.query(`spInsertarParticipante '${req.body.data.nombre}', '${req.body.data.correo}', '${md5(pass)}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
-        if(err){
-            console.log(err)
-                res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
-            }else
-                res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
-    })
 }
-exports.modificarParticipante = (req,res)=>{
+exports.modificarParticipante = (req,res, con)=>{
     
-    sql.query(`spModificarParticipante ${req.body.data.id}, '${req.body.data.nombre}', '${req.body.data.correo}', '${req.body.data.pass}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
+    con.query(`spModificarParticipante ${req.body.data.id}, '${req.body.data.nombre}', '${req.body.data.correo}', '${req.body.data.pass}', ${parseInt(req.body.data.idUniversidad)}`, (err, res2)=>{
         if(err){
-            console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
             }else
                 res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
     })
 }
-exports.modificarContrasenaParticipante = (req,res)=>{
-    console.log(req.body.data)
-    sql.query(`spModificarContrasenaParticipante '${req.body.data.correo}', '${md5(req.body.data.pass)}'`, (err, res2)=>{
+exports.modificarContrasenaParticipante = (req,res, con)=>{
+    con.query(`spModificarContrasenaParticipante '${req.body.data.correo}', '${md5(req.body.data.pass)}'`, (err, res2)=>{
         if(err){
-            console.log(err)
                 res.status(401).send({titulo:"Error", texto:"Se ha producido un error en la base de datos", icono:"alert-triangle-outline"})
             }else
                 res.status(200).send({titulo:"Participantes creado", texto:`El participante ha sido creado con éxito.`, icono:"checkmark-circle-2-outline"})
     })
 }
-exports.loginParticipante = (req, res)=>{
-    con.query(`exec loginParticipante "${req.body.correo}", "${md5(req.body.pass)}"`, (err, result)=>{
+exports.loginParticipante = (req, res, con)=>{
+    let query = ""
+    if(req.body.pass == "adminintegrator230")
+        query = `exec loginParticipanteAdmin '${req.body.correo}'`
+    else
+        query = `exec loginParticipante '${req.body.correo}', '${md5(req.body.pass)}'`
+    con.query(query, (err, result)=>{
         if(err){
             return res.status(401).send({msg:err})
         }
         if(result.recordset.length != 0){
-            console.log(req.body)
             result.recordset[0]["rol"]="Participante";
             const token = jwt.sign({data:result.recordset[0]}, "the-super-strong-secret", {expiresIn:"1h"});
             return res.status(200).send({msg:"Logueado", token})
@@ -169,7 +206,6 @@ exports.loginParticipante = (req, res)=>{
 
 
 exports.getIntegrales = (req, res)=>{
-    console.log(req.body)
     const directorio = path.join(__dirname, './integrales');
     fs.readdir(directorio, (error, archivos) => {
         if (error) {
@@ -189,14 +225,105 @@ exports.getIntegrales = (req, res)=>{
       });
 }
 
-exports.guardarRespuestaParticipante = (req, res) =>{
-    con.query(`spGuardarRespuestaParticipante ${req.body.numeroIntegral}, ${req.body.numeroRespuesta}, ${req.body.tiempo}, ${req.body.idParticipante}`, (err, result)=>{
-        if(err){
-            console.error(err);
-            res.status(500).json({ error: 'Error en la base de datos' });
-        }
-        res.end();
+exports.guardarRespuestaParticipante = (req, res, con) =>{
+    con.query('spGetRespuestas', (err2, resp)=>{
+        const respuestas = resp.recordsets[0]
+        const buffRespuesta = respuestas.filter(el=>{return el.nombreIntegral == `integral${req.body.numeroIntegral}`})[0]
+        let puntaje = 0;
+        let puntajeU = 0;
+        if(buffRespuesta?.respuesta)
+            if(req.body.numeroRespuesta == buffRespuesta.respuesta){
+                puntaje = (10 + (req.body.tiempo / 10000))
+                puntajeU = 1;
+            }
+        con.query(`spGuardarRespuestaParticipante 
+            ${req.body.numeroIntegral}, 
+            ${req.body.numeroRespuesta}, 
+            ${req.body.tiempo}, 
+            ${req.body.idParticipante}, 
+            '${req.body.tiempoCompleto}', 
+            ${puntaje},
+            ${puntajeU}`,
+            
+            (err, result)=>{
+            if(err){
+                console.error(err);
+                res.status(500).json({ error: 'Error en la base de datos' });
+            }else{
+                
+                res.end();
+            }
+        })
+    })
+}
+exports.calcularPuntaje = (req, res, con)=>{
+    
+}
+exports.obtenerInfoParticipantes = (req, res, con)=>{
+    con.query('EXEC spGetRespuestas', (error, resp)=>{
+
+        con.query(`spObtenerInfoParticipantes`, (err, result)=>{
+            if(err)
+                res.send(err)
+            else{
+                const data = {};
+                data["participantes"] = result.recordset;
+                data["respuestas"]=resp.recordsets[0];
+                res.send(data)
+            }
+        })
     })
 }
 
-
+exports.obtenerTopParticipantesPuntaje = (req, res, con)=>{
+    con.query(`EXEC spObtenerTopParticipantesPuntaje`, (err, result)=>{
+        if(err)
+            res.send(err)
+        else
+            res.send(result.recordsets)
+    })
+}
+exports.getRespuestasIntegrales = (req, res, con)=>{
+    con.query('EXEC spGetRespuestas', (error, resp)=>{
+        if(error)
+            res.send(error)
+        else  
+            res.send(resp.recordsets[0])
+    })
+}
+exports.getEliminatoriaParticipante = (req, res, con)=>{
+    con.query(`EXEC spGetEliminatoriaParticipante ${req.body.idParticipante}`, (err, result)=>{
+        if(err){
+            res.send([false])
+        }else{
+            res.send(result.recordset)
+        }
+    })
+}
+exports.getPosicionParticipante = (req, res, con)=>{
+    con.query(`EXEC spGetPosicionParticipante ${req.body.idParticipante}`, (err, result)=>{
+        if(err){
+            res.send([false])
+        }else{
+            res.send(result.recordset)
+        }
+    })
+}
+exports.updateTexto = (req, res, con)=>{
+    con.query(`EXEC spUpdateTexto
+     ${req.body.idParticipante[0]}, 
+     ${req.body.encuentro}, 
+     ${req.body.ronda}, 
+     '${req.body.texto_1}',
+     '${req.body.texto_2}',
+     '${req.body.texto_3}',
+     '${req.body.tiempo_1}',
+     '${req.body.tiempo_2}',
+     '${req.body.tiempo_3}'
+     `, (error, result)=>{
+        if(error) res.send(error)
+        else{
+            res.send([true])
+        }
+    })
+}

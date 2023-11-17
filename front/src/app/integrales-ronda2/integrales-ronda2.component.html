@@ -1,0 +1,92 @@
+<div class="divMenu">
+
+  <section class="registerIntegral m-auto overflow-auto " style="padding-right: 80px;">
+
+    <span style="font-size: 29px; color: white; font-weight: bold; position: relative;">
+      Ingrese las integrales de la segunda ronda:
+    </span>
+    <nb-card class="transparent h-auto" *ngFor="let item of integrales; let i = index" style="margin-top: 15px;">
+      <nb-card-body class="container overflow-hidden display-flex">
+        <div class="container row card_integral d-flex justify-content-center m-auto h-100 overflow-hidden mb-5">
+
+
+          <div class="box_archivo_integral col-8 position-relative m-auto d-flex align-items-center justify-content-center">
+
+            <!-- Aca se sube la imagen de la integral -->
+            <label for="fileInput{{ i }}">
+
+
+              <input type="file" id="fileInput{{ i }}" (change)="fileUpload($event, i, 0)" accept=".png, .jpg" multiple
+                style="display:none">
+
+              <nb-icon *ngIf="!item.selectedImage0" icon="upload-outline" status="basic"></nb-icon>
+
+              <img *ngIf="item.selectedImage0" [src]="item.selectedImage0" alt="Selected Image" class="selected-image">
+
+
+              <!-- Letreros -->
+              <p *ngIf="item.selectedImage0 == null" class="first_letter">
+                Selecciona un archivo PNG o JPG para importar
+              </p>
+              <p *ngIf="item.selectedImage0 == null" class="second_letter">
+                O arrástralo y suéltalo aquí
+              </p>
+            </label>
+
+          </div>
+
+
+          <!-- class="file-input" -->
+
+
+
+
+
+        </div>
+        <div class="container w-100">
+          <div class="row justify-content-center">
+            <div class="col-3 p-1 colImagen m-2 d-flex" *ngFor="let item of integralesCreadas" [class.opacity-50]="item.estado == 1 || item.estado == 3">
+              <nb-icon icon="close-circle-outline" nbTooltip="Borrar integral" (click)="borrar(item.id)" *ngIf="!(item.estado == 1 || item.estado == 3)"></nb-icon>
+              {{item.estado}}
+              <img [src]="item.imagen" alt="" class="w-75 m-auto "  >
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+
+
+    <div class="cont_buttons container" style="display: flex; justify-content: center;">
+
+      <!-- <button nbButton outline status="basic" size="large" class="px-5 m-md-1" (click)="nuevaintegral()"
+        style="font-weight: normal; font-size: 25px !important;">
+        Agregar
+      </button> -->
+
+      <button nbButton outline status="basic" size="large" class="px-5 m-md-1" (click)="abrirConfirmacion()"
+        style="font-weight: normal; font-size: 25px !important;">
+        Guardar
+      </button>
+    </div>
+  </section>
+
+
+   <!-- Mensaje de confirmación -->
+   <div  *ngIf="mostrarConfirmacion" class="confirmation-message h-100 w-100 m-auto">
+    <nb-card class="container h-25 w-25 m-auto" style="position: relative; color: white;">
+      <div class="confirmation-dialog container justify-content-between m-auto">
+        <p>¿Seguro que deseas guardar las integrales?</p>
+        <div class="cont_btns">
+          <button nbButton outline status="basic" size="large" class="px-5 m-md-1"
+          (click)="cerrarConfirmacion()">Cancelar</button>
+        <button nbButton outline status="basic" size="large" class="px-5 m-md-1"
+          (click)="guardarIntegrales(0)">Aceptar</button>
+        </div>
+
+      </div>
+
+    </nb-card>
+  </div>
+
+</div>

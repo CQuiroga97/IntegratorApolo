@@ -1,8 +1,16 @@
-.divMenu{
+button{
+    letter-spacing: 1px;
+     background-color: transparent !important;
+}
+button:hover{
+     background-color: #f0cb00 !important;
+}
+.container{
     width: 100%;
     height: 70px;
     margin: auto;
     display: flex;
+    max-width: 100%;
 }
 .divBtnMenu{
     width: 200px;
@@ -18,16 +26,147 @@
     font-weight: bold;
     text-decoration: none;
 }
-.divBtnMenu span:hover{
+.divBtnMenu span:hover, .divBtnMenu a:hover{
     font-size: 25px;
 }
 button{
     margin: auto 0px auto auto;
 }
+
+
+.cont-logos{
+  display: flex;
+  align-items: center;
+}
+
 img{
-    margin: auto 0px auto 50px;
-    height: 43px;
+
+    height: 75px;
+    position: relative;
+
+}
+
+.white-line{
+  width: 2px;
+  height: 50px;
+  background-color: white;
 }
 .justify-content-end b{
     text-align: right;
 }
+.drop{
+    overflow: hidden;
+    max-height: 100%;
+    width: 100%;
+    margin: auto;
+    height: 500px;
+    transition: all .5s;
+
+    position: relative;
+}
+.drop span, .drop a{
+    position: relative;
+    top: -17px;
+    font-family: "cond" !important;
+
+}
+.alin{
+    text-align: right;
+}
+.dropDown a{
+    font-size: 15px !important;
+    top: 0px !important;
+}
+a, span{
+    letter-spacing: 1px;
+    font-size: 20px !important;
+    font-family: "cond" !important;
+}
+.drop .titulo{
+    width: 100%;
+    height: 70px;
+    margin: auto;
+    position: relative;
+}
+.dropDown{
+    background: rgba(17, 17, 17, 0.5);
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0),white, rgba(0, 0, 0, 0)) 28 0%;
+  border-radius: 13px;
+  color: white;
+  box-sizing: border-box;
+  overflow: hidden;
+
+}
+.drop:hover{
+    max-height: max-content;
+}
+.dropDown a:hover{
+    color: black;
+    background-color: #E6B52C;
+    font-size: 18px;
+}
+
+.dropDown a{
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
+}
+@media (max-width: 1570px){
+    .container{
+        width: 100% !important;
+        max-width: none !important;
+    }
+    .divBtnMenu{
+        width: 100px !important;
+    }
+    a, span, button{
+        font-size: 17px !important;
+    }
+    .col-4 img{
+        height: 58px;
+        position: relative;
+    }
+  }
+  @media (max-width: 767px){
+    .row{
+        flex-direction: row !important;
+    }
+    .container{
+        height: 100% !important;
+    }
+    .h-100{
+        height: auto !important;
+    }
+    .col-1{
+        width: 100% !important;
+        margin-top: 15px;
+    }
+    .col-4{
+        margin-bottom: 150px;
+    }
+    .drop{
+        height: 50px;
+    }
+    .drop:hover{
+        height: 230px;
+    }
+    .titulo{
+        height: 43px;
+
+    }
+    a, span, button{
+        font-size: 20px !important;
+    }
+    .titulo span{
+        top: 0px !important;
+    }
+    .row.justify-content-end{
+        width: 100%;
+    }
+    .row.justify-content-end .col-1{
+        margin: auto;
+    }
+  }

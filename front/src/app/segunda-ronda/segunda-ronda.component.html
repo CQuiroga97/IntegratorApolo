@@ -1,0 +1,131 @@
+<div class="div_segunda_ronda z-0">
+  <video *ngIf="video_2" [srcObject]="video_2.srcObject" class="w-100 m-auto" (loadedmetadata)="onLoadedMetadata($event)" style="display: none;"></video>
+
+  <div
+    class="container cont_padre_segunda_ronda d-flex flex-column w-100 m-auto justify-content-around position-relative">
+    <div class="divCamara">
+      <video *ngIf="video_1" [srcObject]="video_1.srcObject" class="w-100 m-auto" (loadedmetadata)="onLoadedMetadata($event)" muted></video>
+    </div>
+    <div class="container cont_pregunta_segundaRonda h-25 w-100">
+      <div class="row">
+
+        <div class="integral_acual w-75 h-100 m-auto">
+  
+          <img [src]="integral" alt="" class="integral_actual" width="100%" *ngIf="integral && enCompetencia">
+          <img [src]="imagenDefault" alt="" class="integral_actual" width="100%"  *ngIf="!enCompetencia">
+  
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="container time_container w-50 h-50 position-relative m-auto d-flex justify-content-between" >
+          <img src="../../assets/img/segundaRonda/lines1.png" >
+          <div class="box_watch w-25">
+            <span>
+              {{cronometroFront.minutos<10?'0'+cronometroFront.minutos:cronometroFront.minutos}}
+            </span>
+          </div>
+          <div class="box_watch w-25">
+            <span>
+              {{cronometroFront.segundos<10?'0'+cronometroFront.segundos:cronometroFront.segundos}}
+            </span>
+          </div>
+          <div class="box_watch w-25">
+            <span>
+              {{cronometroFront.mill<10?'0'+cronometroFront.mill:cronometroFront.mill}}
+            </span>
+          </div>
+          <img src="../../assets/img/segundaRonda/lines2.png" >
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container  cont_respuesta_segunda_ronda h-25 w-100">
+
+      <img src="../../assets/img/segundaRonda/Group 119.png" class="" alt="" srcset=""
+        style="position: absolute; left: 105px; top: -65px; z-index: 0;">
+
+      <div class="container respuesta-container w-75 h-100 z-3">
+        <!-- <ng-katex [equation] ="mathequations[0]"> </ng-katex> -->
+
+        <div class="entrada z-3 wrapper d-flex" style="width: 100%; height: 100%;" (click)="focus()">
+          <div id="math-field" class="m-auto fs-5 math" (keyup)="validate()"></div>
+          <span tabindex=0 id="substitue-id"></span>
+        </div>
+
+        
+
+
+
+
+        <img src="../../assets/img/segundaRonda/Group 118.png" alt="" srcset=""
+          style="position: absolute; right: 100px; top: 135px; z-index: 0;">
+
+
+      </div>
+
+
+
+    </div>
+
+    <div class="container cont_teclado_segunda_ronda h-50 w-100  justify-content-center">
+      <div class="row row_teclado d-flex align-items-center m-auto position-relative">
+        <div class="col-auto " *ngFor="let symbol of symbols">
+          <button class="btn btn-symbol" (click)="onClickMathButton(symbol.latex)">{{ symbol.simbolo }}</button>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-4 mt-3">
+          <button nbButton class="w-100" (click)="pausarCronometro()"> Enviar respuesta</button>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <div class="w-100 h-100 position-absolute z-3 divSuperior d-flex" *ngIf="!enCompetencia">
+    <div class="container m-auto">
+      <div class="row justify-content-center" >
+        <div class="col-5 fs-1 d-flex" *ngIf="estado == 0">
+          <span class="m-auto">
+          
+            Esperando indicaciones del jurado...
+          </span>
+        </div>
+        <div class="col-5 fs-1 d-flex" *ngIf="estado == 1">
+          <span class="m-auto">
+          
+            Cargando integral...
+          </span>
+        </div>
+        <div class="col-5 fs-1 d-flex" *ngIf="estado == 2">
+          <span class="m-auto">
+          
+            Integral lista, iniciando...
+          </span>
+        </div>
+        
+        <div class="col-5 fs-1 d-flex" *ngIf="estado == 3">
+          <span class="m-auto">
+          
+            {{segundos}}
+          </span>
+        </div>
+        <div class="col-5 fs-1 d-flex" *ngIf="estado == 4">
+          <span class="m-auto">
+          
+            Tu respuesta ha sido enviada, <br> <br>
+            esperando respuesta del jurado...
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

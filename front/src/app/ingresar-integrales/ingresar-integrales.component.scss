@@ -1,0 +1,148 @@
+.divMenu {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%), url(../../assets/img/admin/registroIntegrales/backgroundIntegrales.png);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  display: flex;
+}
+
+
+nb-card {
+  margin: auto;
+  padding: 10px;
+  width: 100%;
+  height: auto;
+  background: rgba(17, 17, 17, 0.5);
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+  border-image: linear-gradient(to left, rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0)) 28 0%;
+  border-radius: 13px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+
+}
+
+
+.registerIntegral {
+  width: 1690px;
+  height: 800px;
+  margin-top: 10rem !important;
+  font-family: regular;
+}
+
+
+
+
+
+
+.box_archivo_integral {
+  background-color: white;
+  text-align: center;
+  font-family: "cond" !important;
+  display: flex;
+}
+
+
+
+.box_archivo_integral .first_letter {
+  font-size: 24px;
+
+}
+
+
+.selected-image {
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+  margin: 0 auto;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.selected-image-respuesta {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  max-height: fit-content;
+  border-radius: 0px 10px 10px 0px;
+  width: 100%;
+  height: 100%;
+  background-size: 159%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+}
+
+.noselected-img{
+  position: relative; margin: auto; left: 110px; width: 100%; height: 100%;
+  background-image: url('../../assets/img/admin/registroIntegrales/Layer_1.png');
+  background-size: 25%;    background-position-y: 17px;    background-repeat: no-repeat;
+}
+
+.box_respuestas {
+  height: 55px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.custom-label {
+  display: block;
+  width: 324px;
+  height: 107px;
+  cursor: pointer;
+  border: solid 1px grey;
+  border-radius: 5px;
+  align-items: center;
+  border-radius: 0px 10px 10px 0px;
+
+}
+
+.file-input {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.letter_opc {
+  background-color: #E6B52C;
+  font-size: 35px;
+  color: white;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 104.8px;
+  border-radius: 5px 0px 0px 5px;
+
+  font-family: light !important;
+}
+
+
+.confirmation-message {
+  backdrop-filter: blur(10px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.confirmation-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.confirmation-dialog p {
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}

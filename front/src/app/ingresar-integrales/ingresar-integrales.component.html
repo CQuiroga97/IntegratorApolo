@@ -1,0 +1,270 @@
+<div class="divMenu">
+
+  <section class="registerIntegral m-auto overflow-auto " style="padding-right: 80px;">
+
+    <nb-card class="transparent h-50" *ngFor="let item of integrales; let i = index">
+      <nb-card-body class="container overflow-hidden display-flex">
+        <div class="row card_integral justify-content-evenly m-auto h-100 overflow-hidden">
+
+
+          <div class="box_archivo_integral col-4 display-flex align-items-center justify-content-center">
+
+            <!-- Aca se sube la imagen de la integral -->
+            <label for="fileInput{{ i }}">
+
+
+              <input type="file" id="fileInput{{ i }}" (change)="fileUpload($event, i, 0)" accept=".png, .jpg"
+                style="display:none">
+
+              <nb-icon *ngIf="!item.selectedImage0" icon="upload-outline" status="basic"></nb-icon>
+
+              <img *ngIf="item.selectedImage0" [src]="item.selectedImage0" alt="Selected Image" class="selected-image">
+
+
+              <!-- Letreros -->
+              <p *ngIf="item.selectedImage0 == null" class="first_letter">
+                Selecciona un archivo PNG o JPG para importar
+              </p>
+              <p *ngIf="item.selectedImage0 == null" class="second_letter">
+                O arrástralo y suéltalo aquí
+              </p>
+            </label>
+
+          </div>
+
+
+          <!-- class="file-input" -->
+
+          <!-- Opciones de respuestas  -->
+
+          <div class="box_opc col-7 container justify-content-evenly">
+            <!-- Row de las respuestas  -->
+
+
+            <div class="row container  m-auto h-50 justify-content-evenly">
+
+              <div class="col-5 m-auto container">
+                <div class="form-check display-flex justify-content-evenly" style="display: flex;">
+
+                  <input class="col-1 form-check-input-{{i}}" type="radio" [name]="'options' + i"
+                    [(ngModel)]="item.correctOption" value="1" id="radioA-{{i}}">
+
+                  <div class="container box_respuestas col-6 h-25 w-100 border-1 border-black"
+                    style=" margin-right: 50px;">
+
+                    <div class="container letter_opc col-2">
+                      <span style="margin: auto; position: relative;">
+                        A
+                      </span>
+                    </div>
+
+
+                    <label for="fileInputA-{{ i }}" class="col-1 custom-label display-1 align-content-between"
+                      style="position: relative;">
+
+                      <input type="file" id="fileInputA-{{ i }}" (change)="fileUpload($event, i, 1)" accept=".png, .jpg"
+                        class="position-absolute opacity-0" style="z-index: 10; cursor: pointer; width: 22%;">
+
+                      <div *ngIf="item.selectedImage1 == null" class="noselected-img">
+                      </div>
+
+                      <div *ngIf="item.selectedImage1" [style.backgroundImage]="'url(' + item.selectedImage1 + ')'"
+                        class="selected-image-respuesta">
+                      </div>
+
+                    </label>
+
+
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-5 m-auto container" style="position: relative; ">
+                <div class="form-check display-flex justify-content-evenly" style="display: flex;">
+
+                  <input class="col-1 form-check-input-{{i}}" type="radio" [name]="'options' + i"
+                    [(ngModel)]="item.correctOption" value="2" id="radioB-{{i}}">
+
+
+                  <div class="container box_respuestas col-5 h-50 w-100 border-1 border-black">
+
+                    <div class="container letter_opc col-2">
+                      <span>
+                        B
+                      </span>
+                    </div>
+
+                    <label for="opcionB-{{ i }}" class="custom-label col-5 display-1 align-content-between"
+                      style="cursor: pointer; position: relative;">
+
+                      <input type="file" id="fileInputB-{{ i }}" (change)="fileUpload($event, i, 2)" accept=".png, .jpg"
+                        class="position-absolute opacity-0" style="z-index: 10; cursor: pointer; width: 80%;">
+
+                      <div *ngIf="item.selectedImage2 == null" class="noselected-img">
+                      </div>
+
+                      <!-- <img *ngIf="item.selectedImage2 == null"
+                        src="../../assets/img/admin/registroIntegrales/Layer_1.png" alt=""
+                        style="position: relative; margin: auto; left: 110px;"> -->
+
+                      <div *ngIf="item.selectedImage2" [style.backgroundImage]="'url(' + item.selectedImage2 + ')'"
+                        class="selected-image-respuesta">
+                      </div>
+
+                      <!--  <img *ngIf="item.selectedImage2" [src]="item.selectedImage2" alt="selected-image-respuesta"
+                        class="selected-image-respuesta"> -->
+
+                    </label>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </div>
+
+
+
+            <!-- Row de las respuestas  -->
+            <div class="row container m-auto h-50 justify-content-evenly">
+
+              <!-- Opcion -->
+              <div class="col-5 m-auto">
+                <div class="form-check display-flex justify-content-evenly" style="display: flex;">
+
+                  <input class="col-1 form-check-input-{{i}}" type="radio" [name]="'options' + i"
+                    [(ngModel)]="item.correctOption" value="3" id="radioC-{{i}}">
+
+                  <div class="container box_respuestas col-6 h-25 w-100 border-1 border-black"
+                    style="margin-right: 50px;">
+
+                    <div class="container letter_opc col-2">
+                      <span style="margin: auto; position: relative;">
+                        C
+                      </span>
+                    </div>
+
+
+                    <label for="opcionC-{{ i }}" class="col-1 custom-label display-1 align-content-between"
+                      style="cursor: pointer;">
+
+                      <input type="file" id="fileInputC-{{ i }}" (change)="fileUpload($event, i, 3)" accept=".png, .jpg"
+                        class="position-absolute opacity-0" style="z-index: 10; cursor: pointer; width: 23%;">
+
+                      <div *ngIf="item.selectedImage3 == null" class="noselected-img">
+                      </div>
+
+                      <!-- <img *ngIf="item.selectedImage3 == null"
+                        src="../../assets/img/admin/registroIntegrales/Layer_1.png" alt=""
+                        style="position: relative; margin: auto; left: 110px;"> -->
+
+                      <div *ngIf="item.selectedImage3" [style.backgroundImage]="'url(' + item.selectedImage3 + ')'"
+                        class="selected-image-respuesta">
+                      </div>
+
+                      <!-- <img *ngIf="item.selectedImage3" [src]="item.selectedImage3" alt="selected-image-respuesta"
+                        class="selected-image-respuesta">
+ -->
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Opcion -->
+
+              <div class="col-5 m-auto container" style="position: relative; ">
+                <div class="form-check display-flex justify-content-evenly" style="display: flex;">
+
+                  <input class="col-1 form-check-input-{{i}}" type="radio" [name]="'options' + i"
+                    [(ngModel)]="item.correctOption" value="4" id="radioD-{{i}}">
+
+                  <div class="container box_respuestas col-5 h-50 w-100 border-1 border-black">
+
+
+                    <div class="container letter_opc col-2">
+                      <span>
+                        D
+                      </span>
+                    </div>
+
+
+                    <label for="opcionD-{{ i }}" class="custom-label col-5 display-1 align-content-between"
+                      style="cursor: pointer;">
+
+                      <input type="file" id="fileInputD-{{ i }}" (change)="fileUpload($event, i, 4)" accept=".png, .jpg"
+                        class="position-absolute opacity-0" style="z-index: 10; cursor: pointer; width: 80%;">
+
+
+                      <!--                       <img *ngIf="item.selectedImage4 == null"
+                        src="../../assets/img/admin/registroIntegrales/Layer_1.png" alt=""
+                        style="position: relative; margin: auto; left: 110px;"> -->
+
+                      <div *ngIf="item.selectedImage4 == null" class="noselected-img">
+                      </div>
+
+
+
+                      <!-- <img *ngIf="item.selectedImage4" [src]="item.selectedImage4" alt="selected-image-respuesta"
+                        class="selected-image-respuesta"> -->
+
+                      <div *ngIf="item.selectedImage4" [style.backgroundImage]="'url(' + item.selectedImage4 + ')'"
+                        class="selected-image-respuesta">
+                      </div>
+
+
+                    </label>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="box_delete col-1 m-auto position-relative" (click)="deleteCard(i)"
+            style="left: 3vw; cursor: pointer;">
+            <img src="../../assets/img/admin/registroUniversidades/delete.png" alt="">
+          </div>
+
+
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+
+
+    <div class="cont_buttons container" style="display: flex; justify-content: center;">
+
+      <button nbButton outline status="basic" size="large" class="px-5 m-md-1" (click)="nuevaintegral()"
+        style="font-weight: normal; font-size: 25px !important;">
+        Agregar
+      </button>
+
+      <button nbButton outline status="basic" size="large" class="px-5 m-md-1" (click)="abrirConfirmacion()"
+        style="font-weight: normal; font-size: 25px !important;">
+        Guardar
+      </button>
+    </div>
+  </section>
+
+
+  <!-- Mensaje de confirmación -->
+  <div *ngIf="mostrarConfirmacion" class="confirmation-message h-100 w-100 m-auto">
+    <nb-card class="container h-25 w-25 m-auto" style="position: relative; color: white;">
+      <div class="confirmation-dialog container justify-content-between m-auto">
+        <p>¿Seguro que deseas guardar las integrales?</p>
+        <div class="cont_btns">
+          <button nbButton outline status="basic" size="large" class="px-5 m-md-1"
+            (click)="cerrarConfirmacion()">Cancelar</button>
+          <button nbButton outline status="basic" size="large" class="px-5 m-md-1"
+            (click)="guardarIntegrales(0)">Aceptar</button>
+        </div>
+
+      </div>
+
+    </nb-card>
+  </div>
+
+</div>

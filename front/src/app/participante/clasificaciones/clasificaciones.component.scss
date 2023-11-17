@@ -1,5 +1,6 @@
 .divMenu2{
-    background:linear-gradient(90.15deg, rgba(13, 47, 28, 0.9) 0.14%, rgba(13, 47, 28, 0.62) 99.88%), url(../../../assets/img/participante/clasificaciones/backgroundCla.png);
+    background:linear-gradient(235deg, #0f385bca 26.71%, #166136ca 61.69%), url(../../../assets/img/participante/clasificaciones/backgroundCla.png);
+    background-size: cover;
 }
 .outer{
     width: 100%;
@@ -67,7 +68,7 @@ nb-card nb-card-footer button{
 }
 .banner{
     height: 400px !important;
-    
+
 }
 .banner .container{
     z-index: 1;
@@ -98,4 +99,10 @@ nb-card nb-card-footer button{
 }
 .divMenu2{
     flex-direction: column;
+    position: relative;
+}
+
+app-integrales{
+    top: -52px !important;
+    position: relative !important;
 }

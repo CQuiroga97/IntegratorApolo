@@ -10,6 +10,7 @@ export class AppComponent implements OnInit{
   tituloN = "";
   textoN = "";
   title = 'front';
+  public menu = false;
   isLog = false;
   constructor(
     public userService:UsersService
@@ -38,5 +39,8 @@ export class AppComponent implements OnInit{
   }
   cerrarModalNotificacion(){
     document.getElementsByClassName("notificacionAbajo")[0].classList.remove("activo");
+  }
+  abrirMenu(){
+    this.menu = !this.menu;
   }
 }

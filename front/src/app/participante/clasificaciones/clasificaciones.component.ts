@@ -57,7 +57,7 @@ import { ParticipanteService } from 'src/app/users/participante.services';
 export class ClasificacionesComponent implements OnInit{
   public bannerEspera = false;
   public bannerLobby = false;
-  public inicioCompetencia = new Date("2023-07-27T15:58:00");
+  public inicioCompetencia = new Date("2023-11-16T07:30:00");
   public dias = 0;
   public loaded = false;
   public timerComienzo:any;
@@ -75,47 +75,59 @@ export class ClasificacionesComponent implements OnInit{
 
   }
   ngOnInit(): void {
+    setTimeout(()=>{
 
+      this.socket.getEstadoClasificatoriasEmit();
+    }, 1000)
     this.participanteService.getIntegralesClasificaciones().subscribe((res:any)=>{
       this.cantIntegrales = res.integrales.length;
     })
     this.participanteService.getTimerClasificaciones().subscribe((res2:any) =>{
       this.tiempo = res2;
     })
-    this.socket.getEstadoClasificatorias().subscribe(res =>{
-      if(!res.estado){
-        this.bannerLobby = !res.estado;
-        setTimeout(()=>{
-          this.bannerEspera = res.estado;
-        }, 510)
-        if(!this.loaded){
-          this.loaded = true;
-          if(this.inicioCompetencia>fechaActual){
-            this.timerComienzo = this.timer();
-          }else{
-            this.bannerLobby = false;
+    this.user.llamarEncuentros().subscribe((re2s:any)=>{
+      if(re2s.length == 0){
+        console.log("Asd")
+        this.socket.getEstadoClasificatorias().subscribe(res =>{
+          console.log(res)
+          if(!res.estado){
+            this.bannerLobby = !res.estado;
             setTimeout(()=>{
-              this.bannerEspera = true;
+              this.bannerEspera = res.estado;
+            }, 510)
+            if(!this.loaded){
+              this.loaded = true;
+              if(this.inicioCompetencia>fechaActual){
+                this.timerComienzo = this.timer();
+              }else{
+                this.bannerLobby = false;
+                setTimeout(()=>{
+                  this.bannerEspera = true;
+                }, 510)
+              }
+            }
+          }else{
+            if(!this.loaded){
+              this.loaded = true;
+              if(res.estado){
+                this.toastrService.show(`Las clasificatorias ya han empezado`, "Acceso inhabilitado", { status: "warning", destroyByClick: true, icon: "checkmark-circle-2-outline" });
+                this.router.navigate(["/"])
+                
+              }
+            }
+            this.loaded = false;
+            setTimeout(()=>{
+              this.enPrueba = true;
             }, 510)
           }
-        }
+        })
       }else{
-        if(!this.loaded){
-          this.loaded = true;
-          if(res.estado){
-            this.toastrService.show(`Las clasificatorias ya han empezado`, "Acceso inhabilitado", { status: "warning", destroyByClick: true, icon: "checkmark-circle-2-outline" });
-            this.router.navigate(["/"])
-          }
-        }
-        this.loaded = false;
-        setTimeout(()=>{
-          this.enPrueba = true;
-        }, 510)
+        window.location.href = "./participante/segundaRonda"
       }
     })
-    this.socket.getEstadoClasificatoriasEmit();
+    
+    
     const fechaActual = new Date();
-    console.log(fechaActual>this.inicioCompetencia)
     const diff = Math.abs(this.inicioCompetencia.getTime() - fechaActual.getTime())
     this.dias = Math.ceil(diff / (1000 * 3600 * 24))
     this.dias = isNaN(this.dias)?0:this.dias;
