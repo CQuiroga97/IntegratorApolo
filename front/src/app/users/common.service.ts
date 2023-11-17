@@ -14,7 +14,7 @@ export class CommonService {
     }
     getApiUrl(){
         console.log(window.location.hostname)
-        if(window.location.hostname == "localhost")
+        if(window.location.hostname == "localhost2")
             return "http://localhost:8080/api/"
         return "https://integratorapi.azurewebsites.net/api/"
         

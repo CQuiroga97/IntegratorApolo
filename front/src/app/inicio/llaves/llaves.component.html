@@ -204,11 +204,16 @@
                                 <nb-card-body *ngIf="!octavos['11'] || octavos['11']?.length<2">Ganador</nb-card-body>
                                 <nb-card-body style="text-align: center;" *ngIf="octavos['11']?.length > 1">
                                     <span *ngIf="octavos['11'][0]?.estado == 2" class="fs-4">
-                                        {{octavos['11'][0]?.nombre}}
+                                        1. {{octavos['11'][0]?.nombre}}
+                                        <br>
+                                        2. {{octavos['11'][1]?.nombre}}
                                     </span>
                                     <span *ngIf="octavos['11'][1]?.estado == 2" class="fs-4">
-                                        {{octavos['11'][1]?.nombre}}
+                                        1. {{octavos['11'][1]?.nombre}}
+                                        <br>
+                                        2. {{octavos['11'][0]?.nombre}}
                                     </span>
+                                    
                                 </nb-card-body>
                             </nb-card>
                         </div>
@@ -226,10 +231,10 @@
                                 </nb-card-body>
                                 <nb-card-body class="p-2 ps-4 d-flex flex-column" *ngIf="octavos['11']">
                                     <span>
-                                        {{octavos['11'][0]?.nombre}}
+                                       1. {{octavos['11'][0]?.nombre}}
                                     </span>
                                     <span>
-                                        {{octavos['11'][0]?.nombreU}}
+                                        2. {{octavos['11'][1]?.nombre}}
                                     </span>
                                 </nb-card-body>
                             </nb-card>
